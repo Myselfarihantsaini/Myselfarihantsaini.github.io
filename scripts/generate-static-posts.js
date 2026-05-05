@@ -62,6 +62,7 @@ function renderArticlePage(post) {
     <meta name="description" content="${escapeHTML(description)}">
     <meta name="robots" content="index,follow">
     <meta name="theme-color" content="#0B1020">
+    <meta name="google-adsense-account" content="ca-pub-9194178610009666">
     <link rel="canonical" href="${canonical}">
     <link rel="icon" href="favicon.ico" sizes="any">
     <link rel="apple-touch-icon" href="assets/logo.png">

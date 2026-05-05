@@ -6,6 +6,10 @@ User-agent: Mediapartners-Google
 Allow: /ads.txt
 Allow: /
 
+User-agent: Google-Display-Ads-Bot
+Allow: /ads.txt
+Allow: /
+
 User-agent: *
 Allow: /
 

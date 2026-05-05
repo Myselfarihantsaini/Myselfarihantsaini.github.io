@@ -220,26 +220,6 @@ function renderPosts() {
     });
 }
 
-function initializeAdSlot(container) {
-    if (!container || container.dataset.initialized === 'true') return;
-
-    const ad = document.createElement('ins');
-    ad.className = 'adsbygoogle';
-    ad.style.display = 'block';
-    ad.setAttribute('data-ad-client', 'ca-pub-9194178610009666');
-    ad.setAttribute('data-ad-slot', 'auto');
-    ad.setAttribute('data-ad-format', 'auto');
-    ad.setAttribute('data-full-width-responsive', 'true');
-    container.appendChild(ad);
-    container.dataset.initialized = 'true';
-
-    try {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (error) {
-        console.warn('AdSense slot could not be initialized.', error);
-    }
-}
-
 async function copyTextToClipboard(text) {
     if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(text);
@@ -445,9 +425,6 @@ function renderSinglePost() {
                 ${post.content}
             </div>
 
-            <!-- AdSense Ad inside the blog post to maximize earnings -->
-            <div data-post-ad style="margin: 40px 0; text-align: center;">
-            </div>
             <div class="post-actions" style="display: flex; gap: 12px; margin: 30px 0; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px 0; flex-wrap: wrap;">
                 <button class="post-action-btn like-btn" type="button">♡ Like</button>
                 <button class="post-action-btn comment-btn" type="button">💬 Comment</button>
@@ -481,7 +458,6 @@ function renderSinglePost() {
             </div>
         `;
 
-        initializeAdSlot(singlePostContainer.querySelector('[data-post-ad]'));
         initializePostCommentForm(singlePostContainer.querySelector('.post-comments-section'), post);
         initializePostActions(singlePostContainer, post);
     } else {
