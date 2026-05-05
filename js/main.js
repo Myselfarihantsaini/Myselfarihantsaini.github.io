@@ -173,7 +173,7 @@ function initMobileMenu() {
 
 // ---- Scroll Reveal Animation ----
 function initScrollReveal() {
-    const elements = document.querySelectorAll('.post-card, .zodiac-card, .about-grid, .cta-content, .service-card');
+    const elements = document.querySelectorAll('.post-card, .zodiac-card, .about-grid, .cta-content, .service-card, .product-card');
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -210,9 +210,9 @@ function renderPosts() {
             </div>
             <div class="post-content">
                 <span class="post-date">${post.date}</span>
-                <h3 class="post-title"><a href="post.html?id=${post.id}">${post.title}</a></h3>
+                <h3 class="post-title"><a href="posts/${post.id}.html">${post.title}</a></h3>
                 <p class="post-excerpt">${post.excerpt}</p>
-                <a href="post.html?id=${post.id}" class="read-more">Read Full Post →</a>
+                <a href="posts/${post.id}.html" class="read-more">Read Full Post →</a>
             </div>
         `;
 
@@ -424,8 +424,12 @@ function renderSinglePost() {
 
     const urlParams = new URLSearchParams(window.location.search);
     const postId = urlParams.get('id');
+    const staticPostMatch = window.location.pathname.match(/\/posts\/([^/]+)\.html$/);
+    const staticPostId = staticPostMatch ? staticPostMatch[1] : null;
 
-    const post = postId ? postsData.find(p => p.id === postId) : postsData[0];
+    const post = (staticPostId || postId)
+        ? postsData.find(p => p.id === (staticPostId || postId))
+        : postsData[0];
 
     if (post) {
         document.title = `${post.title} — Shambhava`;
@@ -495,7 +499,7 @@ function renderSinglePost() {
 function updatePostMetadata(post) {
     if (!post) return;
 
-    const pageUrl = new URL(window.location.href);
+    const pageUrl = new URL(`posts/${post.id}.html`, window.location.origin);
     const imageUrl = new URL(post.image, window.location.href).toString();
     const description = post.excerpt || 'Read in-depth Vedic astrology articles and planetary insights from Shambhava.';
 
