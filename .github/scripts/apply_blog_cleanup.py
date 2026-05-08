@@ -11,22 +11,64 @@ post = root / "post.html"
 data = root / "js" / "data.js"
 
 idx = index.read_text()
-idx = idx.replace("Shambhavaa — Daily Astrology Insights", "Shambhavaa - Vedic Astrology Services")
-idx = re.sub(r'<meta name="description" content="[^"]*Daily astrology insights[^"]*">', '<meta name="description" content="Vedic astrology services, products, zodiac guidance, and divine services from Shambhavaa.">', idx)
-idx = re.sub(r'<a href="#insights">(?:Insights|Blog)</a>', f'<a href="{BLOG}">Blog</a>', idx)
-idx = re.sub(r'<li><a href="#insights">(?:Insights|Blog)</a></li>', f'<li><a href="{BLOG}">Blog</a></li>', idx)
-idx = re.sub(r'\n\s*<!-- Insights Section -->\s*<section[^>]*id="insights"[\s\S]*?</section>\s*', '\n', idx, count=1)
+
+# Header and footer blog links.
+idx = re.sub(
+    r'<li><a href="#daily-insights">Insights</a></li>',
+    f'<li><a href="{BLOG}" target="_blank" rel="noopener noreferrer">Blog</a></li>',
+    idx,
+)
+idx = re.sub(
+    r'<li><a href="#daily-insights">Daily Insights</a></li>',
+    f'<li><a href="{BLOG}" target="_blank" rel="noopener noreferrer">Blog</a></li>',
+    idx,
+)
+idx = re.sub(
+    r'<a href="#daily-insights">(Planetary Transits|Daily Horoscope|Deep Dives|Remedies)</a>',
+    rf'<a href="{BLOG}" target="_blank" rel="noopener noreferrer">\1</a>',
+    idx,
+)
+idx = re.sub(r'<a href="#insights">(?:Insights|Blog)</a>', f'<a href="{BLOG}" target="_blank" rel="noopener noreferrer">Blog</a>', idx)
+idx = re.sub(r'<li><a href="#insights">(?:Insights|Blog)</a></li>', f'<li><a href="{BLOG}" target="_blank" rel="noopener noreferrer">Blog</a></li>', idx)
+
+# Remove the old article grid from the main site.
+idx = re.sub(
+    r'\n\s*<!-- Daily Insights Section -->\s*<main id="daily-insights" class="section">[\s\S]*?</main>\s*',
+    '\n',
+    idx,
+    count=1,
+)
+idx = re.sub(
+    r'\n\s*<!-- Insights Section -->\s*<section[^>]*id="insights"[\s\S]*?</section>\s*',
+    '\n',
+    idx,
+    count=1,
+)
 idx = re.sub(r'\n\s*<script src="js/data\.js[^\"]*"></script>\s*', '\n', idx)
-idx = re.sub(r'<a href="#insights">Insights</a>', f'<a href="{BLOG}">Blog</a>', idx)
-idx = idx.replace('<div id="gocharChart" class="chart-container">', '<div id="gocharChart" class="gochar-chart">')
+
+# Make the transit/kundali labels use CSS instead of inline styles so labels do not collide.
+idx = re.sub(
+    r'<div id="chart-container" style="[^"]*">',
+    '<div id="chart-container" class="gochar-chart">',
+    idx,
+)
 for n in range(1, 13):
+    idx = re.sub(
+        rf'<div id="house-{n}" style="[^"]*"></div>',
+        f'<div id="house-{n}" class="gochar-house house-{n}"></div>',
+        idx,
+    )
     idx = re.sub(rf'<div class="house house-{n}"><span>{n}</span></div>', f'<div class="gochar-house house-{n}"><span>{n}</span></div>', idx)
+
 index.write_text(idx)
 
 js = main_js.read_text()
+js = js.replace("'.post-card, .zodiac-card, .about-grid, .cta-content, .service-card, .product-card'", "'.zodiac-card, .about-grid, .cta-content, .service-card, .product-card'")
 js = re.sub(r',\s*\.post-card', '', js)
 js = re.sub(r'function renderPosts\(\) \{[\s\S]*?\n\}\n\n(?=function|//)', '', js, count=1)
 js = re.sub(r'\n\s*safeInit\("Posts", renderPosts\);', '', js)
+js = js.replace(' <span style="color: #ff4d4d;">(R)</span>', ' <span class="retrograde-marker">(R)</span>')
+js = js.replace('style="color: var(--primary-light); font-size: 0.8rem; display: block; margin-top: 4px;"', 'class="transit-status"')
 js = re.sub(
     r'el\.innerHTML = `\n\s*<div style="font-size: 1\.1rem; color: var\(--text-light\);">\$\{signName\}</div>\n\s*<div style="font-size: 0\.85rem; color: var\(--text-muted\); margin-top: 2px;">\$\{degStr\}\$\{retro\}</div>\n\s*<div style="font-size: 0\.75rem; color: var\(--primary\); opacity: 0\.8; margin-top: 4px; font-weight: 600;">\$\{stayText\}</div>\n\s*\$\{status\}\n\s*`;',
     'el.innerHTML = `\n                    <span class="transit-sign">${signName}</span>\n                    <span class="transit-degree">${degStr}${retro}</span>\n                    <span class="transit-stay">${stayText}</span>\n                    ${status}\n                `;',
