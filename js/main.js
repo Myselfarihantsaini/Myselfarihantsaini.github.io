@@ -193,53 +193,6 @@ function initScrollReveal() {
 }
 
 // ---- Render Posts on Home Page ----
-function renderPosts() {
-    const postsGrid = document.getElementById('posts-grid');
-    if (!postsGrid) return;
-
-    postsGrid.innerHTML = '';
-
-    postsData.forEach((post, index) => {
-        const postCard = document.createElement('div');
-        postCard.className = 'post-card';
-        postCard.style.transitionDelay = `${index * 0.1}s`;
-
-        postCard.innerHTML = `
-            <div class="post-image" style="background-image: url('${post.image}')">
-                <span class="category-badge">${post.category}</span>
-            </div>
-            <div class="post-content">
-                <span class="post-date">${post.date}</span>
-                <h3 class="post-title"><a href="posts/${post.id}.html">${post.title}</a></h3>
-                <p class="post-excerpt">${post.excerpt}</p>
-                <a href="posts/${post.id}.html" class="read-more">Read Full Post →</a>
-            </div>
-        `;
-
-        postsGrid.appendChild(postCard);
-    });
-}
-
-async function copyTextToClipboard(text) {
-    if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(text);
-        return true;
-    }
-
-    const fallbackInput = document.createElement('input');
-    fallbackInput.value = text;
-    fallbackInput.setAttribute('readonly', '');
-    fallbackInput.style.position = 'absolute';
-    fallbackInput.style.left = '-9999px';
-    document.body.appendChild(fallbackInput);
-    fallbackInput.select();
-    fallbackInput.setSelectionRange(0, fallbackInput.value.length);
-
-    const copied = document.execCommand('copy');
-    document.body.removeChild(fallbackInput);
-    return copied;
-}
-
 function escapeHTML(value) {
     return String(value)
         .replace(/&/g, '&amp;')
@@ -673,9 +626,9 @@ function renderTransits() {
             const el = document.getElementById(`transit-${idPrefix}`);
             if (el) {
                 el.innerHTML = `
-                    <div style="font-size: 1.1rem; color: var(--text-light);">${signName}</div>
-                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">${degStr}${retro}</div>
-                    <div style="font-size: 0.75rem; color: var(--primary); opacity: 0.8; margin-top: 4px; font-weight: 600;">${stayText}</div>
+                    <span class="transit-sign">${signName}</span>
+                    <span class="transit-degree">${degStr}${retro}</span>
+                    <span class="transit-stay">${stayText}</span>
                     ${status}
                 `;
             }
@@ -721,10 +674,8 @@ function updateKundli(lagnaRashi) {
         const houseEl = document.getElementById(`house-${hNum}`);
         
         // Add Rashi Number to House
-        const rashiLabel = document.createElement('div');
-        rashiLabel.style.fontSize = "0.7rem";
-        rashiLabel.style.color = "var(--primary)";
-        rashiLabel.style.marginBottom = "2px";
+        const rashiLabel = document.createElement('span');
+        rashiLabel.className = 'gochar-rashi';
         rashiLabel.innerText = houseRashi;
         houseEl.appendChild(rashiLabel);
 
@@ -737,10 +688,9 @@ function updateKundli(lagnaRashi) {
         }
 
         if (planetList.length > 0) {
-            const pLabel = document.createElement('div');
-            pLabel.style.fontSize = "0.85rem";
-            pLabel.style.color = "var(--text-light)";
-            pLabel.innerText = planetList.join(" ");
+            const pLabel = document.createElement('span');
+            pLabel.className = 'gochar-planets';
+            pLabel.innerText = planetList.join(' ');
             houseEl.appendChild(pLabel);
         }
     }
@@ -884,7 +834,6 @@ document.addEventListener('DOMContentLoaded', () => {
     safeInit("Stars", initStars);
     safeInit("Navbar", initNavbar);
     safeInit("MobileMenu", initMobileMenu);
-    safeInit("Posts", renderPosts);
     safeInit("SinglePost", renderSinglePost);
     safeInit("ChatFab", initChatFab);
     safeInit("Transits", fetchNavagrahaTransits);

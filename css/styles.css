@@ -1948,3 +1948,30 @@ textarea.form-control {
 .service-card:hover .card-image-small {
     transform: scale(1.02);
 }
+
+/* ==================== TRANSIT GRID + GOCHAR CHART ==================== */
+.transit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.transit-card { display: flex; align-items: center; gap: 16px; min-width: 0; padding: 22px; border: 1px solid var(--border-subtle); border-radius: 16px; background: rgba(255,255,255,0.02); }
+.transit-icon { display: flex; align-items: center; justify-content: center; flex: 0 0 56px; width: 56px; height: 56px; border-radius: 50%; background: rgba(198,161,91,0.1); color: var(--primary); font-size: 2rem; line-height: 1; }
+.transit-details { min-width: 0; }
+.transit-sign, .transit-degree, .transit-stay, .transit-status { display: block; }
+.transit-sign { color: var(--text-light); font-size: 1.05rem; line-height: 1.25; }
+.transit-degree { margin-top: 2px; color: var(--text-muted); font-size: 0.85rem; line-height: 1.25; }
+.transit-stay { margin-top: 4px; color: var(--primary); font-size: 0.75rem; font-weight: 600; line-height: 1.25; opacity: 0.85; }
+.transit-status { margin-top: 4px; color: var(--primary-light); font-size: 0.8rem; line-height: 1.25; }
+.retrograde-marker { color: #ff4d4d; }
+.gochar-chart { position: relative; width: min(100%, 370px); margin: 0 auto; aspect-ratio: 1 / 1; border: 2px solid var(--primary); border-radius: 4px; background: rgba(255,255,255,0.01); }
+.gochar-house { position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 28px; padding: 1px 3px; color: var(--text-light); font-weight: 700; line-height: 1.05; text-align: center; pointer-events: none; transform: translate(-50%, -50%); }
+.gochar-house > span:first-child { color: var(--primary); font-size: 0.72rem; line-height: 1; }
+.gochar-rashi { color: var(--primary-light); font-size: 0.66rem; line-height: 1; white-space: nowrap; }
+.gochar-planets { color: var(--text-light); font-size: clamp(0.58rem, 1.5vw, 0.8rem); line-height: 1.05; max-width: 54px; overflow-wrap: anywhere; }
+.house-1 { top: 16%; left: 50%; } .house-2 { top: 10%; left: 77%; } .house-3 { top: 30%; left: 91%; } .house-4 { top: 50%; left: 84%; }
+.house-5 { top: 70%; left: 91%; } .house-6 { top: 90%; left: 77%; } .house-7 { top: 84%; left: 50%; } .house-8 { top: 90%; left: 23%; }
+.house-9 { top: 70%; left: 9%; } .house-10 { top: 50%; left: 16%; } .house-11 { top: 30%; left: 9%; } .house-12 { top: 10%; left: 23%; }
+@media (max-width: 576px) {
+  .transit-grid { grid-template-columns: 1fr; gap: 14px; }
+  .transit-card { padding: 16px; }
+  .gochar-chart { width: min(100%, 320px); }
+  .gochar-planets { max-width: 44px; }
+}
+
