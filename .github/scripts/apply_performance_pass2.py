@@ -14,13 +14,21 @@ html = html.replace('<meta property="og:image" content="https://shambhavaa.com/a
 html = html.replace('<meta name="twitter:image" content="https://shambhavaa.com/assets/cosmic_banner.png">', '<meta name="twitter:image" content="https://shambhavaa.com/assets/om_bg.webp">')
 html = html.replace('"image": "https://shambhavaa.com/assets/cosmic_banner.png"', '"image": "https://shambhavaa.com/assets/om_bg.webp"')
 html = html.replace('"logo": "https://shambhavaa.com/assets/logo.png"', '"logo": "https://shambhavaa.com/assets/logo-small.webp"')
-html = html.replace('css/styles.css?v=5.4', 'css/styles.css?v=5.5')
-html = html.replace('js/main.js?v=5.4', 'js/main.js?v=5.5')
+html = html.replace('css/styles.css?v=5.4', 'css/styles.css?v=5.6').replace('css/styles.css?v=5.5', 'css/styles.css?v=5.6')
+html = html.replace('js/main.js?v=5.4', 'js/main.js?v=5.6').replace('js/main.js?v=5.5', 'js/main.js?v=5.6')
 html = html.replace('src="assets/logo-small.webp" alt="Shambhava Icon" width="40" height="40" decoding="async">', 'src="assets/logo-small.webp" alt="Shambhava Icon" width="40" height="40" decoding="async">', 1)
 html = html.replace('src="assets/logo-small.webp" alt="Shambhava Icon" width="40" height="40" decoding="async">', 'src="assets/logo-small.webp" alt="Shambhava Icon" width="40" height="40" loading="lazy" decoding="async">', 1)
+
+# Add lazy loading while keeping the card-image-small class. The previous pass accidentally
+# created duplicate class attributes, which made service images render at natural size.
 html = re.sub(
-    r'<img loading="lazy" decoding="async" width="640" height="427" src="(assets/service-[^"]+\.webp)"',
-    rf'<img loading="lazy" decoding="async" width="640" height="427" class="lazy-img" src="{PLACEHOLDER}" data-src="\1"',
+    r'<img loading="lazy" decoding="async" width="640" height="427" src="(assets/service-[^"]+\.webp)"([^>]*)class="card-image-small"',
+    rf'<img loading="lazy" decoding="async" width="640" height="427" class="card-image-small lazy-img" src="{PLACEHOLDER}" data-src="\1"\2',
+    html,
+)
+html = re.sub(
+    rf'<img loading="lazy" decoding="async" width="640" height="427" class="lazy-img" src="{re.escape(PLACEHOLDER)}" data-src="(assets/service-[^"]+\.webp)"([^>]*)class="card-image-small"',
+    rf'<img loading="lazy" decoding="async" width="640" height="427" class="card-image-small lazy-img" src="{PLACEHOLDER}" data-src="\1"\2',
     html,
 )
 html = html.replace(
