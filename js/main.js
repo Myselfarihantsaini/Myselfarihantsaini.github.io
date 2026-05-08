@@ -171,6 +171,34 @@ function initMobileMenu() {
     });
 }
 
+function initLazyImages() {
+    const images = document.querySelectorAll('img[data-src]');
+    if (!images.length) return;
+
+    const loadImage = (img) => {
+        if (!img.dataset.src) return;
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+        img.classList.remove('lazy-img');
+    };
+
+    if (!('IntersectionObserver' in window)) {
+        images.forEach(loadImage);
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                loadImage(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { rootMargin: '350px 0px' });
+
+    images.forEach((img) => observer.observe(img));
+}
+
 // ---- Scroll Reveal Animation ----
 function initScrollReveal() {
     const elements = document.querySelectorAll('.zodiac-card, .about-grid, .cta-content, .service-card, .product-card');
@@ -190,264 +218,6 @@ function initScrollReveal() {
         el.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
         observer.observe(el);
     });
-}
-
-// ---- Render Posts on Home Page ----
-function escapeHTML(value) {
-    return String(value)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-}
-
-function getStoredPostComments(postId) {
-    try {
-        return JSON.parse(localStorage.getItem(`comments_${postId}`)) || [];
-    } catch (error) {
-        return [];
-    }
-}
-
-function renderStoredPostComments(container, comments) {
-    if (!container) return;
-
-    if (!comments.length) {
-        container.innerHTML = '<p class="comment-empty">No comments yet.</p>';
-        return;
-    }
-
-    container.innerHTML = comments.map(comment => `
-        <article class="comment-card">
-            <div class="comment-card-header">
-                <strong>${escapeHTML(comment.name)}</strong>
-                <span>${escapeHTML(comment.date)}</span>
-            </div>
-            <p>${escapeHTML(comment.message).replace(/\n/g, '<br>')}</p>
-        </article>
-    `).join('');
-}
-
-function initializePostCommentForm(container, post) {
-    if (!container || !post || container.dataset.initialized === 'true') return;
-
-    const form = container.querySelector('[data-post-comment-form]');
-    const list = container.querySelector('[data-post-comment-list]');
-    const status = container.querySelector('[data-post-comment-status]');
-    const comments = getStoredPostComments(post.id);
-
-    renderStoredPostComments(list, comments);
-
-    if (!form) return;
-
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        if (!form.reportValidity()) return;
-
-        const formData = new FormData(form);
-        const name = String(formData.get('name') || '').trim();
-        const email = String(formData.get('email') || '').trim();
-        const message = String(formData.get('message') || '').trim();
-        const date = new Date().toLocaleDateString('en-IN', {
-            day: 'numeric',
-            month: 'short',
-            year: 'numeric'
-        });
-
-        const comment = { name, email, message, date };
-        const nextComments = [...comments, comment];
-        localStorage.setItem(`comments_${post.id}`, JSON.stringify(nextComments));
-        comments.push(comment);
-        renderStoredPostComments(list, comments);
-
-        const subject = `New comment on ${post.title}`;
-        const body = [
-            `Post: ${post.title}`,
-            `URL: ${window.location.href}`,
-            `Name: ${name}`,
-            `Email: ${email}`,
-            '',
-            'Comment:',
-            message
-        ].join('\n');
-
-        if (status) {
-            status.textContent = 'Comment saved here. Opening email to send it now.';
-        }
-
-        window.location.href = buildMailtoUrl('shambhavaa.reviews@gmail.com', subject, body);
-        form.reset();
-    });
-
-    container.dataset.initialized = 'true';
-}
-
-function initializePostActions(container, post) {
-    if (!container || !post) return;
-
-    const likeBtn = container.querySelector('.like-btn');
-    const commentBtn = container.querySelector('.comment-btn');
-    const shareBtn = container.querySelector('.share-btn');
-    
-    // Generate a unique, consistent "starting" like count based on post ID
-    // This makes the site feel active and professional immediately
-    let baseLikes = 0;
-    for (let i = 0; i < post.id.length; i++) {
-        baseLikes += post.id.charCodeAt(i);
-    }
-    const simulatedLikes = (baseLikes % 50) + 42; 
-    
-    if (likeBtn && likeBtn.dataset.initialized !== 'true') {
-        const isLiked = localStorage.getItem(`liked_${post.id}`) === 'true';
-        if (isLiked) {
-            likeBtn.classList.add('liked');
-            likeBtn.innerHTML = `♥ <span class="like-count">${simulatedLikes + 1}</span>`;
-        } else {
-            likeBtn.innerHTML = `♡ <span class="like-count">${simulatedLikes}</span>`;
-        }
-
-        likeBtn.addEventListener('click', () => {
-            const liked = likeBtn.classList.toggle('liked');
-            localStorage.setItem(`liked_${post.id}`, liked);
-            
-            const currentCount = parseInt(likeBtn.querySelector('.like-count').textContent);
-            const newCount = liked ? currentCount + 1 : currentCount - 1;
-            
-            likeBtn.innerHTML = `${liked ? '♥' : '♡'} <span class="like-count">${newCount}</span>`;
-            
-            if (liked) {
-                likeBtn.style.animation = 'none';
-                setTimeout(() => likeBtn.style.animation = 'pulse 0.4s ease', 10);
-            }
-        });
-        likeBtn.dataset.initialized = 'true';
-    }
-
-    if (shareBtn && shareBtn.dataset.initialized !== 'true') {
-        shareBtn.addEventListener('click', async () => {
-            try {
-                const copied = await copyTextToClipboard(window.location.href);
-                if (copied) {
-                    shareBtn.innerHTML = '✅ Copied';
-                    setTimeout(() => shareBtn.innerHTML = '🔗 Share', 2000);
-                }
-            } catch (error) {
-                console.error('Share failed', error);
-            }
-        });
-        shareBtn.dataset.initialized = 'true';
-    }
-
-    if (commentBtn && commentBtn.dataset.initialized !== 'true') {
-        commentBtn.addEventListener('click', () => {
-            const commentsSection = document.getElementById('discussion-anchor');
-            if (commentsSection) {
-                commentsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-        commentBtn.dataset.initialized = 'true';
-    }
-}
-
-// ---- Render Single Post ----
-function renderSinglePost() {
-    const singlePostContainer = document.getElementById('single-post');
-    if (!singlePostContainer) return;
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const postId = urlParams.get('id');
-    const staticPostMatch = window.location.pathname.match(/\/posts\/([^/]+)\.html$/);
-    const staticPostId = staticPostMatch ? staticPostMatch[1] : null;
-
-    const post = (staticPostId || postId)
-        ? postsData.find(p => p.id === (staticPostId || postId))
-        : postsData[0];
-
-    if (post) {
-        document.title = `${post.title} — Shambhava`;
-        updatePostMetadata(post);
-        singlePostContainer.innerHTML = `
-            <header class="post-header">
-                <span class="category-badge mb-1" style="display:inline-block; position:relative;">${post.category}</span>
-                <h1 class="post-title-large">${post.title}</h1>
-                <p class="post-meta">Published on ${post.date} • by Arihant Saini</p>
-            </header>
-            <div class="post-hero-image" style="background-image: url('${post.image}')"></div>
-            <div class="post-body">
-                ${post.content}
-            </div>
-
-            <div class="post-actions" style="display: flex; gap: 12px; margin: 30px 0; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 20px 0; flex-wrap: wrap;">
-                <button class="post-action-btn like-btn" type="button">♡ Like</button>
-                <button class="post-action-btn comment-btn" type="button">💬 Comment</button>
-                <button class="post-action-btn share-btn" type="button">🔗 Share</button>
-            </div>
-            
-            <div id="discussion-anchor" class="post-comments-section">
-                <h3>Comments</h3>
-                <form class="post-comment-form" data-post-comment-form>
-                    <div class="post-comment-grid">
-                        <label class="sr-only" for="post-comment-name">Your Name</label>
-                        <input type="text" id="post-comment-name" name="name" class="form-control" placeholder="Your Name" autocomplete="name" required>
-
-                        <label class="sr-only" for="post-comment-email">Your Email</label>
-                        <input type="email" id="post-comment-email" name="email" class="form-control" placeholder="Your Email" autocomplete="email" required>
-                    </div>
-
-                    <label class="sr-only" for="post-comment-message">Your Comment</label>
-                    <textarea id="post-comment-message" name="message" class="form-control" rows="5" placeholder="Write your comment..." required></textarea>
-
-                    <button type="submit" class="btn-primary post-comment-submit">
-                        <span>Send Comment</span>
-                    </button>
-                    <p class="post-comment-status" data-post-comment-status></p>
-                </form>
-                <div class="post-comment-list" data-post-comment-list></div>
-            </div>
-
-            <div class="post-footer" style="margin-top: 40px; text-align: center;">
-                <a href="index.html" class="btn-threads" style="display: inline-block;">← Back to Home</a>
-            </div>
-        `;
-
-        initializePostCommentForm(singlePostContainer.querySelector('.post-comments-section'), post);
-        initializePostActions(singlePostContainer, post);
-    } else {
-        singlePostContainer.innerHTML = `
-            <div style="text-align:center; padding: 60px 20px;">
-                <h1 style="font-size: 3rem; margin-bottom: 20px;">✦</h1>
-                <h2>Post not found</h2>
-                <p style="margin: 20px 0;">The stars have aligned elsewhere. We couldn't find the article you were looking for.</p>
-                <a href="index.html" class="btn-primary"><span>Return Home</span></a>
-            </div>
-        `;
-    }
-}
-
-function updatePostMetadata(post) {
-    if (!post) return;
-
-    const pageUrl = new URL(`posts/${post.id}.html`, window.location.origin);
-    const imageUrl = new URL(post.image, window.location.href).toString();
-    const description = post.excerpt || 'Read in-depth Vedic astrology articles and planetary insights from Shambhava.';
-
-    const setContent = (selector, value) => {
-        const element = document.querySelector(selector);
-        if (element) element.setAttribute('content', value);
-    };
-
-    const canonical = document.getElementById('page-canonical');
-    if (canonical) canonical.setAttribute('href', pageUrl.toString());
-
-    setContent('meta[name="description"]', description);
-    setContent('#og-title', `${post.title} — Shambhava`);
-    setContent('#og-description', description);
-    setContent('#og-url', pageUrl.toString());
-    setContent('#og-image', imageUrl);
-    setContent('#twitter-title', `${post.title} — Shambhava`);
-    setContent('#twitter-description', description);
-    setContent('#twitter-image', imageUrl);
 }
 
 // ---- Floating Chat Button Logic ----
@@ -948,7 +718,7 @@ document.addEventListener('DOMContentLoaded', () => {
     runWhenIdle(() => safeInit("Stars", initStars));
     safeInit("Navbar", initNavbar);
     safeInit("MobileMenu", initMobileMenu);
-    safeInit("SinglePost", renderSinglePost);
+    safeInit("LazyImages", initLazyImages);
     safeInit("ChatFab", initChatFab);
     safeInit("Transits", initTransitLoading);
     safeInit("ExternalLinks", secureExternalLinks);
@@ -964,223 +734,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 100);
 });
 
-// ---- Divine Discovery Logic (D1 & D9) ----
-const remedyLibrary = {
-    "Sun": { 
-        perfume: "Oudh & Saffron", rudraksha: "12 Mukhi", stone: "Sunstone", gem: "Ruby", 
-        advice: "To ignite your internal fire and soul authority.", 
-        link: "https://wa.me/919057918251?text=Order%20Sun%20Remedies" 
-    },
-    "Moon": { 
-        perfume: "Jasmine & White Sandal", rudraksha: "2 Mukhi", stone: "Moonstone", gem: "Pearl", 
-        advice: "To soothe the mind and stabilize emotional tides.", 
-        link: "https://wa.me/919057918251?text=Order%20Moon%20Remedies" 
-    },
-    "Mars": { 
-        perfume: "Musk & Red Cedar", rudraksha: "3 Mukhi", stone: "Carnelian", gem: "Red Coral", 
-        advice: "To channel courage and protective energy.", 
-        link: "https://wa.me/919057918251?text=Order%20Mars%20Remedies" 
-    },
-    "Mercury": { 
-        perfume: "Vetiver & Basil", rudraksha: "4 Mukhi", stone: "Peridot", gem: "Emerald", 
-        advice: "To sharpen the intellect and verbal flow.", 
-        link: "https://wa.me/919057918251?text=Order%20Mercury%20Remedies" 
-    },
-    "Jupiter": { 
-        perfume: "Amber & Lotus", rudraksha: "5 Mukhi", stone: "Citrine", gem: "Yellow Sapphire", 
-        advice: "To expand wisdom and attract abundance.", 
-        link: "https://wa.me/919057918251?text=Order%20Jupiter%20Remedies" 
-    },
-    "Venus": { 
-        perfume: "Rose & White Lily", rudraksha: "6 Mukhi", stone: "White Topaz", gem: "Diamond", 
-        advice: "To enhance attraction, art, and luxury.", 
-        link: "https://wa.me/919057918251?text=Order%20Venus%20Remedies" 
-    },
-    "Saturn": { 
-        perfume: "Patchouli & Myrrh", rudraksha: "7 Mukhi", stone: "Amethyst", gem: "Blue Sapphire", 
-        advice: "To bring discipline, stability, and karmic clearance.", 
-        link: "https://wa.me/919057918251?text=Order%20Saturn%20Remedies" 
-    },
-    "Rahu": { 
-        perfume: "Frankincense & Smoke", rudraksha: "8 Mukhi", stone: "Tiger Eye", gem: "Hessonite", 
-        advice: "To clear illusion and navigate sudden change.", 
-        link: "https://wa.me/919057918251?text=Order%20Rahu%20Remedies" 
-    },
-    "Ketu": { 
-        perfume: "Camphor & Earth", rudraksha: "9 Mukhi", stone: "Lapis Lazuli", gem: "Cat's Eye", 
-        advice: "To deepen intuition and spiritual detachment.", 
-        link: "https://wa.me/919057918251?text=Order%20Ketu%20Remedies" 
-    }
-};
-
-function renderRemedyPortal(ak, mahadasha) {
-    const portal = document.getElementById('remedy-portal-content');
-    if (!portal) return;
-
-    const akRem = remedyLibrary[ak] || remedyLibrary["Sun"];
-    const mdRem = remedyLibrary[mahadasha] || remedyLibrary["Sun"];
-
-    const items = [
-        { type: "Essence", name: akRem.perfume, icon: "🌬️", tag: "Soul Signature", advice: akRem.advice, link: akRem.link },
-        { type: "Rudraksha", name: akRem.rudraksha, icon: "📿", tag: "Divine Shield", advice: akRem.advice, link: akRem.link },
-        { type: "Semi-Precious", name: mdRem.stone, icon: "✨", tag: "Timeline Balancer", advice: mdRem.advice, link: mdRem.link },
-        { type: "Gemstone", name: akRem.gem, icon: "💎", tag: "Primary Catalyst", advice: akRem.advice, link: akRem.link }
-    ];
-
-    portal.innerHTML = items.map(item => `
-        <div class="remedy-card" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(198,161,91,0.1); padding: 25px; border-radius: 20px; text-align: center; transition: all 0.3s ease;">
-            <div style="font-size: 2.5rem; margin-bottom: 15px;">${item.icon}</div>
-            <span style="font-size: 0.65rem; color: var(--primary); letter-spacing: 2px; text-transform: uppercase; font-weight: 700;">${item.tag}</span>
-            <h4 style="color: var(--text-light); margin: 10px 0; font-size: 1.2rem;">${item.name}</h4>
-            <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px;">${item.advice}</p>
-            <a href="${item.link}" target="_blank" style="display: block; padding: 12px; background: rgba(198, 161, 91, 0.1); color: var(--primary-light); text-decoration: none; border-radius: 10px; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(198, 161, 91, 0.2);">Acquire ${item.type} →</a>
-        </div>
-    `).join("");
-}
-
-function calculateNavamsha(rashi, deg) {
-    const navIndex = Math.floor(deg / (30 / 9)); // 0 to 8
-    let startSign = 1;
-    if ([1, 5, 9].includes(rashi)) startSign = 1;         // Fire: Starts from Aries
-    else if ([2, 6, 10].includes(rashi)) startSign = 10;  // Earth: Starts from Capricorn
-    else if ([3, 7, 11].includes(rashi)) startSign = 7;   // Air: Starts from Libra
-    else if ([4, 8, 12].includes(rashi)) startSign = 4;   // Water: Starts from Cancer
-    
-    return ((startSign + navIndex - 1) % 12) + 1;
-}
-
-function runDivineDiscovery() {
-    const nameField = document.getElementById('disc-name');
-    const dateField = document.getElementById('disc-date');
-    const timeField = document.getElementById('disc-time');
-
-    if (!nameField || !dateField || !timeField) {
-        console.warn('Discovery form is not available on this page.');
-        return;
-    }
-
-    const name = nameField.value;
-    const date = dateField.value;
-    const time = timeField.value;
-    
-    if(!name || !date || !time) {
-        alert("Please enter full details to generate your reference analysis.");
-        return;
-    }
-
-    try {
-        const birthDate = new Date(`${date}T${time}`);
-        if (Number.isNaN(birthDate.getTime())) {
-            alert("Please check the date and time you entered.");
-            return;
-        }
-        const pData = buildReferenceBirthChart(birthDate);
-
-        let ak = "Sun"; let maxDeg = 0;
-        for (const [p, d] of Object.entries(pData)) {
-            if (d.normDegree > maxDeg && p !== "Rahu" && p !== "Ketu") {
-                maxDeg = d.normDegree; ak = p;
-            }
-        }
-
-        const d1_sign = pData[ak].current_sign;
-        const d9_sign = calculateNavamsha(pData[ak].current_sign, pData[ak].normDegree);
-        const isVargottama = d1_sign === d9_sign;
-
-        document.getElementById('discovery-input-state').style.display = 'none';
-        document.getElementById('discovery-results-state').style.display = 'block';
-        document.getElementById('discovery-user-name').innerText = `Soul Analysis: ${name}`;
-        
-        // --- VIMSHOTTARI DASHA LOGIC ---
-        const moonPos = pData["Moon"] ? (pData["Moon"].current_sign - 1) * 30 + pData["Moon"].normDegree : 0;
-        const nakSize = 360 / 27;
-        const nakIndex = Math.floor(moonPos / nakSize);
-        const startingDashaIndex = nakIndex % 9;
-        const nakPassed = (moonPos % nakSize) / nakSize;
-        
-        const currentDate = new Date();
-        const ageInYears = (currentDate - birthDate) / (1000 * 60 * 60 * 24 * 365.25);
-        
-        let yearsPassed = nakPassed * DASHA_YEARS[startingDashaIndex];
-        let totalYears = 0;
-        let currentMahadasha = DASHA_ORDER[startingDashaIndex];
-        
-        for (let i = 0; i < 100; i++) {
-            let idx = (startingDashaIndex + i) % 9;
-            let duration = DASHA_YEARS[idx];
-            if (i === 0) duration -= yearsPassed;
-            
-            totalYears += duration;
-            if (totalYears > ageInYears) {
-                currentMahadasha = DASHA_ORDER[idx];
-                break;
-            }
-        }
-
-        document.getElementById('current-mahadasha').innerText = currentMahadasha;
-        document.getElementById('current-antardasha').innerText = ak;
-        document.getElementById('dasha-advice').innerText = `This reference reading emphasizes ${currentMahadasha}. Use it as directional guidance, and book a manual reading for exact timing.`;
-
-        let summary = `Your Atmakaraka (Soul Planet) is **${ak}**. `;
-        if (isVargottama) summary += `It appears **Vargottama** in this reference model, indicating a strong repeating pattern. `;
-        summary += `These remedies are directional and meant as an on-site reference, not a substitute for a full manual chart reading.`;
-        document.getElementById('discovery-summary').innerHTML = summary;
-
-        // --- Render Dual Charts (D1 & D9) ---
-        // D1 Logic
-        const lagnaRashiD1 = pData["Ascendant"] ? pData["Ascendant"].current_sign : 1;
-        renderChart("d1", lagnaRashiD1, pData, ak);
-
-        // D9 Logic
-        // For D9, we assume lagna is roughly the same or we calculate it if available
-        const lagnaRashiD9 = calculateNavamsha(pData["Ascendant"] ? pData["Ascendant"].current_sign : 1, pData["Ascendant"] ? pData["Ascendant"].normDegree : 0);
-        
-        // Prepare D9 data object
-        const pDataD9 = {};
-        for (const [p, d] of Object.entries(pData)) {
-            pDataD9[p] = { current_sign: calculateNavamsha(d.current_sign, d.normDegree) };
-        }
-        renderChart("d9", lagnaRashiD9, pDataD9, ak);
-        renderRemedyPortal(ak, currentMahadasha);
-
-    } catch (e) {
-        console.error("Discovery Error:", e);
-        alert("The reference calculator could not complete. Please try again.");
-    }
-}
-
-function renderChart(prefix, lagna, data, ak) {
-    for (let hNum = 1; hNum <= 12; hNum++) {
-        const houseRashi = ((lagna + hNum - 2) % 12) + 1;
-        const houseEl = document.getElementById(`${prefix}-house-${hNum}`);
-        if (!houseEl) continue;
-
-        houseEl.innerHTML = `<span class="house-label">${houseRashi}</span>`;
-        
-        const planetsInHouse = [];
-        const planetSymbols = {
-            "sun": "Su", "moon": "Mo", "mars": "Ma", "mercury": "Me",
-            "jupiter": "Ju", "venus": "Ve", "saturn": "Sa", "rahu": "Ra", "ketu": "Ke"
-        };
-
-        for (let [pName, pObj] of Object.entries(data)) {
-            let pNameLower = pName.toLowerCase();
-            if (planetSymbols[pNameLower] && pObj.current_sign === houseRashi) {
-                const isAK = pNameLower === ak.toLowerCase();
-                planetsInHouse.push(`<span class="${isAK ? 'ak-highlight' : ''}">${planetSymbols[pNameLower]}${isAK ? '★' : ''}</span>`);
-            }
-        }
-        houseEl.innerHTML += planetsInHouse.join(" ");
-    }
-}
-
-function resetDiscovery() {
-    const inputState = document.getElementById('discovery-input-state');
-    const resultsState = document.getElementById('discovery-results-state');
-    if (inputState) inputState.style.display = 'block';
-    if (resultsState) resultsState.style.display = 'none';
-}
-
+// ---- Review Stars ----
 function initReviewStars() {
     const starContainer = document.getElementById('star-rating');
     if (!starContainer) return;
