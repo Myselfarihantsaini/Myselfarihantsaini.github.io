@@ -8,7 +8,7 @@ function initStars() {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let stars = [], symbols = [], shootingStars = [];
-    const STAR_COUNT = 220;
+    const STAR_COUNT = window.innerWidth < 768 ? 70 : 140;
     const SACRED = ['ॐ', '᳐', '✦', 'ॐ', '☸'];
 
     function resize() {
@@ -610,6 +610,24 @@ function buildReferenceBirthChart(birthDate) {
     };
 }
 
+function initTransitLoading() {
+    const section = document.getElementById('navagraha-transits');
+    if (!section) return;
+
+    if (!('IntersectionObserver' in window)) {
+        fetchNavagrahaTransits();
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+            observer.disconnect();
+            fetchNavagrahaTransits();
+        }
+    }, { rootMargin: '600px 0px' });
+    observer.observe(section);
+}
+
 async function fetchNavagrahaTransits() {
     if (!document.getElementById('navagraha-transits')) return;
     const setLoadingState = (text) => {
@@ -789,26 +807,26 @@ function initAudio() {
     const audio = document.getElementById('om-audio');
     if (!audio) return;
 
-    // Set a whisper-quiet, subtle volume (3%)
     audio.volume = 0.03;
 
-    // Browser policy blocks audio unless user interacts. 
-    // We play it as soon as the user clicks anywhere or scrolls.
-    const startAudio = () => {
-        audio.play().then(() => {
-            console.log("Sacred chant started automatically.");
-            // Remove listeners once it starts
-            document.removeEventListener('click', startAudio);
-            document.removeEventListener('touchstart', startAudio);
-            document.removeEventListener('scroll', startAudio);
-        }).catch(err => {
-            // If still blocked, wait for next interaction
-        });
+    const prepareAudio = () => {
+        const source = audio.querySelector('source[data-src]');
+        if (source && !source.src) {
+            source.src = source.dataset.src;
+            audio.load();
+        }
     };
 
-    document.addEventListener('click', startAudio);
-    document.addEventListener('touchstart', startAudio);
-    document.addEventListener('scroll', startAudio, { once: true });
+    const startAudio = () => {
+        prepareAudio();
+        audio.play().then(() => {
+            document.removeEventListener('click', startAudio);
+            document.removeEventListener('touchstart', startAudio);
+        }).catch(() => {});
+    };
+
+    document.addEventListener('click', startAudio, { once: true });
+    document.addEventListener('touchstart', startAudio, { once: true });
 }
 
 function secureExternalLinks() {
@@ -919,15 +937,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    safeInit("Stars", initStars);
+    const runWhenIdle = (callback) => {
+        if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(callback, { timeout: 1800 });
+        } else {
+            window.setTimeout(callback, 900);
+        }
+    };
+
+    runWhenIdle(() => safeInit("Stars", initStars));
     safeInit("Navbar", initNavbar);
     safeInit("MobileMenu", initMobileMenu);
     safeInit("SinglePost", renderSinglePost);
     safeInit("ChatFab", initChatFab);
-    safeInit("Transits", fetchNavagrahaTransits);
+    safeInit("Transits", initTransitLoading);
     safeInit("ExternalLinks", secureExternalLinks);
     safeInit("FAQ", initFaqAccessibility);
     safeInit("Forms", initLeadForms);
+    safeInit("LazyAds", initLazyAds);
     safeInit("ChartSelector", setupChartSelector);
     safeInit("Audio", initAudio);
     safeInit("ReviewStars", initReviewStars);
