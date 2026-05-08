@@ -173,7 +173,7 @@ function initMobileMenu() {
 
 // ---- Scroll Reveal Animation ----
 function initScrollReveal() {
-    const elements = document.querySelectorAll('.post-card, .zodiac-card, .about-grid, .cta-content, .service-card, .product-card');
+    const elements = document.querySelectorAll('.zodiac-card, .about-grid, .cta-content, .service-card, .product-card');
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -617,10 +617,10 @@ function renderTransits() {
             const signNum = p.current_sign;
             const signName = signs[signNum];
             const degStr = formatDegrees(p.normDegree);
-            const retro = p.isRetro === "true" ? ' <span style="color: #ff4d4d;">(R)</span>' : '';
+            const retro = p.isRetro === "true" ? ' <span class="retrograde-marker">(R)</span>' : '';
             const stayText = calculateStay(apiName, p);
             const status = (statuses[apiName] && statuses[apiName][signNum]) 
-                ? `<span style="color: var(--primary-light); font-size: 0.8rem; display: block; margin-top: 4px;">${statuses[apiName][signNum]}</span>` 
+                ? `<span class="transit-status">${statuses[apiName][signNum]}</span>` 
                 : "";
             
             const el = document.getElementById(`transit-${idPrefix}`);
