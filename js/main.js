@@ -482,19 +482,10 @@ function initChatFab() {
     }, 15000); // Trigger after 15 seconds of page load
 }
 
-// ---- Reference Navagraha Transits ----
+// ---- Live Navagraha Transits ----
 let currentPlanetData = null;
-const TRANSIT_REFERENCE_DATA_2026 = {
-    "Sun": { current_sign: 1, normDegree: 10 },
-    "Moon": { current_sign: 4, normDegree: 15 },
-    "Mars": { current_sign: 11, normDegree: 22 },
-    "Mercury": { current_sign: 1, normDegree: 5 },
-    "Jupiter": { current_sign: 3, normDegree: 25 },
-    "Venus": { current_sign: 12, normDegree: 28 },
-    "Saturn": { current_sign: 12, normDegree: 18 },
-    "Rahu": { current_sign: 11, normDegree: 4, isRetro: "true" },
-    "Ketu": { current_sign: 5, normDegree: 4, isRetro: "true" }
-};
+let transitRefreshTimer = null;
+const ASTRONOMY_ENGINE_URL = "https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js";
 const DASHA_ORDER = ["Ketu", "Venus", "Sun", "Moon", "Mars", "Rahu", "Jupiter", "Saturn", "Mercury"];
 const DASHA_YEARS = [7, 20, 6, 10, 7, 18, 16, 19, 17];
 
@@ -509,6 +500,95 @@ function createPlanetPosition(longitude, isRetro) {
         normDegree: normalized % 30,
         isRetro: isRetro ? "true" : "false"
     };
+}
+
+function getLahiriAyanamsa(date) {
+    const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+    const yearProgress = (date.getTime() - yearStart.getTime()) / (365.2425 * 86400000);
+    const decimalYear = date.getUTCFullYear() + yearProgress;
+    return 24.044 + ((decimalYear - 2000) * 50.290966 / 3600);
+}
+
+function tropicalToSidereal(tropicalLongitude, date) {
+    return normalizeLongitude(tropicalLongitude - getLahiriAyanamsa(date));
+}
+
+function getMeanRahuLongitude(date) {
+    const jd = date.getTime() / 86400000 + 2440587.5;
+    const t = (jd - 2451545.0) / 36525;
+    const meanNode = 125.04452 - (1934.136261 * t) + (0.0020708 * t * t) + (t * t * t / 450000);
+    return tropicalToSidereal(meanNode, date);
+}
+
+function getFallbackTransitData(date = new Date()) {
+    const days = date.getTime() / 86400000;
+    const rahuLongitude = getMeanRahuLongitude(date);
+
+    return {
+        "Sun": createPlanetPosition(tropicalToSidereal((days / 365.256363) * 360 + 280.46, date), false),
+        "Moon": createPlanetPosition(tropicalToSidereal((days / 27.321582) * 360 + 218.32, date), false),
+        "Mars": createPlanetPosition(tropicalToSidereal((days / 686.98) * 360 + 150, date), false),
+        "Mercury": createPlanetPosition(tropicalToSidereal((days / 87.969) * 360 + 60, date), false),
+        "Jupiter": createPlanetPosition(tropicalToSidereal((days / 4332.59) * 360 + 120, date), false),
+        "Venus": createPlanetPosition(tropicalToSidereal((days / 224.701) * 360 + 45, date), false),
+        "Saturn": createPlanetPosition(tropicalToSidereal((days / 10759.22) * 360 + 300, date), false),
+        "Rahu": createPlanetPosition(rahuLongitude, true),
+        "Ketu": createPlanetPosition(rahuLongitude + 180, true)
+    };
+}
+
+function loadAstronomyEngine() {
+    if (window.Astronomy) return Promise.resolve(window.Astronomy);
+
+    return new Promise((resolve, reject) => {
+        const existingScript = document.querySelector(`script[src="${ASTRONOMY_ENGINE_URL}"]`);
+        if (existingScript) {
+            existingScript.addEventListener('load', () => resolve(window.Astronomy), { once: true });
+            existingScript.addEventListener('error', reject, { once: true });
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = ASTRONOMY_ENGINE_URL;
+        script.async = true;
+        script.crossOrigin = "anonymous";
+        script.onload = () => window.Astronomy ? resolve(window.Astronomy) : reject(new Error("Astronomy Engine unavailable"));
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+}
+
+function getLivePlanetLongitude(astronomy, planetName, time) {
+    if (planetName === "Moon") {
+        return astronomy.EclipticGeoMoon(time).lon;
+    }
+
+    const vector = astronomy.GeoVector(astronomy.Body[planetName], time, true);
+    return astronomy.Ecliptic(vector).elon;
+}
+
+function buildLiveTransitData(astronomy, date = new Date()) {
+    const time = astronomy.MakeTime(date);
+    const comparisonDate = new Date(date.getTime() + 6 * 60 * 60 * 1000);
+    const comparisonTime = astronomy.MakeTime(comparisonDate);
+    const liveData = {};
+
+    ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn"].forEach((planetName) => {
+        const tropicalLongitude = getLivePlanetLongitude(astronomy, planetName, time);
+        const futureLongitude = getLivePlanetLongitude(astronomy, planetName, comparisonTime);
+        const currentSidereal = tropicalToSidereal(tropicalLongitude, date);
+        const futureSidereal = tropicalToSidereal(futureLongitude, comparisonDate);
+        const movement = normalizeLongitude(futureSidereal - currentSidereal);
+        const isRetro = movement > 180;
+
+        liveData[planetName] = createPlanetPosition(currentSidereal, isRetro);
+    });
+
+    const rahuLongitude = getMeanRahuLongitude(date);
+    liveData.Rahu = createPlanetPosition(rahuLongitude, true);
+    liveData.Ketu = createPlanetPosition(rahuLongitude + 180, true);
+
+    return liveData;
 }
 
 function buildReferenceBirthChart(birthDate) {
@@ -530,13 +610,38 @@ function buildReferenceBirthChart(birthDate) {
     };
 }
 
-function fetchNavagrahaTransits() {
+async function fetchNavagrahaTransits() {
     if (!document.getElementById('navagraha-transits')) return;
-    currentPlanetData = TRANSIT_REFERENCE_DATA_2026;
-    renderTransits();
+    const setLoadingState = (text) => {
+        document.querySelectorAll('[id^="transit-"]').forEach((el) => {
+            el.innerHTML = `<span class="transit-sign">${text}</span>`;
+        });
+    };
+
+    try {
+        setLoadingState("Loading live position...");
+        const astronomy = await loadAstronomyEngine();
+        currentPlanetData = buildLiveTransitData(astronomy, new Date());
+        renderTransits(true);
+
+        if (!transitRefreshTimer) {
+            transitRefreshTimer = window.setInterval(() => {
+                try {
+                    currentPlanetData = buildLiveTransitData(astronomy, new Date());
+                    renderTransits(true);
+                } catch (error) {
+                    console.warn("Live transit refresh failed:", error);
+                }
+            }, 15 * 60 * 1000);
+        }
+    } catch (error) {
+        console.warn("Live transit source failed, using date-based fallback:", error);
+        currentPlanetData = getFallbackTransitData(new Date());
+        renderTransits(false);
+    }
 }
 
-function renderTransits() {
+function renderTransits(isLive = false) {
     if (!currentPlanetData) return;
 
     const signs = {
@@ -557,21 +662,6 @@ function renderTransits() {
         "Ketu": {9: "Exalted", 8: "Exalted", 3: "Debilitated"}
     };
 
-    // 2026 Sidereal (Lahiri) Transit Lookup Table for Slow Planets
-    const transitTable2026 = {
-        "Jupiter": [
-            { date: new Date("2026-06-02"), sign: 4 }, // Cancer
-            { date: new Date("2026-10-31"), sign: 5 }  // Leo
-        ],
-        "Rahu": [
-            { date: new Date("2026-12-05"), sign: 10 } // Capricorn
-        ],
-        "Ketu": [
-            { date: new Date("2026-12-05"), sign: 4 }  // Cancer
-        ],
-        "Saturn": [] // Remains in Pisces (12) all 2026
-    };
-
     const formatDegrees = (deg) => {
         const d = Math.floor(deg);
         const m = Math.floor((deg - d) * 60);
@@ -579,37 +669,37 @@ function renderTransits() {
     };
 
     const calculateStay = (name, p) => {
-        const now = new Date();
-        const degRemaining = 30 - p.normDegree;
-
-        // Mathematical approximations for fast planets
+        const forwardDegree = p.isRetro === "true" ? p.normDegree : 30 - p.normDegree;
         if (name === "Moon") {
-            const days = degRemaining / 13.18; // Avg speed
+            const days = forwardDegree / 13.18;
             return days < 1 ? `${Math.round(days * 24)}h left` : `${Math.round(days)}d left`;
         }
         if (name === "Sun") {
-            return `${Math.round(degRemaining)}d left`;
+            return `${Math.round(forwardDegree)}d left`;
         }
         if (name === "Mercury" || name === "Venus" || name === "Mars") {
-            const avgSpeeds = { "Mercury": 1.4, "Venus": 1.2, "Mars": 0.5 };
-            const days = degRemaining / (avgSpeeds[name] || 1);
+            const avgSpeeds = { "Mercury": 1.35, "Venus": 1.2, "Mars": 0.52 };
+            const days = forwardDegree / avgSpeeds[name];
             return `~${Math.round(days)}d left`;
         }
-
-        // Lookup table for slow planets
-        if (transitTable2026[name]) {
-            const nextTransit = transitTable2026[name].find(t => t.date > now);
-            if (nextTransit) {
-                const diffTime = Math.abs(nextTransit.date - now);
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                return `${diffDays}d left`;
-            } else {
-                if (name === "Saturn") return "Stays all year";
-                return "Moving soon";
-            }
+        if (name === "Rahu" || name === "Ketu") {
+            return `~${Math.round(forwardDegree / 0.05295)}d left`;
         }
-        return "--";
+
+        const avgSpeeds = { "Jupiter": 0.083, "Saturn": 0.033 };
+        return `~${Math.round(forwardDegree / avgSpeeds[name])}d left`;
     };
+
+    const sourceLabel = document.getElementById('transit-source');
+    if (sourceLabel) {
+        const now = new Date();
+        sourceLabel.textContent = `${isLive ? "Live sidereal data" : "Estimated sidereal data"} • Updated ${now.toLocaleString([], {
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        })}`;
+    }
 
     const updatePlanet = (apiName, idPrefix) => {
         const p = currentPlanetData[apiName];
@@ -619,10 +709,10 @@ function renderTransits() {
             const degStr = formatDegrees(p.normDegree);
             const retro = p.isRetro === "true" ? ' <span class="retrograde-marker">(R)</span>' : '';
             const stayText = calculateStay(apiName, p);
-            const status = (statuses[apiName] && statuses[apiName][signNum]) 
-                ? `<span class="transit-status">${statuses[apiName][signNum]}</span>` 
+            const status = (statuses[apiName] && statuses[apiName][signNum])
+                ? `<span class="transit-status">${statuses[apiName][signNum]}</span>`
                 : "";
-            
+
             const el = document.getElementById(`transit-${idPrefix}`);
             if (el) {
                 el.innerHTML = `
@@ -637,13 +727,15 @@ function renderTransits() {
 
     const grahas = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu"];
     grahas.forEach(g => updatePlanet(g, g.toLowerCase()));
+
+    const selector = document.getElementById('rashi-selector');
+    if (selector) updateKundli(parseInt(selector.value || "1", 10));
 }
 
 function setupChartSelector() {
     const selector = document.getElementById('rashi-selector');
     if (!selector) return;
 
-    // Initialize with current selector value (or default to Aries if empty)
     const initialValue = selector.value || "1";
     selector.value = initialValue;
     updateKundli(parseInt(initialValue));
@@ -656,7 +748,6 @@ function setupChartSelector() {
 function updateKundli(lagnaRashi) {
     if (!currentPlanetData) return;
 
-    // Clear all houses
     for (let i = 1; i <= 12; i++) {
         const h = document.getElementById(`house-${i}`);
         if (h) h.innerHTML = "";
@@ -667,19 +758,16 @@ function updateKundli(lagnaRashi) {
         "Jupiter": "Ju", "Venus": "Ve", "Saturn": "Sa", "Rahu": "Ra", "Ketu": "Ke"
     };
 
-    // For each house, determine which rashi it is
-    // House 1 is lagnaRashi, House 2 is lagnaRashi + 1, etc.
     for (let hNum = 1; hNum <= 12; hNum++) {
         const houseRashi = ((lagnaRashi + hNum - 2) % 12) + 1;
         const houseEl = document.getElementById(`house-${hNum}`);
-        
-        // Add Rashi Number to House
+        if (!houseEl) continue;
+
         const rashiLabel = document.createElement('span');
-        rashiLabel.className = 'gochar-rashi';
+        rashiLabel.className = "gochar-rashi";
         rashiLabel.innerText = houseRashi;
         houseEl.appendChild(rashiLabel);
 
-        // Find planets in this rashi
         const planetList = [];
         for (const [pName, pData] of Object.entries(currentPlanetData)) {
             if (planetSymbols[pName] && pData.current_sign === houseRashi) {
@@ -689,8 +777,8 @@ function updateKundli(lagnaRashi) {
 
         if (planetList.length > 0) {
             const pLabel = document.createElement('span');
-            pLabel.className = 'gochar-planets';
-            pLabel.innerText = planetList.join(' ');
+            pLabel.className = "gochar-planets";
+            pLabel.innerText = planetList.join(" ");
             houseEl.appendChild(pLabel);
         }
     }
