@@ -658,6 +658,52 @@ h5 {
     color: var(--text-main);
 }
 
+/* ==================== CONTENT PAGES ==================== */
+.inner-hero {
+    min-height: 42vh;
+    padding-top: 140px;
+    padding-bottom: 56px;
+}
+
+.inner-hero .hero-content h1 {
+    max-width: 920px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: clamp(2.1rem, 5vw, 3.6rem);
+}
+
+.content-container {
+    max-width: 920px;
+}
+
+.content-container h2 {
+    margin-top: 44px;
+    margin-bottom: 18px;
+    color: var(--primary-light);
+}
+
+.content-container h3 {
+    margin-top: 28px;
+    margin-bottom: 12px;
+}
+
+.content-container p,
+.content-container li {
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.content-container ul {
+    margin: 0 0 24px;
+    padding-left: 22px;
+}
+
+.content-container a {
+    color: var(--primary-light);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
 /* ==================== SERVICES ==================== */
 .services-section {
     background: var(--bg-deep);

@@ -1,27 +1,31 @@
-# Shambhavaa.com AdSense Resubmission Checklist
+# Shambhavaa AdSense Resubmission Checklist
 
-Before requesting another review from Google AdSense, ensure all items below are completed on `shambhavaa.com`. Do not submit the site automatically. 
+Date: May 13, 2026
+Scope: shambhavaa.com only.
 
-- [x] **ads.txt authorized and accessible** (Currently active and valid)
-- [ ] **About page complete** (Must explain philosophy, D1, transits, and avoid false promises)
-- [ ] **Contact page complete** (Must explain how to contact/book, and required birth details)
-- [ ] **Privacy Policy complete** (Must cover personal data, cookies, analytics)
-- [ ] **Terms complete** (Must state no guaranteed outcomes, astrology as guidance)
-- [ ] **Disclaimer complete** (Must state not a substitute for medical/legal/financial advice)
-- [ ] **Refund/Cancellation page complete** (Must outline no-shows, cancellation, and rescheduling policies)
-- [ ] **FAQ complete** (Must contain at least 15 detailed questions on a dedicated page)
-- [ ] **Consultation process page complete** (Must detail the step-by-step reading process)
-- [ ] **Service pages complete** (8 high-quality, 800-1200 word original pages created for each consultation type)
-- [ ] **Homepage improved** (Must clearly link to service pages, trust pages, and explain what is checked)
-- [ ] **Navigation clear** (Header navigation includes Home, About, Consultations, FAQ, Contact)
-- [ ] **Footer links complete** (Includes About, Contact, Privacy, Terms, Disclaimer, Refund, Sitemap)
-- [ ] **No empty pages** (No placeholder pages or empty templates)
-- [ ] **No broken links** (All internal and external links resolve correctly)
-- [ ] **No duplicate/thin content** (No Quora copy-pasting, each service and resource page is deeply informative)
-- [ ] **Mobile layout checked** (Site is fully responsive and legible on all devices)
-- [ ] **Sitemap available** (Updated `sitemap.xml` with all new service and resource pages)
-- [ ] **robots.txt not blocking key pages** (`robots.txt` explicitly allows crawling)
-- [ ] **Internal links added** (All pages cross-link logically using the Internal Linking Map)
-- [ ] **Wait 7–14 days after fixes before requesting AdSense review again** (Allow Google to recrawl the updated sitemap and pages before resubmitting)
+- [x] ads.txt authorized and accessible locally as /ads.txt
+- [x] About page complete
+- [x] Contact page complete
+- [x] Privacy Policy complete
+- [x] Terms and Conditions complete
+- [x] Disclaimer complete
+- [x] Refund/Cancellation page complete
+- [x] FAQ complete with 15+ questions
+- [x] Consultation process page complete
+- [x] Service pages complete
+- [x] Homepage improved for consultation positioning
+- [x] Navigation clear and consultation-first
+- [x] Footer links complete
+- [x] Old duplicate trust URLs converted to noindex redirects
+- [x] Product/remedy page removed from sitemap and set noindex,follow
+- [x] No broken local links found after ignoring cache-busting query strings and data URLs
+- [x] Deterministic/guarantee-style wording softened
+- [x] Mobile content-page CSS added
+- [x] Sitemap rebuilt with canonical URLs
+- [x] robots.txt present and not configured to block key pages
+- [x] Internal links added across services/resources
+- [ ] Deploy changes to shambhavaa.com
+- [ ] Re-check live /ads.txt, /sitemap.xml, /robots.txt, and major pages after deploy
+- [ ] Wait 7-14 days after fixes are live before requesting AdSense review again
 
-> **Important**: Do not modify `shambhavaa.blog` or `shambhavaa.blogspot.com`. Keep all focus entirely on the root domain `shambhavaa.com`. Ensure the tone remains authoritative, clear, beginner-friendly, and ethical.
+Do not submit the site to AdSense automatically. Do not modify shambhavaa.blog or shambhavaa.blogspot.com.
