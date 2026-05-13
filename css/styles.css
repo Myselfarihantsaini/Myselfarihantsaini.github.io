@@ -1077,6 +1077,40 @@ h5 {
     color: var(--primary-light);
 }
 
+.post-inline-image {
+    margin: 32px 0;
+}
+
+.post-inline-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-card);
+}
+
+.answer-box {
+    margin: 28px 0;
+    padding: 24px;
+    background: rgba(212, 168, 67, 0.05);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+}
+
+.answer-box h2:first-child,
+.answer-box h3:first-child {
+    margin-top: 0;
+}
+
+.answer-box ul {
+    margin-bottom: 0;
+}
+
+.author-note {
+    background: rgba(255, 255, 255, 0.035);
+}
+
 .post-footer {
     margin-top: 50px;
     padding-top: 24px;
@@ -1100,6 +1134,94 @@ h5 {
 
 .mb-1 {
     margin-bottom: 1rem;
+}
+
+/* ==================== ARTICLES INDEX ==================== */
+.articles-hero {
+    min-height: 58vh;
+    padding-top: 150px;
+    padding-bottom: 60px;
+}
+
+.articles-hero .hero-subtitle {
+    max-width: 760px;
+}
+
+.articles-section {
+    padding-top: 70px;
+}
+
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.article-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 100%;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(10px);
+}
+
+.article-image-link {
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--bg-surface);
+}
+
+.article-image-link img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.article-card:hover .article-image-link img {
+    transform: scale(1.04);
+}
+
+.article-card-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 24px;
+}
+
+.article-card-body .category-badge {
+    position: static;
+    align-self: flex-start;
+}
+
+.article-card-body h3 {
+    margin: 14px 0 12px;
+    font-size: 1.35rem;
+}
+
+.article-card-body h3 a {
+    color: var(--text-light);
+}
+
+.article-card-body h3 a:hover {
+    color: var(--primary-light);
+}
+
+.article-card-body p {
+    margin-bottom: 16px;
+    color: var(--text-main);
+}
+
+.article-card-body .post-meta {
+    margin-top: auto;
+    margin-bottom: 0;
+    color: var(--text-muted);
 }
 
 /* ==================== ADS ==================== */
@@ -1974,4 +2096,3 @@ textarea.form-control {
   .gochar-chart { width: min(100%, 320px); }
   .gochar-planets { max-width: 44px; }
 }
-

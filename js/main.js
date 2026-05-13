@@ -696,6 +696,17 @@ function initLeadForms() {
     }
 }
 
+function initLazyAds() {
+    document.querySelectorAll('ins.adsbygoogle:not([data-ad-initialized])').forEach((adSlot) => {
+        adSlot.dataset.adInitialized = 'true';
+        try {
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (error) {
+            console.warn('[Ads] Slot initialization skipped:', error);
+        }
+    });
+}
+
 // ---- Initialize Everything ----
 document.addEventListener('DOMContentLoaded', () => {
     const safeInit = (fnName, fn) => {
