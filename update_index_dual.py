@@ -22,8 +22,8 @@ def make_actions(wa_link, read_more_link, name="Arihant"):
 
 html_replacement = f"""<section id="vedic-services" class="section services-section" style="padding-top: 20px;">
         <div class="container" style="max-width: 1200px; padding: 0 24px;">
+            <h2 style="font-size: 2.2rem; color: var(--text-light); text-align: center; margin-bottom: 40px; font-family: var(--font-serif);">Vedic Astrology by Arihant</h2>
             <div class="services-grid">
-                <!-- Arihant's Services -->
                 <div class="service-card">
                     <img loading="lazy" decoding="async" width="640" height="427" class="card-image-small lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="assets/service-full-chart.webp" alt="Vedic Kundli Reading">
                     <span class="service-label">Full Chart</span>
@@ -96,8 +96,15 @@ html_replacement = f"""<section id="vedic-services" class="section services-sect
                     </div>
                     {make_actions(make_wa(arihant_wa, 'Hi! I would like to book a Rahu Ketu Consultation.'), 'rahu-ketu-kaal-sarpa-consultation.html', 'Arihant')}
                 </div>
-                
-                <!-- Isha's Services -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Isha's Services Section -->
+    <section id="divine-services" class="section services-section" style="padding-top: 60px; border-top: 1px solid var(--border-subtle); background: rgba(11, 16, 32, 0.2);">
+        <div class="container" style="max-width: 1200px; padding: 0 24px;">
+            <h2 style="font-size: 2.2rem; color: var(--text-light); text-align: center; margin-bottom: 40px; font-family: var(--font-serif);">Divine Services by Isha</h2>
+            <div class="services-grid">
                 <div class="service-card">
                     <img loading="lazy" decoding="async" width="640" height="427" class="card-image-small lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="assets/service-vastu.jpg" alt="Vastu Shastra">
                     <span class="service-label">Environment</span>
@@ -141,10 +148,11 @@ html_replacement = f"""<section id="vedic-services" class="section services-sect
 with open('index.html', 'r', encoding='utf-8') as f:
     html = f.read()
 
-# Replace the entire vedic-services section
-new_html = re.sub(r'<section id="vedic-services" class="section services-section" style="padding-top: 20px;">.*?</section>', html_replacement, html, flags=re.DOTALL)
+# Since the previous run already replaced the content with a single <section id="vedic-services">...</section>,
+# We can just replace it again.
+new_html = re.sub(r'<section id="vedic-services" class="section services-section".*?</section>', html_replacement, html, flags=re.DOTALL)
 
 with open('index.html', 'w', encoding='utf-8') as f:
     f.write(new_html)
 
-print("index.html updated successfully with middle path!")
+print("index.html updated successfully with split grids!")
