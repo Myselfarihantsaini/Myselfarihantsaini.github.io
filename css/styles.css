@@ -2133,9 +2133,9 @@ textarea.form-control {
 .gochar-house > span:first-child { color: var(--primary); font-size: 0.72rem; line-height: 1; }
 .gochar-rashi { color: var(--primary-light); font-size: 0.66rem; line-height: 1; white-space: nowrap; }
 .gochar-planets { color: var(--text-light); font-size: clamp(0.58rem, 1.5vw, 0.8rem); line-height: 1.05; max-width: 54px; overflow-wrap: anywhere; }
-.house-1 { top: 16%; left: 50%; } .house-2 { top: 10%; left: 77%; } .house-3 { top: 30%; left: 91%; } .house-4 { top: 50%; left: 84%; }
-.house-5 { top: 70%; left: 91%; } .house-6 { top: 90%; left: 77%; } .house-7 { top: 84%; left: 50%; } .house-8 { top: 90%; left: 23%; }
-.house-9 { top: 70%; left: 9%; } .house-10 { top: 50%; left: 16%; } .house-11 { top: 30%; left: 9%; } .house-12 { top: 10%; left: 23%; }
+.house-1 { top: 16%; left: 50%; } .house-2 { top: 10%; left: 23%; } .house-3 { top: 30%; left: 9%; } .house-4 { top: 50%; left: 16%; }
+.house-5 { top: 70%; left: 9%; } .house-6 { top: 90%; left: 23%; } .house-7 { top: 84%; left: 50%; } .house-8 { top: 90%; left: 77%; }
+.house-9 { top: 70%; left: 91%; } .house-10 { top: 50%; left: 84%; } .house-11 { top: 30%; left: 91%; } .house-12 { top: 10%; left: 77%; }
 @media (max-width: 576px) {
   .transit-grid { grid-template-columns: 1fr; gap: 14px; }
   .transit-card { padding: 16px; }
