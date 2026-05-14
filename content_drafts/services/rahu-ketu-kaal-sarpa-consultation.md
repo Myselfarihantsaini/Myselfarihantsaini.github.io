@@ -53,4 +53,4 @@ If you are entering a nodal Dasha, we will break down the timeline, explaining t
 
 **Ready to decode your karmic axis without the fear?**
 
-[Book a Rahu Ketu Consultation at Shambhavaa](/contact)
+[Book a Rahu Ketu Consultation at Shambhavaa](https://wa.me/919057918251?text=Hi%21%20I%20would%20like%20to%20book%20a%20Rahu%20Ketu%20and%20Kaal%20Sarpa%20Consultation.)

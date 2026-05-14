@@ -81,4 +81,4 @@ By synthesizing the Dasha with the D10, the astrologer removes the guesswork and
 Your career is too important to leave to generalized predictions. The Dasamsa (D10) chart is the specialized tool that separates generic horoscopes from precise, actionable Jyotish. It reveals the true reality of your professional environment, your hidden leadership potential, and the exact timing of your rise.
 
 **Ready to unlock your professional potential?**
-[Book a Career Astrology Consultation at Shambhavaa](/contact)
+[Book a Career Astrology Consultation at Shambhavaa](https://wa.me/919057918251?text=Hi%21%20I%20would%20like%20to%20book%20a%20Consultation.)

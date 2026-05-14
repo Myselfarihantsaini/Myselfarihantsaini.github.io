@@ -86,4 +86,4 @@ Astrology is the science of time. Just as a combination lock requires multiple n
 If you are trying to understand the exact timeline of your life—when to push forward and when to lay low—you must analyze the synthesis of your periods and planetary movements.
 
 **Want to know what your current timeline holds?**
-[Book a Dasha and Transit Reading at Shambhavaa](/contact)
+[Book a Dasha and Transit Reading at Shambhavaa](https://wa.me/919057918251?text=Hi%21%20I%20would%20like%20to%20book%20a%20Consultation.)

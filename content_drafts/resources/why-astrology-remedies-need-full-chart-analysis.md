@@ -80,4 +80,4 @@ If your chart indicates a difficult period for your career, performing a remedy 
 True remedies require your time, your discipline, and your devotion. They are a partnership between you and the cosmos.
 
 **Ready to find the right alignment for your chart?**
-[Book an Astrology Remedies Consultation at Shambhavaa](/contact)
+[Book an Astrology Remedies Consultation at Shambhavaa](https://wa.me/919057918251?text=Hi%21%20I%20would%20like%20to%20book%20a%20Consultation.)

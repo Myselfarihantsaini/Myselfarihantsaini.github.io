@@ -57,4 +57,4 @@ The true power of this reading lies in combining the two. For example, if you ar
 
 **Ready to understand your timeline?**
 
-[Book a Dasha and Transit Reading at Shambhavaa](/contact)
+[Book a Dasha and Transit Reading at Shambhavaa](https://wa.me/919057918251?text=Hi%21%20I%20would%20like%20to%20book%20a%20Dasha%20and%20Transit%20Reading.)

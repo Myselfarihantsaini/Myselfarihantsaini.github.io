@@ -61,4 +61,4 @@ To maintain the integrity of Jyotish, we strictly adhere to the following limita
 
 **Ready to align your career with your karma?**
 
-[Book a Career Astrology Consultation at Shambhavaa](/contact)
+[Book a Career Astrology Consultation at Shambhavaa](https://wa.me/919057918251?text=Hi%21%20I%20would%20like%20to%20book%20a%20Career%20Astrology%20Consultation.)

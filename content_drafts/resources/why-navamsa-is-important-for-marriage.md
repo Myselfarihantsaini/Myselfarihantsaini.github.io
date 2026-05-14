@@ -75,4 +75,4 @@ Vedic astrology is a system of profound depth. Making a marriage prediction with
 If you are facing delays, confusion, or recurring patterns in your romantic life, you must look beyond the surface of your D1 chart.
 
 **Ready to uncover the true reality of your relationships?**
-[Book a Marriage Astrology Consultation at Shambhavaa](/contact)
+[Book a Marriage Astrology Consultation at Shambhavaa](https://wa.me/919057918251?text=Hi%21%20I%20would%20like%20to%20book%20a%20Consultation.)

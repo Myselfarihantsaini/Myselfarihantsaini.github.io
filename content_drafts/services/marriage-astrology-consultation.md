@@ -60,4 +60,4 @@ Our approach to Jyotish is realistic and ethical. Therefore:
 
 **Ready to find clarity in your relationship journey?**
 
-[Book a Marriage Astrology Consultation at Shambhavaa](/contact)
+[Book a Marriage Astrology Consultation at Shambhavaa](https://wa.me/919057918251?text=Hi%21%20I%20would%20like%20to%20book%20a%20Marriage%20Astrology%20Consultation.)

@@ -76,4 +76,4 @@ If your chart indicates a period of intense struggle, isolation, or delay (such 
 By preparing your exact data, formulating clear questions, and approaching the reading with realistic expectations, you turn an astrology reading from a passive fortune-telling session into an active, empowering strategy for your life.
 
 **Prepared and ready for clarity?**
-[Book your Consultation at Shambhavaa](/contact)
+[Book your Consultation at Shambhavaa](https://wa.me/919057918251?text=Hi%21%20I%20would%20like%20to%20book%20a%20Consultation.)

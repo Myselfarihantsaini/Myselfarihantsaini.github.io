@@ -92,4 +92,4 @@ Career astrology is a complex synthesis of your karmic duties (10th house), your
 By decoding this structure, astrology removes the guesswork from your professional life. It tells you whether you are built for business or service, what industries align with your planetary energies, and exactly when the windows of opportunity will open.
 
 **Ready to align your career with your chart?**
-[Book a Career Astrology Consultation at Shambhavaa](/contact)
+[Book a Career Astrology Consultation at Shambhavaa](https://wa.me/919057918251?text=Hi%21%20I%20would%20like%20to%20book%20a%20Consultation.)

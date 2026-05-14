@@ -49,4 +49,4 @@ Because Nakshatras span only 13 degrees and 20 minutes, and their Padas span jus
 
 **Ready to explore the deeper layers of your mind?**
 
-[Book a Nakshatra Reading Consultation at Shambhavaa](/contact)
+[Book a Nakshatra Reading Consultation at Shambhavaa](https://wa.me/919057918251?text=Hi%21%20I%20would%20like%20to%20book%20a%20Nakshatra%20Reading%20Consultation.)

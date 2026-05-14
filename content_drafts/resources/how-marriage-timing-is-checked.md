@@ -94,4 +94,4 @@ If your chart shows a strong marriage window opening next year, you must still a
 If you are facing delays or confusion regarding your marital timeline, a structured astrological reading can alleviate the anxiety by showing you exactly where you are on your karmic timeline.
 
 **Ready to understand your relationship timeline?**
-[Book a Marriage Astrology Consultation at Shambhavaa](/contact)
+[Book a Marriage Astrology Consultation at Shambhavaa](https://wa.me/919057918251?text=Hi%21%20I%20would%20like%20to%20book%20a%20Consultation.)

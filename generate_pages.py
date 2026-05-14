@@ -6,7 +6,7 @@ def read_template():
         html = f.read()
     
     # Extract everything before the hero
-    head_match = re.search(r'(.*?<header class="hero"[^>]*>.*?)<h1', html, re.DOTALL)
+    head_match = re.search(r'(.*?<header class="[^"]*hero[^"]*"[^>]*>.*?)<h1', html, re.DOTALL)
     if not head_match:
         print("Could not parse head")
         return None, None
@@ -14,7 +14,7 @@ def read_template():
     head_str = head_match.group(1)
     
     # Extract footer
-    foot_match = re.search(r'(</section>\s*<!-- Footer -->.*)', html, re.DOTALL)
+    foot_match = re.search(r'(<footer class="footer">.*)', html, re.DOTALL)
     if not foot_match:
         print("Could not parse foot")
         return None, None

@@ -130,4 +130,4 @@ When you sit down with an astrologer, you should expect to hear about your stren
 If you are ready to explore the karmic blueprint of your life, ensure you have your exact birth details ready, prepare your questions, and approach the session with an open mind. 
 
 **Ready to decode your timeline?**
-[Book a Vedic Kundli Reading at Shambhavaa](/contact)
+[Book a Vedic Kundli Reading at Shambhavaa](https://wa.me/919057918251?text=Hi%21%20I%20would%20like%20to%20book%20a%20Consultation.)

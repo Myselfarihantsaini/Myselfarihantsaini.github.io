@@ -49,4 +49,4 @@ For a compatibility reading, we require accurate birth data for **both** individ
 
 **Ready to deeply understand your relationship dynamics?**
 
-[Book a Kundli Matching Consultation at Shambhavaa](/contact)
+[Book a Kundli Matching Consultation at Shambhavaa](https://wa.me/919057918251?text=Hi%21%20I%20would%20like%20to%20book%20a%20Kundli%20Matching%20Consultation.)

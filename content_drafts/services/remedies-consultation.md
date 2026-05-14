@@ -54,4 +54,4 @@ To protect you from exploitative practices, you must understand our ethical boun
 
 **Ready to align your energy and overcome blockages?**
 
-[Book an Astrology Remedies Consultation at Shambhavaa](/contact)
+[Book an Astrology Remedies Consultation at Shambhavaa](https://wa.me/919057918251?text=Hi%21%20I%20would%20like%20to%20book%20a%20Astrology%20Remedies%20Consultation.)
