@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-15T06:33:28.097136+00:00",
+  "generatedAt": "2026-05-15T06:40:32.323547+00:00",
   "validHours": 72,
   "engine": "pyswisseph",
   "engineVersion": "2.10.03",
@@ -10,155 +10,191 @@
   "licenseNote": "Swiss Ephemeris data generated at build time; pyswisseph source is not bundled in the website.",
   "planets": {
     "Sun": {
-      "longitude": 30.228796,
+      "longitude": 30.233531,
       "current_sign": 2,
       "sign": "Taurus",
-      "normDegree": 0.228796,
+      "normDegree": 0.233531,
       "degreeParts": {
         "degrees": 0,
-        "minutes": 13,
-        "seconds": 44
+        "minutes": 14,
+        "seconds": 1
       },
       "nakshatra": "Krittika",
       "nakshatraIndex": 3,
+      "nakshatraLord": "Sun",
       "pada": 2,
-      "speed": 0.964919,
+      "speed": 0.964917,
+      "movement": "D",
+      "relativeSpeed": 0.9649,
+      "absoluteLongitudeLabel": "30.23°",
       "isRetro": "false",
       "source": "Swiss Ephemeris"
     },
     "Moon": {
-      "longitude": 8.259325,
+      "longitude": 8.331985,
       "current_sign": 1,
       "sign": "Aries",
-      "normDegree": 8.259325,
+      "normDegree": 8.331985,
       "degreeParts": {
         "degrees": 8,
-        "minutes": 15,
-        "seconds": 34
+        "minutes": 19,
+        "seconds": 55
       },
       "nakshatra": "Ashwini",
       "nakshatraIndex": 1,
+      "nakshatraLord": "Ketu",
       "pada": 3,
-      "speed": 14.80534,
+      "speed": 14.807174,
+      "movement": "D",
+      "relativeSpeed": 14.8072,
+      "absoluteLongitudeLabel": "8.33°",
       "isRetro": "false",
       "source": "Swiss Ephemeris"
     },
     "Mars": {
-      "longitude": 3.011075,
+      "longitude": 3.014784,
       "current_sign": 1,
       "sign": "Aries",
-      "normDegree": 3.011075,
+      "normDegree": 3.014784,
       "degreeParts": {
         "degrees": 3,
         "minutes": 0,
-        "seconds": 40
+        "seconds": 53
       },
       "nakshatra": "Ashwini",
       "nakshatraIndex": 1,
+      "nakshatraLord": "Ketu",
       "pada": 1,
-      "speed": 0.75584,
+      "speed": 0.755836,
+      "movement": "D",
+      "relativeSpeed": 0.7558,
+      "absoluteLongitudeLabel": "3.01°",
       "isRetro": "false",
       "source": "Swiss Ephemeris"
     },
     "Mercury": {
-      "longitude": 31.048114,
+      "longitude": 31.058833,
       "current_sign": 2,
       "sign": "Taurus",
-      "normDegree": 1.048114,
+      "normDegree": 1.058833,
       "degreeParts": {
         "degrees": 1,
-        "minutes": 2,
-        "seconds": 53
+        "minutes": 3,
+        "seconds": 32
       },
       "nakshatra": "Krittika",
       "nakshatraIndex": 3,
+      "nakshatraLord": "Sun",
       "pada": 2,
-      "speed": 2.184228,
+      "speed": 2.184251,
+      "movement": "D",
+      "relativeSpeed": 2.1843,
+      "absoluteLongitudeLabel": "31.06°",
       "isRetro": "false",
       "source": "Swiss Ephemeris"
     },
     "Jupiter": {
-      "longitude": 86.868362,
+      "longitude": 86.869173,
       "current_sign": 3,
       "sign": "Gemini",
-      "normDegree": 26.868362,
+      "normDegree": 26.869173,
       "degreeParts": {
         "degrees": 26,
         "minutes": 52,
-        "seconds": 6
+        "seconds": 9
       },
       "nakshatra": "Punarvasu",
       "nakshatraIndex": 7,
+      "nakshatraLord": "Jupiter",
       "pada": 3,
-      "speed": 0.165326,
+      "speed": 0.165334,
+      "movement": "D",
+      "relativeSpeed": 0.1653,
+      "absoluteLongitudeLabel": "86.87°",
       "isRetro": "false",
       "source": "Swiss Ephemeris"
     },
     "Venus": {
-      "longitude": 61.257249,
+      "longitude": 61.263131,
       "current_sign": 3,
       "sign": "Gemini",
-      "normDegree": 1.257249,
+      "normDegree": 1.263131,
       "degreeParts": {
         "degrees": 1,
         "minutes": 15,
-        "seconds": 26
+        "seconds": 47
       },
       "nakshatra": "Mrigashira",
       "nakshatraIndex": 5,
+      "nakshatraLord": "Mars",
       "pada": 3,
-      "speed": 1.198771,
+      "speed": 1.198767,
+      "movement": "D",
+      "relativeSpeed": 1.1988,
+      "absoluteLongitudeLabel": "61.26°",
       "isRetro": "false",
       "source": "Swiss Ephemeris"
     },
     "Saturn": {
-      "longitude": 346.454396,
+      "longitude": 346.454896,
       "current_sign": 12,
       "sign": "Pisces",
-      "normDegree": 16.454396,
+      "normDegree": 16.454896,
       "degreeParts": {
         "degrees": 16,
         "minutes": 27,
-        "seconds": 16
+        "seconds": 18
       },
       "nakshatra": "Uttara Bhadrapada",
       "nakshatraIndex": 26,
+      "nakshatraLord": "Saturn",
       "pada": 4,
-      "speed": 0.101715,
+      "speed": 0.10171,
+      "movement": "D",
+      "relativeSpeed": 0.1017,
+      "absoluteLongitudeLabel": "346.45°",
       "isRetro": "false",
       "source": "Swiss Ephemeris"
     },
     "Rahu": {
-      "longitude": 310.833501,
+      "longitude": 310.833241,
       "current_sign": 11,
       "sign": "Aquarius",
-      "normDegree": 10.833501,
+      "normDegree": 10.833241,
       "degreeParts": {
         "degrees": 10,
         "minutes": 50,
-        "seconds": 1
+        "seconds": 0
       },
       "nakshatra": "Shatabhisha",
       "nakshatraIndex": 24,
+      "nakshatraLord": "Rahu",
       "pada": 2,
       "speed": -0.052992,
+      "movement": "R",
+      "relativeSpeed": -0.053,
+      "absoluteLongitudeLabel": "310.83°",
       "isRetro": "true",
       "source": "Swiss Ephemeris"
     },
     "Ketu": {
-      "longitude": 130.833501,
+      "longitude": 130.833241,
       "current_sign": 5,
       "sign": "Leo",
-      "normDegree": 10.833501,
+      "normDegree": 10.833241,
       "degreeParts": {
         "degrees": 10,
         "minutes": 50,
-        "seconds": 1
+        "seconds": 0
       },
       "nakshatra": "Magha",
       "nakshatraIndex": 10,
+      "nakshatraLord": "Ketu",
       "pada": 4,
       "speed": -0.052992,
+      "movement": "R",
+      "relativeSpeed": -0.053,
+      "absoluteLongitudeLabel": "130.83°",
       "isRetro": "true",
       "source": "Swiss Ephemeris"
     }
@@ -166,59 +202,59 @@
   "validation": {
     "tool": "swetest",
     "status": "passed",
-    "checkedAt": "2026-05-15T06:33:28.097136+00:00",
+    "checkedAt": "2026-05-15T06:40:32.323547+00:00",
     "comparison": "Lahiri sidereal longitude",
     "toleranceDegrees": 0.01,
-    "maxLongitudeDeltaDegrees": 0.0025765,
+    "maxLongitudeDeltaDegrees": 0.0025768,
     "planetsChecked": 8,
     "note": "swetest was used as a local build-time validator only; its source, binary, and ephemeris files are not bundled in the website.",
     "comparisons": [
       {
         "planet": "Sun",
-        "generatedLongitude": 30.228796,
-        "swetestLongitude": 30.229002,
-        "deltaDegrees": 0.0002065
+        "generatedLongitude": 30.233531,
+        "swetestLongitude": 30.233738,
+        "deltaDegrees": 0.0002068
       },
       {
         "planet": "Moon",
-        "generatedLongitude": 8.259325,
-        "swetestLongitude": 8.261902,
-        "deltaDegrees": 0.0025765
+        "generatedLongitude": 8.331985,
+        "swetestLongitude": 8.334562,
+        "deltaDegrees": 0.0025768
       },
       {
         "planet": "Mercury",
-        "generatedLongitude": 31.048114,
-        "swetestLongitude": 31.048529,
-        "deltaDegrees": 0.0004154
+        "generatedLongitude": 31.058833,
+        "swetestLongitude": 31.059248,
+        "deltaDegrees": 0.0004153
       },
       {
         "planet": "Venus",
-        "generatedLongitude": 61.257249,
-        "swetestLongitude": 61.257495,
-        "deltaDegrees": 0.0002461
+        "generatedLongitude": 61.263131,
+        "swetestLongitude": 61.263378,
+        "deltaDegrees": 0.000247
       },
       {
         "planet": "Mars",
-        "generatedLongitude": 3.011075,
-        "swetestLongitude": 3.011246,
-        "deltaDegrees": 0.0001707
+        "generatedLongitude": 3.014784,
+        "swetestLongitude": 3.014955,
+        "deltaDegrees": 0.0001709
       },
       {
         "planet": "Jupiter",
-        "generatedLongitude": 86.868362,
-        "swetestLongitude": 86.868431,
-        "deltaDegrees": 6.93e-05
+        "generatedLongitude": 86.869173,
+        "swetestLongitude": 86.869243,
+        "deltaDegrees": 6.97e-05
       },
       {
         "planet": "Saturn",
-        "generatedLongitude": 346.454396,
-        "swetestLongitude": 346.454455,
-        "deltaDegrees": 5.91e-05
+        "generatedLongitude": 346.454896,
+        "swetestLongitude": 346.454954,
+        "deltaDegrees": 5.82e-05
       },
       {
         "planet": "Rahu",
-        "generatedLongitude": 310.833501,
-        "swetestLongitude": 310.833533,
+        "generatedLongitude": 310.833241,
+        "swetestLongitude": 310.833273,
         "deltaDegrees": 3.24e-05
       }
     ]

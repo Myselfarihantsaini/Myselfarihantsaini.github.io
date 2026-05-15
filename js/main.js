@@ -546,7 +546,10 @@ function renderTransits(isLive = false) {
             const retro = p.isRetro === "true" ? ' <span class="retrograde-marker">(R)</span>' : '';
             const stayText = calculateStay(apiName, p);
             const nakshatra = p.nakshatra
-                ? `<span class="transit-stay">${p.nakshatra}${p.pada ? ` Pada ${p.pada}` : ""}</span>`
+                ? `<span class="transit-stay">${p.nakshatra}${p.pada ? ` Pada ${p.pada}` : ""}${p.nakshatraLord ? ` • Lord ${p.nakshatraLord}` : ""}</span>`
+                : "";
+            const transitMeta = (p.absoluteLongitudeLabel || Number.isFinite(Number(p.longitude)) || Number.isFinite(Number(p.speed)))
+                ? `<span class="transit-stay">${p.absoluteLongitudeLabel || `${Number(p.longitude).toFixed(2)}°`} 360°${Number.isFinite(Number(p.speed)) ? ` • Speed ${Number(p.speed).toFixed(4)}°/day` : ""}</span>`
                 : "";
             const status = (statuses[apiName] && statuses[apiName][signNum])
                 ? `<span class="transit-status">${statuses[apiName][signNum]}</span>`
@@ -558,6 +561,7 @@ function renderTransits(isLive = false) {
                     <span class="transit-sign">${signName}</span>
                     <span class="transit-degree">${degStr}${retro}</span>
                     ${nakshatra}
+                    ${transitMeta}
                     <span class="transit-stay">${stayText}</span>
                     ${status}
                 `;

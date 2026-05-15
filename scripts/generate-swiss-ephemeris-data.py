@@ -64,6 +64,18 @@ NAKSHATRAS = [
     "Revati",
 ]
 
+NAKSHATRA_LORDS = [
+    "Ketu",
+    "Venus",
+    "Sun",
+    "Moon",
+    "Mars",
+    "Rahu",
+    "Jupiter",
+    "Saturn",
+    "Mercury",
+] * 3
+
 PLANETS = [
     ("Sun", "SUN", False),
     ("Moon", "MOON", False),
@@ -153,8 +165,12 @@ def position_payload(longitude: float, speed: float, source: str) -> dict:
         "degreeParts": dms(sign_degree),
         "nakshatra": NAKSHATRAS[nak_index],
         "nakshatraIndex": nak_index + 1,
+        "nakshatraLord": NAKSHATRA_LORDS[nak_index],
         "pada": pada,
         "speed": round(speed, 6),
+        "movement": "R" if speed < 0 else "D",
+        "relativeSpeed": round(speed, 4),
+        "absoluteLongitudeLabel": f"{lon:.2f}°",
         "isRetro": "true" if speed < 0 else "false",
         "source": source,
     }
