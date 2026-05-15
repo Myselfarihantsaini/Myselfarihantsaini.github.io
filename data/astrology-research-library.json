@@ -1,0 +1,133 @@
+{
+  "name": "Shambhavaa Vedic Astrology Research Library",
+  "source": "Metadata-only index prepared from an offline astrology books database.",
+  "integrationDate": "2026-05-15",
+  "copyrightPolicy": "No PDFs, DOC files, chart files, or book text are hosted in this website integration. This catalog records study topics and reference titles only.",
+  "excluded": [
+    "Birth-detail chart collections",
+    "Private local file paths",
+    "Full PDF/DOC/PPTX contents",
+    "Medical or guaranteed-outcome claim content"
+  ],
+  "sourceSummary": {
+    "totalFilesInspected": 1461,
+    "researchFilesFound": 223,
+    "chartFilesExcluded": 1229,
+    "topLevelCategories": {
+      "Articles": 96,
+      "Classics": 56,
+      "Books by Authors": 34,
+      "Nadi Jyotish": 28,
+      "Good Books": 8
+    }
+  },
+  "topics": [
+    {
+      "topic": "Classical Jyotish",
+      "references": [
+        "Brihat Jataka",
+        "Brihat Samhita",
+        "Jaimini Sutras",
+        "Saravali",
+        "Sarvartha Chintamani",
+        "Phaladeepika",
+        "Jataka Parijata",
+        "Sanketa Nidhi",
+        "Uttara Kalamrita",
+        "Satya Jataka"
+      ],
+      "relatedPages": [
+        "/vedic-kundli-reading.html",
+        "/resources/how-vedic-kundli-reading-works.html"
+      ]
+    },
+    {
+      "topic": "Dasha and Timing",
+      "references": [
+        "Vimshottari Dasa notes",
+        "Chara Dasha research notes",
+        "Dasha lagna key accurate predictions",
+        "Encyclopedia of Vedic Astrology Dasha Systems",
+        "How to judge Mahadasha results from D1, D9 and transit"
+      ],
+      "relatedPages": [
+        "/dasha-transit-reading.html",
+        "/resources/why-dasha-and-transit-must-be-read-together.html"
+      ]
+    },
+    {
+      "topic": "Divisional Charts",
+      "references": [
+        "Navamsa notes",
+        "D10 Dasama Mahatphalam",
+        "Dashamsha career notes",
+        "Shashtiamsa D60",
+        "Saptavarga Phala in Astrology",
+        "Drekkana notes",
+        "Hora chart methods"
+      ],
+      "relatedPages": [
+        "/resources/why-navamsa-is-important-for-marriage.html",
+        "/resources/how-d10-chart-helps-career-prediction.html"
+      ]
+    },
+    {
+      "topic": "Marriage and Compatibility",
+      "references": [
+        "Cancellation of Manglik Dosh",
+        "Navamsa marriage notes",
+        "Stri Jataka",
+        "7th house and relationship research notes",
+        "Kundli matching reference notes"
+      ],
+      "relatedPages": [
+        "/marriage-astrology-consultation.html",
+        "/kundli-matching-consultation.html",
+        "/resources/how-marriage-timing-is-checked.html"
+      ]
+    },
+    {
+      "topic": "Career and Profession",
+      "references": [
+        "Role of Saturn in career and profession",
+        "D10 career prediction notes",
+        "Dasamsa loss and gain in career",
+        "Amatyakaraka and profession notes",
+        "Nadi method of determining profession"
+      ],
+      "relatedPages": [
+        "/career-astrology-consultation.html",
+        "/resources/how-career-is-judged-from-kundli.html"
+      ]
+    },
+    {
+      "topic": "Rahu, Ketu, and Nadi",
+      "references": [
+        "Bhrigu Nadi principles",
+        "Bhrigu Nandi Nadi",
+        "Roots of Nadi",
+        "Sukar Nadi references",
+        "Nodes research notes",
+        "Karmic astrology notes"
+      ],
+      "relatedPages": [
+        "/rahu-ketu-kaal-sarpa-consultation.html",
+        "/dasha-transit-reading.html"
+      ]
+    },
+    {
+      "topic": "Prashna and Jaimini",
+      "references": [
+        "Essence of Prashna Techniques",
+        "Prashna Marga",
+        "Prashna Tantra",
+        "Jaimini astrology notes",
+        "Jaimini Chara Dasha"
+      ],
+      "relatedPages": [
+        "/vedic-kundli-reading.html",
+        "/consultation-process.html"
+      ]
+    }
+  ]
+}
