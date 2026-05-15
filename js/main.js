@@ -255,7 +255,9 @@ function initChatFab() {
 // ---- Live Navagraha Transits ----
 let currentPlanetData = null;
 let transitRefreshTimer = null;
+let transitSourceMeta = null;
 const ASTRONOMY_ENGINE_URL = "https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js";
+const SWISS_EPHEMERIS_TRANSITS_URL = "data/navagraha-transits.json";
 const DASHA_ORDER = ["Ketu", "Venus", "Sun", "Moon", "Mars", "Rahu", "Jupiter", "Saturn", "Mercury"];
 const DASHA_YEARS = [7, 20, 6, 10, 7, 18, 16, 19, 17];
 
@@ -305,6 +307,33 @@ function getFallbackTransitData(date = new Date()) {
         "Rahu": createPlanetPosition(rahuLongitude, true),
         "Ketu": createPlanetPosition(rahuLongitude + 180, true)
     };
+}
+
+function getSiteDataUrl(filePath) {
+    const path = window.location.pathname || "";
+    const prefix = (path.includes("/resources/") || path.includes("/posts/")) ? "../" : "";
+    return `${prefix}${filePath}`;
+}
+
+async function loadSwissEphemerisTransits() {
+    const response = await fetch(getSiteDataUrl(SWISS_EPHEMERIS_TRANSITS_URL), {
+        cache: "no-store"
+    });
+    if (!response.ok) throw new Error(`Swiss Ephemeris snapshot unavailable: ${response.status}`);
+
+    const snapshot = await response.json();
+    if (!snapshot || !snapshot.generatedAt || !snapshot.planets) {
+        throw new Error("Swiss Ephemeris snapshot is malformed");
+    }
+
+    const generatedAt = new Date(snapshot.generatedAt);
+    const validHours = Number(snapshot.validHours || 72);
+    const ageHours = (Date.now() - generatedAt.getTime()) / 3600000;
+    if (!Number.isFinite(ageHours) || ageHours > validHours) {
+        throw new Error("Swiss Ephemeris snapshot is stale");
+    }
+
+    return snapshot;
 }
 
 function loadAstronomyEngine() {
@@ -407,9 +436,21 @@ async function fetchNavagrahaTransits() {
     };
 
     try {
+        setLoadingState("Loading Swiss Ephemeris...");
+        const swissSnapshot = await loadSwissEphemerisTransits();
+        currentPlanetData = swissSnapshot.planets;
+        transitSourceMeta = swissSnapshot;
+        renderTransits("swiss");
+        return;
+    } catch (error) {
+        console.warn("Swiss Ephemeris snapshot failed, using live browser calculation:", error);
+    }
+
+    try {
         setLoadingState("Loading live position...");
         const astronomy = await loadAstronomyEngine();
         currentPlanetData = buildLiveTransitData(astronomy, new Date());
+        transitSourceMeta = null;
         renderTransits(true);
 
         if (!transitRefreshTimer) {
@@ -425,6 +466,7 @@ async function fetchNavagrahaTransits() {
     } catch (error) {
         console.warn("Live transit source failed, using date-based fallback:", error);
         currentPlanetData = getFallbackTransitData(new Date());
+        transitSourceMeta = null;
         renderTransits(false);
     }
 }
@@ -481,7 +523,13 @@ function renderTransits(isLive = false) {
     const sourceLabel = document.getElementById('transit-source');
     if (sourceLabel) {
         const now = new Date();
-        sourceLabel.textContent = `${isLive ? "Live sidereal data" : "Estimated sidereal data"} • Updated ${now.toLocaleString([], {
+        const sourceText = isLive === "swiss"
+            ? "Swiss Ephemeris Lahiri sidereal snapshot"
+            : (isLive ? "Live sidereal data" : "Estimated sidereal data");
+        const sourceTime = (isLive === "swiss" && transitSourceMeta && transitSourceMeta.generatedAt)
+            ? new Date(transitSourceMeta.generatedAt)
+            : now;
+        sourceLabel.textContent = `${sourceText} • Updated ${sourceTime.toLocaleString([], {
             month: "short",
             day: "numeric",
             hour: "2-digit",
@@ -497,6 +545,9 @@ function renderTransits(isLive = false) {
             const degStr = formatDegrees(p.normDegree);
             const retro = p.isRetro === "true" ? ' <span class="retrograde-marker">(R)</span>' : '';
             const stayText = calculateStay(apiName, p);
+            const nakshatra = p.nakshatra
+                ? `<span class="transit-stay">${p.nakshatra}${p.pada ? ` Pada ${p.pada}` : ""}</span>`
+                : "";
             const status = (statuses[apiName] && statuses[apiName][signNum])
                 ? `<span class="transit-status">${statuses[apiName][signNum]}</span>`
                 : "";
@@ -506,6 +557,7 @@ function renderTransits(isLive = false) {
                 el.innerHTML = `
                     <span class="transit-sign">${signName}</span>
                     <span class="transit-degree">${degStr}${retro}</span>
+                    ${nakshatra}
                     <span class="transit-stay">${stayText}</span>
                     ${status}
                 `;

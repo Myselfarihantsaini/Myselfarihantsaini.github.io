@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-05-15T06:24:37.569214+00:00",
+  "validHours": 72,
+  "engine": "pyswisseph",
+  "engineVersion": "2.10.03",
+  "ayanamsa": "Lahiri",
+  "zodiac": "sidereal",
+  "calculationTime": "UTC",
+  "licenseNote": "Swiss Ephemeris data generated at build time; pyswisseph source is not bundled in the website.",
+  "planets": {
+    "Sun": {
+      "longitude": 30.222871,
+      "current_sign": 2,
+      "sign": "Taurus",
+      "normDegree": 0.222871,
+      "degreeParts": {
+        "degrees": 0,
+        "minutes": 13,
+        "seconds": 22
+      },
+      "nakshatra": "Krittika",
+      "nakshatraIndex": 3,
+      "pada": 2,
+      "speed": 0.96492,
+      "isRetro": "false",
+      "source": "Swiss Ephemeris"
+    },
+    "Moon": {
+      "longitude": 8.168117,
+      "current_sign": 1,
+      "sign": "Aries",
+      "normDegree": 8.168117,
+      "degreeParts": {
+        "degrees": 8,
+        "minutes": 10,
+        "seconds": 5
+      },
+      "nakshatra": "Ashwini",
+      "nakshatraIndex": 1,
+      "pada": 3,
+      "speed": 14.803103,
+      "isRetro": "false",
+      "source": "Swiss Ephemeris"
+    },
+    "Mars": {
+      "longitude": 3.006423,
+      "current_sign": 1,
+      "sign": "Aries",
+      "normDegree": 3.006423,
+      "degreeParts": {
+        "degrees": 3,
+        "minutes": 0,
+        "seconds": 23
+      },
+      "nakshatra": "Ashwini",
+      "nakshatraIndex": 1,
+      "pada": 1,
+      "speed": 0.755844,
+      "isRetro": "false",
+      "source": "Swiss Ephemeris"
+    },
+    "Mercury": {
+      "longitude": 31.034687,
+      "current_sign": 2,
+      "sign": "Taurus",
+      "normDegree": 1.034687,
+      "degreeParts": {
+        "degrees": 1,
+        "minutes": 2,
+        "seconds": 5
+      },
+      "nakshatra": "Krittika",
+      "nakshatraIndex": 3,
+      "pada": 2,
+      "speed": 2.184198,
+      "isRetro": "false",
+      "source": "Swiss Ephemeris"
+    },
+    "Jupiter": {
+      "longitude": 86.867391,
+      "current_sign": 3,
+      "sign": "Gemini",
+      "normDegree": 26.867391,
+      "degreeParts": {
+        "degrees": 26,
+        "minutes": 52,
+        "seconds": 3
+      },
+      "nakshatra": "Punarvasu",
+      "nakshatraIndex": 7,
+      "pada": 3,
+      "speed": 0.165315,
+      "isRetro": "false",
+      "source": "Swiss Ephemeris"
+    },
+    "Venus": {
+      "longitude": 61.249895,
+      "current_sign": 3,
+      "sign": "Gemini",
+      "normDegree": 1.249895,
+      "degreeParts": {
+        "degrees": 1,
+        "minutes": 15,
+        "seconds": 0
+      },
+      "nakshatra": "Mrigashira",
+      "nakshatraIndex": 5,
+      "pada": 3,
+      "speed": 1.198775,
+      "isRetro": "false",
+      "source": "Swiss Ephemeris"
+    },
+    "Saturn": {
+      "longitude": 346.453756,
+      "current_sign": 12,
+      "sign": "Pisces",
+      "normDegree": 16.453756,
+      "degreeParts": {
+        "degrees": 16,
+        "minutes": 27,
+        "seconds": 14
+      },
+      "nakshatra": "Uttara Bhadrapada",
+      "nakshatraIndex": 26,
+      "pada": 4,
+      "speed": 0.10172,
+      "isRetro": "false",
+      "source": "Swiss Ephemeris"
+    },
+    "Rahu": {
+      "longitude": 310.833827,
+      "current_sign": 11,
+      "sign": "Aquarius",
+      "normDegree": 10.833827,
+      "degreeParts": {
+        "degrees": 10,
+        "minutes": 50,
+        "seconds": 2
+      },
+      "nakshatra": "Shatabhisha",
+      "nakshatraIndex": 24,
+      "pada": 2,
+      "speed": -0.052992,
+      "isRetro": "true",
+      "source": "Swiss Ephemeris"
+    },
+    "Ketu": {
+      "longitude": 130.833827,
+      "current_sign": 5,
+      "sign": "Leo",
+      "normDegree": 10.833827,
+      "degreeParts": {
+        "degrees": 10,
+        "minutes": 50,
+        "seconds": 2
+      },
+      "nakshatra": "Magha",
+      "nakshatraIndex": 10,
+      "pada": 4,
+      "speed": -0.052992,
+      "isRetro": "true",
+      "source": "Swiss Ephemeris"
+    }
+  }
+}
