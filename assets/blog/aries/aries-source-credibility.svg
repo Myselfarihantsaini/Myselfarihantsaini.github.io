@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Aries in all 12 houses source credibility framework</title>
+  <desc id="desc">A Vedic astrology editorial image showing Aries, Mars, twelve houses, BPHS source note, and full chart analysis method.</desc>
+  <defs>
+    <radialGradient id="sun" cx="50%" cy="48%" r="65%">
+      <stop offset="0%" stop-color="#ffdf88"/>
+      <stop offset="42%" stop-color="#d9562b"/>
+      <stop offset="100%" stop-color="#140916"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#f8e2a0"/>
+      <stop offset="48%" stop-color="#c89b45"/>
+      <stop offset="100%" stop-color="#7c4b1d"/>
+    </linearGradient>
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="#090b18"/>
+  <rect width="1600" height="900" fill="url(#sun)" opacity="0.55"/>
+  <g opacity="0.18">
+    <path d="M0 140 C260 60 360 220 600 140 S1040 60 1600 160" fill="none" stroke="#ffd98a" stroke-width="2"/>
+    <path d="M0 760 C240 650 420 840 700 720 S1140 650 1600 760" fill="none" stroke="#ffd98a" stroke-width="2"/>
+  </g>
+  <g transform="translate(800 450)" filter="url(#softGlow)">
+    <circle r="292" fill="none" stroke="url(#gold)" stroke-width="5"/>
+    <circle r="218" fill="none" stroke="#f7d57b" stroke-width="2" opacity="0.6"/>
+    <circle r="116" fill="none" stroke="#ffba62" stroke-width="2" opacity="0.55"/>
+    <g stroke="#f7d57b" stroke-width="2" opacity="0.75">
+      <line x1="0" y1="-292" x2="0" y2="-218"/>
+      <line x1="146" y1="-253" x2="109" y2="-189"/>
+      <line x1="253" y1="-146" x2="189" y2="-109"/>
+      <line x1="292" y1="0" x2="218" y2="0"/>
+      <line x1="253" y1="146" x2="189" y2="109"/>
+      <line x1="146" y1="253" x2="109" y2="189"/>
+      <line x1="0" y1="292" x2="0" y2="218"/>
+      <line x1="-146" y1="253" x2="-109" y2="189"/>
+      <line x1="-253" y1="146" x2="-189" y2="109"/>
+      <line x1="-292" y1="0" x2="-218" y2="0"/>
+      <line x1="-253" y1="-146" x2="-189" y2="-109"/>
+      <line x1="-146" y1="-253" x2="-109" y2="-189"/>
+    </g>
+    <text x="0" y="-18" text-anchor="middle" font-family="Georgia,serif" font-size="150" fill="#ffd273">♈</text>
+    <text x="0" y="62" text-anchor="middle" font-family="Georgia,serif" font-size="42" fill="#fff2c2" letter-spacing="8">ARIES</text>
+  </g>
+  <g transform="translate(95 108)">
+    <rect width="455" height="684" rx="18" fill="rgba(7,10,24,0.72)" stroke="#d6a855" stroke-width="2"/>
+    <text x="34" y="70" font-family="Georgia,serif" font-size="34" fill="#f8dc91">Classical Source Lens</text>
+    <line x1="34" y1="95" x2="421" y2="95" stroke="#d6a855" opacity="0.55"/>
+    <text x="34" y="145" font-family="Arial,sans-serif" font-size="24" fill="#ffffff">Brihat Parashara Hora Shastra</text>
+    <text x="34" y="182" font-family="Arial,sans-serif" font-size="20" fill="#f3cf83">House indications and bhava judgment</text>
+    <text x="34" y="236" font-family="Arial,sans-serif" font-size="21" fill="#ffffff">Check Aries through:</text>
+    <text x="58" y="286" font-family="Arial,sans-serif" font-size="21" fill="#f8dc91">• house meaning</text>
+    <text x="58" y="328" font-family="Arial,sans-serif" font-size="21" fill="#f8dc91">• Mars as sign lord</text>
+    <text x="58" y="370" font-family="Arial,sans-serif" font-size="21" fill="#f8dc91">• dignity and aspects</text>
+    <text x="58" y="412" font-family="Arial,sans-serif" font-size="21" fill="#f8dc91">• conjunctions</text>
+    <text x="58" y="454" font-family="Arial,sans-serif" font-size="21" fill="#f8dc91">• dasha and transit</text>
+    <text x="34" y="530" font-family="Arial,sans-serif" font-size="21" fill="#ffffff">No single sign placement gives</text>
+    <text x="34" y="565" font-family="Arial,sans-serif" font-size="21" fill="#ffffff">complete prediction by itself.</text>
+    <text x="34" y="635" font-family="Georgia,serif" font-size="27" fill="#f8dc91">Full chart first.</text>
+  </g>
+  <g transform="translate(1050 108)">
+    <rect width="455" height="684" rx="18" fill="rgba(7,10,24,0.72)" stroke="#d6a855" stroke-width="2"/>
+    <text x="34" y="70" font-family="Georgia,serif" font-size="34" fill="#f8dc91">Aries Themes</text>
+    <line x1="34" y1="95" x2="421" y2="95" stroke="#d6a855" opacity="0.55"/>
+    <text x="34" y="150" font-family="Arial,sans-serif" font-size="23" fill="#ffffff">Where Aries sits, life asks for:</text>
+    <text x="58" y="205" font-family="Arial,sans-serif" font-size="22" fill="#f8dc91">• courage</text>
+    <text x="58" y="248" font-family="Arial,sans-serif" font-size="22" fill="#f8dc91">• initiative</text>
+    <text x="58" y="291" font-family="Arial,sans-serif" font-size="22" fill="#f8dc91">• action</text>
+    <text x="58" y="334" font-family="Arial,sans-serif" font-size="22" fill="#f8dc91">• competition</text>
+    <text x="58" y="377" font-family="Arial,sans-serif" font-size="22" fill="#f8dc91">• independence</text>
+    <text x="58" y="420" font-family="Arial,sans-serif" font-size="22" fill="#f8dc91">• disciplined fire</text>
+    <text x="34" y="505" font-family="Arial,sans-serif" font-size="21" fill="#ffffff">Unevolved Aries reacts.</text>
+    <text x="34" y="545" font-family="Arial,sans-serif" font-size="21" fill="#ffffff">Evolved Aries acts with direction.</text>
+    <text x="34" y="635" font-family="Georgia,serif" font-size="27" fill="#f8dc91">Courage, not chaos.</text>
+  </g>
+  <text x="800" y="845" text-anchor="middle" font-family="Arial,sans-serif" font-size="23" fill="#ffe6a1">Shambhavaa Vedic Astrology • Educational source framework</text>
+</svg>
