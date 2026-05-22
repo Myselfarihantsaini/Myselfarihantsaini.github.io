@@ -752,7 +752,51 @@ function initLeadForms() {
     }
 }
 
+const cookieConsentStorageKey = 'shambhavaa_cookie_consent';
+let cookieConsentMemory = null;
+
+function getStoredCookieConsent() {
+    try {
+        if (window.localStorage) {
+            return window.localStorage.getItem(cookieConsentStorageKey);
+        }
+    } catch (error) {
+        // Some privacy-focused browser modes disable localStorage.
+    }
+
+    try {
+        const cookieMatch = document.cookie.match(new RegExp(`(?:^|; )${cookieConsentStorageKey}=([^;]*)`));
+        if (cookieMatch) return decodeURIComponent(cookieMatch[1]);
+    } catch (error) {
+        // Keep the banner usable even when cookies are unavailable.
+    }
+
+    return cookieConsentMemory;
+}
+
+function setStoredCookieConsent(choice) {
+    cookieConsentMemory = choice;
+
+    try {
+        if (window.localStorage) {
+            window.localStorage.setItem(cookieConsentStorageKey, choice);
+        }
+    } catch (error) {
+        // Fall back to a first-party cookie below.
+    }
+
+    try {
+        const secureFlag = window.location.protocol === 'https:' ? '; Secure' : '';
+        document.cookie = `${cookieConsentStorageKey}=${encodeURIComponent(choice)}; Max-Age=31536000; Path=/; SameSite=Lax${secureFlag}`;
+    } catch (error) {
+        // In-page memory already captured the choice for this visit.
+    }
+}
+
 function initLazyAds() {
+    const consent = getStoredCookieConsent();
+    if (consent !== 'accepted') return;
+
     document.querySelectorAll('ins.adsbygoogle:not([data-ad-initialized])').forEach((adSlot) => {
         adSlot.dataset.adInitialized = 'true';
         try {
@@ -761,6 +805,55 @@ function initLazyAds() {
             console.warn('[Ads] Slot initialization skipped:', error);
         }
     });
+}
+
+function updateGoogleConsent(consentValue) {
+    if (typeof window.gtag === 'function') {
+        window.gtag('consent', 'update', {
+            ad_storage: consentValue,
+            analytics_storage: consentValue,
+            ad_user_data: consentValue,
+            ad_personalization: consentValue
+        });
+    }
+}
+
+function initCookieConsent() {
+    const existingConsent = getStoredCookieConsent();
+    if (existingConsent === 'accepted') {
+        updateGoogleConsent('granted');
+        initLazyAds();
+        return;
+    }
+    if (existingConsent === 'declined') {
+        updateGoogleConsent('denied');
+        return;
+    }
+
+    const banner = document.createElement('div');
+    banner.className = 'cookie-consent is-visible';
+    banner.setAttribute('role', 'dialog');
+    banner.setAttribute('aria-live', 'polite');
+    banner.setAttribute('aria-label', 'Cookie consent');
+    banner.innerHTML = `
+        <p>Shambhavaa uses cookies for basic site functions, analytics, and Google AdSense advertising. You can accept or decline non-essential cookies. Read our <a href="${getSiteDataUrl('cookie-policy.html')}">Cookie Policy</a>.</p>
+        <div class="cookie-actions">
+            <button type="button" class="cookie-btn" data-cookie-choice="declined">Decline</button>
+            <button type="button" class="cookie-btn cookie-btn-primary" data-cookie-choice="accepted">Accept</button>
+        </div>
+    `;
+
+    banner.addEventListener('click', (event) => {
+        const button = event.target.closest('[data-cookie-choice]');
+        if (!button) return;
+        const choice = button.dataset.cookieChoice;
+        setStoredCookieConsent(choice);
+        updateGoogleConsent(choice === 'accepted' ? 'granted' : 'denied');
+        banner.remove();
+        if (choice === 'accepted') initLazyAds();
+    });
+
+    document.body.appendChild(banner);
 }
 
 // ---- Initialize Everything ----
@@ -791,7 +884,7 @@ document.addEventListener('DOMContentLoaded', () => {
     safeInit("ExternalLinks", secureExternalLinks);
     safeInit("FAQ", initFaqAccessibility);
     safeInit("Forms", initLeadForms);
-    safeInit("LazyAds", initLazyAds);
+    safeInit("CookieConsent", initCookieConsent);
     safeInit("ChartSelector", setupChartSelector);
     safeInit("Audio", initAudio);
     safeInit("ReviewStars", initReviewStars);
