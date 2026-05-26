@@ -888,11 +888,124 @@ document.addEventListener('DOMContentLoaded', () => {
     safeInit("ChartSelector", setupChartSelector);
     safeInit("Audio", initAudio);
     safeInit("ReviewStars", initReviewStars);
+    safeInit("Counters", initCounters);
+    safeInit("UrgencyStrip", initUrgencyStrip);
+    safeInit("HeroParallax", initHeroParallax);
+    safeInit("CardTilt", initCardTilt);
+    safeInit("EnhancedReveal", initEnhancedReveal);
 
     setTimeout(() => {
         try { initScrollReveal(); } catch(e) {}
     }, 100);
 });
+
+// ---- Stats Counter Animation ----
+function initCounters() {
+    const counters = document.querySelectorAll('.stat-number[data-target]');
+    if (!counters.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            const target = parseInt(el.dataset.target, 10);
+            let current = 0;
+            const duration = 1400;
+            const step = target / (duration / 16);
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) { current = target; clearInterval(timer); }
+                el.textContent = Math.floor(current);
+            }, 16);
+            observer.unobserve(el);
+        });
+    }, { threshold: 0.6 });
+
+    counters.forEach(c => observer.observe(c));
+}
+
+// ---- Urgency Strip ----
+function initUrgencyStrip() {
+    const strip = document.getElementById('urgency-strip');
+    const closeBtn = document.getElementById('urgency-close');
+    if (!strip) return;
+
+    if (sessionStorage.getItem('urgency-dismissed')) {
+        strip.classList.add('hidden');
+        return;
+    }
+
+    setTimeout(() => strip.classList.add('visible'), 6000);
+
+    closeBtn && closeBtn.addEventListener('click', () => {
+        strip.classList.remove('visible');
+        setTimeout(() => strip.classList.add('hidden'), 520);
+        sessionStorage.setItem('urgency-dismissed', '1');
+    });
+}
+
+// ---- Hero Mouse Parallax ----
+function initHeroParallax() {
+    const cosmos = document.getElementById('cosmos-3d');
+    if (!cosmos || window.matchMedia('(max-width: 960px)').matches) return;
+
+    let rafId = null;
+    let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        targetX = (e.clientX / window.innerWidth  - 0.5) * 18;
+        targetY = (e.clientY / window.innerHeight - 0.5) * 14;
+    });
+
+    function tick() {
+        currentX += (targetX - currentX) * 0.06;
+        currentY += (targetY - currentY) * 0.06;
+        cosmos.style.transform = `perspective(900px) rotateY(${currentX}deg) rotateX(${-currentY}deg)`;
+        rafId = requestAnimationFrame(tick);
+    }
+    tick();
+
+    document.addEventListener('mouseleave', () => {
+        targetX = 0; targetY = 0;
+    });
+}
+
+// ---- Service Card 3D Tilt ----
+function initCardTilt() {
+    if (window.matchMedia('(hover: none)').matches) return;
+
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const r = card.getBoundingClientRect();
+            const x = ((e.clientX - r.left) / r.width  - 0.5) * 14;
+            const y = ((e.clientY - r.top)  / r.height - 0.5) * 14;
+            card.style.transform = `perspective(900px) rotateX(${-y}deg) rotateY(${x}deg) translateY(-6px)`;
+            card.style.boxShadow = `0 24px 48px rgba(0,0,0,0.45), 0 0 28px rgba(198,161,91,0.12)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+            card.style.boxShadow = '';
+        });
+    });
+}
+
+// ---- Enhanced Scroll Reveal ----
+function initEnhancedReveal() {
+    const els = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
+    if (!els.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    els.forEach(el => observer.observe(el));
+}
 
 // ---- Review Stars ----
 function initReviewStars() {
