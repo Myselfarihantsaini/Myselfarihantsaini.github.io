@@ -1,1 +1,2 @@
 google.com, pub-9194178610009666, DIRECT, f08c47fec0942fa0
+# Refreshed for AdSense crawl on 2026-05-31
