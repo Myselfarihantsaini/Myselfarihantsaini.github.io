@@ -109,11 +109,19 @@ def build_page(file_path, head_tmpl, foot_tmpl, is_resource=False):
         foot_tmpl = foot_tmpl.replace('src="assets/', 'src="../assets/')
         foot_tmpl = foot_tmpl.replace('href="index.html', 'href="../index.html')
         foot_tmpl = foot_tmpl.replace('href="contact.html', 'href="../contact.html')
-        foot_tmpl = foot_tmpl.replace('href="privacy.html', 'href="../privacy.html')
-        foot_tmpl = foot_tmpl.replace('href="terms.html', 'href="../terms.html')
+        foot_tmpl = foot_tmpl.replace('href="about.html', 'href="../about.html')
+        foot_tmpl = foot_tmpl.replace('href="privacy-policy.html', 'href="../privacy-policy.html')
+        foot_tmpl = foot_tmpl.replace('href="terms-and-conditions.html', 'href="../terms-and-conditions.html')
         foot_tmpl = foot_tmpl.replace('href="disclaimer.html', 'href="../disclaimer.html')
-        foot_tmpl = foot_tmpl.replace('href="refund-policy.html', 'href="../refund-policy.html')
-        foot_tmpl = foot_tmpl.replace('href="editorial-policy.html', 'href="../editorial-policy.html')
+        foot_tmpl = foot_tmpl.replace('href="refund-cancellation-policy.html', 'href="../refund-cancellation-policy.html')
+        foot_tmpl = foot_tmpl.replace('href="sitemap.xml', 'href="../sitemap.xml')
+        
+        # Consultation links
+        foot_tmpl = foot_tmpl.replace('href="vedic-kundli-reading.html', 'href="../vedic-kundli-reading.html')
+        foot_tmpl = foot_tmpl.replace('href="marriage-astrology-consultation.html', 'href="../marriage-astrology-consultation.html')
+        foot_tmpl = foot_tmpl.replace('href="career-astrology-consultation.html', 'href="../career-astrology-consultation.html')
+        foot_tmpl = foot_tmpl.replace('href="dasha-transit-reading.html', 'href="../dasha-transit-reading.html')
+        foot_tmpl = foot_tmpl.replace('href="remedies-consultation.html', 'href="../remedies-consultation.html')
 
     # Construct hero and section
     hero = f'''
