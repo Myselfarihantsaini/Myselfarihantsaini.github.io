@@ -3,7 +3,16 @@
    ============================================= */
 
 /* ==================== HERO SPLIT LAYOUT ==================== */
-.hero { min-height: 90vh; padding: 110px 0 60px; }
+.hero {
+    min-height: 74vh;
+    padding: 112px 0 54px;
+}
+
+.hero-content {
+    max-width: 920px;
+    margin: 0 auto;
+    text-align: center;
+}
 
 .hero-split-layout {
     display: flex;
@@ -26,17 +35,38 @@
 
 /* Hero badge */
 .hero-badge {
-    display: inline-block;
-    padding: 6px 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    padding: 10px 22px;
     background: rgba(198, 161, 91, 0.08);
     border: 1px solid rgba(198, 161, 91, 0.3);
     border-radius: 30px;
-    font-size: 0.75rem;
-    letter-spacing: 2.5px;
+    font-size: 0.78rem;
+    letter-spacing: 0;
+    line-height: 1.2;
     text-transform: uppercase;
-    color: var(--primary);
-    margin-bottom: 22px;
+    color: var(--primary-light);
+    margin-bottom: 30px;
     animation: slowFadeIn 1s ease 0.1s both;
+}
+
+.hero-content h1 {
+    font-size: clamp(2.9rem, 6.4vw, 4.8rem);
+    line-height: 1.08;
+    margin-bottom: 22px;
+    letter-spacing: 0;
+}
+
+.hero-subtitle {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-actions {
+    justify-content: center;
 }
 
 .hero-text-side h1 {
@@ -85,17 +115,23 @@
 .hero-trust-pills {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
     animation: slowFadeIn 1s ease 1.2s both;
 }
 
 .trust-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
     font-size: 0.75rem;
     color: var(--text-muted);
     padding: 5px 14px;
     border: 1px solid rgba(198, 161, 91, 0.12);
     border-radius: 20px;
-    letter-spacing: 0.5px;
+    letter-spacing: 0;
+    line-height: 1.2;
 }
 
 /* ==================== 3D COSMOS ==================== */
@@ -476,6 +512,24 @@
 
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 960px) {
+    .hero {
+        min-height: auto;
+        padding: 106px 0 48px;
+    }
+
+    .hero-content {
+        max-width: 680px;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(2.45rem, 9vw, 3.5rem);
+    }
+
+    .hero-subtitle {
+        max-width: 560px;
+        line-height: 1.62;
+    }
+
     .hero-split-layout {
         flex-direction: column-reverse;
         text-align: center;
@@ -502,6 +556,50 @@
 }
 
 @media (max-width: 600px) {
+    .hero {
+        padding: 96px 0 42px;
+    }
+
+    .hero-badge {
+        margin-bottom: 20px;
+        padding: 8px 14px;
+        font-size: 0.68rem;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(2.12rem, 12vw, 2.75rem);
+        line-height: 1.12;
+    }
+
+    .hero-subtitle {
+        font-size: 0.98rem;
+        margin-bottom: 24px;
+    }
+
+    .hero-actions {
+        width: 100%;
+        max-width: 340px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-actions .btn-primary,
+    .hero-actions .btn-ghost {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero-trust-pills {
+        max-width: 340px;
+        margin: 0 auto;
+    }
+
+    .trust-pill {
+        flex: 1 1 150px;
+        white-space: normal;
+        text-align: center;
+    }
+
     .stats-bar { grid-template-columns: repeat(2, 1fr); }
     .stat-item:nth-child(2) { border-right: none; }
     .stat-item:nth-child(1),
