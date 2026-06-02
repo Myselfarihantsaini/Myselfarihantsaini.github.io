@@ -1,16 +1,7 @@
-User-agent: Googlebot
-Allow: /ads.txt
-Allow: /
-
-User-agent: Mediapartners-Google
-Allow: /ads.txt
-Allow: /
-
-User-agent: Google-Display-Ads-Bot
-Allow: /ads.txt
-Allow: /
-
 User-agent: *
 Allow: /
-
+User-agent: Mediapartners-Google
+Allow: /
+User-agent: Google-Display-Ads-Bot
+Allow: /
 Sitemap: https://shambhavaa.com/sitemap.xml
