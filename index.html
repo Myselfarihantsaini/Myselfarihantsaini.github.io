@@ -89,11 +89,24 @@
   .shambhavaa-page * { box-sizing: border-box; margin: 0; padding: 0; }
 
   .shambhavaa-page {
-    /* NOTE: NO background set here — your existing background image stays. */
+    position: relative;
+    z-index: 1;
     color: #e8e6f0;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     line-height: 1.7;
+  }
+
+  .shambhavaa-page::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url('assets/om_bg.webp');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: -1;
   }
 
   .shambhavaa-page :root,
