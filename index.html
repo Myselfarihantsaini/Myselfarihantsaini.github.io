@@ -130,15 +130,20 @@
   /* ─── NAV ─── */
   .sh-nav {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 32px;
-    border-bottom: 0.5px solid var(--gold-border);
+    min-height: 82px;
+    padding: 20px 32px;
+    border-bottom: 1px solid var(--gold-border);
     position: sticky; top: 0; z-index: 50;
-    background: rgba(11,16,32,0.85);
-    backdrop-filter: blur(10px);
+    background: rgba(11,16,32,0.93);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 12px 34px rgba(0,0,0,0.24);
   }
-  .sh-logo { font-family: 'Playfair Display', serif; font-size: 19px; color: var(--gold); letter-spacing: 1px; }
-  .sh-nav-links { display: flex; gap: 22px; align-items: center; list-style: none; }
-  .sh-nav-links a { font-size: 13px; color: var(--text-muted); transition: color .2s; }
+  .sh-logo {
+    font-family: 'Playfair Display', serif; font-size: 28px; color: var(--gold);
+    letter-spacing: 1.2px; line-height: 1; white-space: nowrap;
+  }
+  .sh-nav-links { display: flex; gap: 26px; align-items: center; list-style: none; }
+  .sh-nav-links a { font-size: 14px; color: var(--text-muted); transition: color .2s; }
   .sh-nav-links a:hover { color: var(--gold); }
   .sh-nav-cta {
     background: var(--green); color: #fff; border: none;
@@ -148,8 +153,8 @@
   .sh-book-links { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; }
   .sh-book-mini {
     background: rgba(201,168,106,0.08); color: var(--gold);
-    border: 1px solid var(--gold-border); padding: 8px 13px;
-    border-radius: 20px; font-size: 12px; font-weight: 500;
+    border: 1px solid var(--gold-border); padding: 10px 16px;
+    border-radius: 22px; font-size: 13px; font-weight: 500;
     display: inline-flex; align-items: center; justify-content: center;
     transition: transform .24s ease, border-color .24s ease, background .24s ease;
   }
@@ -321,9 +326,10 @@
 
   /* ─── MOBILE ─── */
   @media (max-width: 768px) {
-    .sh-nav { padding: 12px 18px; }
+    .sh-nav { min-height: 74px; padding: 14px 18px; }
+    .sh-logo { font-size: 23px; }
     .sh-book-links { gap: 6px; }
-    .sh-book-mini { padding: 7px 10px; font-size: 11px; }
+    .sh-book-mini { padding: 9px 12px; font-size: 12px; }
     .sh-nav-links { display: none; }
     .sh-hero { padding: 56px 18px 40px; }
     .sh-hero-title { font-size: 34px; }
