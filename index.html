@@ -142,9 +142,19 @@
     font-family: 'Playfair Display', serif; font-size: 28px; color: var(--gold);
     letter-spacing: 1.2px; line-height: 1; white-space: nowrap;
   }
-  .sh-nav-links { display: flex; gap: 26px; align-items: center; list-style: none; }
+  .sh-nav-links { display: flex; gap: 22px; align-items: center; list-style: none; }
   .sh-nav-links a { font-size: 14px; color: var(--text-muted); transition: color .2s; }
   .sh-nav-links a:hover { color: var(--gold); }
+  .sh-social-links { display: flex; gap: 8px; align-items: center; justify-content: center; }
+  .sh-social-links a {
+    color: var(--text-muted); border: 1px solid var(--gold-border);
+    border-radius: 999px; padding: 7px 11px; font-size: 12px;
+    transition: transform .24s ease, color .24s ease, border-color .24s ease, background .24s ease;
+  }
+  .sh-social-links a:hover {
+    color: var(--gold); border-color: rgba(201,168,106,0.5);
+    background: rgba(201,168,106,0.08); transform: translateY(-2px);
+  }
   .sh-nav-cta {
     background: var(--green); color: #fff; border: none;
     padding: 8px 16px; border-radius: 20px; font-size: 12px;
@@ -306,6 +316,7 @@
 
   /* ─── FOOTER ─── */
   .sh-footer { padding: 40px 32px 24px; border-top: 0.5px solid var(--divider); margin-top: 48px; background: transparent; }
+  .sh-footer-social { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
   .sh-footer-copy { font-size: 12px; color: var(--text-faint); text-align: center; }
 
   /* ─── STICKY ─── */
@@ -330,6 +341,7 @@
     .sh-logo { font-size: 23px; }
     .sh-book-links { gap: 6px; }
     .sh-book-mini { padding: 9px 12px; font-size: 12px; }
+    .sh-social-links.nav-social { display: none; }
     .sh-nav-links { display: none; }
     .sh-hero { padding: 56px 18px 40px; }
     .sh-hero-title { font-size: 34px; }
@@ -360,6 +372,11 @@
       <li><a href="tools/janma-finder/">Janma Finder</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
+    <div class="sh-social-links nav-social" aria-label="Social links">
+      <a href="https://www.instagram.com/sham_bhavaa/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://www.threads.com/@myself_arihant" target="_blank" rel="noopener noreferrer">Threads</a>
+      <a href="https://www.tumblr.com/cosmicdecoderr" target="_blank" rel="noopener noreferrer">Tumblr</a>
+    </div>
     <div class="sh-book-links" aria-label="Booking contacts">
       <a href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Vedic%20Astrology%20Consultation." class="sh-book-mini primary">Arihant</a>
       <a href="https://wa.me/917795374787?text=Hi!%20I%20would%20like%20to%20Book%20a%20Divine%20Service." class="sh-book-mini">Isha</a>
@@ -484,6 +501,11 @@
 
   <!-- FOOTER -->
   <footer class="sh-footer" id="faq">
+    <div class="sh-social-links sh-footer-social" aria-label="Social links">
+      <a href="https://www.instagram.com/sham_bhavaa/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://www.threads.com/@myself_arihant" target="_blank" rel="noopener noreferrer">Threads</a>
+      <a href="https://www.tumblr.com/cosmicdecoderr" target="_blank" rel="noopener noreferrer">Tumblr</a>
+    </div>
     <div class="sh-footer-copy">© 2026 Shambhavaa by Arihant Saini. All rights reserved. · Astrology content is for educational and spiritual guidance only.</div>
   </footer>
 
