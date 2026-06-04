@@ -1,0 +1,26 @@
+{
+  "version": "2.0",
+  "safety_rules": [
+    "Separate facts, interpretation and prediction.",
+    "Do not force outcome if dasha/transit do not support.",
+    "D1 first; divisional charts confirm.",
+    "Label Parashari, KP, Bhrigu/Nadi and Muhurta separately.",
+    "For health/legal/financial matters, astrology is guidance only, not professional advice."
+  ],
+  "minimum_prediction_requirements": [
+    "D1 natal promise",
+    "relevant house/lord/karaka",
+    "dasha or antardasha activation",
+    "transit trigger",
+    "confidence statement"
+  ],
+  "weights": {
+    "planet_in_house": 6,
+    "planet_in_sign": 5,
+    "planet_in_nakshatra": 4,
+    "dasha_lord": 9,
+    "varga_confirmation": 7,
+    "kp_cuspal_confirmation": 8,
+    "transit_support": 7
+  }
+}

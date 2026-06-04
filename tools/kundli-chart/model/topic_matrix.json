@@ -1,0 +1,187 @@
+{
+  "career": {
+    "primary_houses": [
+      1,
+      2,
+      6,
+      10,
+      11
+    ],
+    "karakas": [
+      "Sun",
+      "Saturn",
+      "Mercury",
+      "Jupiter"
+    ],
+    "vargas": [
+      "D10"
+    ],
+    "timing": [
+      "10th lord dasha",
+      "6th/10th/11th connected planets",
+      "Saturn/Jupiter transit"
+    ],
+    "do_not_predict_without": [
+      "10th house/lord",
+      "dasha",
+      "D10 confirmation"
+    ]
+  },
+  "marriage": {
+    "primary_houses": [
+      1,
+      2,
+      7,
+      8,
+      11
+    ],
+    "karakas": [
+      "Venus",
+      "Jupiter"
+    ],
+    "vargas": [
+      "D9"
+    ],
+    "timing": [
+      "7th lord dasha",
+      "Venus/Jupiter connected periods",
+      "Jupiter/Saturn transit over 1/5/7/9 from Lagna/Moon"
+    ],
+    "do_not_predict_without": [
+      "7th house/lord",
+      "Venus/Jupiter",
+      "D9",
+      "dasha"
+    ]
+  },
+  "children": {
+    "primary_houses": [
+      2,
+      5,
+      9,
+      11
+    ],
+    "karakas": [
+      "Jupiter",
+      "Sun"
+    ],
+    "vargas": [
+      "D7"
+    ],
+    "timing": [
+      "5th lord dasha",
+      "Jupiter periods",
+      "Jupiter transit support"
+    ],
+    "do_not_predict_without": [
+      "5th house/lord",
+      "Jupiter",
+      "D7",
+      "dasha"
+    ]
+  },
+  "education": {
+    "primary_houses": [
+      2,
+      4,
+      5,
+      9
+    ],
+    "karakas": [
+      "Mercury",
+      "Jupiter"
+    ],
+    "vargas": [
+      "D24"
+    ],
+    "timing": [
+      "4th/5th/9th lord periods",
+      "Mercury/Jupiter periods"
+    ],
+    "do_not_predict_without": [
+      "4th/5th/9th",
+      "Mercury/Jupiter",
+      "D24"
+    ]
+  },
+  "health": {
+    "primary_houses": [
+      1,
+      6,
+      8,
+      12
+    ],
+    "karakas": [
+      "Sun",
+      "Moon",
+      "Mars",
+      "Saturn"
+    ],
+    "vargas": [
+      "D1",
+      "D9",
+      "D30 if available"
+    ],
+    "timing": [
+      "6th/8th/12th connected periods",
+      "Saturn/Rahu/Ketu transits"
+    ],
+    "do_not_predict_without": [
+      "Lagna/Lagna lord",
+      "6th/8th/12th",
+      "dasha",
+      "medical disclaimer"
+    ]
+  },
+  "property": {
+    "primary_houses": [
+      2,
+      4,
+      11,
+      12
+    ],
+    "karakas": [
+      "Moon",
+      "Mars",
+      "Venus"
+    ],
+    "vargas": [
+      "D4 if available"
+    ],
+    "timing": [
+      "4th lord/Mars/Venus periods",
+      "Jupiter/Saturn transit to 4th/11th"
+    ],
+    "do_not_predict_without": [
+      "4th house/lord",
+      "Mars/Venus/Moon",
+      "dasha"
+    ]
+  },
+  "foreign": {
+    "primary_houses": [
+      3,
+      7,
+      9,
+      12
+    ],
+    "karakas": [
+      "Rahu",
+      "Saturn",
+      "Moon"
+    ],
+    "vargas": [
+      "D1",
+      "D9"
+    ],
+    "timing": [
+      "9th/12th/Rahu periods",
+      "Rahu/Saturn/Jupiter transit"
+    ],
+    "do_not_predict_without": [
+      "9th/12th linkage",
+      "Rahu/Saturn",
+      "dasha"
+    ]
+  }
+}

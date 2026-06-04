@@ -265,14 +265,6 @@ const TRANSIT_SIGN_NAMES = {
     5: "Leo", 6: "Virgo", 7: "Libra", 8: "Scorpio",
     9: "Sagittarius", 10: "Capricorn", 11: "Aquarius", 12: "Pisces"
 };
-const NAKSHATRA_NAMES = [
-    "Ashwini", "Bharani", "Krittika", "Rohini", "Mrigashira", "Ardra",
-    "Punarvasu", "Pushya", "Ashlesha", "Magha", "Purva Phalguni",
-    "Uttara Phalguni", "Hasta", "Chitra", "Swati", "Vishakha",
-    "Anuradha", "Jyeshtha", "Mula", "Purva Ashadha", "Uttara Ashadha",
-    "Shravana", "Dhanishta", "Shatabhisha", "Purva Bhadrapada",
-    "Uttara Bhadrapada", "Revati"
-];
 
 function normalizeLongitude(longitude) {
     return ((longitude % 360) + 360) % 360;
@@ -584,128 +576,6 @@ function renderTransits(isLive = false) {
     if (selector) updateKundli(parseInt(selector.value || "1", 10));
 }
 
-function formatTransitDegreeParts(planetData) {
-    if (planetData.degreeParts) {
-        return `${planetData.degreeParts.degrees}° ${planetData.degreeParts.minutes}' ${planetData.degreeParts.seconds}"`;
-    }
-
-    const degree = Number(planetData.normDegree || 0);
-    const degrees = Math.floor(degree);
-    const minutes = Math.floor((degree - degrees) * 60);
-    return `${degrees}° ${minutes}'`;
-}
-
-function getNakshatraLabel(planetData) {
-    if (planetData.nakshatra) {
-        return `${planetData.nakshatra}${planetData.pada ? ` Pada ${planetData.pada}` : ""}`;
-    }
-
-    const longitude = Number.isFinite(Number(planetData.longitude))
-        ? Number(planetData.longitude)
-        : ((Number(planetData.current_sign || 1) - 1) * 30) + Number(planetData.normDegree || 0);
-    const normalized = normalizeLongitude(longitude);
-    const nakshatraSpan = 360 / 27;
-    const nakshatraIndex = Math.floor(normalized / nakshatraSpan);
-    const pada = Math.floor((normalized % nakshatraSpan) / (nakshatraSpan / 4)) + 1;
-    return `${NAKSHATRA_NAMES[nakshatraIndex] || "Unknown"} Pada ${pada}`;
-}
-
-async function getTransitDataForTool() {
-    if (currentPlanetData) {
-        return { planets: currentPlanetData, source: "Current site transit data" };
-    }
-
-    try {
-        const swissSnapshot = await loadSwissEphemerisTransits();
-        currentPlanetData = swissSnapshot.planets;
-        transitSourceMeta = swissSnapshot;
-        return { planets: currentPlanetData, source: "Swiss Ephemeris Lahiri sidereal snapshot" };
-    } catch (error) {
-        console.warn("Hero transit Swiss snapshot failed, trying live browser calculation:", error);
-    }
-
-    try {
-        const astronomy = await loadAstronomyEngine();
-        currentPlanetData = buildLiveTransitData(astronomy, new Date());
-        transitSourceMeta = null;
-        return { planets: currentPlanetData, source: "Live Lahiri sidereal browser calculation" };
-    } catch (error) {
-        console.warn("Hero transit live source failed, using estimated fallback:", error);
-        currentPlanetData = getFallbackTransitData(new Date());
-        transitSourceMeta = null;
-        return { planets: currentPlanetData, source: "Estimated Lahiri sidereal data" };
-    }
-}
-
-function renderHeroTransitResult(resultEl, planetName, planetData, source) {
-    const signName = TRANSIT_SIGN_NAMES[planetData.current_sign] || "Unknown";
-    const degreeText = formatTransitDegreeParts(planetData);
-    const movement = planetData.isRetro === "true" || planetData.movement === "R" ? "Retrograde" : "Direct";
-    const nakshatraText = getNakshatraLabel(planetData);
-
-    resultEl.classList.remove('is-loading', 'is-error');
-    resultEl.innerHTML = `
-        <div class="hero-transit-metric">
-            <span>Graha</span>
-            <strong>${planetName}</strong>
-        </div>
-        <div class="hero-transit-metric">
-            <span>Rashi</span>
-            <strong>${signName}</strong>
-        </div>
-        <div class="hero-transit-metric">
-            <span>Degree</span>
-            <strong>${degreeText}</strong>
-        </div>
-        <div class="hero-transit-metric">
-            <span>Motion</span>
-            <strong>${movement}</strong>
-        </div>
-        <div class="hero-transit-metric">
-            <span>Nakshatra</span>
-            <strong>${nakshatraText}</strong>
-        </div>
-        <div class="hero-transit-metric">
-            <span>Source</span>
-            <strong>${source}</strong>
-        </div>
-    `;
-}
-
-function initHeroTransitTool() {
-    const form = document.getElementById('hero-transit-tool');
-    const selector = document.getElementById('hero-transit-planet');
-    const resultEl = document.getElementById('hero-transit-result');
-    if (!form || !selector || !resultEl) return;
-
-    const updateTool = async () => {
-        const planetName = selector.value || "Moon";
-        resultEl.classList.add('is-loading');
-        resultEl.classList.remove('is-error');
-        resultEl.textContent = "Loading current transit...";
-
-        try {
-            const transit = await getTransitDataForTool();
-            const planetData = transit.planets && transit.planets[planetName];
-            if (!planetData) throw new Error(`${planetName} transit data unavailable`);
-            renderHeroTransitResult(resultEl, planetName, planetData, transit.source);
-        } catch (error) {
-            console.warn("Hero transit tool failed:", error);
-            resultEl.classList.remove('is-loading');
-            resultEl.classList.add('is-error');
-            resultEl.textContent = "Transit data is unavailable right now.";
-        }
-    };
-
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        updateTool();
-    });
-
-    selector.addEventListener('change', updateTool);
-    updateTool();
-}
-
 function setupChartSelector() {
     const selector = document.getElementById('rashi-selector');
     if (!selector) return;
@@ -1011,7 +881,6 @@ document.addEventListener('DOMContentLoaded', () => {
     safeInit("LazyImages", initLazyImages);
     safeInit("ChatFab", initChatFab);
     safeInit("Transits", initTransitLoading);
-    safeInit("HeroTransitTool", initHeroTransitTool);
     safeInit("ExternalLinks", secureExternalLinks);
     safeInit("FAQ", initFaqAccessibility);
     safeInit("Forms", initLeadForms);

@@ -1,0 +1,294 @@
+{
+  "version": "2026-05-31",
+  "method": {
+    "core_principle": "No prediction should be made from one placement alone. Judge D1 promise first, then house lords, karakas, dignity, conjunctions, aspects, combustion, retrogression, nakshatra lord, dispositor, divisional confirmation, dasha activation and transit trigger.",
+    "sequence": [
+      "D1 promise",
+      "house lord and karaka strength",
+      "relevant divisional chart confirmation",
+      "Mahadasha and Antardasha activation",
+      "Jupiter, Saturn and nodal transit trigger",
+      "final strength grading"
+    ],
+    "ethical_rule": "Use caution language for sensitive areas. Remedies support awareness, discipline and correction; they are not magical guarantees."
+  },
+  "topics": {
+    "career": {
+      "label": "Career",
+      "meaning": "Career represents karma, profession, status, responsibility, public role, authority, skill, earning through work and long-term professional direction.",
+      "primary_houses": [10],
+      "supporting_houses": [1, 2, 6, 7, 11],
+      "karakas": ["Sun", "Saturn", "Mercury", "Jupiter", "Mars"],
+      "vargas": ["D10"],
+      "timing": ["10th lord dasha", "6th/10th/11th connected periods", "Saturn/Jupiter transit"],
+      "practical_guidance": "Build skill, discipline, networking and long-term consistency. If Saturn is strong, patience and structure are required. If Mercury is strong, communication, analytics and business skill help."
+    },
+    "marriage": {
+      "label": "Marriage",
+      "meaning": "Marriage represents spouse, partnership, commitment, legal or social union, compatibility, intimacy, adjustment and family continuity.",
+      "primary_houses": [7],
+      "supporting_houses": [2, 4, 8, 11, 12],
+      "karakas": ["Venus", "Jupiter"],
+      "vargas": ["D9"],
+      "timing": ["7th lord dasha", "Venus/Jupiter connected periods", "2nd/7th/11th activation", "Jupiter/Saturn transit"],
+      "practical_guidance": "Develop emotional maturity, communication, boundaries and realistic expectations. If Venus, Mars, Rahu or Saturn are active, avoid impulsive relationship decisions."
+    },
+    "wealth": {
+      "label": "Wealth",
+      "meaning": "Wealth represents savings, income, assets, liquidity, business profit, family resources, financial discipline and long-term prosperity pattern.",
+      "primary_houses": [2, 11],
+      "supporting_houses": [5, 6, 8, 9, 10],
+      "karakas": ["Jupiter", "Venus", "Mercury", "Moon", "Saturn"],
+      "vargas": ["D2", "D9"],
+      "timing": ["2nd/11th lord dasha", "5th/9th support periods", "Jupiter transit"],
+      "practical_guidance": "Strengthen budgeting, saving, documentation, ethical earning and investment discipline. If the 6th is active, manage debt before expanding risk."
+    },
+    "health": {
+      "label": "Health",
+      "meaning": "Health represents vitality, immunity, disease tendency, recovery capacity, chronic weakness, mental stability, accidents, surgery, hospitalisation and lifestyle vulnerability.",
+      "primary_houses": [1, 6, 8, 12],
+      "supporting_houses": [4],
+      "karakas": ["Sun", "Moon", "Mars", "Saturn", "Mercury", "Jupiter", "Venus"],
+      "vargas": ["D30", "D1"],
+      "timing": ["Lagna lord periods", "6th/8th/12th connected periods", "Saturn/Mars/Rahu/Ketu transit"],
+      "practical_guidance": "Build routine, sleep discipline, food discipline, exercise, stress management and timely medical check-ups. Astrology supports awareness and does not replace medical care."
+    },
+    "foreign_settlement": {
+      "label": "Foreign / Travel",
+      "meaning": "Foreign settlement represents relocation, foreign residence, immigration, overseas work, foreign education, spiritual retreat or life away from homeland.",
+      "primary_houses": [12],
+      "supporting_houses": [3, 4, 7, 9],
+      "karakas": ["Rahu", "Moon", "Saturn", "Jupiter", "Ketu"],
+      "vargas": ["D9", "D10", "D4"],
+      "timing": ["12th/9th lord dasha", "Rahu/Moon/Saturn periods", "Rahu/Jupiter/Saturn transit"],
+      "practical_guidance": "Prepare documents, credentials, language ability, visa strategy and financial planning. Rahu creates desire, while Jupiter and Saturn create legal structure and stability."
+    },
+    "children": {
+      "label": "Children",
+      "meaning": "Children represent fertility, conception, first child, pregnancy, child happiness, creativity, lineage and responsibility through offspring.",
+      "primary_houses": [5],
+      "supporting_houses": [2, 8, 9, 11, 12],
+      "karakas": ["Jupiter", "Moon", "Venus", "Sun"],
+      "vargas": ["D7"],
+      "timing": ["5th lord dasha", "Jupiter periods", "9th lord periods", "Jupiter transit"],
+      "practical_guidance": "Use patient, careful language. Support health, emotional stability, medical guidance if needed and right timing. D7 and dasha confirmation are essential."
+    },
+    "property": {
+      "label": "Property",
+      "meaning": "Property represents land, home, house purchase, vehicles, real estate, comfort, mother, domestic peace and fixed assets.",
+      "primary_houses": [4],
+      "supporting_houses": [2, 6, 8, 11, 12],
+      "karakas": ["Moon", "Mars", "Venus", "Saturn"],
+      "vargas": ["D4"],
+      "timing": ["4th lord dasha", "Mars/Moon/Venus periods", "2nd/11th activation", "Saturn/Jupiter transit"],
+      "practical_guidance": "Check finances, documents, legal clarity, loan capacity and family needs before major property decisions. Mars and the 4th lord should be judged carefully."
+    },
+    "current_dasha": {
+      "label": "Current Dasha",
+      "meaning": "Current dasha represents the active karmic field of life. Mahadasha gives the broad chapter, Antardasha gives the sub-theme, and Pratyantardasha gives sharper timing.",
+      "primary_houses": [],
+      "supporting_houses": [1, 2, 6, 7, 8, 9, 10, 11, 12],
+      "karakas": ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu"],
+      "vargas": ["Relevant varga by topic"],
+      "timing": ["Mahadasha lord", "Antardasha lord", "Pratyantardasha lord", "transit trigger"],
+      "practical_guidance": "A dasha cannot give what the birth chart does not promise. Judge the dasha planet in D1 first, then in the relevant divisional chart."
+    },
+    "yearly_prediction": {
+      "label": "Yearly Prediction",
+      "meaning": "Yearly prediction represents annual activation of natal promises through current dasha, Jupiter/Saturn/Rahu-Ketu transit and relevant divisional support.",
+      "primary_houses": [],
+      "supporting_houses": [1, 4, 5, 7, 9, 10, 11, 12],
+      "karakas": ["Jupiter", "Saturn", "Rahu", "Ketu", "Sun", "Moon"],
+      "vargas": ["D1", "relevant varga"],
+      "timing": ["current dasha", "annual transit", "Jupiter/Saturn support", "Rahu-Ketu activation"],
+      "practical_guidance": "The year should be read as an activation layer, not a replacement for natal promise. Transit alone can show movement, but dasha decides manifestation."
+    }
+  },
+  "strength_language": {
+    "strong": "D1 promise, relevant divisional confirmation, active dasha and supportive transit align for this topic. The chart strongly supports progress in this area, provided practical effort is maintained.",
+    "moderate": "The chart shows workable support for this area. Results are possible, but they may come through effort, timing correction and maturity rather than instant outcome.",
+    "mixed": "The chart contains both support and pressure. Progress is possible, but the same period may also bring responsibility, adjustment or emotional, financial or practical caution.",
+    "delayed": "The topic is not clearly denied, but delay is indicated. A stronger result may come after maturity, disciplined effort or a more supportive dasha/transit period.",
+    "caution": "This area requires careful handling. The chart shows sensitivity, so decisions should be made with patience, documentation, health awareness or relationship maturity.",
+    "preparation": "This period may bring planning, discussion, training, healing or groundwork. Final manifestation may require stronger dasha and transit support.",
+    "insufficient": "One factor supports the event, but D1, dasha, divisional chart and transit do not yet align enough for a firm prediction."
+  },
+  "rules": [
+    {
+      "rule_id": "core_prediction_no_single_factor",
+      "topic": "all",
+      "layer": "methodology",
+      "condition": "only one placement supports event without dasha, varga, transit or house-lord confirmation",
+      "supports": [],
+      "challenges": ["overprediction", "generic result", "false certainty"],
+      "required_confirmation": ["D1 promise", "relevant varga", "dasha", "transit"],
+      "prediction_strength": "insufficient",
+      "tool_output": "One placement alone is not enough for a final prediction. D1 promise, dasha activation, divisional confirmation and transit trigger must be checked together."
+    },
+    {
+      "rule_id": "career_d1_10th_lord_strong",
+      "topic": "career",
+      "layer": "D1",
+      "condition": "10th lord strong, well placed, unafflicted or benefic-supported",
+      "supports": ["career growth", "status rise", "professional stability", "recognition"],
+      "challenges": [],
+      "required_confirmation": ["D10", "career-related dasha", "Saturn/Jupiter transit"],
+      "prediction_strength": "medium_to_strong",
+      "tool_output": "Career growth is supported when the 10th lord is strong and the active dasha connects with career houses."
+    },
+    {
+      "rule_id": "career_d1_10th_lord_afflicted",
+      "topic": "career",
+      "layer": "D1",
+      "condition": "10th lord weak, combust, debilitated, afflicted, or connected with 8th/12th without benefic support",
+      "supports": ["career transformation if supported by dasha"],
+      "challenges": ["career delay", "workplace instability", "confusion", "status pressure"],
+      "required_confirmation": ["D10", "dasha", "transit", "strength of Lagna lord"],
+      "prediction_strength": "weak_to_mixed",
+      "tool_output": "Career may require patience and correction. Professional growth is possible, but instability or delay can appear if dasha also activates weak career factors."
+    },
+    {
+      "rule_id": "marriage_d1_7th_lord_strong",
+      "topic": "marriage",
+      "layer": "D1",
+      "condition": "7th lord strong, unafflicted, connected with 2nd or 11th, Venus/Jupiter supportive",
+      "supports": ["marriage possibility", "relationship stability", "social acceptance"],
+      "challenges": [],
+      "required_confirmation": ["D9", "marriage dasha", "Jupiter/Saturn transit"],
+      "prediction_strength": "strong",
+      "tool_output": "Marriage is strongly supported when the 7th lord, family houses, Venus/Jupiter and D9 align with marriage dasha."
+    },
+    {
+      "rule_id": "marriage_d1_7th_afflicted_6_8_12",
+      "topic": "marriage",
+      "layer": "D1",
+      "condition": "7th lord or Venus afflicted and connected with 6th, 8th or 12th houses",
+      "supports": ["relationship learning", "maturity through partnership"],
+      "challenges": ["delay", "conflict", "secrecy", "emotional distance", "adjustment issues"],
+      "required_confirmation": ["D9", "dasha", "transit", "benefic protection"],
+      "prediction_strength": "mixed_to_caution",
+      "tool_output": "Relationship matters require maturity. Marriage may still occur, but timing and compatibility should be judged carefully through D9 and dasha."
+    },
+    {
+      "rule_id": "wealth_d1_2nd_11th_strong",
+      "topic": "wealth",
+      "layer": "D1",
+      "condition": "2nd and 11th lords strong, linked with 5th, 9th or 10th, Jupiter/Mercury/Venus supportive",
+      "supports": ["income growth", "savings", "financial stability", "gains"],
+      "challenges": [],
+      "required_confirmation": ["D2", "wealth dasha", "Jupiter transit"],
+      "prediction_strength": "strong",
+      "tool_output": "Wealth growth is supported when income, savings and gain houses are strong and activated by dasha."
+    },
+    {
+      "rule_id": "wealth_6th_8th_12th_pressure",
+      "topic": "wealth",
+      "layer": "D1",
+      "condition": "2nd or 11th lord connected with 6th, 8th or 12th and afflicted",
+      "supports": ["financial restructuring if disciplined"],
+      "challenges": ["debt", "sudden expense", "blocked gains", "poor savings"],
+      "required_confirmation": ["D2", "dasha", "transit", "Jupiter protection"],
+      "prediction_strength": "mixed_to_caution",
+      "tool_output": "Financial caution is required. The chart may show earning ability, but saving and debt management need discipline."
+    },
+    {
+      "rule_id": "health_lagna_lord_strong",
+      "topic": "health",
+      "layer": "D1",
+      "condition": "Lagna, Lagna lord, Sun and Moon strong or benefic-supported",
+      "supports": ["vitality", "recovery capacity", "immunity", "mental stability"],
+      "challenges": [],
+      "required_confirmation": ["D30", "current dasha", "Saturn/Mars transit"],
+      "prediction_strength": "medium_to_strong",
+      "tool_output": "Health resilience is supported when Lagna, Lagna lord, Sun and Moon are strong. Routine and discipline strengthen the result."
+    },
+    {
+      "rule_id": "health_6_8_12_active_afflicted",
+      "topic": "health",
+      "layer": "dasha",
+      "condition": "Dasha activates afflicted 6th, 8th or 12th houses/lords with weak Lagna or Moon",
+      "supports": ["health awareness", "correction through routine"],
+      "challenges": ["illness vulnerability", "stress", "hospital expense", "chronic issue caution"],
+      "required_confirmation": ["D30", "medical context", "transit pressure"],
+      "prediction_strength": "caution",
+      "tool_output": "This period requires health discipline and timely check-ups. Astrology indicates caution, not fear."
+    },
+    {
+      "rule_id": "foreign_12th_9th_7th_connection",
+      "topic": "foreign_settlement",
+      "layer": "D1",
+      "condition": "12th, 9th, 7th or 3rd houses/lords connected with Rahu/Moon/Saturn",
+      "supports": ["foreign travel", "relocation", "foreign work", "life away from birthplace"],
+      "challenges": ["distance from home", "expenses", "adjustment period"],
+      "required_confirmation": ["purpose-specific varga", "foreign dasha", "Rahu/Jupiter/Saturn transit"],
+      "prediction_strength": "medium_to_strong",
+      "tool_output": "Foreign movement is supported when relocation houses connect with Rahu, Moon or Saturn and the active dasha confirms the same."
+    },
+    {
+      "rule_id": "children_5th_jupiter_d7_strong",
+      "topic": "children",
+      "layer": "D1_D7",
+      "condition": "5th house/lord strong, Jupiter supportive, D7 confirms, 2nd/11th support family expansion",
+      "supports": ["childbirth possibility", "fertility support", "child happiness"],
+      "challenges": [],
+      "required_confirmation": ["children dasha", "Jupiter transit", "D7"],
+      "prediction_strength": "strong",
+      "tool_output": "Children-related results are strongly supported when the 5th house, Jupiter and D7 align with supportive dasha and transit."
+    },
+    {
+      "rule_id": "children_5th_afflicted_delay",
+      "topic": "children",
+      "layer": "D1_D7",
+      "condition": "5th lord or Jupiter afflicted, connected with 6th/8th/12th, D7 weak",
+      "supports": ["event possible with support if dasha improves"],
+      "challenges": ["delay", "medical process", "anxiety", "planning required"],
+      "required_confirmation": ["D7", "dasha", "Jupiter transit", "health context"],
+      "prediction_strength": "delayed_or_caution",
+      "tool_output": "Children-related matters may require patience, planning and proper guidance. The chart should be reviewed through D7 and dasha before timing."
+    },
+    {
+      "rule_id": "property_4th_lord_mars_moon_strong",
+      "topic": "property",
+      "layer": "D1_D4",
+      "condition": "4th lord strong, 4th house supported, Mars/Moon/Venus favourable, 2nd/11th support funds and gain",
+      "supports": ["property purchase", "home comfort", "vehicle", "fixed asset gain"],
+      "challenges": [],
+      "required_confirmation": ["D4", "property dasha", "Saturn/Jupiter transit"],
+      "prediction_strength": "strong",
+      "tool_output": "Property acquisition is supported when the 4th house, 4th lord, Mars/Moon/Venus and D4 are strong and activated by dasha."
+    },
+    {
+      "rule_id": "property_4th_6_8_12_pressure",
+      "topic": "property",
+      "layer": "D1_D4",
+      "condition": "4th lord afflicted or connected with 6th, 8th or 12th during weak dasha",
+      "supports": ["property restructuring", "repair", "legal correction"],
+      "challenges": ["loan burden", "delay", "dispute", "documentation issue", "expense"],
+      "required_confirmation": ["D4", "dasha", "transit", "legal/financial review"],
+      "prediction_strength": "mixed_to_caution",
+      "tool_output": "Property matters require careful documentation and financial planning. Purchase may be delayed or come with responsibility."
+    },
+    {
+      "rule_id": "current_dasha_md_ad_topic_alignment",
+      "topic": "current_dasha",
+      "layer": "dasha",
+      "condition": "Mahadasha and Antardasha lords both connect with same topic houses/lords/karakas",
+      "supports": ["event manifestation", "clear life theme", "timing activation"],
+      "challenges": [],
+      "required_confirmation": ["D1", "relevant varga", "transit"],
+      "prediction_strength": "medium_to_strong",
+      "tool_output": "The current dasha can activate this life area when both Mahadasha and Antardasha connect with the same topic indicators."
+    },
+    {
+      "rule_id": "yearly_prediction_dasha_transit_alignment",
+      "topic": "yearly_prediction",
+      "layer": "annual",
+      "condition": "Annual transit supports the same houses activated by current dasha and confirmed in D1",
+      "supports": ["yearly progress", "event window", "visible result"],
+      "challenges": [],
+      "required_confirmation": ["D1 promise", "current dasha", "relevant varga", "Ashtakavarga if available"],
+      "prediction_strength": "medium_to_strong",
+      "tool_output": "This year can produce visible results when current dasha and annual transits activate the same natal promise."
+    }
+  ]
+}
