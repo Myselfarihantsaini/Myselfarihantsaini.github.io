@@ -56,7 +56,10 @@
       "serviceType": "Vedic Astrology Consultation",
       "areaServed": "Worldwide",
       "founder": { "@type": "Person", "name": "Arihant Saini", "url": "https://shambhavaa.com/about.html" },
-      "contactPoint": { "@type": "ContactPoint", "email": "shambhavaa.reviews@gmail.com", "telephone": "+919057918251", "contactType": "customer support" },
+      "contactPoint": [
+        { "@type": "ContactPoint", "email": "shambhavaa.reviews@gmail.com", "telephone": "+919057918251", "contactType": "Arihant consultation booking" },
+        { "@type": "ContactPoint", "telephone": "+917795374787", "contactType": "Isha divine services booking" }
+      ],
       "sameAs": [
         "https://www.instagram.com/sham_bhavaa/",
         "https://www.threads.com/@myself_arihant",
@@ -142,6 +145,16 @@
     padding: 8px 16px; border-radius: 20px; font-size: 12px;
     font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
   }
+  .sh-book-links { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .sh-book-mini {
+    background: rgba(201,168,106,0.08); color: var(--gold);
+    border: 1px solid var(--gold-border); padding: 8px 13px;
+    border-radius: 20px; font-size: 12px; font-weight: 500;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: transform .24s ease, border-color .24s ease, background .24s ease;
+  }
+  .sh-book-mini:hover { transform: translateY(-2px); border-color: rgba(201,168,106,0.52); background: rgba(201,168,106,0.14); }
+  .sh-book-mini.primary { background: var(--green); color: #fff; border-color: rgba(29,165,112,0.72); }
 
   /* ─── SECTIONS (transparent over your bg) ─── */
   .sh-section { padding: 60px 32px; background: transparent; }
@@ -179,6 +192,7 @@
   .sh-hero-title span { color: var(--gold); }
   .sh-hero-sub { font-size: 16px; color: var(--text-muted); max-width: 560px; margin: 0 auto 32px; line-height: 1.7; }
   .sh-hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 44px; }
+  .sh-book-note { width: 100%; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-faint); margin-bottom: -2px; }
 
   /* ─── STATS ─── */
   .sh-stats { display: flex; justify-content: center; flex-wrap: wrap; max-width: 760px; margin: 0 auto; }
@@ -290,12 +304,26 @@
   .sh-footer-copy { font-size: 12px; color: var(--text-faint); text-align: center; }
 
   /* ─── STICKY ─── */
-  .sh-sticky { position: fixed; bottom: 24px; right: 24px; background: var(--green); color: #fff; border: none; border-radius: 50px; padding: 12px 20px; font-size: 13px; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(29,165,112,0.4); z-index: 60; transition: transform .24s ease, box-shadow .24s ease; }
-  .sh-sticky:hover { transform: translateY(-3px); box-shadow: 0 12px 34px rgba(29,165,112,0.34); }
+  .sh-sticky {
+    position: fixed; bottom: 24px; right: 24px; z-index: 60;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px; border-radius: 999px;
+    background: rgba(11,16,32,0.88); border: 1px solid var(--gold-border);
+    backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,0.24);
+  }
+  .sh-sticky a {
+    color: #fff; border-radius: 50px; padding: 10px 15px; font-size: 12px;
+    font-weight: 500; background: var(--green);
+    transition: transform .24s ease, box-shadow .24s ease;
+  }
+  .sh-sticky a:last-child { background: rgba(201,168,106,0.14); color: var(--gold); border: 1px solid var(--gold-border); }
+  .sh-sticky a:hover { transform: translateY(-3px); box-shadow: 0 12px 34px rgba(29,165,112,0.24); }
 
   /* ─── MOBILE ─── */
   @media (max-width: 768px) {
     .sh-nav { padding: 12px 18px; }
+    .sh-book-links { gap: 6px; }
+    .sh-book-mini { padding: 7px 10px; font-size: 11px; }
     .sh-nav-links { display: none; }
     .sh-hero { padding: 56px 18px 40px; }
     .sh-hero-title { font-size: 34px; }
@@ -308,6 +336,8 @@
     .sh-about { grid-template-columns: 1fr; }
     .sh-cta-band { padding: 32px 20px; margin: 0 18px; }
     .sh-cta-title { font-size: 24px; }
+    .sh-sticky { left: 14px; right: 14px; bottom: 14px; justify-content: center; }
+    .sh-sticky a { flex: 1; text-align: center; }
   }
 </style>
 
@@ -324,7 +354,10 @@
       <li><a href="tools/janma-finder/">Janma Finder</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
-    <a href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Consultation." class="sh-nav-cta">Book Now</a>
+    <div class="sh-book-links" aria-label="Booking contacts">
+      <a href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Vedic%20Astrology%20Consultation." class="sh-book-mini primary">Arihant</a>
+      <a href="https://wa.me/917795374787?text=Hi!%20I%20would%20like%20to%20Book%20a%20Divine%20Service." class="sh-book-mini">Isha</a>
+    </div>
   </nav>
 
   <!-- HERO -->
@@ -333,7 +366,9 @@
     <h1 class="sh-hero-title">Read Your <span>Cosmic Blueprint</span></h1>
     <p class="sh-hero-sub">Kundli reading, marriage astrology, career guidance, dasha-transit timing, and remedies — through complete chart analysis, not generic prediction.</p>
     <div class="sh-hero-btns">
-      <a href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Consultation." class="sh-btn-green">Book Consultation</a>
+      <div class="sh-book-note">Choose your consultant</div>
+      <a href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Vedic%20Astrology%20Consultation." class="sh-btn-green">Book Arihant</a>
+      <a href="https://wa.me/917795374787?text=Hi!%20I%20would%20like%20to%20Book%20a%20Divine%20Service." class="sh-btn-outline">Book Isha</a>
       <a href="#services" class="sh-btn-outline">Explore Services ↓</a>
     </div>
     <div class="sh-stats">
@@ -435,7 +470,10 @@
   <div class="sh-cta-band">
     <div class="sh-cta-title">If the question is important, clarity should not be delayed.</div>
     <div class="sh-cta-sub">Consultation slots are limited each week — book your session today.</div>
-    <a href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Consultation." class="sh-btn-green" style="margin:0 auto">Book Consultation</a>
+    <div class="sh-book-links">
+      <a href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Vedic%20Astrology%20Consultation." class="sh-btn-green">Book Arihant</a>
+      <a href="https://wa.me/917795374787?text=Hi!%20I%20would%20like%20to%20Book%20a%20Divine%20Service." class="sh-btn-outline">Book Isha</a>
+    </div>
   </div>
 
   <!-- FOOTER -->
@@ -443,8 +481,11 @@
     <div class="sh-footer-copy">© 2026 Shambhavaa by Arihant Saini. All rights reserved. · Astrology content is for educational and spiritual guidance only.</div>
   </footer>
 
-  <!-- STICKY BOOK BUTTON -->
-  <a href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Consultation." class="sh-sticky">Book Now</a>
+  <!-- STICKY BOOK BUTTONS -->
+  <div class="sh-sticky" aria-label="Quick booking contacts">
+    <a href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Vedic%20Astrology%20Consultation.">Arihant</a>
+    <a href="https://wa.me/917795374787?text=Hi!%20I%20would%20like%20to%20Book%20a%20Divine%20Service.">Isha</a>
+  </div>
 
 </div>
 <script>
