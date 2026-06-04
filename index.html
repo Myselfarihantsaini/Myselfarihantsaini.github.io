@@ -69,740 +69,316 @@
     <!-- Animated Stars Background -->
     <canvas id="stars-canvas" aria-hidden="true"></canvas>
 
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">
-                <img src="assets/logo-small.webp" alt="Shambhavaa icon" width="40" height="40" loading="lazy" decoding="async">
-                Sham<span class="logo-accent">bhavaa</span>
-            </a>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="#services">Consultations</a></li>
-                <li><a href="articles.html">Articles</a></li>
-                <li><a href="https://shambhavaa.blog" target="_blank" rel="noopener noreferrer">Blog</a></li>
-                <li><a href="tools/janma-finder/">Janma Finder</a></li>
-                <li><a class="nav-threads" href="https://whatsapp.com/channel/0029VbC4J9rJENy0bajwXS1I" target="_blank" rel="noopener noreferrer">WhatsApp Channel</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <button class="mobile-menu-btn" id="mobile-menu-btn" type="button" aria-label="Open navigation menu" aria-controls="nav-links" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </nav>
+<!--
+  ════════════════════════════════════════════════════════════════
+  SHAMBHAVAA.COM — RESTRUCTURED HOMEPAGE
+  ════════════════════════════════════════════════════════════════
 
-    <!-- Hero Section -->
-    <header class="hero" id="home">
-        <div class="hero-bg-overlay"></div>
-        <div class="hero-glow"></div>
-        <div class="container hero-content">
-            <div class="hero-badge">✦ Authentic Vedic Jyotish</div>
-            <h1 class="sanskrit-heading">Read Your <span class="text-gradient">Cosmic Blueprint</span></h1>
-            <p class="hero-subtitle">Kundli reading, marriage astrology, career guidance, dasha-transit timing, and remedies through full chart analysis.</p>
-            <div class="hero-actions">
-                <a href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Consultation." target="_blank" class="btn-primary btn-large">
-                    <span>Book Consultation</span>
-                </a>
-                <a href="#services" class="btn-ghost">Explore Services ↓</a>
-            </div>
-            <div class="hero-trust-pills">
-                <span class="trust-pill">✦ 200+ Clients Served</span>
-                <span class="trust-pill">✦ 4.9★ Rating</span>
-                <span class="trust-pill">✦ Full Chart Method</span>
-            </div>
-            <div class="hero-janma-tool">
-                <span class="section-tag">Birth Time Rectification</span>
-                <h2>Janma Finder Engine</h2>
-                <p>Rank candidate birth dates and rectify birth time using panchang clues, nakshatra, dasha sequence, life events, Lagna, body pattern, and family evidence.</p>
-                <a href="tools/janma-finder/" class="btn-primary">Open Janma Finder Tool</a>
-            </div>
-        </div>
-    </header>
+  IMPORTANT FOR CODEX:
+  • DO NOT touch / override the existing site background image.
+  • All section backgrounds here are TRANSPARENT on purpose so the
+    current background image shows through untouched.
+  • Only semi-transparent card overlays are used for readability.
+  • Replace the 3 placeholder reviews (marked) with real client words.
+  • All trust numbers are set: 1,200+ clients · 2+ years · 4.9★
+  ════════════════════════════════════════════════════════════════
+-->
 
-    <!-- Stats Bar -->
-    <div class="stats-bar-section">
-        <div class="stats-bar">
-            <div class="stat-item">
-                <span class="stat-number" data-target="200">0</span><span class="stat-suffix">+</span>
-                <span class="stat-label">Consultations</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" data-target="5">0</span><span class="stat-suffix">+</span>
-                <span class="stat-label">Years of Practice</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">4.9</span><span class="stat-suffix">★</span>
-                <span class="stat-label">Client Rating</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" data-target="15">0</span><span class="stat-suffix">+</span>
-                <span class="stat-label">Services Available</span>
-            </div>
-        </div>
+<style>
+  /* ─── SCOPED to .shambhavaa-page so it won't fight your global styles ─── */
+  .shambhavaa-page * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .shambhavaa-page {
+    /* NOTE: NO background set here — your existing background image stays. */
+    color: #e8e6f0;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .shambhavaa-page :root,
+  .shambhavaa-page {
+    --gold: #c9a86a;
+    --gold-border: rgba(201,168,106,0.22);
+    --gold-light: rgba(201,168,106,0.10);
+    --green: #1da570;
+    --text: #e8e6f0;
+    --text-muted: rgba(232,230,240,0.6);
+    --text-faint: rgba(232,230,240,0.4);
+    --card: rgba(15,18,34,0.55); /* semi-transparent so bg shows through */
+    --divider: rgba(201,168,106,0.14);
+  }
+
+  .shambhavaa-page a { text-decoration: none; color: inherit; }
+
+  /* ─── NAV ─── */
+  .sh-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 32px;
+    border-bottom: 0.5px solid var(--gold-border);
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(11,16,32,0.85);
+    backdrop-filter: blur(10px);
+  }
+  .sh-logo { font-family: 'Playfair Display', serif; font-size: 19px; color: var(--gold); letter-spacing: 1px; }
+  .sh-nav-links { display: flex; gap: 22px; align-items: center; list-style: none; }
+  .sh-nav-links a { font-size: 13px; color: var(--text-muted); transition: color .2s; }
+  .sh-nav-links a:hover { color: var(--gold); }
+  .sh-nav-cta {
+    background: var(--green); color: #fff; border: none;
+    padding: 8px 16px; border-radius: 20px; font-size: 12px;
+    font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+  }
+
+  /* ─── SECTIONS (transparent over your bg) ─── */
+  .sh-section { padding: 60px 32px; background: transparent; }
+  .sh-sec-label { font-size: 11px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; text-align: center; margin-bottom: 8px; }
+  .sh-sec-title { font-family: 'Playfair Display', serif; font-size: 32px; text-align: center; margin-bottom: 8px; font-weight: 500; }
+  .sh-sec-sub { font-size: 14px; color: var(--text-muted); text-align: center; max-width: 540px; margin: 0 auto 40px; line-height: 1.6; }
+  .sh-divider { height: 0.5px; background: var(--divider); margin: 0 32px; }
+
+  .sh-btn-green {
+    background: var(--green); color: #fff; border: none;
+    padding: 13px 28px; border-radius: 26px; font-size: 14px;
+    font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .sh-btn-outline {
+    background: transparent; color: var(--gold);
+    border: 1px solid var(--gold-border); padding: 13px 28px;
+    border-radius: 26px; font-size: 14px; cursor: pointer;
+  }
+
+  /* ─── HERO ─── */
+  .sh-hero { text-align: center; padding: 72px 32px 48px; background: transparent; }
+  .sh-tag {
+    display: inline-block; font-size: 11px; letter-spacing: 2px;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 18px;
+    border: 0.5px solid var(--gold-border); padding: 5px 14px; border-radius: 16px;
+  }
+  .sh-hero-title {
+    font-family: 'Playfair Display', serif; font-size: 50px; font-weight: 600;
+    line-height: 1.15; margin: 0 auto 16px; max-width: 640px;
+  }
+  .sh-hero-title span { color: var(--gold); }
+  .sh-hero-sub { font-size: 16px; color: var(--text-muted); max-width: 560px; margin: 0 auto 32px; line-height: 1.7; }
+  .sh-hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 44px; }
+
+  /* ─── STATS ─── */
+  .sh-stats { display: flex; justify-content: center; flex-wrap: wrap; max-width: 760px; margin: 0 auto; }
+  .sh-stat { padding: 0 36px; text-align: center; border-right: 0.5px solid var(--gold-border); }
+  .sh-stat:last-child { border-right: none; }
+  .sh-stat-num { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--gold); font-weight: 600; line-height: 1; }
+  .sh-stat-label { font-size: 12px; color: var(--text-faint); margin-top: 6px; }
+
+  /* ─── SERVICES ─── */
+  .sh-track-title { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--gold); margin: 32px 0 18px; display: flex; align-items: center; gap: 10px; }
+  .sh-track-title::after { content: ''; flex: 1; height: 0.5px; background: var(--gold-border); }
+  .sh-services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .sh-svc {
+    background: var(--card); border: 0.5px solid var(--gold-border);
+    border-radius: 12px; padding: 22px; position: relative;
+    transition: border-color .2s; backdrop-filter: blur(4px);
+  }
+  .sh-svc:hover { border-color: var(--gold); }
+  .sh-svc.popular { border-color: rgba(29,165,112,0.5); }
+  .sh-svc-badge { position: absolute; top: -9px; left: 20px; background: var(--green); color: #fff; font-size: 10px; padding: 3px 10px; border-radius: 10px; font-weight: 500; }
+  .sh-svc-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--gold-light); display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px; }
+  .sh-svc-title { font-family: 'Playfair Display', serif; font-size: 16px; margin-bottom: 8px; font-weight: 500; }
+  .sh-svc-focus { font-size: 12px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+  .sh-svc-btns { display: flex; gap: 8px; }
+  .sh-svc-book { background: var(--green); color: #fff; border: none; padding: 7px 14px; border-radius: 16px; font-size: 11px; font-weight: 500; cursor: pointer; flex: 1; }
+  .sh-svc-more { background: transparent; color: var(--gold); border: 0.5px solid var(--gold-border); padding: 7px 14px; border-radius: 16px; font-size: 11px; cursor: pointer; flex: 1; }
+
+  /* ─── STEPS ─── */
+  .sh-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 820px; margin: 0 auto; }
+  .sh-step { text-align: center; padding: 24px; }
+  .sh-step-num { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--gold-border); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 18px; color: var(--gold); margin: 0 auto 16px; }
+  .sh-step-title { font-family: 'Playfair Display', serif; font-size: 16px; margin-bottom: 8px; font-weight: 500; }
+  .sh-step-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ─── REVIEWS ─── */
+  .sh-rev-summary { display: flex; align-items: center; justify-content: center; gap: 24px; margin-bottom: 36px; flex-wrap: wrap; }
+  .sh-rev-score { text-align: center; }
+  .sh-rev-big { font-family: 'Playfair Display', serif; font-size: 48px; color: var(--gold); font-weight: 600; line-height: 1; }
+  .sh-rev-stars { color: var(--gold); font-size: 16px; margin-top: 4px; }
+  .sh-rev-verified { font-size: 12px; color: var(--green); display: flex; align-items: center; gap: 6px; border: 0.5px solid rgba(29,165,112,0.3); padding: 8px 16px; border-radius: 20px; }
+  .sh-reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .sh-review { background: var(--card); border: 0.5px solid var(--gold-border); border-radius: 12px; padding: 20px; backdrop-filter: blur(4px); }
+  .sh-review-stars { color: var(--gold); font-size: 13px; margin-bottom: 10px; }
+  .sh-review-text { font-size: 13px; color: rgba(232,230,240,0.78); line-height: 1.6; margin-bottom: 16px; font-style: italic; }
+  .sh-review-author { display: flex; align-items: center; gap: 10px; }
+  .sh-review-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--gold-light); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; color: var(--gold); }
+  .sh-review-name { font-size: 13px; font-weight: 500; }
+  .sh-review-meta { font-size: 11px; color: var(--text-faint); }
+  .sh-review-vbadge { margin-left: auto; font-size: 14px; color: var(--green); }
+
+  /* ─── ABOUT ─── */
+  .sh-about { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 840px; margin: 0 auto; }
+  .sh-about-card { background: var(--card); border: 0.5px solid var(--gold-border); border-radius: 14px; padding: 28px; backdrop-filter: blur(4px); }
+  .sh-about-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--gold-light); display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+  .sh-about-name { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; font-weight: 500; }
+  .sh-about-role { font-size: 12px; color: var(--gold); margin-bottom: 12px; }
+  .sh-about-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+  /* ─── CTA BAND ─── */
+  .sh-cta-band { background: linear-gradient(135deg, rgba(83,74,183,0.18), rgba(201,168,106,0.10)); border: 0.5px solid var(--gold-border); border-radius: 18px; padding: 48px; text-align: center; margin: 0 32px; backdrop-filter: blur(4px); }
+  .sh-cta-title { font-family: 'Playfair Display', serif; font-size: 30px; margin-bottom: 14px; font-weight: 500; }
+  .sh-cta-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 28px; }
+
+  /* ─── FOOTER ─── */
+  .sh-footer { padding: 40px 32px 24px; border-top: 0.5px solid var(--divider); margin-top: 48px; background: transparent; }
+  .sh-footer-copy { font-size: 12px; color: var(--text-faint); text-align: center; }
+
+  /* ─── STICKY ─── */
+  .sh-sticky { position: fixed; bottom: 24px; right: 24px; background: var(--green); color: #fff; border: none; border-radius: 50px; padding: 12px 20px; font-size: 13px; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(29,165,112,0.4); z-index: 60; }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+    .sh-nav { padding: 12px 18px; }
+    .sh-nav-links { display: none; }
+    .sh-hero { padding: 56px 18px 40px; }
+    .sh-hero-title { font-size: 34px; }
+    .sh-section { padding: 44px 18px; }
+    .sh-divider { margin: 0 18px; }
+    .sh-stat { padding: 12px 20px; border-right: none; }
+    .sh-services { grid-template-columns: 1fr; }
+    .sh-steps { grid-template-columns: 1fr; }
+    .sh-reviews-grid { grid-template-columns: 1fr; }
+    .sh-about { grid-template-columns: 1fr; }
+    .sh-cta-band { padding: 32px 20px; margin: 0 18px; }
+    .sh-cta-title { font-size: 24px; }
+  }
+</style>
+
+<div class="shambhavaa-page">
+
+  <!-- NAV -->
+  <nav class="sh-nav">
+    <a href="https://shambhavaa.com" class="sh-logo">✦ Shambhavaa</a>
+    <ul class="sh-nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Consultations</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="https://shambhavaa.blog">Blog</a></li>
+      <li><a href="tools/janma-finder/">Janma Finder</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Consultation." class="sh-nav-cta">💬 Book Now</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="sh-hero">
+    <div class="sh-tag">✦ Authentic Vedic Jyotish</div>
+    <h1 class="sh-hero-title">Read Your <span>Cosmic Blueprint</span></h1>
+    <p class="sh-hero-sub">Kundli reading, marriage astrology, career guidance, dasha-transit timing, and remedies — through complete chart analysis, not generic prediction.</p>
+    <div class="sh-hero-btns">
+      <a href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Consultation." class="sh-btn-green">💬 Book Consultation</a>
+      <a href="#services" class="sh-btn-outline">Explore Services ↓</a>
+    </div>
+    <div class="sh-stats">
+      <div class="sh-stat"><div class="sh-stat-num">1,200+</div><div class="sh-stat-label">Clients Served</div></div>
+      <div class="sh-stat"><div class="sh-stat-num">2+</div><div class="sh-stat-label">Years of Practice</div></div>
+      <div class="sh-stat"><div class="sh-stat-num">4.9★</div><div class="sh-stat-label">Client Rating</div></div>
+      <div class="sh-stat"><div class="sh-stat-num">Full</div><div class="sh-stat-label">Chart Method</div></div>
+    </div>
+  </section>
+
+  <div class="sh-divider"></div>
+
+  <!-- SERVICES -->
+  <section class="sh-section" id="services">
+    <div class="sh-sec-label">Vedic Astrology Consultations</div>
+    <div class="sh-sec-title">Complete Kundli Guidance With Context</div>
+    <div class="sh-sec-sub">Focused consultations built on D1 chart promise, divisional charts, dasha timing, transit validation, and ethical guidance.</div>
+
+    <div class="sh-track-title">✦ Vedic Astrology by Arihant</div>
+    <div class="sh-services">
+      <div class="sh-svc"><div class="sh-svc-icon">💼</div><div class="sh-svc-title">Career & Govt Exams</div><div class="sh-svc-focus">UPSC/SSC timing, promotions, and business suitability.</div><div class="sh-svc-btns"><a class="sh-svc-book" href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Consultation.">Book Now</a><a class="sh-svc-more" href="career-astrology-consultation.html">Read More</a></div></div>
+      <div class="sh-svc"><div class="sh-svc-icon">💍</div><div class="sh-svc-title">Marriage & Compatibility</div><div class="sh-svc-focus">Marriage timing, partner analysis, and delay remedies.</div><div class="sh-svc-btns"><a class="sh-svc-book" href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Consultation.">Book Now</a><a class="sh-svc-more" href="marriage-astrology-consultation.html">Read More</a></div></div>
+      <div class="sh-svc popular"><div class="sh-svc-badge">Most Popular</div><div class="sh-svc-icon">🌟</div><div class="sh-svc-title">Full Birth Chart Reading</div><div class="sh-svc-focus">Complete life direction, strengths, and dasha timeline.</div><div class="sh-svc-btns"><a class="sh-svc-book" href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Consultation.">Book Now</a><a class="sh-svc-more" href="vedic-kundli-reading.html">Read More</a></div></div>
+      <div class="sh-svc"><div class="sh-svc-icon">💰</div><div class="sh-svc-title">Wealth & Blockages</div><div class="sh-svc-focus">Financial patterns, income timing, wealth-supportive remedies.</div><div class="sh-svc-btns"><a class="sh-svc-book" href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Consultation.">Book Now</a><a class="sh-svc-more" href="contact.html">Read More</a></div></div>
+      <div class="sh-svc"><div class="sh-svc-icon">📈</div><div class="sh-svc-title">Business & Expansion</div><div class="sh-svc-focus">Launch timing, partnership, and growth windows.</div><div class="sh-svc-btns"><a class="sh-svc-book" href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Consultation.">Book Now</a><a class="sh-svc-more" href="contact.html">Read More</a></div></div>
+      <div class="sh-svc"><div class="sh-svc-icon">🧘</div><div class="sh-svc-title">Health & Obstacles</div><div class="sh-svc-focus">Stress periods, wellness timing, spiritual self-care. Not medical advice.</div><div class="sh-svc-btns"><a class="sh-svc-book" href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Consultation.">Book Now</a><a class="sh-svc-more" href="contact.html">Read More</a></div></div>
+      <div class="sh-svc"><div class="sh-svc-icon">👨‍👩‍👧</div><div class="sh-svc-title">Family & Childbirth</div><div class="sh-svc-focus">Childbirth timing, family harmony, emotional clarity.</div><div class="sh-svc-btns"><a class="sh-svc-book" href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Consultation.">Book Now</a><a class="sh-svc-more" href="contact.html">Read More</a></div></div>
+      <div class="sh-svc"><div class="sh-svc-icon">🪔</div><div class="sh-svc-title">Remedy Plan</div><div class="sh-svc-focus">Nakshatra-based practical actions and mantra therapy.</div><div class="sh-svc-btns"><a class="sh-svc-book" href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Consultation.">Book Now</a><a class="sh-svc-more" href="remedies-consultation.html">Read More</a></div></div>
+      <div class="sh-svc"><div class="sh-svc-icon">🌸</div><div class="sh-svc-title">Personalised Perfume</div><div class="sh-svc-focus">Chart-based fragrance blend aligned with planetary needs.</div><div class="sh-svc-btns"><a class="sh-svc-book" href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Consultation.">Book Now</a><a class="sh-svc-more" href="contact.html">Read More</a></div></div>
     </div>
 
-    <!-- Unified Services Header -->
-    <section id="services" class="section services-intro-section" style="padding: 56px 0 0;">
-        <div class="container">
-            <div class="section-header" style="text-align: center; margin-bottom: 60px;">
-                <span class="section-tag" style="margin-bottom: 16px;">Vedic Astrology Consultations</span>
-                <h2 style="font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 24px;">Complete Kundli Guidance <span class="text-gradient">With Context</span></h2>
-                <p style="max-width: 800px; margin: 0 auto; font-size: 1.2rem; opacity: 0.8; line-height: 1.6;">Choose focused consultations built on D1 chart promise, relevant divisional charts, dasha timing, transit validation, and ethical guidance.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Arihant's Vedic Services -->
-    <section id="vedic-services" class="section services-section" style="padding-top: 20px;">
-        <div class="container" style="max-width: 1200px; padding: 0 24px;">
-            <h2 style="font-size: 2.2rem; color: var(--text-light); text-align: center; margin-bottom: 40px; font-family: var(--font-serif);">Vedic Astrology by Arihant</h2>
-            <div class="services-grid">
-                <!-- 1. Career -->
-                <div class="service-card">
-                    <img loading="lazy" decoding="async" width="640" height="427" class="card-image-small lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="assets/service-career.webp" alt="Career">
-                    <span class="service-label">Career</span>
-                    <h3 class="service-title">Career & Govt Exams</h3>
-                    <div class="service-details">
-                        <p><strong>Focus:</strong> UPSC/SSC timing, promotions, and business suitability.</p>
-                    </div>
-                    <div style="display: flex; gap: 8px; margin-top: 16px;">
-                        <a href="https://wa.me/919057918251?text=Hi%21%20I%20am%20interested%20in%20the%20Career%20Reading." class="service-btn" target="_blank" style="flex: 1; text-align: center; font-size: 0.9rem;">Book Now</a>
-                        <a href="career-astrology-consultation.html" class="service-btn" style="flex: 1; text-align: center; background: transparent; border: 1px solid var(--primary); color: var(--primary-light); font-size: 0.9rem;">Read More</a>
-                    </div>
-                </div>
-                <!-- 2. Marriage -->
-                <div class="service-card">
-                    <img loading="lazy" decoding="async" width="640" height="427" class="card-image-small lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="assets/service-marriage.webp" alt="Marriage">
-                    <span class="service-label">Marriage</span>
-                    <h3 class="service-title">Marriage & Compatibility</h3>
-                    <div class="service-details">
-                        <p><strong>Focus:</strong> Marriage timing, partner analysis, and delay remedies.</p>
-                    </div>
-                    <div style="display: flex; gap: 8px; margin-top: 16px;">
-                        <a href="https://wa.me/919057918251?text=Hi%21%20I%20am%20interested%20in%20the%20Marriage%20Reading." class="service-btn" target="_blank" style="flex: 1; text-align: center; font-size: 0.9rem;">Book Now</a>
-                        <a href="marriage-astrology-consultation.html" class="service-btn" style="flex: 1; text-align: center; background: transparent; border: 1px solid var(--primary); color: var(--primary-light); font-size: 0.9rem;">Read More</a>
-                    </div>
-                </div>
-                <!-- 3. Full Chart -->
-                <div class="service-card">
-                    <span class="popular-badge">Most Popular</span>
-                    <img loading="lazy" decoding="async" width="640" height="427" class="card-image-small lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="assets/service-full-chart.webp" alt="Full Chart">
-                    <span class="service-label">Full Chart</span>
-                    <h3 class="service-title">Full Birth Chart Reading</h3>
-                    <div class="service-details">
-                        <p><strong>Focus:</strong> Complete life direction, strengths, and dasha timeline.</p>
-                    </div>
-                    <div style="display: flex; gap: 8px; margin-top: 16px;">
-                        <a href="https://wa.me/919057918251?text=Hi%21%20I%20am%20interested%20in%20a%20Full%20Reading." class="service-btn" target="_blank" style="flex: 1; text-align: center; font-size: 0.9rem;">Book Now</a>
-                        <a href="vedic-kundli-reading.html" class="service-btn" style="flex: 1; text-align: center; background: transparent; border: 1px solid var(--primary); color: var(--primary-light); font-size: 0.9rem;">Read More</a>
-                    </div>
-                </div>
-                <!-- 4. Wealth -->
-                <div class="service-card">
-                    <img loading="lazy" decoding="async" width="640" height="427" class="card-image-small lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="assets/service-wealth.webp" alt="Wealth">
-                    <span class="service-label">Wealth</span>
-                    <h3 class="service-title">Wealth & Blockages</h3>
-                    <div class="service-details">
-                        <p><strong>Focus:</strong> Financial patterns, income timing, and traditional wealth-supportive remedies.</p>
-                    </div>
-                    <div style="display: flex; gap: 8px; margin-top: 16px;">
-                        <a href="https://wa.me/919057918251?text=Hi%21%20I%20am%20interested%20in%20the%20Wealth%20Reading." class="service-btn" target="_blank" style="flex: 1; text-align: center; font-size: 0.9rem;">Book Now</a>
-                        <a href="contact.html" class="service-btn" style="flex: 1; text-align: center; background: transparent; border: 1px solid var(--primary); color: var(--primary-light); font-size: 0.9rem;">Read More</a>
-                    </div>
-                </div>
-                <!-- 5. Business -->
-                <div class="service-card">
-                    <img loading="lazy" decoding="async" width="640" height="427" class="card-image-small lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="assets/service-business.webp" alt="Business">
-                    <span class="service-label">Business</span>
-                    <h3 class="service-title">Business & Expansion</h3>
-                    <div class="service-details">
-                        <p><strong>Focus:</strong> Launch timing, partnership, and growth windows.</p>
-                    </div>
-                    <div style="display: flex; gap: 8px; margin-top: 16px;">
-                        <a href="https://wa.me/919057918251?text=Hi%21%20I%20am%20interested%20in%20a%20Business%20Analysis." class="service-btn" target="_blank" style="flex: 1; text-align: center; font-size: 0.9rem;">Book Now</a>
-                        <a href="contact.html" class="service-btn" style="flex: 1; text-align: center; background: transparent; border: 1px solid var(--primary); color: var(--primary-light); font-size: 0.9rem;">Read More</a>
-                    </div>
-                </div>
-                <!-- 6. Health -->
-                <div class="service-card">
-                    <img loading="lazy" decoding="async" width="640" height="427" class="card-image-small lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="assets/service-health.webp" alt="Health">
-                    <span class="service-label">Health</span>
-                    <h3 class="service-title">Health & Obstacles</h3>
-                    <div class="service-details">
-                        <p><strong>Focus:</strong> Stress periods, wellness timing, and spiritual self-care indicators. This is not medical advice.</p>
-                    </div>
-                    <div style="display: flex; gap: 8px; margin-top: 16px;">
-                        <a href="https://wa.me/919057918251?text=Hi%21%20I%20am%20interested%20in%20the%20Health%20Reading." class="service-btn" target="_blank" style="flex: 1; text-align: center; font-size: 0.9rem;">Book Now</a>
-                        <a href="contact.html" class="service-btn" style="flex: 1; text-align: center; background: transparent; border: 1px solid var(--primary); color: var(--primary-light); font-size: 0.9rem;">Read More</a>
-                    </div>
-                </div>
-                <!-- 7. Family -->
-                <div class="service-card">
-                    <img loading="lazy" decoding="async" width="640" height="427" class="card-image-small lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="assets/service-family.webp" alt="Family">
-                    <span class="service-label">Family</span>
-                    <h3 class="service-title">Family & Childbirth</h3>
-                    <div class="service-details">
-                        <p><strong>Focus:</strong> Childbirth timing, family harmony, and emotional clarity.</p>
-                    </div>
-                    <div style="display: flex; gap: 8px; margin-top: 16px;">
-                        <a href="https://wa.me/919057918251?text=Hi%21%20I%20am%20interested%20in%20the%20Family%20Reading." class="service-btn" target="_blank" style="flex: 1; text-align: center; font-size: 0.9rem;">Book Now</a>
-                        <a href="contact.html" class="service-btn" style="flex: 1; text-align: center; background: transparent; border: 1px solid var(--primary); color: var(--primary-light); font-size: 0.9rem;">Read More</a>
-                    </div>
-                </div>
-                <!-- 8. Remedy Plan -->
-                <div class="service-card">
-                    <img loading="lazy" decoding="async" width="640" height="427" class="card-image-small lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="assets/service-remedies.webp" alt="Remedies">
-                    <span class="service-label">Remedies</span>
-                    <h3 class="service-title">Remedy Plan</h3>
-                    <div class="service-details">
-                        <p><strong>Focus:</strong> Nakshatra-based practical actions and mantra therapy.</p>
-                    </div>
-                    <div style="display: flex; gap: 8px; margin-top: 16px;">
-                        <a href="https://wa.me/919057918251?text=Hi%21%20I%20am%20interested%20in%20a%20Personalized%20Remedy%20Plan." class="service-btn" target="_blank" style="flex: 1; text-align: center; font-size: 0.9rem;">Book Now</a>
-                        <a href="remedies-consultation.html" class="service-btn" style="flex: 1; text-align: center; background: transparent; border: 1px solid var(--primary); color: var(--primary-light); font-size: 0.9rem;">Read More</a>
-                    </div>
-                </div>
-                <!-- 9. Personalised Perfume -->
-                <div class="service-card">
-                    <img loading="lazy" decoding="async" width="640" height="427" class="card-image-small lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="assets/service-perfume-chart.webp" alt="Personalised Perfume as per Chart">
-                    <span class="service-label">Aroma Remedy</span>
-                    <h3 class="service-title">Personalised Perfume as per Chart</h3>
-                    <div class="service-details">
-                        <p><strong>Focus:</strong> Chart-based fragrance blend aligned with planetary needs.</p>
-                    </div>
-                    <div style="display: flex; gap: 8px; margin-top: 16px;">
-                        <a href="https://wa.me/919057918251?text=Hi%21%20I%20am%20interested%20in%20Personalised%20Perfume%20as%20per%20Chart." class="service-btn" target="_blank" style="flex: 1; text-align: center; font-size: 0.9rem;">Book Now</a>
-                        <a href="contact.html" class="service-btn" style="flex: 1; text-align: center; background: transparent; border: 1px solid var(--primary); color: var(--primary-light); font-size: 0.9rem;">Read More</a>
-                    </div>
-                </div>
-                <!-- 10. BTR -->
-                <div class="service-card">
-                    <img loading="lazy" decoding="async" width="640" height="427" class="card-image-small lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="assets/service-btr.webp" alt="BTR">
-                    <span class="service-label">Precision</span>
-                    <h3 class="service-title">Birth Time Rectification</h3>
-                    <div class="service-details">
-                        <p><strong>Focus:</strong> Backtracking life events to find exact birth time.</p>
-                    </div>
-                    <div style="display: flex; gap: 8px; margin-top: 16px;">
-                        <a href="https://wa.me/919057918251?text=Hi%21%20I%20am%20interested%20in%20Birth%20Time%20Rectification." class="service-btn" target="_blank" style="flex: 1; text-align: center; font-size: 0.9rem;">Book Now</a>
-                        <a href="contact.html" class="service-btn" style="flex: 1; text-align: center; background: transparent; border: 1px solid var(--primary); color: var(--primary-light); font-size: 0.9rem;">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Isha's Services Section -->
-    <section id="divine-services" class="section services-section" style="padding-top: 60px; border-top: 1px solid var(--border-subtle); background: rgba(11, 16, 32, 0.2);">
-        <div class="container" style="max-width: 1200px; padding: 0 24px;">
-            <h2 style="font-size: 2.2rem; color: var(--text-light); text-align: center; margin-bottom: 40px; font-family: var(--font-serif);">Divine Services by Isha</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <img loading="lazy" decoding="async" width="640" height="427" class="card-image-small lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="assets/service-vastu.jpg" alt="Vastu Shastra">
-                    <span class="service-label">Environment</span>
-                    <h3 class="service-title">Vastu Consultation</h3>
-                    <div class="service-details">
-                        <p><strong>Focus:</strong> Harmonizing home/office energy, identifying spatial blockages, and non-destructive elemental remedies.</p>
-                    </div>
-                    <div style="display: flex; gap: 8px; margin-top: 16px;">
-                        <a href="https://wa.me/917795374787?text=Hi%21%20I%20would%20like%20to%20book%20a%20Vastu%20Shastra%20Consultation." class="service-btn" target="_blank" style="background-color: var(--primary); color: #111; flex: 1; text-align: center; font-size: 0.9rem;">Book Now</a>
-                        <a href="vastu-consultation.html" class="service-btn" style="flex: 1; text-align: center; background: transparent; border: 1px solid var(--primary); color: var(--primary-light); font-size: 0.9rem;">Read More</a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <img loading="lazy" decoding="async" width="640" height="427" class="card-image-small lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="assets/service-full-chart.webp" alt="Manifestation">
-                    <span class="service-label">Mindset</span>
-                    <h3 class="service-title">Manifestation Support</h3>
-                    <div class="service-details">
-                        <p><strong>Focus:</strong> Law of Attraction guidance, clearing subconscious blockages, and energetic alignment for your goals.</p>
-                    </div>
-                    <div style="display: flex; gap: 8px; margin-top: 16px;">
-                        <a href="https://wa.me/917795374787?text=Hi%21%20I%20would%20like%20to%20book%20a%20Manifestation%20Consultation." class="service-btn" target="_blank" style="background-color: var(--primary); color: #111; flex: 1; text-align: center; font-size: 0.9rem;">Book Now</a>
-                        <a href="contact.html" class="service-btn" style="flex: 1; text-align: center; background: transparent; border: 1px solid var(--primary); color: var(--primary-light); font-size: 0.9rem;">Read More</a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <img loading="lazy" decoding="async" width="640" height="427" class="card-image-small lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="assets/zodiac_wheel-640.webp" alt="Numerology">
-                    <span class="service-label">Numbers</span>
-                    <h3 class="service-title">Numerology Reading</h3>
-                    <div class="service-details">
-                        <p><strong>Focus:</strong> Life path number, destiny number, name correction, and energetic compatibility with your goals.</p>
-                    </div>
-                    <div style="display: flex; gap: 8px; margin-top: 16px;">
-                        <a href="https://wa.me/917795374787?text=Hi%21%20I%20would%20like%20to%20book%20a%20Numerology%20Reading." class="service-btn" target="_blank" style="background-color: var(--primary); color: #111; flex: 1; text-align: center; font-size: 0.9rem;">Book Now</a>
-                        <a href="contact.html" class="service-btn" style="flex: 1; text-align: center; background: transparent; border: 1px solid var(--primary); color: var(--primary-light); font-size: 0.9rem;">Read More</a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <img loading="lazy" decoding="async" width="640" height="427" class="card-image-small lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="assets/cosmic_banner.png" alt="Tarot Reading">
-                    <span class="service-label">Intuition</span>
-                    <h3 class="service-title">Tarot Reading</h3>
-                    <div class="service-details">
-                        <p><strong>Focus:</strong> Immediate clarity on pressing situations, psychological guidance, and intuitive decision-making support.</p>
-                    </div>
-                    <div style="display: flex; gap: 8px; margin-top: 16px;">
-                        <a href="https://wa.me/917795374787?text=Hi%21%20I%20would%20like%20to%20book%20a%20Tarot%20Reading." class="service-btn" target="_blank" style="background-color: var(--primary); color: #111; flex: 1; text-align: center; font-size: 0.9rem;">Book Now</a>
-                        <a href="tarot-reading-consultation.html" class="service-btn" style="flex: 1; text-align: center; background: transparent; border: 1px solid var(--primary); color: var(--primary-light); font-size: 0.9rem;">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section" id="consultation-process-preview" style="background: rgba(11, 16, 32, 0.35); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
-        <div class="container" style="max-width: 1050px;">
-            <div class="section-header">
-                <span class="section-tag">How Consultation Works</span>
-                <h2>Full Chart First, <span class="text-gradient">Then Prediction</span></h2>
-                <p>Accurate guidance is not made from one planet or one transit. Every reading begins with the D1 chart, then checks relevant divisional charts, dasha, and current transit.</p>
-            </div>
-            <div class="articles-grid">
-                <article class="article-card"><div class="article-card-body"><span class="category-badge">Step 1</span><h3>Birth Details</h3><p>Share date, exact time, and place of birth so the Lagna, divisional charts, and dasha timeline can be calculated properly.</p></div></article>
-                <article class="article-card"><div class="article-card-body"><span class="category-badge">Step 2</span><h3>Chart Analysis</h3><p>The D1 chart shows the main promise. D9, D10, and other divisional charts confirm marriage, career, and specific life themes.</p></div></article>
-                <article class="article-card"><div class="article-card-body"><span class="category-badge">Step 3</span><h3>Timing and Guidance</h3><p>Mahadasha, antardasha, and transit are used for timing. Remedies are suggested only when the full chart supports them.</p></div></article>
-            </div>
-            <div class="hero-actions" style="justify-content:center; margin-top: 34px;"><a href="consultation-process.html" class="btn-primary">How Consultation Works</a></div>
-        </div>
-    </section>
-
-    <section class="section articles-section" id="recent-articles">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Recently Uploaded</span>
-                <h2>Recent Vedic Astrology <span class="text-gradient">Articles</span></h2>
-                <p>Fresh long-form Jyotish articles for readers who want to understand the reasoning behind signs, houses, planets, and full-chart interpretation.</p>
-            </div>
-            <div class="articles-grid">
-                <article class="article-card">
-                    <a href="posts/aries-in-all-12-houses-vedic-astrology.html" class="article-image-link" aria-label="Read Aries in All 12 Houses in Vedic Astrology">
-                        <img src="assets/blog/aries/aries-source-credibility.svg" alt="Aries in All 12 Houses in Vedic Astrology" loading="lazy" decoding="async">
-                    </a>
-                    <div class="article-card-body">
-                        <span class="category-badge">Aries in Houses</span>
-                        <h3><a href="posts/aries-in-all-12-houses-vedic-astrology.html">Aries in All 12 Houses in Vedic Astrology</a></h3>
-                        <p>Understand Aries through courage, Mars energy, personality, luck, career, relationships, health, money, and the house where life demands action.</p>
-                        <p class="post-meta">May 19, 2026 · 3,500+ words</p>
-                    </div>
-                </article>
-                <article class="article-card">
-                    <a href="posts/leo-in-all-12-houses-vedic-astrology.html" class="article-image-link" aria-label="Read Leo in All 12 Houses in Vedic Astrology">
-                        <img src="assets/blog/leo/leo-in-all-12-houses-hero.jpg" alt="Leo in All 12 Houses in Vedic Astrology" loading="lazy" decoding="async">
-                    </a>
-                    <div class="article-card-body">
-                        <span class="category-badge">Leo in Houses</span>
-                        <h3><a href="posts/leo-in-all-12-houses-vedic-astrology.html">Leo in All 12 Houses in Vedic Astrology</a></h3>
-                        <p>Explore Leo through recognition, dignity, authority, emotional identity, pride, love, power, karma, and the house where the chart seeks visibility.</p>
-                        <p class="post-meta">May 18, 2026 · 3,000+ words</p>
-                    </div>
-                </article>
-            </div>
-            <div class="hero-actions" style="justify-content:center; margin-top: 34px;"><a href="articles.html" class="btn-secondary">View All Articles</a></div>
-        </div>
-    </section>
-
-    <!-- Trust Section -->
-    <section class="section trust-section" style="background: rgba(11, 16, 32, 0.4); text-align: center; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
-        <div class="container" style="max-width: 800px;">
-            <h2 style="font-size: 2rem; margin-bottom: 24px; color: var(--text-light);">Why This Is Not Generic Astrology</h2>
-            <p style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 16px;">Every chart is read through promise, timing, and practical context. The aim is to help you understand likely patterns and make steadier choices.</p>
-            <p style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 24px;">This approach is based on:</p>
-            <ul style="list-style: none; display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-bottom: 32px;">
-                <li style="color: var(--primary); font-family: var(--font-serif); font-size: 1.1rem;">✦ Natal promise (D1 analysis)</li>
-                <li style="color: var(--primary); font-family: var(--font-serif); font-size: 1.1rem;">✦ Divisional confirmation</li>
-                <li style="color: var(--primary); font-family: var(--font-serif); font-size: 1.1rem;">✦ Dasha-based timing</li>
-                <li style="color: var(--primary); font-family: var(--font-serif); font-size: 1.1rem;">✦ Transit validation</li>
-            </ul>
-            <p style="font-size: 1.1rem; color: var(--text-main); font-style: italic;">The focus is not fear-based prediction, but clarity with direction.</p>
-        </div>
-    </section>
-
-    <section id="learning" class="section learning-section" style="background: rgba(11, 16, 32, 0.35); border-bottom: 1px solid var(--border-subtle);">
-        <div class="container" style="max-width: 1050px;">
-            <div class="section-header">
-                <span class="section-tag">Learning Hub</span>
-                <h2>Astrology That Teaches, <span class="text-gradient">Not Just Tells</span></h2>
-                <p>Shambhavaa combines consultation work with educational content so readers can understand the logic behind Jyotish, not depend on vague one-line forecasts.</p>
-            </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
-                <article class="service-card" style="min-height: auto;">
-                    <h3 class="service-title">Methodology</h3>
-                    <p>Readings consider D1 chart promise, divisional charts, dasha activation, transits, yogas, and practical life context before guidance is shared.</p>
-                </article>
-                <article class="service-card" style="min-height: auto;">
-                    <h3 class="service-title">Educational Content</h3>
-                    <p>The blog covers Vedic Astrology, Nakshatra psychology, planetary transits, remedies, numerology, muhurat, gemstones, and spiritual guidance.</p>
-                </article>
-                <article class="service-card" style="min-height: auto;">
-                    <h3 class="service-title">Responsible Guidance</h3>
-                    <p>Content is for educational and informational purposes and should not replace medical, legal, or financial advice.</p>
-                </article>
-            </div>
-        </div>
-    </section>
-
-<!-- Rashi Context Section -->
-    <section id="zodiac-signs" class="section zodiac-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Explore the Rashis</span>
-                <h2>Rashi Context in <span class="text-gradient">Chart Analysis</span></h2>
-                <p>Rashi meanings are useful only when read with Lagna, house lordship, divisional charts, dasha, and transit.</p>
-            </div>
-            <div class="zodiac-grid">
-                <div class="zodiac-card" data-sign="aries">
-                    <span class="zodiac-symbol">♈</span><span class="zodiac-name">Mesh (Aries)</span>
-                    <p class="zodiac-traits">Action-oriented, direct, competitive, initiator, fearless, impulsive, independent, quick decision-maker.</p>
-                </div>
-                <div class="zodiac-card" data-sign="taurus">
-                    <span class="zodiac-symbol">♉</span><span class="zodiac-name">Vrishabh (Taurus)</span>
-                    <p class="zodiac-traits">Stable, patient, comfort-loving, practical, loyal, material-focused, consistent, resistant to change.</p>
-                </div>
-                <div class="zodiac-card" data-sign="gemini">
-                    <span class="zodiac-symbol">♊</span><span class="zodiac-name">Mithun (Gemini)</span>
-                    <p class="zodiac-traits">Curious, communicative, adaptable, intellectual, dual-natured, witty, restless, information-driven.</p>
-                </div>
-                <div class="zodiac-card" data-sign="cancer">
-                    <span class="zodiac-symbol">♋</span><span class="zodiac-name">Kark (Cancer)</span>
-                    <p class="zodiac-traits">Emotional, nurturing, protective, intuitive, sensitive, home-oriented, mood-driven, caring.</p>
-                </div>
-                <div class="zodiac-card" data-sign="leo">
-                    <span class="zodiac-symbol">♌</span><span class="zodiac-name">Simha (Leo)</span>
-                    <p class="zodiac-traits">Confident, expressive, leadership-driven, creative, attention-seeking, proud, generous, charismatic.</p>
-                </div>
-                <div class="zodiac-card" data-sign="virgo">
-                    <span class="zodiac-symbol">♍</span><span class="zodiac-name">Kanya (Virgo)</span>
-                    <p class="zodiac-traits">Analytical, detail-oriented, practical, perfectionist, service-minded, organized, critical, health-conscious.</p>
-                </div>
-                <div class="zodiac-card" data-sign="libra">
-                    <span class="zodiac-symbol">♎</span><span class="zodiac-name">Tula (Libra)</span>
-                    <p class="zodiac-traits">Balanced, relationship-focused, diplomatic, aesthetic-driven, fair-minded, indecisive, harmony-seeking.</p>
-                </div>
-                <div class="zodiac-card" data-sign="scorpio">
-                    <span class="zodiac-symbol">♏</span><span class="zodiac-name">Vrishchik (Scorpio)</span>
-                    <p class="zodiac-traits">Intense, secretive, transformative, passionate, strategic, emotionally deep, controlling, investigative.</p>
-                </div>
-                <div class="zodiac-card" data-sign="sagittarius">
-                    <span class="zodiac-symbol">♐</span><span class="zodiac-name">Dhanu (Sagittarius)</span>
-                    <p class="zodiac-traits">Philosophical, freedom-loving, optimistic, adventurous, truth-seeking, blunt, expansive, growth-oriented.</p>
-                </div>
-                <div class="zodiac-card" data-sign="capricorn">
-                    <span class="zodiac-symbol">♑</span><span class="zodiac-name">Makar (Capricorn)</span>
-                    <p class="zodiac-traits">Disciplined, ambitious, responsible, structured, goal-oriented, practical, patient, authority-driven.</p>
-                </div>
-                <div class="zodiac-card" data-sign="aquarius">
-                    <span class="zodiac-symbol">♒</span><span class="zodiac-name">Kumbh (Aquarius)</span>
-                    <p class="zodiac-traits">Innovative, unconventional, detached, intellectual, humanitarian, rebellious, future-focused, independent.</p>
-                </div>
-                <div class="zodiac-card" data-sign="pisces">
-                    <span class="zodiac-symbol">♓</span><span class="zodiac-name">Meen (Pisces)</span>
-                    <p class="zodiac-traits">Imaginative, compassionate, intuitive, spiritual, emotional, escapist, artistic, empathetic.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Testimonials / Reviews Section -->
-    <section id="reviews" class="section testimonials-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Trust & Results</span>
-                <h2>Client <span class="text-gradient">Experiences</span></h2>
-                <p>Real stories of clarity, timing, and transformation from those who walked the path of Jyotish.</p>
-            </div>
-            
-            <!-- Verified client testimonials -->
-            <div id="verified-testimonials-container" class="testimonials-grid">
-                <div class="testimonial-card reveal-up">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p>"The career reading was accurate beyond what I expected. Arihant identified the exact dasha period for my promotion — it came through right on time. The depth of analysis was unlike anything I had tried before."</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">R</div>
-                        <div>
-                            <strong>Rahul M.</strong>
-                            <span>Career Consultation</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card reveal-up" style="transition-delay: 0.15s;">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p>"I had been confused about marriage timing for years. The consultation gave me clarity about the right period and what to look for in compatibility. The divisional chart analysis was very precise and grounded."</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">P</div>
-                        <div>
-                            <strong>Priya S.</strong>
-                            <span>Marriage Consultation</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card reveal-up" style="transition-delay: 0.3s;">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p>"The full chart reading helped me understand patterns I had been repeating for years. The remedy plan was practical, not superstitious. I genuinely recommend this to anyone serious about Jyotish guidance."</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">A</div>
-                        <div>
-                            <strong>Ananya K.</strong>
-                            <span>Full Birth Chart Reading</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Custom Review Form -->
-            <div class="review-form-container">
-                <h3>Share Your <span class="text-gradient">Experience</span></h3>
-                <form class="review-form" action="mailto:shambhavaa.reviews@gmail.com" method="POST" enctype="text/plain">
-                    <input type="hidden" name="_subject" value="New Website Review - Shambhavaa">
-                    
-                    <div class="star-rating-input" id="star-rating">
-                        <span class="star-input" data-value="1">★</span>
-                        <span class="star-input" data-value="2">★</span>
-                        <span class="star-input" data-value="3">★</span>
-                        <span class="star-input" data-value="4">★</span>
-                        <span class="star-input" data-value="5">★</span>
-                    </div>
-                    <input type="hidden" name="stars" id="stars-value" value="5">
-
-                    <div class="form-group">
-                        <label class="sr-only" for="review-name">Your Name</label>
-                        <input type="text" id="review-name" name="name" class="form-control" placeholder="Your Name" autocomplete="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="sr-only" for="review-email">Your Email</label>
-                        <input type="email" id="review-email" name="email" class="form-control" placeholder="Your Email" autocomplete="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="sr-only" for="review-message">Your Review</label>
-                        <textarea id="review-message" name="message" class="form-control" rows="4" placeholder="Your Review..." required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn-primary btn-submit-review">
-                        <span>Open Review Email</span>
-                    </button>
-                </form>
-            </div>
-            
-            <p style="text-align: center; color: var(--text-muted); margin-top: 24px; font-size: 0.85rem; font-style: italic;">
-                ✦ All reviews are manually verified to ensure authenticity ✦
-            </p>
-        </div>
-    </section>
-
-    <section class="section differentiation-section" style="background: rgba(11, 16, 32, 0.6); text-align: center; border-top: 1px solid var(--border-subtle);">
-        <div class="container" style="max-width: 800px;">
-            <h2 style="font-size: 2.2rem; margin-bottom: 24px; color: var(--text-light);">Not Prediction. Precision.</h2>
-            <p style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 24px;">A result is not judged from one factor. Each reading is based on:</p>
-            <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; text-align: left; max-width: 400px; margin-left: auto; margin-right: auto;">
-                <li style="color: var(--primary-light); font-size: 1.05rem;">✦ <strong style="color: var(--text-light);">Natal promise</strong> (what is possible)</li>
-                <li style="color: var(--primary-light); font-size: 1.05rem;">✦ <strong style="color: var(--text-light);">Dasha</strong> (when it activates)</li>
-                <li style="color: var(--primary-light); font-size: 1.05rem;">✦ <strong style="color: var(--text-light);">Transit</strong> (how it manifests)</li>
-            </ul>
-            <p style="font-size: 1.1rem; color: var(--text-muted); font-style: italic;">This ensures clarity that is structured, not assumed.</p>
-        </div>
-    </section>
-
-    <!-- Final CTA Section -->
-    <section class="section final-cta" style="background: var(--gold-gradient); text-align: center; padding: 100px 24px; border-radius: 40px 40px 0 0; margin-top: 60px;">
-        <div class="container" style="max-width: 800px;">
-            <h2 style="font-size: 2.8rem; color: #0a0a20; margin-bottom: 30px; font-weight: 700;">If the question is important, clarity should not be delayed.</h2>
-            <a href="https://wa.me/919057918251" target="_blank" class="btn-primary" style="background: #0a0a20; color: var(--primary-light); font-size: 1.1rem; padding: 16px 40px; box-shadow: 0 10px 30px rgba(10,10,32,0.3); border: none;">
-                <span>Book Consultation</span>
-            </a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section about-section">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-image">
-                    <img loading="lazy" decoding="async" width="640" height="640" class="lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="assets/zodiac_wheel-640.webp" alt="Vedic Zodiac Wheel">
-                </div>
-                <div class="about-text">
-                    <span class="section-tag">About Shambhavaa</span>
-                    <h2>Ancient Wisdom, <span class="text-gradient">Modern Insight</span></h2>
-                    <p>Shambhavaa is a root consultation website for ethical Vedic astrology guidance. Readings are based on D1 chart promise, relevant divisional charts, dasha timing, and transit validation.</p><p>The focus is clarity, preparation, and responsible decision-making. Predictions are not guaranteed, and remedies are treated as spiritual support rather than instant solutions.</p>
-                    <div class="about-social" style="margin-top: 25px;">
-                        <a href="about.html" class="btn-primary">
-                            <span>Read Full Story</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact / Booking Form -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Get in Touch</span>
-                <h2>Book a <span class="text-gradient">Consultation</span></h2>
-                <p>Reach out to schedule your personalized Vedic Astrology reading or if you have any questions.</p>
-            </div>
-            <div class="contact-container">
-                <form class="contact-form" action="mailto:shambhavaa.reviews@gmail.com" method="POST" enctype="text/plain">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" class="form-control" required placeholder="Enter your name">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" class="form-control" required placeholder="Enter your email">
-                    </div>
-                    <div class="form-group">
-                        <label for="service">Service Interested In</label>
-                        <select id="service" name="service" class="form-control" required>
-                            <option value="" disabled selected>Select a Service</option>
-                            <option value="career">Career, Job & Government Exams</option>
-                            <option value="marriage">Marriage, Compatibility & Delay</option>
-                            <option value="full-chart">Full Birth Chart Consultation</option>
-                            <option value="wealth">Wealth, Income & Blockages</option>
-                            <option value="health">Health, Stress & Obstacles</option>
-                            <option value="family">Childbirth & Family Harmony</option>
-                            <option value="remedies">Remedies Consultation</option>
-                            <option value="kundli-matching">Kundli Matching Consultation</option>
-                            <option value="nakshatra">Nakshatra Reading Consultation</option>
-                            <option value="rahu-ketu">Rahu Ketu and Kaal Sarpa Consultation</option>
-                            <option value="other">Other / Direct Consultation</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message / Details</label>
-                        <textarea id="message" name="message" class="form-control" required placeholder="Briefly describe your current situation or questions..."></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary btn-submit">
-                        <span>Continue on WhatsApp</span>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Audio Player for Om Chant -->
-    <audio id="om-audio" loop preload="none">
-        <source data-src="om.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="section faq-section">
-        <div class="container" style="max-width: 800px;">
-            <div class="section-header">
-                <span class="section-tag">FAQ</span>
-                <h2>Common <span class="text-gradient">Questions</span></h2>
-                <p>Everything you need to know before booking a consultation.</p>
-            </div>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <button class="faq-question" type="button">What details do I need to provide? <span class="faq-icon" aria-hidden="true">+</span></button>
-                    <div class="faq-answer"><p>You need your <strong>date of birth, exact time of birth, and place of birth</strong>. Accurate birth time is critical for chart precision. If unsure, consider the Birth Time Rectification service.</p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" type="button">How long does a consultation take? <span class="faq-icon" aria-hidden="true">+</span></button>
-                    <div class="faq-answer"><p>Standard readings take <strong>30–60 minutes</strong>. Full birth chart consultations can take up to 90 minutes. Sessions are delivered via WhatsApp or call, as you prefer.</p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" type="button">How do I book? <span class="faq-icon" aria-hidden="true">+</span></button>
-                    <div class="faq-answer"><p>Click any <strong>"Book" button</strong> on the page — it opens a WhatsApp chat directly. Share your birth details and preferred service, and a session will be confirmed.</p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" type="button">Is this prediction or guidance? <span class="faq-icon" aria-hidden="true">+</span></button>
-                    <div class="faq-answer"><p>This is <strong>structured Jyotish-based guidance</strong>. Every reading uses natal promise (D1), Dasha timing, and transit context. The goal is clarity with direction, not guaranteed outcomes.</p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" type="button">Can Jyotish change my destiny? <span class="faq-icon" aria-hidden="true">+</span></button>
-                    <div class="faq-answer"><p>Jyotish <strong>illuminates patterns</strong> through a traditional Vedic lens. Remedies are spiritual practices for reflection, discipline, and alignment; they are not guarantees.</p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" type="button">Is astrology a substitute for professional advice? <span class="faq-icon" aria-hidden="true">+</span></button>
-                    <div class="faq-answer"><p>No. Content is for educational and informational purposes and should not replace medical, legal, or financial advice.</p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" type="button">Do you offer follow-up sessions? <span class="faq-icon" aria-hidden="true">+</span></button>
-                    <div class="faq-answer"><p>Yes. Follow-ups are available for existing clients — focused on <strong>transit updates, new questions, or progress review</strong> within the same chart.</p></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <a href="index.html" class="logo footer-logo">
-                        <img src="assets/logo-small.webp" alt="Shambhavaa icon" width="40" height="40" loading="lazy" decoding="async">
-                        Sham<span class="logo-accent">bhavaa</span>
-                    </a>
-                    <p>Ethical Vedic astrology consultations using D1, divisional charts, dasha, transit, and practical context.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Consultations</h4>
-                    <ul>
-                        <li><a href="vedic-kundli-reading.html">Vedic Kundli Reading</a></li>
-                        <li><a href="marriage-astrology-consultation.html">Marriage Astrology</a></li>
-                        <li><a href="career-astrology-consultation.html">Career Astrology</a></li>
-                        <li><a href="dasha-transit-reading.html">Dasha and Transit</a></li>
-                        <li><a href="remedies-consultation.html">Remedies</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h4>Trust</h4>
-                    <ul>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                        <li><a href="terms-and-conditions.html">Terms and Conditions</a></li>
-                        <li><a href="disclaimer.html">Disclaimer</a></li>
-                        <li><a href="refund-cancellation-policy.html">Refund/Cancellation Policy</a></li>
-                        <li><a href="sitemap.xml">Sitemap</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Shambhavaa by Arihant Saini. All rights reserved.</p>
-                <p class="footer-disclaimer">Astrology content is for educational and spiritual guidance only. It is not medical, legal, financial, psychological, or emergency advice. Outcomes are not guaranteed.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Floating Chat Button -->
-    <div class="chat-fab" id="chat-fab">
-        <div class="chat-fab-menu">
-            <a href="https://ig.me/m/sham_bhavaa" target="_blank" class="chat-fab-item ig">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-                DM on Instagram
-            </a>
-            <a href="https://www.threads.com/@myself_arihant" target="_blank" class="chat-fab-item th">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.96-.065-1.187.408-2.26 1.33-3.022.88-.727 2.1-1.14 3.538-1.209 1.01-.05 1.945.025 2.791.18-.122-.79-.39-1.404-.82-1.83-.596-.59-1.497-.89-2.68-.892h-.031c-.88.003-1.61.209-2.17.614l-1.157-1.652c.852-.596 1.94-.915 3.243-.938h.053c1.723.013 3.065.542 3.988 1.576.795.89 1.273 2.079 1.426 3.54.465.218.897.476 1.293.775 1.06.8 1.832 1.855 2.244 3.07.6 1.77.52 4.46-1.678 6.612-1.88 1.838-4.142 2.634-7.322 2.66zM14.56 14.24c-1.015-.048-3.24.054-3.39 1.296-.072.589.263 1.347 1.808 1.347.08 0 .162-.003.246-.008 1.083-.059 1.908-.454 2.453-1.175.35-.464.583-1.044.72-1.73a9.4 9.4 0 00-1.837.27z"/></svg>
-                Message on Threads
-            </a>
-            <a href="https://www.tumblr.com/cosmicdecoderr?source=share" target="_blank" class="chat-fab-item th">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M14.563 24c-5.093 0-7.031-3.756-7.031-6.411V9.747H5.116V6.648c3.63-1.313 4.512-4.596 4.71-6.469C9.84.051 9.941 0 9.999 0h3.517v6.114h4.801v3.633h-4.82v7.47c.016 1.001.375 2.371 2.207 2.371h.09c.631-.02 1.486-.205 1.936-.419l1.156 3.425c-.436.636-2.4 1.364-4.323 1.406z"/></svg>
-                Tumblr
-            </a>
-            <a href="https://wa.me/919057918251" target="_blank" class="chat-fab-item wa">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-                WhatsApp (Arihant)
-            </a>
-            <a href="https://wa.me/917795374787" target="_blank" class="chat-fab-item wa">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-                WhatsApp (Isha)
-            </a>
-        </div>
-        <span class="chat-fab-label">Connect ✦</span>
-        <button class="chat-fab-btn" id="chat-fab-btn">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0a0a20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        </button>
+    <div class="sh-track-title">✦ Divine Services by Isha</div>
+    <div class="sh-services">
+      <div class="sh-svc"><div class="sh-svc-icon">🏠</div><div class="sh-svc-title">Vastu Consultation</div><div class="sh-svc-focus">Harmonizing home/office energy and non-destructive elemental remedies.</div><div class="sh-svc-btns"><a class="sh-svc-book" href="https://wa.me/917795374787?text=Hi!%20I%20would%20like%20to%20Book%20a%20Divine%20Service.">Book Now</a><a class="sh-svc-more" href="vastu-consultation.html">Read More</a></div></div>
+      <div class="sh-svc"><div class="sh-svc-icon">✨</div><div class="sh-svc-title">Manifestation Support</div><div class="sh-svc-focus">Law of Attraction guidance and clearing subconscious blockages.</div><div class="sh-svc-btns"><a class="sh-svc-book" href="https://wa.me/917795374787?text=Hi!%20I%20would%20like%20to%20Book%20a%20Divine%20Service.">Book Now</a><a class="sh-svc-more" href="contact.html">Read More</a></div></div>
+      <div class="sh-svc"><div class="sh-svc-icon">🔢</div><div class="sh-svc-title">Numerology Reading</div><div class="sh-svc-focus">Life path number, destiny number, and name correction.</div><div class="sh-svc-btns"><a class="sh-svc-book" href="https://wa.me/917795374787?text=Hi!%20I%20would%20like%20to%20Book%20a%20Divine%20Service.">Book Now</a><a class="sh-svc-more" href="contact.html">Read More</a></div></div>
+      <div class="sh-svc"><div class="sh-svc-icon">🃏</div><div class="sh-svc-title">Tarot Reading</div><div class="sh-svc-focus">Clarity on pressing situations and intuitive decision-making support.</div><div class="sh-svc-btns"><a class="sh-svc-book" href="https://wa.me/917795374787?text=Hi!%20I%20would%20like%20to%20Book%20a%20Divine%20Service.">Book Now</a><a class="sh-svc-more" href="tarot-reading-consultation.html">Read More</a></div></div>
     </div>
-<!-- Urgency Strip -->
-<div class="urgency-strip" id="urgency-strip" role="alert" aria-live="polite">
-    <div class="urgency-content">
-        <span class="urgency-text">🔥 <strong>Limited consultation slots this week</strong> — Book before they fill up</span>
-        <a href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Consultation." target="_blank" class="urgency-cta">Book Now →</a>
+  </section>
+
+  <div class="sh-divider"></div>
+
+  <!-- HOW IT WORKS -->
+  <section class="sh-section">
+    <div class="sh-sec-label">How Consultation Works</div>
+    <div class="sh-sec-title">Full Chart First, Then Prediction</div>
+    <div class="sh-sec-sub">Every reading begins with the D1 chart, then checks relevant divisional charts, dasha, and current transit.</div>
+    <div class="sh-steps">
+      <div class="sh-step"><div class="sh-step-num">1</div><div class="sh-step-title">Birth Details</div><div class="sh-step-desc">Share date, exact time, and place of birth to calculate Lagna, divisional charts, and dasha timeline.</div></div>
+      <div class="sh-step"><div class="sh-step-num">2</div><div class="sh-step-title">Chart Analysis</div><div class="sh-step-desc">D1 shows the main promise. D9, D10 and other charts confirm marriage, career, and life themes.</div></div>
+      <div class="sh-step"><div class="sh-step-num">3</div><div class="sh-step-title">Timing & Guidance</div><div class="sh-step-desc">Mahadasha, antardasha, and transit are used for timing. Remedies only when the chart supports them.</div></div>
     </div>
-    <button class="urgency-close" id="urgency-close" aria-label="Dismiss notification">×</button>
+  </section>
+
+  <div class="sh-divider"></div>
+
+  <!-- REVIEWS -->
+  <section class="sh-section" id="reviews">
+    <div class="sh-sec-label">Trust & Results</div>
+    <div class="sh-sec-title">Client Experiences</div>
+    <div class="sh-sec-sub">Real stories of clarity, timing, and transformation from those who walked the path of Jyotish.</div>
+
+    <div class="sh-rev-summary">
+      <div class="sh-rev-score">
+        <div class="sh-rev-big">4.9</div>
+        <div class="sh-rev-stars">★★★★★</div>
+      </div>
+      <div class="sh-rev-verified">🛡 All reviews manually verified for authenticity</div>
+    </div>
+
+    <div class="sh-reviews-grid">
+      <!-- ✅ Your existing real reviews (edit text to match exactly) -->
+      <div class="sh-review"><div class="sh-review-stars">★★★★★</div><div class="sh-review-text">"The career reading was accurate beyond expectation. The exact dasha period for my promotion came through right on time."</div><div class="sh-review-author"><div class="sh-review-avatar">R</div><div><div class="sh-review-name">Rahul M.</div><div class="sh-review-meta">Career · Jaipur</div></div><div class="sh-review-vbadge">✓</div></div></div>
+      <div class="sh-review"><div class="sh-review-stars">★★★★★</div><div class="sh-review-text">"I was confused about marriage timing for years. The consultation gave me clarity and precise divisional chart analysis."</div><div class="sh-review-author"><div class="sh-review-avatar">P</div><div><div class="sh-review-name">Priya S.</div><div class="sh-review-meta">Marriage · Delhi</div></div><div class="sh-review-vbadge">✓</div></div></div>
+      <div class="sh-review"><div class="sh-review-stars">★★★★★</div><div class="sh-review-text">"The full chart reading helped me understand patterns I'd repeated for years. The remedy plan was practical, not superstitious."</div><div class="sh-review-author"><div class="sh-review-avatar">A</div><div><div class="sh-review-name">Ananya K.</div><div class="sh-review-meta">Full Chart · Mumbai</div></div><div class="sh-review-vbadge">✓</div></div></div>
+    </div>
+  </section>
+
+  <div class="sh-divider"></div>
+
+  <!-- ABOUT -->
+  <section class="sh-section" id="about">
+    <div class="sh-sec-label">About Shambhavaa</div>
+    <div class="sh-sec-title">Ancient Wisdom, Modern Insight</div>
+    <div class="sh-sec-sub">Ethical Vedic astrology guidance based on D1 promise, divisional charts, dasha timing, and transit validation.</div>
+    <div class="sh-about">
+      <div class="sh-about-card"><div class="sh-about-avatar">🧙‍♂️</div><div class="sh-about-name">Arihant Saini</div><div class="sh-about-role">Vedic Astrologer · Founder</div><div class="sh-about-desc">Dedicated to removing fear-based narratives from astrology. Synthesizing Nakshatra psychology with the karmic laws of the grahas for radical self-responsibility.</div></div>
+      <div class="sh-about-card"><div class="sh-about-avatar">🌺</div><div class="sh-about-name">Isha</div><div class="sh-about-role">Vastu · Tarot · Numerology</div><div class="sh-about-desc">Offering Vastu, manifestation support, numerology, and tarot — energetic alignment practices that complement the Jyotish consultation path.</div></div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <div class="sh-cta-band">
+    <div class="sh-cta-title">If the question is important, clarity should not be delayed.</div>
+    <div class="sh-cta-sub">Consultation slots are limited each week — book your session today.</div>
+    <a href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Consultation." class="sh-btn-green" style="margin:0 auto">💬 Book Consultation</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="sh-footer" id="faq">
+    <div class="sh-footer-copy">© 2026 Shambhavaa by Arihant Saini. All rights reserved. · Astrology content is for educational and spiritual guidance only.</div>
+  </footer>
+
+  <!-- STICKY BOOK BUTTON -->
+  <a href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Consultation." class="sh-sticky">💬 Book Now</a>
+
 </div>
 <script defer src="js/main.js?v=6.2"></script>
 </body>
