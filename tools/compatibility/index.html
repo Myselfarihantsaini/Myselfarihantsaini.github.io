@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-9194178610009666">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9194178610009666" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cosmic Compatibility — Birth Chart Synastry for Two</title>
+<meta name="description" content="Use Shambhavaa's cosmic compatibility tool to compare two birth charts through Sun, Moon, Mercury, Venus, Mars, Ascendant, and synastry aspects.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0a0814">
+<link rel="canonical" href="https://shambhavaa.com/tools/compatibility/">
+<link rel="icon" href="../../favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="../../assets/logo-small.webp">
+<meta property="og:title" content="Cosmic Compatibility Tool | Shambhavaa">
+<meta property="og:description" content="Compare two birth charts with Shambhavaa's synastry compatibility tool.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shambhavaa.com/tools/compatibility/">
+<meta property="og:image" content="https://shambhavaa.com/assets/om_bg.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0814;--ink:#ece6f5;--muted:#9a8fb5;
+    --rose:#e0405a;--rose-soft:#ff6b81;--gold:#e7c873;--green:#5ad17a;--green-soft:#7fe39c;
+    --line:rgba(231,200,115,.18);--card:rgba(255,255,255,.035);--cl:rgba(255,255,255,.08);
+    --pa:#7aa8ff;--pb:#ff9ad1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Karla',sans-serif;line-height:1.6;overflow-x:hidden;position:relative}
+  .stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+  .stars span{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:tw 3.5s infinite}
+  @keyframes tw{0%,100%{opacity:.15}50%{opacity:.85}}
+  .glow{position:fixed;border-radius:50%;filter:blur(95px);z-index:0;pointer-events:none}
+  .glow.a{width:500px;height:500px;background:radial-gradient(circle,rgba(122,168,255,.28),transparent 70%);top:-130px;left:-110px}
+  .glow.b{width:520px;height:520px;background:radial-gradient(circle,rgba(255,154,209,.24),transparent 70%);bottom:-170px;right:-150px}
+  .site-nav{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:22px;min-height:82px;padding:20px 32px;border-bottom:1px solid var(--line);background:rgba(10,8,20,.88);backdrop-filter:blur(14px);box-shadow:0 12px 34px rgba(0,0,0,.24)}
+  .site-logo{font-family:'Cormorant Garamond',serif;font-size:2.15rem;line-height:1;color:#fff;text-decoration:none;white-space:nowrap}
+  .site-links,.site-social{display:flex;align-items:center;gap:22px}
+  .site-links a,.site-social a{color:rgba(236,230,245,.84);text-decoration:none;font-size:.95rem;white-space:nowrap;transition:color .2s,border-color .2s,background .2s,transform .2s}
+  .site-links a:hover{color:var(--gold)}
+  .site-social{gap:10px}
+  .site-social a{border:1px solid var(--line);border-radius:999px;padding:8px 13px;font-size:.84rem}
+  .site-social a:hover{color:var(--gold);border-color:rgba(231,200,115,.45);background:rgba(231,200,115,.08);transform:translateY(-2px)}
+  @media(max-width:900px){.site-nav{min-height:74px;padding:14px 18px}.site-logo{font-size:1.55rem}.site-links,.site-social{display:none}}
+  .wrap{position:relative;z-index:2;max-width:920px;margin:0 auto;padding:0 22px}
+  header{text-align:center;padding:74px 0 26px}
+  .eyebrow{letter-spacing:.42em;text-transform:uppercase;font-size:.7rem;color:var(--gold);font-weight:600;margin-bottom:18px}
+  h1{font-family:'Cormorant Garamond';font-weight:600;font-size:clamp(2.6rem,7vw,4.4rem);line-height:1.05}
+  h1 em{font-style:italic;color:var(--rose-soft)}
+  .heart{display:inline-block;animation:beat 1.8s infinite}
+  @keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.18)}30%{transform:scale(1)}}
+  .sub{color:var(--muted);max-width:560px;margin:20px auto 0;font-size:1.02rem}
+
+  .partners{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:42px}
+  @media(max-width:680px){.partners{grid-template-columns:1fr}}
+  .pcard{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));border:1px solid var(--cl);border-radius:20px;padding:26px 24px;backdrop-filter:blur(6px)}
+  .pcard.A{border-top:3px solid var(--pa)} .pcard.B{border-top:3px solid var(--pb)}
+  .pcard h2{font-family:'Cormorant Garamond';font-weight:500;font-size:1.5rem;display:flex;align-items:center;gap:9px;margin-bottom:18px}
+  .dot{width:11px;height:11px;border-radius:50%} .A .dot{background:var(--pa)} .B .dot{background:var(--pb)}
+  .field{margin-bottom:15px}
+  .field label{display:block;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:7px;font-weight:600}
+  input,select{width:100%;background:rgba(10,8,20,.7);border:1px solid var(--cl);color:var(--ink);padding:12px 13px;border-radius:10px;font-family:'Karla';font-size:.95rem;transition:border-color .2s,box-shadow .2s}
+  input:focus,select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(231,200,115,.12)}
+  select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23e7c873' d='M6 8 0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center}
+  input[type=date],input[type=time]{color-scheme:dark}
+  .tinynote{font-size:.72rem;color:var(--muted);margin-top:5px;opacity:.8}
+  details{margin-top:6px} summary{font-size:.74rem;color:var(--pa);cursor:pointer;letter-spacing:.04em} .A summary{color:var(--pa)} .B summary{color:var(--pb)}
+  .coords{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:9px}
+
+  .btn{display:block;width:100%;max-width:420px;margin:32px auto 0;background:linear-gradient(90deg,var(--pa),var(--pb));border:none;color:#10081a;font-family:'Cormorant Garamond';font-weight:600;font-size:1.4rem;letter-spacing:.5px;padding:16px;border-radius:13px;cursor:pointer;transition:transform .15s,box-shadow .25s;box-shadow:0 10px 32px rgba(255,154,209,.28)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 14px 42px rgba(122,168,255,.4)}
+  .err{color:var(--rose-soft);text-align:center;margin-top:14px;font-size:.9rem;min-height:18px}
+
+  #out{margin:46px 0 20px;display:none}
+  #out.show{display:block;animation:rise .6s ease}
+  @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1}}
+
+  .score-card{text-align:center;border:1px solid var(--line);border-radius:24px;padding:42px 28px;background:radial-gradient(circle at 50% 0%,rgba(255,154,209,.13),transparent 65%);margin-bottom:30px}
+  .ring{width:170px;height:170px;margin:6px auto 18px;position:relative}
+  .ring svg{transform:rotate(-90deg)}
+  .ring .pct{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .ring .pct b{font-family:'Cormorant Garamond';font-size:3rem;line-height:1;color:#fff}
+  .ring .pct span{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .tier{font-family:'Cormorant Garamond';font-style:italic;font-size:clamp(1.9rem,5.5vw,2.8rem);color:var(--rose-soft)}
+  .ssum{color:var(--muted);max-width:560px;margin:12px auto 0}
+  .vsline{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:6px;font-family:'Cormorant Garamond';font-size:1.5rem}
+  .nameA{color:var(--pa)} .nameB{color:var(--pb)} .amp{color:var(--muted);font-style:italic}
+
+  .sect-title{font-family:'Cormorant Garamond';font-size:1.45rem;letter-spacing:.03em;margin:34px 0 4px;text-align:center}
+  .sect-title.spark{color:var(--green-soft)} .sect-title.flag{color:var(--rose-soft)} .sect-title.chem{color:var(--gold)}
+  .sect-rule{width:46px;height:1px;background:var(--line);margin:0 auto 22px}
+
+  .asp{border:1px solid var(--cl);border-radius:15px;padding:16px 20px;margin-bottom:13px;background:var(--card);display:flex;gap:14px;align-items:flex-start}
+  .asp .gl{font-size:1.4rem;line-height:1.3;flex-shrink:0;width:30px;text-align:center}
+  .asp.s .gl{color:var(--green-soft)} .asp.f .gl{color:var(--rose-soft)}
+  .asp .body .nm{font-family:'Cormorant Garamond';font-size:1.18rem;font-weight:600;margin-bottom:2px}
+  .asp .body .tag{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-left:8px;font-weight:700;vertical-align:middle}
+  .tag.harm{background:rgba(90,209,122,.15);color:var(--green-soft)}
+  .tag.intense{background:rgba(231,200,115,.16);color:var(--gold)}
+  .tag.fric{background:rgba(224,64,90,.18);color:var(--rose-soft)}
+  .tag.mag{background:rgba(122,168,255,.16);color:var(--pa)}
+  .asp .body p{font-size:.92rem;color:var(--ink);margin-top:5px}
+  .none{color:var(--muted);text-align:center;font-style:italic;padding:8px 0 14px;font-family:'Cormorant Garamond';font-size:1.1rem}
+
+  .chem{border:1px solid var(--line);border-radius:18px;padding:24px 26px;background:rgba(231,200,115,.05);margin-bottom:10px}
+  .chem p{margin-bottom:10px} .chem p:last-child{margin-bottom:0}
+  .chem b{color:var(--gold)}
+
+  .charts{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+  @media(max-width:680px){.charts{grid-template-columns:1fr}}
+  .chart{border:1px solid var(--cl);border-radius:16px;padding:20px;background:var(--card)}
+  .chart h4{font-family:'Cormorant Garamond';font-size:1.25rem;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .chart.A h4{color:var(--pa)} .chart.B h4{color:var(--pb)}
+  .prow{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.92rem}
+  .prow:last-child{border:none}
+  .prow .pl{color:var(--muted)} .prow .sg{font-weight:600}
+  .prow.rise{background:rgba(231,200,115,.07);margin:0 -8px;padding:7px 8px;border-radius:8px}
+  .prow.rise .pl{color:var(--gold)}
+
+  .disc{font-size:.8rem;color:var(--muted);text-align:center;max-width:600px;margin:38px auto 56px;line-height:1.7;opacity:.82}
+  .disc b{color:var(--gold)}
+  footer{text-align:center;padding-bottom:50px;color:var(--muted);font-family:'Cormorant Garamond';font-style:italic;font-size:1.1rem}
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+<div class="glow a"></div><div class="glow b"></div>
+<nav class="site-nav" aria-label="Primary navigation">
+  <a class="site-logo" href="../../">Shambhavaa</a>
+  <div class="site-links">
+    <a href="../../about.html">About</a>
+    <a href="../../index.html#services">Consultations</a>
+    <a href="../../index.html#reviews">Reviews</a>
+    <a href="../../articles.html">Articles</a>
+    <a href="https://shambhavaa.blog" target="_blank" rel="noopener noreferrer">Blog</a>
+    <a href="../janma-finder/">Janma Finder</a>
+    <a href="./">Compatibility</a>
+    <a href="../../faq.html">FAQ</a>
+  </div>
+  <div class="site-social" aria-label="Social links">
+    <a href="https://www.instagram.com/sham_bhavaa/" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://www.threads.com/@myself_arihant" target="_blank" rel="noopener noreferrer">Threads</a>
+    <a href="https://www.tumblr.com/cosmicdecoderr" target="_blank" rel="noopener noreferrer">Tumblr</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Birth Chart Synastry · For Two</div>
+    <h1>Cosmic <em>Compatibility</em> <span class="heart">💞</span></h1>
+    <p class="sub">Enter both partners' birth date, time & place. The tool computes each chart's real planet positions <em>and Rising sign</em>, then reads the aspects between them — the sparks, the chemistry, and the red flags written in the space between two skies.</p>
+  </header>
+
+  <div class="partners">
+    <div class="pcard A">
+      <h2><span class="dot"></span>Partner A</h2>
+      <div class="field"><label>Name (optional)</label><input id="a-name" type="text" placeholder="e.g. Aria"></div>
+      <div class="field"><label>Birth date</label><input id="a-date" type="date"></div>
+      <div class="field"><label>Birth time</label><input id="a-time" type="time" value="12:00"><div class="tinynote">Exact time matters most for the Rising sign — it changes every ~2 hours.</div></div>
+      <div class="field"><label>Place of birth</label><input id="a-place" list="cities" placeholder="Start typing a city…" autocomplete="off">
+        <details><summary>Not listed? Enter coordinates →</summary><div class="coords"><input id="a-lat" type="number" step="0.01" placeholder="Latitude"><input id="a-lon" type="number" step="0.01" placeholder="Longitude"></div><div class="tinynote">North & East positive; South & West negative.</div></details>
+      </div>
+      <div class="field"><label>Timezone at birth</label><select id="a-tz"></select><div class="tinynote">Auto-set from city; adjust if born during daylight-saving time.</div></div>
+    </div>
+    <div class="pcard B">
+      <h2><span class="dot"></span>Partner B</h2>
+      <div class="field"><label>Name (optional)</label><input id="b-name" type="text" placeholder="e.g. Kai"></div>
+      <div class="field"><label>Birth date</label><input id="b-date" type="date"></div>
+      <div class="field"><label>Birth time</label><input id="b-time" type="time" value="12:00"><div class="tinynote">Exact time matters most for the Rising sign — it changes every ~2 hours.</div></div>
+      <div class="field"><label>Place of birth</label><input id="b-place" list="cities" placeholder="Start typing a city…" autocomplete="off">
+        <details><summary>Not listed? Enter coordinates →</summary><div class="coords"><input id="b-lat" type="number" step="0.01" placeholder="Latitude"><input id="b-lon" type="number" step="0.01" placeholder="Longitude"></div><div class="tinynote">North & East positive; South & West negative.</div></details>
+      </div>
+      <div class="field"><label>Timezone at birth</label><select id="b-tz"></select><div class="tinynote">Auto-set from city; adjust if born during daylight-saving time.</div></div>
+    </div>
+  </div>
+  <datalist id="cities"></datalist>
+
+  <button class="btn" id="go">Read Our Compatibility ✦</button>
+  <div class="err" id="err"></div>
+
+  <div id="out"></div>
+
+  <p class="disc">✦ <b>Positions are computed astronomically</b> — Sun, Moon, Mercury, Venus, Mars and the Rising sign (Ascendant). Planet signs depend only on date & time; the <b>Rising sign also needs exact time + place</b>, so it's the most sensitive to a guessed birth time. Accurate to the zodiac sign in almost all cases; cusp placements may vary. This reads planet & Ascendant aspects, not full house overlays. <b>For entertainment & reflection</b> — the stars describe tendencies, never destiny.</p>
+  <footer>Two charts, one conversation. The rest is up to you.</footer>
+</div>
+
+<script>
+/* ===== starfield ===== */
+(function(){const s=document.getElementById('stars');for(let i=0;i<95;i++){const d=document.createElement('span');d.style.left=Math.random()*100+'%';d.style.top=Math.random()*100+'%';d.style.opacity=.4;d.style.animationDelay=(Math.random()*3.5)+'s';d.style.transform='scale('+(Math.random()*1.6+.4)+')';s.appendChild(d);}})();
+
+/* ===== city database  name -> [lat, lon, tzMinutes(standard)] ===== */
+const CITIES={
+ "Jaipur, India":[26.92,75.82,330],"New Delhi, India":[28.61,77.21,330],"Mumbai, India":[19.08,72.88,330],
+ "Bengaluru, India":[12.97,77.59,330],"Kolkata, India":[22.57,88.36,330],"Chennai, India":[13.08,80.27,330],
+ "Hyderabad, India":[17.39,78.49,330],"Pune, India":[18.52,73.86,330],"Ahmedabad, India":[23.03,72.58,330],
+ "Surat, India":[21.17,72.83,330],"Lucknow, India":[26.85,80.95,330],"Kanpur, India":[26.45,80.33,330],
+ "Nagpur, India":[21.15,79.09,330],"Indore, India":[22.72,75.86,330],"Bhopal, India":[23.26,77.41,330],
+ "Patna, India":[25.59,85.14,330],"Chandigarh, India":[30.73,76.78,330],"Kochi, India":[9.93,76.27,330],
+ "Coimbatore, India":[11.02,76.96,330],"Visakhapatnam, India":[17.69,83.22,330],"Guwahati, India":[26.14,91.74,330],
+ "Bhubaneswar, India":[20.30,85.82,330],"Dehradun, India":[30.32,78.03,330],"Amritsar, India":[31.63,74.87,330],
+ "Varanasi, India":[25.32,82.97,330],"Agra, India":[27.18,78.01,330],"Jodhpur, India":[26.24,73.02,330],
+ "Udaipur, India":[24.58,73.71,330],"Raipur, India":[21.25,81.63,330],"Ranchi, India":[23.34,85.31,330],
+ "Srinagar, India":[34.08,74.80,330],"Shimla, India":[31.10,77.17,330],"Thiruvananthapuram, India":[8.52,76.94,330],
+ "Madurai, India":[9.93,78.12,330],"Vijayawada, India":[16.51,80.65,330],"Gurugram, India":[28.46,77.03,330],"Noida, India":[28.54,77.39,330],
+ "London, UK":[51.51,-0.13,0],"Manchester, UK":[53.48,-2.24,0],"Dublin, Ireland":[53.35,-6.26,0],
+ "Paris, France":[48.85,2.35,60],"Berlin, Germany":[52.52,13.40,60],"Madrid, Spain":[40.42,-3.70,60],
+ "Rome, Italy":[41.90,12.50,60],"Amsterdam, Netherlands":[52.37,4.90,60],"Zurich, Switzerland":[47.37,8.54,60],
+ "Stockholm, Sweden":[59.33,18.07,60],"Moscow, Russia":[55.76,37.62,180],"Istanbul, Turkey":[41.01,28.98,180],
+ "Dubai, UAE":[25.20,55.27,240],"Abu Dhabi, UAE":[24.45,54.38,240],"Doha, Qatar":[25.29,51.53,180],
+ "Riyadh, Saudi Arabia":[24.71,46.68,180],"Tehran, Iran":[35.69,51.39,210],"Karachi, Pakistan":[24.86,67.01,300],
+ "Lahore, Pakistan":[31.55,74.34,300],"Islamabad, Pakistan":[33.68,73.05,300],"Dhaka, Bangladesh":[23.81,90.41,360],
+ "Kathmandu, Nepal":[27.72,85.32,345],"Colombo, Sri Lanka":[6.93,79.86,330],"Bangkok, Thailand":[13.76,100.50,420],
+ "Singapore":[1.35,103.82,480],"Kuala Lumpur, Malaysia":[3.14,101.69,480],"Jakarta, Indonesia":[-6.21,106.85,420],
+ "Hong Kong":[22.32,114.17,480],"Shanghai, China":[31.23,121.47,480],"Beijing, China":[39.90,116.41,480],
+ "Tokyo, Japan":[35.68,139.65,540],"Seoul, South Korea":[37.57,126.98,540],"Sydney, Australia":[-33.87,151.21,600],
+ "Melbourne, Australia":[-37.81,144.96,600],"Auckland, New Zealand":[-36.85,174.76,720],
+ "New York, USA":[40.71,-74.01,-300],"Boston, USA":[42.36,-71.06,-300],"Washington DC, USA":[38.90,-77.04,-300],
+ "Atlanta, USA":[33.75,-84.39,-300],"Miami, USA":[25.76,-80.19,-300],"Toronto, Canada":[43.65,-79.38,-300],
+ "Chicago, USA":[41.88,-87.63,-360],"Houston, USA":[29.76,-95.37,-360],"Dallas, USA":[32.78,-96.80,-360],
+ "Mexico City, Mexico":[19.43,-99.13,-360],"Denver, USA":[39.74,-104.99,-420],"Phoenix, USA":[33.45,-112.07,-420],
+ "Los Angeles, USA":[34.05,-118.24,-480],"San Francisco, USA":[37.77,-122.42,-480],"Seattle, USA":[47.61,-122.33,-480],
+ "Vancouver, Canada":[49.28,-123.12,-480],"Sao Paulo, Brazil":[-23.55,-46.63,-180],"Rio de Janeiro, Brazil":[-22.91,-43.17,-180],
+ "Buenos Aires, Argentina":[-34.60,-58.38,-180],"Lima, Peru":[-12.05,-77.04,-300],"Bogota, Colombia":[4.71,-74.07,-300],
+ "Santiago, Chile":[-33.45,-70.67,-180],"Cairo, Egypt":[30.04,31.24,120],"Johannesburg, South Africa":[-26.20,28.05,120],
+ "Cape Town, South Africa":[-33.92,18.42,120],"Nairobi, Kenya":[-1.29,36.82,180],"Lagos, Nigeria":[6.52,3.38,60],
+ "Casablanca, Morocco":[33.57,-7.59,0],"Accra, Ghana":[5.60,-0.19,0]
+};
+(function(){const dl=document.getElementById('cities');Object.keys(CITIES).forEach(n=>{const o=document.createElement('option');o.value=n;dl.appendChild(o);});})();
+
+/* ===== timezone options ===== */
+const TZ=[
+ [-720,"UTC−12:00"],[-660,"UTC−11:00"],[-600,"UTC−10:00 Hawaii"],[-540,"UTC−09:00 Alaska"],
+ [-480,"UTC−08:00 US Pacific"],[-420,"UTC−07:00 US Mountain"],[-360,"UTC−06:00 US Central"],
+ [-300,"UTC−05:00 US Eastern"],[-240,"UTC−04:00"],[-210,"UTC−03:30 Newfoundland"],[-180,"UTC−03:00 Brazil/Argentina"],
+ [-120,"UTC−02:00"],[-60,"UTC−01:00"],[0,"UTC±00:00 London/Lisbon"],[60,"UTC+01:00 Central Europe"],
+ [120,"UTC+02:00 East Europe"],[180,"UTC+03:00 Moscow/East Africa"],[210,"UTC+03:30 Iran"],[240,"UTC+04:00 Gulf"],
+ [270,"UTC+04:30 Afghanistan"],[300,"UTC+05:00 Pakistan"],[330,"UTC+05:30 India / Sri Lanka"],[345,"UTC+05:45 Nepal"],
+ [360,"UTC+06:00 Bangladesh"],[390,"UTC+06:30 Myanmar"],[420,"UTC+07:00 Thailand/Vietnam"],[480,"UTC+08:00 China/Singapore"],
+ [540,"UTC+09:00 Japan/Korea"],[570,"UTC+09:30 Central Australia"],[600,"UTC+10:00 East Australia"],
+ [660,"UTC+11:00"],[720,"UTC+12:00 New Zealand"],[780,"UTC+13:00"]
+];
+function fillTZ(id){const s=document.getElementById(id);TZ.forEach(([m,l])=>{const o=document.createElement('option');o.value=m;o.textContent=l;if(m===330)o.selected=true;s.appendChild(o);});}
+fillTZ('a-tz');fillTZ('b-tz');
+function hookPlace(pre){const el=document.getElementById(pre+'-place');el.addEventListener('change',()=>{const c=CITIES[el.value.trim()];if(c){document.getElementById(pre+'-tz').value=c[2];}});}
+hookPlace('a');hookPlace('b');
+
+/* ===== astronomy (validated) ===== */
+const RAD=Math.PI/180,DEG=180/Math.PI;
+const rev=x=>{x%=360;return x<0?x+360:x;};
+const sind=x=>Math.sin(x*RAD),cosd=x=>Math.cos(x*RAD),tand=x=>Math.tan(x*RAD);
+const atan2d=(y,x)=>Math.atan2(y,x)*DEG;
+function dayNumber(Y,M,D,UT){return 367*Y-Math.floor(7*(Y+Math.floor((M+9)/12))/4)+Math.floor(275*M/9)+D-730530+UT/24;}
+function gmstDeg(JD){const T=(JD-2451545.0)/36525;return rev(280.46061837+360.98564736629*(JD-2451545.0)+0.000387933*T*T-T*T*T/38710000);}
+function sunPos(d){
+  const w=282.9404+4.70935e-5*d,e=0.016709-1.151e-9*d,M=rev(356.0470+0.9856002585*d);
+  const E=M+e*DEG*sind(M)*(1+e*cosd(M));
+  const x=cosd(E)-e,y=sind(E)*Math.sqrt(1-e*e);
+  return {lon:rev(atan2d(y,x)+w),r:Math.sqrt(x*x+y*y),M,w};
+}
+function moonPos(d,sun){
+  const N=rev(125.1228-0.0529538083*d),i=5.1454,w=rev(318.0634+0.1643573223*d),a=60.2666,e=0.0549,M=rev(115.3654+13.0649929509*d);
+  let E=M+e*DEG*sind(M)*(1+e*cosd(M)),E1;do{E1=E;E=E1-(E1-e*DEG*sind(E1)-M)/(1-e*cosd(E1));}while(Math.abs(E-E1)>0.005);
+  const xv=a*(cosd(E)-e),yv=a*Math.sqrt(1-e*e)*sind(E),v=rev(atan2d(yv,xv)),r=Math.sqrt(xv*xv+yv*yv);
+  const xe=r*(cosd(N)*cosd(v+w)-sind(N)*sind(v+w)*cosd(i)),ye=r*(sind(N)*cosd(v+w)+cosd(N)*sind(v+w)*cosd(i));
+  let lon=rev(atan2d(ye,xe));
+  const Ms=sun.M,Mm=M,Ls=rev(sun.w+sun.M),Lm=rev(N+w+M),Dl=rev(Lm-Ls),F=rev(Lm-N);
+  lon+=-1.274*sind(Mm-2*Dl)+0.658*sind(2*Dl)-0.186*sind(Ms)-0.059*sind(2*Mm-2*Dl)
+       -0.057*sind(Mm-2*Dl+Ms)+0.053*sind(Mm+2*Dl)+0.046*sind(2*Dl-Ms)+0.041*sind(Mm-Ms)
+       -0.035*sind(Dl)-0.031*sind(Mm+Ms)-0.015*sind(2*F-2*Dl)+0.011*sind(Mm-4*Dl);
+  return rev(lon);
+}
+const EL={
+ Mercury:d=>({N:rev(48.3313+3.24587e-5*d),i:7.0047+5e-8*d,w:rev(29.1241+1.01444e-5*d),a:0.387098,e:0.205635+5.59e-10*d,M:rev(168.6562+4.0923344368*d)}),
+ Venus:d=>({N:rev(76.6799+2.4659e-5*d),i:3.3946+2.75e-8*d,w:rev(54.891+1.38374e-5*d),a:0.72333,e:0.006773-1.302e-9*d,M:rev(48.0052+1.6021302244*d)}),
+ Mars:d=>({N:rev(49.5574+2.11081e-5*d),i:1.8497-1.78e-8*d,w:rev(286.5016+2.92961e-5*d),a:1.523688,e:0.093405+2.516e-9*d,M:rev(18.6021+0.5240207766*d)})
+};
+function planet(name,d,sun){
+  const el=EL[name](d),{e,a,N,w,i}=el,M=el.M;
+  let E=M+e*DEG*sind(M)*(1+e*cosd(M)),E1;do{E1=E;E=E1-(E1-e*DEG*sind(E1)-M)/(1-e*cosd(E1));}while(Math.abs(E-E1)>0.005);
+  const xv=a*(cosd(E)-e),yv=a*Math.sqrt(1-e*e)*sind(E),v=rev(atan2d(yv,xv)),r=Math.sqrt(xv*xv+yv*yv);
+  const xh=r*(cosd(N)*cosd(v+w)-sind(N)*sind(v+w)*cosd(i)),yh=r*(sind(N)*cosd(v+w)+cosd(N)*sind(v+w)*cosd(i));
+  return rev(atan2d(yh+sun.r*sind(sun.lon),xh+sun.r*cosd(sun.lon)));
+}
+const SIGNS=["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"];
+const GLY={Aries:"♈",Taurus:"♉",Gemini:"♊",Cancer:"♋",Leo:"♌",Virgo:"♍",Libra:"♎",Scorpio:"♏",Sagittarius:"♐",Capricorn:"♑",Aquarius:"♒",Pisces:"♓"};
+const ELEM={Aries:"Fire",Leo:"Fire",Sagittarius:"Fire",Taurus:"Earth",Virgo:"Earth",Capricorn:"Earth",Gemini:"Air",Libra:"Air",Aquarius:"Air",Cancer:"Water",Scorpio:"Water",Pisces:"Water"};
+const place=l=>({lon:l,sign:SIGNS[Math.floor(l/30)],deg:(l%30)});
+
+function chart(dateStr,timeStr,offMin,lat,lon){
+  const [Y,Mo,D]=dateStr.split('-').map(Number);
+  const [hh,mm]=(timeStr||"12:00").split(':').map(Number);
+  const dt=new Date(Date.UTC(Y,Mo-1,D,hh,mm)-offMin*60000);
+  const d=dayNumber(dt.getUTCFullYear(),dt.getUTCMonth()+1,dt.getUTCDate(),dt.getUTCHours()+dt.getUTCMinutes()/60);
+  const s=sunPos(d);
+  const out={Sun:place(s.lon),Moon:place(moonPos(d,s)),Mercury:place(planet("Mercury",d,s)),Venus:place(planet("Venus",d,s)),Mars:place(planet("Mars",d,s))};
+  if(lat!==null&&lon!==null&&!isNaN(lat)&&!isNaN(lon)){
+    const JD=d+2451543.5,eps=23.4393-3.563e-7*d;
+    const ramc=rev(gmstDeg(JD)+lon);
+    const ascLon=rev(atan2d(cosd(ramc),-(sind(ramc)*cosd(eps)+tand(lat)*sind(eps))));
+    out.ASC=place(ascLon);
+  }
+  return out;
+}
+
+/* ===== synastry ===== */
+const ASPECTS=[
+ {name:"conjunction",angle:0,orb:8,base:8,gl:"☌",kind:"s",tag:"intense"},
+ {name:"sextile",angle:60,orb:5,base:6,gl:"⚹",kind:"s",tag:"harm"},
+ {name:"square",angle:90,orb:6,base:-6,gl:"□",kind:"f",tag:"fric"},
+ {name:"trine",angle:120,orb:7,base:10,gl:"△",kind:"s",tag:"harm"},
+ {name:"opposition",angle:180,orb:7,base:-2,gl:"☍",kind:"f",tag:"mag"}
+];
+const BASE_PAIRS=[
+ {a:"Sun",b:"Moon",w:1.5},{a:"Moon",b:"Sun",w:1.5},
+ {a:"Venus",b:"Mars",w:1.6},{a:"Mars",b:"Venus",w:1.6},
+ {a:"Sun",b:"Venus",w:1.3},{a:"Venus",b:"Sun",w:1.3},
+ {a:"Moon",b:"Venus",w:1.3},{a:"Venus",b:"Moon",w:1.3},
+ {a:"Sun",b:"Sun",w:1.1,same:1},{a:"Moon",b:"Moon",w:1.3,same:1},
+ {a:"Venus",b:"Venus",w:1.1,same:1},{a:"Mars",b:"Mars",w:1.0,same:1},
+ {a:"Mercury",b:"Mercury",w:1.1,same:1},
+ {a:"Moon",b:"Mars",w:1.0},{a:"Mars",b:"Moon",w:1.0},
+ {a:"Sun",b:"Mars",w:1.0},{a:"Mars",b:"Sun",w:1.0}
+];
+const ASC_PAIRS=[
+ {a:"ASC",b:"Sun",w:1.2},{a:"Sun",b:"ASC",w:1.2},
+ {a:"ASC",b:"Moon",w:1.2},{a:"Moon",b:"ASC",w:1.2},
+ {a:"ASC",b:"Venus",w:1.3},{a:"Venus",b:"ASC",w:1.3},
+ {a:"ASC",b:"Mars",w:1.1},{a:"Mars",b:"ASC",w:1.1}
+];
+const MEAN={Sun:"identity & ego",Moon:"emotions",Mercury:"communication",Venus:"love & affection",Mars:"passion & drive",ASC:"self-image & vibe"};
+const SAME={Sun:"core selves",Moon:"emotional worlds",Mercury:"minds",Venus:"love styles",Mars:"drives"};
+const LABEL={Sun:"Sun",Moon:"Moon",Mercury:"Mercury",Venus:"Venus",Mars:"Mars",ASC:"Ascendant"};
+const VERB={conjunction:"fuse and amplify — magnetic, but a lot of the same energy at once",sextile:"click with easy, friendly chemistry",square:"grind against each other, creating recurring friction",trine:"flow together effortlessly and feel naturally supportive",opposition:"pull like magnets — strong draw with a built-in push-and-pull"};
+
+function sep(a,b){let x=Math.abs(a-b)%360;return x>180?360-x:x;}
+function findAspect(a,b){let best=null;const s=sep(a,b);for(const A of ASPECTS){const o=Math.abs(s-A.angle);if(o<=A.orb&&(!best||o<best.orb_used)){best={...A,orb_used:o};}}return best;}
+
+document.getElementById('go').addEventListener('click',()=>{
+  const err=document.getElementById('err');err.textContent='';
+  const ad=document.getElementById('a-date').value,bd=document.getElementById('b-date').value;
+  if(!ad||!bd){err.textContent='Please enter a birth date for both partners ✦';return;}
+  const nameA=(document.getElementById('a-name').value.trim())||"Partner A";
+  const nameB=(document.getElementById('b-name').value.trim())||"Partner B";
+
+  function place_of(pre){
+    const latM=document.getElementById(pre+'-lat').value, lonM=document.getElementById(pre+'-lon').value;
+    if(latM!==''&&lonM!==''){return [parseFloat(latM),parseFloat(lonM)];}
+    const c=CITIES[document.getElementById(pre+'-place').value.trim()];
+    if(c){return [c[0],c[1]];}
+    return [null,null];
+  }
+  const [aLat,aLon]=place_of('a'),[bLat,bLon]=place_of('b');
+  const cA=chart(ad,document.getElementById('a-time').value,+document.getElementById('a-tz').value,aLat,aLon);
+  const cB=chart(bd,document.getElementById('b-time').value,+document.getElementById('b-tz').value,bLat,bLon);
+  const haveASC=!!(cA.ASC&&cB.ASC);
+  const PAIRS=haveASC?BASE_PAIRS.concat(ASC_PAIRS):BASE_PAIRS;
+
+  let raw=0;const sparks=[],flags=[];let venusMars=[];
+  PAIRS.forEach(p=>{
+    const asp=findAspect(cA[p.a].lon,cB[p.b].lon);
+    if(!asp)return;
+    raw+=asp.base*p.w;
+    let nm,desc;
+    if(p.same){nm=`${nameA}'s & ${nameB}'s ${SAME[p.a].replace(/^\w/,c=>c.toUpperCase())} — ${asp.name}`;desc=`Your ${SAME[p.a]} ${VERB[asp.name]}.`;}
+    else{nm=`${nameA}'s ${LABEL[p.a]} ${asp.name} ${nameB}'s ${LABEL[p.b]}`;desc=`${nameA}'s ${LABEL[p.a]} (${MEAN[p.a]}) and ${nameB}'s ${LABEL[p.b]} (${MEAN[p.b]}) ${VERB[asp.name]}.`;}
+    (asp.kind==="s"?sparks:flags).push({nm,desc,gl:asp.gl,tag:asp.tag});
+    if((p.a==="Venus"&&p.b==="Mars")||(p.a==="Mars"&&p.b==="Venus"))venusMars.push({asp});
+  });
+
+  const eA=ELEM[cA.Sun.sign],eB=ELEM[cB.Sun.sign];
+  const harmoniousE=(x,y)=>{const f=["Fire","Air"],e=["Earth","Water"];return x===y||(f.includes(x)&&f.includes(y))||(e.includes(x)&&e.includes(y));};
+  if(harmoniousE(eA,eB))raw+=4;else raw-=3;
+  const score=Math.max(17,Math.min(97,Math.round(60+raw*0.72)));
+
+  const tiers=[
+   {min:85,t:"Written in the Stars",s:"A rare, deeply resonant connection. The easy aspects far outweigh the friction — the kind of chemistry that feels like it was always meant to be. Just don't let 'easy' make you lazy."},
+   {min:70,t:"A Strong Cosmic Pull",s:"Powerful attraction and plenty of natural harmony. Real magnetism here, with enough friction to keep it interesting. A genuinely promising match."},
+   {min:55,t:"Promising, With Work",s:"Real sparks alongside some genuine growth edges. This connection can absolutely thrive — but it rewards honesty, patience and working the friction points below."},
+   {min:40,t:"Mixed Signals",s:"Attraction and tension in roughly equal measure. Nothing here is a dealbreaker, but the red flags below are real patterns to talk through early and often."},
+   {min:0, t:"Challenging Terrain",s:"The charts pull in different directions. That doesn't mean 'no' — challenging synastry can build the strongest couples — but it asks for serious communication and effort. Love here is a choice, not a coast."}
+  ];
+  const tier=tiers.find(t=>score>=t.min);
+
+  let chemTxt;
+  if(venusMars.length===0){chemTxt=`Neither partner's Venus closely aspects the other's Mars, so the raw physical spark is subtle rather than instant — a connection that tends to <b>build through closeness</b> rather than detonate on sight.`;}
+  else{
+    const conj=venusMars.some(v=>v.asp.name==="conjunction");
+    const harm=venusMars.some(v=>v.asp.kind==="s"&&v.asp.name!=="conjunction");
+    const hard=venusMars.some(v=>v.asp.name==="square"||v.asp.name==="opposition");
+    if(conj)chemTxt=`A <b>Venus–Mars conjunction</b> links your charts — the single strongest marker of physical and romantic chemistry in astrology. Expect powerful, immediate magnetism. The work is keeping that heat from burning out or tipping into possessiveness.`;
+    else if(harm)chemTxt=`A flowing <b>Venus–Mars aspect</b> connects you — affection and desire move in the same direction. Attraction feels natural and reciprocated, neither forced nor combustible. A lovely foundation for lasting passion.`;
+    else if(hard)chemTxt=`Your <b>Venus and Mars sit at a hard angle</b> — intense attraction laced with friction. You want each other, but how you give love and how you pursue it can clash. Passionate, sometimes combustible; thrilling if you channel the heat instead of fighting with it.`;
+    else chemTxt=`There's a real <b>Venus–Mars link</b> between you, adding genuine physical pull to the connection.`;
+  }
+  if(haveASC){chemTxt+=` <span style="color:var(--muted)">With both Rising signs included, contacts to each other's Ascendant show how instantly "seen" you feel on first meeting.</span>`;}
+  else{chemTxt+=` <span style="color:var(--muted)">Add a place of birth for both to factor in Rising-sign chemistry.</span>`;}
+
+  const renderList=(arr,cls)=>arr.length?arr.map(i=>`<div class="asp ${cls}"><div class="gl">${i.gl}</div><div class="body"><div class="nm">${i.nm}<span class="tag ${i.tag}">${i.tag==="harm"?"Harmonious":i.tag==="intense"?"Intense":i.tag==="mag"?"Magnetic":"Friction"}</span></div><p>${i.desc}</p></div></div>`).join(''):`<div class="none">— none found —</div>`;
+
+  const chartTable=(c,name,cls)=>{
+    const rise=c.ASC?`<div class="prow rise"><span class="pl">Rising ↑</span><span class="sg">${GLY[c.ASC.sign]} ${c.ASC.sign} ${c.ASC.deg.toFixed(0)}°</span></div>`:`<div class="prow rise"><span class="pl">Rising ↑</span><span class="sg" style="color:var(--muted);font-weight:400">add place of birth</span></div>`;
+    return `<div class="chart ${cls}"><h4><span class="dot"></span>${name}</h4>${rise}${["Sun","Moon","Mercury","Venus","Mars"].map(k=>`<div class="prow"><span class="pl">${k}</span><span class="sg">${GLY[c[k].sign]} ${c[k].sign} ${c[k].deg.toFixed(0)}°</span></div>`).join('')}</div>`;
+  };
+
+  const circ=2*Math.PI*72,dash=circ*score/100;
+  const out=document.getElementById('out');
+  out.innerHTML=`
+   <div class="score-card">
+     <div class="vsline"><span class="nameA">${nameA}</span><span class="amp">&</span><span class="nameB">${nameB}</span></div>
+     <div class="ring">
+       <svg width="170" height="170" viewBox="0 0 170 170">
+         <circle cx="85" cy="85" r="72" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="11"/>
+         <circle id="arc" cx="85" cy="85" r="72" fill="none" stroke="url(#g)" stroke-width="11" stroke-linecap="round" stroke-dasharray="0 ${circ}"/>
+         <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7aa8ff"/><stop offset="1" stop-color="#ff9ad1"/></linearGradient></defs>
+       </svg>
+       <div class="pct"><b id="pctNum">0</b><span>Compatibility</span></div>
+     </div>
+     <div class="tier">"${tier.t}"</div>
+     <p class="ssum">${tier.s}</p>
+   </div>
+
+   <div class="sect-title chem">The Chemistry Check</div><div class="sect-rule"></div>
+   <div class="chem"><p>${chemTxt}</p><p style="font-size:.9rem;color:var(--muted)">Sun elements: <b style="color:var(--pa)">${eA}</b> & <b style="color:var(--pb)">${eB}</b> — ${harmoniousE(eA,eB)?"naturally compatible elements that understand each other's rhythm.":"contrasting elements; you operate at different speeds, which is exciting but needs translation."}</p></div>
+
+   <div class="sect-title spark">✦ Sparks & Strengths</div><div class="sect-rule"></div>
+   ${renderList(sparks,'s')}
+
+   <div class="sect-title flag">🚩 Red Flags & Friction</div><div class="sect-rule"></div>
+   ${renderList(flags,'f')}
+
+   <div class="sect-title">The Two Charts</div><div class="sect-rule"></div>
+   <div class="charts">${chartTable(cA,nameA,'A')}${chartTable(cB,nameB,'B')}</div>
+  `;
+  out.classList.add('show');
+  out.scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(()=>{const arc=document.getElementById('arc');arc.style.transition='stroke-dasharray 1.2s cubic-bezier(.3,1,.4,1)';arc.setAttribute('stroke-dasharray',`${dash} ${circ}`);
+    let n=0;const t=setInterval(()=>{n+=2;if(n>=score){n=score;clearInterval(t);}document.getElementById('pctNum').textContent=n;},18);},150);
+});
+</script>
+</body>
+</html>
