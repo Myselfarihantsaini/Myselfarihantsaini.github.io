@@ -70,6 +70,21 @@
   .tinynote{font-size:.72rem;color:var(--muted);margin-top:5px;opacity:.8}
   details{margin-top:6px} summary{font-size:.74rem;color:var(--pa);cursor:pointer;letter-spacing:.04em} .A summary{color:var(--pa)} .B summary{color:var(--pb)}
   .coords{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:9px}
+  .loc-row{display:grid;grid-template-columns:1fr auto;gap:8px}
+  .loc-find{border:1px solid var(--line);background:rgba(231,200,115,.08);color:var(--gold);border-radius:10px;padding:0 13px;font-family:'Karla';font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background .2s,border-color .2s,transform .2s}
+  .loc-find:hover{background:rgba(231,200,115,.14);border-color:rgba(231,200,115,.45);transform:translateY(-1px)}
+  .loc-find:disabled{opacity:.55;cursor:wait;transform:none}
+  .loc-results{display:none;margin-top:9px;border:1px solid var(--cl);border-radius:12px;overflow:hidden;background:rgba(10,8,20,.92);box-shadow:0 14px 34px rgba(0,0,0,.22)}
+  .loc-results.show{display:block}
+  .loc-result{width:100%;display:block;text-align:left;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.06);color:var(--ink);padding:10px 12px;font-family:'Karla';cursor:pointer}
+  .loc-result:last-child{border-bottom:0}
+  .loc-result:hover{background:rgba(231,200,115,.08)}
+  .loc-result strong{display:block;font-size:.92rem}
+  .loc-result span{display:block;color:var(--muted);font-size:.74rem;margin-top:2px}
+  .loc-status{font-size:.72rem;color:var(--muted);margin-top:7px;min-height:17px}
+  .loc-status.ok{color:var(--green-soft)}
+  .loc-status.bad{color:var(--rose-soft)}
+  @media(max-width:520px){.loc-row{grid-template-columns:1fr}.loc-find{min-height:42px}}
 
   .btn{display:block;width:100%;max-width:420px;margin:32px auto 0;background:linear-gradient(90deg,var(--pa),var(--pb));border:none;color:#10081a;font-family:'Cormorant Garamond';font-weight:600;font-size:1.4rem;letter-spacing:.5px;padding:16px;border-radius:13px;cursor:pointer;transition:transform .15s,box-shadow .25s;box-shadow:0 10px 32px rgba(255,154,209,.28)}
   .btn:hover{transform:translateY(-2px);box-shadow:0 14px 42px rgba(122,168,255,.4)}
@@ -161,7 +176,7 @@
       <div class="field"><label>Name (optional)</label><input id="a-name" type="text" placeholder="e.g. Aria"></div>
       <div class="field"><label>Birth date</label><input id="a-date" type="date"></div>
       <div class="field"><label>Birth time</label><input id="a-time" type="time" value="12:00"><div class="tinynote">Exact time matters most for the Rising sign — it changes every ~2 hours.</div></div>
-      <div class="field"><label>Place of birth</label><input id="a-place" list="cities" placeholder="Start typing a city…" autocomplete="off">
+      <div class="field"><label>Place of birth</label><div class="loc-row"><input id="a-place" list="cities" placeholder="Search city, town, or postal code" autocomplete="off"><button class="loc-find" type="button" data-pre="a">Find Location</button></div><div class="loc-results" id="a-loc-results"></div><div class="loc-status" id="a-loc-status"></div>
         <details><summary>Not listed? Enter coordinates →</summary><div class="coords"><input id="a-lat" type="number" step="0.01" placeholder="Latitude"><input id="a-lon" type="number" step="0.01" placeholder="Longitude"></div><div class="tinynote">North & East positive; South & West negative.</div></details>
       </div>
       <div class="field"><label>Timezone at birth</label><select id="a-tz"></select><div class="tinynote">Auto-set from city; adjust if born during daylight-saving time.</div></div>
@@ -171,7 +186,7 @@
       <div class="field"><label>Name (optional)</label><input id="b-name" type="text" placeholder="e.g. Kai"></div>
       <div class="field"><label>Birth date</label><input id="b-date" type="date"></div>
       <div class="field"><label>Birth time</label><input id="b-time" type="time" value="12:00"><div class="tinynote">Exact time matters most for the Rising sign — it changes every ~2 hours.</div></div>
-      <div class="field"><label>Place of birth</label><input id="b-place" list="cities" placeholder="Start typing a city…" autocomplete="off">
+      <div class="field"><label>Place of birth</label><div class="loc-row"><input id="b-place" list="cities" placeholder="Search city, town, or postal code" autocomplete="off"><button class="loc-find" type="button" data-pre="b">Find Location</button></div><div class="loc-results" id="b-loc-results"></div><div class="loc-status" id="b-loc-status"></div>
         <details><summary>Not listed? Enter coordinates →</summary><div class="coords"><input id="b-lat" type="number" step="0.01" placeholder="Latitude"><input id="b-lon" type="number" step="0.01" placeholder="Longitude"></div><div class="tinynote">North & East positive; South & West negative.</div></details>
       </div>
       <div class="field"><label>Timezone at birth</label><select id="b-tz"></select><div class="tinynote">Auto-set from city; adjust if born during daylight-saving time.</div></div>
@@ -245,7 +260,113 @@ const TZ=[
 ];
 function fillTZ(id){const s=document.getElementById(id);TZ.forEach(([m,l])=>{const o=document.createElement('option');o.value=m;o.textContent=l;if(m===330)o.selected=true;s.appendChild(o);});}
 fillTZ('a-tz');fillTZ('b-tz');
-function hookPlace(pre){const el=document.getElementById(pre+'-place');el.addEventListener('change',()=>{const c=CITIES[el.value.trim()];if(c){document.getElementById(pre+'-tz').value=c[2];}});}
+function setStatus(pre,msg,cls=''){
+  const el=document.getElementById(pre+'-loc-status');
+  if(!el)return;
+  el.textContent=msg;
+  el.className='loc-status '+cls;
+}
+function syncTzSelect(pre,offset,label){
+  const sel=document.getElementById(pre+'-tz');
+  const value=String(offset);
+  if(![...sel.options].some(o=>o.value===value)){
+    const sign=offset>=0?'+':'-';
+    const abs=Math.abs(offset),hh=String(Math.floor(abs/60)).padStart(2,'0'),mm=String(abs%60).padStart(2,'0');
+    const o=document.createElement('option');
+    o.value=value;
+    o.textContent=`UTC${sign}${hh}:${mm}${label?' '+label:''}`;
+    sel.appendChild(o);
+  }
+  sel.value=value;
+}
+function offsetFromZone(tzid,pre){
+  try{
+    const date=document.getElementById(pre+'-date').value;
+    const time=document.getElementById(pre+'-time').value||'12:00';
+    const now=new Date();
+    const [Y,M,D]=date?date.split('-').map(Number):[now.getUTCFullYear(),now.getUTCMonth()+1,now.getUTCDate()];
+    const [h,m]=time.split(':').map(Number);
+    const probe=new Date(Date.UTC(Y,M-1,D,h||0,m||0));
+    const parts=new Intl.DateTimeFormat('en-CA',{timeZone:tzid,hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}).formatToParts(probe);
+    const get=t=>parts.find(p=>p.type===t)?.value;
+    let hour=Number(get('hour'));
+    const asUTC=Date.UTC(Number(get('year')),Number(get('month'))-1,Number(get('day')),hour===24?0:hour,Number(get('minute')));
+    return Math.round((asUTC-probe.getTime())/60000);
+  }catch(e){return null;}
+}
+function applyLocation(pre,loc){
+  const country=loc.country_code?loc.country_code.toUpperCase():loc.country;
+  const admin=[loc.admin1,loc.admin2].filter(Boolean).join(', ');
+  const label=[loc.name,admin,country].filter(Boolean).join(', ');
+  document.getElementById(pre+'-place').value=label;
+  document.getElementById(pre+'-lat').value=Number(loc.latitude).toFixed(4);
+  document.getElementById(pre+'-lon').value=Number(loc.longitude).toFixed(4);
+  document.getElementById(pre+'-place').dataset.tzid=loc.timezone||'';
+  const offset=loc.timezone?offsetFromZone(loc.timezone,pre):null;
+  if(offset!==null){syncTzSelect(pre,offset,loc.timezone);setStatus(pre,`Selected ${label}. Coordinates and timezone filled.`, 'ok');}
+  else{setStatus(pre,`Selected ${label}. Coordinates filled; please confirm timezone.`, 'ok');}
+  document.getElementById(pre+'-loc-results').classList.remove('show');
+}
+function renderLocationResults(pre,results){
+  const box=document.getElementById(pre+'-loc-results');
+  box.innerHTML='';
+  if(!results.length){box.classList.remove('show');setStatus(pre,'No location found. Try a larger nearby city or enter coordinates.', 'bad');return;}
+  results.slice(0,6).forEach(loc=>{
+    const b=document.createElement('button');
+    b.type='button';
+    b.className='loc-result';
+    const admin=[loc.admin1,loc.admin2].filter(Boolean).join(', ');
+    const country=loc.country_code?loc.country_code.toUpperCase():loc.country;
+    b.innerHTML=`<strong>${loc.name}${country?', '+country:''}</strong><span>${[admin,`${Number(loc.latitude).toFixed(3)}, ${Number(loc.longitude).toFixed(3)}`,loc.timezone].filter(Boolean).join(' · ')}</span>`;
+    b.addEventListener('click',()=>applyLocation(pre,loc));
+    box.appendChild(b);
+  });
+  box.classList.add('show');
+  setStatus(pre,'Choose the correct birthplace from the results.');
+}
+async function findLocation(pre){
+  const input=document.getElementById(pre+'-place');
+  const q=input.value.trim();
+  if(q.length<2){setStatus(pre,'Type at least 2 letters of a city, town, or postal code.', 'bad');return;}
+  const btn=document.querySelector(`.loc-find[data-pre="${pre}"]`);
+  btn.disabled=true;
+  btn.textContent='Searching';
+  setStatus(pre,'Searching locations...');
+  try{
+    const res=await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=8&language=en&format=json`);
+    if(!res.ok)throw new Error('location search failed');
+    const data=await res.json();
+    renderLocationResults(pre,data.results||[]);
+  }catch(e){
+    setStatus(pre,'Location search is unavailable right now. Use the listed city or manual coordinates.', 'bad');
+  }finally{
+    btn.disabled=false;
+    btn.textContent='Find Location';
+  }
+}
+function refreshSelectedTimezone(pre){
+  const tzid=document.getElementById(pre+'-place').dataset.tzid;
+  if(!tzid)return;
+  const offset=offsetFromZone(tzid,pre);
+  if(offset!==null)syncTzSelect(pre,offset,tzid);
+}
+function hookPlace(pre){
+  const el=document.getElementById(pre+'-place');
+  el.addEventListener('change',()=>{
+    const c=CITIES[el.value.trim()];
+    if(c){
+      document.getElementById(pre+'-lat').value=c[0];
+      document.getElementById(pre+'-lon').value=c[1];
+      document.getElementById(pre+'-tz').value=c[2];
+      delete el.dataset.tzid;
+      setStatus(pre,'Built-in city selected. Coordinates and timezone filled.', 'ok');
+    }
+  });
+  document.querySelector(`.loc-find[data-pre="${pre}"]`).addEventListener('click',()=>findLocation(pre));
+  el.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();findLocation(pre);}});
+  document.getElementById(pre+'-date').addEventListener('change',()=>refreshSelectedTimezone(pre));
+  document.getElementById(pre+'-time').addEventListener('change',()=>refreshSelectedTimezone(pre));
+}
 hookPlace('a');hookPlace('b');
 
 /* ===== astronomy (validated) ===== */
