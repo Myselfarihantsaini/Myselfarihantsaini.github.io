@@ -90,6 +90,14 @@
   .btn:hover{transform:translateY(-2px);box-shadow:0 14px 42px rgba(122,168,255,.4)}
   .err{color:var(--rose-soft);text-align:center;margin-top:14px;font-size:.9rem;min-height:18px}
 
+  .zodiac{max-width:520px;margin:30px auto 0;text-align:center}
+  .ztitle{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:11px}
+  .ztoggle{display:inline-flex;background:rgba(10,8,20,.7);border:1px solid var(--cl);border-radius:12px;padding:4px;gap:4px}
+  .zopt{background:transparent;border:none;color:var(--muted);font-family:'Karla';font-size:.92rem;font-weight:600;padding:10px 18px;border-radius:9px;cursor:pointer;transition:all .2s}
+  .zopt.active{background:linear-gradient(90deg,rgba(122,168,255,.9),rgba(255,154,209,.9));color:#10081a}
+  .znote{font-size:.78rem;color:var(--muted);margin-top:12px;line-height:1.6}
+  .znote b{color:var(--gold)}
+
   #out{margin:46px 0 20px;display:none}
   #out.show{display:block;animation:rise .6s ease}
   @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1}}
@@ -194,12 +202,21 @@
   </div>
   <datalist id="cities"></datalist>
 
+  <div class="zodiac">
+    <div class="ztitle">Zodiac System</div>
+    <div class="ztoggle">
+      <button class="zopt active" type="button" data-z="trop">Western · Tropical</button>
+      <button class="zopt" type="button" data-z="sid">Vedic · Sidereal (Lahiri)</button>
+    </div>
+    <div class="znote" id="znote">Western/Tropical is the global default. <b>Choose Vedic · Sidereal to match an Indian kundli</b> — it applies the Lahiri ayanamsa, shifting every placement back by about 24 degrees, usually about one sign.</div>
+  </div>
+
   <button class="btn" id="go">Read Our Compatibility ✦</button>
   <div class="err" id="err"></div>
 
   <div id="out"></div>
 
-  <p class="disc">✦ <b>Positions are computed astronomically</b> — Sun, Moon, Mercury, Venus, Mars and the Rising sign (Ascendant). Planet signs depend only on date & time; the <b>Rising sign also needs exact time + place</b>, so it's the most sensitive to a guessed birth time. Accurate to the zodiac sign in almost all cases; cusp placements may vary. This reads planet & Ascendant aspects, not full house overlays. <b>For entertainment & reflection</b> — the stars describe tendencies, never destiny.</p>
+  <p class="disc">✦ <b>Positions are computed astronomically</b> — Sun, Moon, Mercury, Venus, Mars and the Rising sign. Pick <b>Tropical</b> for Western charts or <b>Sidereal (Lahiri)</b> to match an Indian/Vedic kundli — the two zodiacs differ by about 24 degrees, so the same birth gives different signs in each. The <b>Rising sign needs exact time + place</b> and is the most sensitive to a guessed birth time. Compatibility aspects are angular and read the same in both systems; only the sign labels change. <b>For entertainment & reflection</b> — the stars describe tendencies, never destiny.</p>
   <footer>Two charts, one conversation. The rest is up to you.</footer>
 </div>
 
@@ -369,6 +386,13 @@ function hookPlace(pre){
 }
 hookPlace('a');hookPlace('b');
 
+let zodiacMode='trop';
+document.querySelectorAll('.zopt').forEach(btn=>btn.addEventListener('click',()=>{
+  document.querySelectorAll('.zopt').forEach(opt=>opt.classList.remove('active'));
+  btn.classList.add('active');
+  zodiacMode=btn.dataset.z;
+}));
+
 /* ===== astronomy (validated) ===== */
 const RAD=Math.PI/180,DEG=180/Math.PI;
 const rev=x=>{x%=360;return x<0?x+360:x;};
@@ -376,6 +400,7 @@ const sind=x=>Math.sin(x*RAD),cosd=x=>Math.cos(x*RAD),tand=x=>Math.tan(x*RAD);
 const atan2d=(y,x)=>Math.atan2(y,x)*DEG;
 function dayNumber(Y,M,D,UT){return 367*Y-Math.floor(7*(Y+Math.floor((M+9)/12))/4)+Math.floor(275*M/9)+D-730530+UT/24;}
 function gmstDeg(JD){const T=(JD-2451545.0)/36525;return rev(280.46061837+360.98564736629*(JD-2451545.0)+0.000387933*T*T-T*T*T/38710000);}
+function ayanamsa(JD){const years=(JD-2451545.0)/365.25;return 23.853+0.0139694*years;} /* Lahiri / Chitrapaksha approximation */
 function sunPos(d){
   const w=282.9404+4.70935e-5*d,e=0.016709-1.151e-9*d,M=rev(356.0470+0.9856002585*d);
   const E=M+e*DEG*sind(M)*(1+e*cosd(M));
@@ -411,18 +436,21 @@ const GLY={Aries:"♈",Taurus:"♉",Gemini:"♊",Cancer:"♋",Leo:"♌",Virgo:"�
 const ELEM={Aries:"Fire",Leo:"Fire",Sagittarius:"Fire",Taurus:"Earth",Virgo:"Earth",Capricorn:"Earth",Gemini:"Air",Libra:"Air",Aquarius:"Air",Cancer:"Water",Scorpio:"Water",Pisces:"Water"};
 const place=l=>({lon:l,sign:SIGNS[Math.floor(l/30)],deg:(l%30)});
 
-function chart(dateStr,timeStr,offMin,lat,lon){
+function chart(dateStr,timeStr,offMin,lat,lon,sidereal){
   const [Y,Mo,D]=dateStr.split('-').map(Number);
   const [hh,mm]=(timeStr||"12:00").split(':').map(Number);
   const dt=new Date(Date.UTC(Y,Mo-1,D,hh,mm)-offMin*60000);
   const d=dayNumber(dt.getUTCFullYear(),dt.getUTCMonth()+1,dt.getUTCDate(),dt.getUTCHours()+dt.getUTCMinutes()/60);
+  const JD=d+2451543.5;
+  const ay=sidereal?ayanamsa(JD):0;
+  const adj=l=>place(rev(l-ay));
   const s=sunPos(d);
-  const out={Sun:place(s.lon),Moon:place(moonPos(d,s)),Mercury:place(planet("Mercury",d,s)),Venus:place(planet("Venus",d,s)),Mars:place(planet("Mars",d,s))};
+  const out={Sun:adj(s.lon),Moon:adj(moonPos(d,s)),Mercury:adj(planet("Mercury",d,s)),Venus:adj(planet("Venus",d,s)),Mars:adj(planet("Mars",d,s))};
   if(lat!==null&&lon!==null&&!isNaN(lat)&&!isNaN(lon)){
-    const JD=d+2451543.5,eps=23.4393-3.563e-7*d;
+    const eps=23.4393-3.563e-7*d;
     const ramc=rev(gmstDeg(JD)+lon);
     const ascLon=rev(atan2d(cosd(ramc),-(sind(ramc)*cosd(eps)+tand(lat)*sind(eps))));
-    out.ASC=place(ascLon);
+    out.ASC=adj(ascLon);
   }
   return out;
 }
@@ -475,8 +503,9 @@ document.getElementById('go').addEventListener('click',()=>{
     return [null,null];
   }
   const [aLat,aLon]=place_of('a'),[bLat,bLon]=place_of('b');
-  const cA=chart(ad,document.getElementById('a-time').value,+document.getElementById('a-tz').value,aLat,aLon);
-  const cB=chart(bd,document.getElementById('b-time').value,+document.getElementById('b-tz').value,bLat,bLon);
+  const sid=(zodiacMode==='sid');
+  const cA=chart(ad,document.getElementById('a-time').value,+document.getElementById('a-tz').value,aLat,aLon,sid);
+  const cB=chart(bd,document.getElementById('b-time').value,+document.getElementById('b-tz').value,bLat,bLon,sid);
   const haveASC=!!(cA.ASC&&cB.ASC);
   const PAIRS=haveASC?BASE_PAIRS.concat(ASC_PAIRS):BASE_PAIRS;
 
@@ -554,6 +583,7 @@ document.getElementById('go').addEventListener('click',()=>{
    ${renderList(flags,'f')}
 
    <div class="sect-title">The Two Charts</div><div class="sect-rule"></div>
+   <p style="text-align:center;color:var(--muted);font-size:.82rem;margin:-14px 0 18px">Showing <b style="color:var(--gold)">${sid?'Vedic · Sidereal (Lahiri)':'Western · Tropical'}</b> positions</p>
    <div class="charts">${chartTable(cA,nameA,'A')}${chartTable(cB,nameB,'B')}</div>
   `;
   out.classList.add('show');
