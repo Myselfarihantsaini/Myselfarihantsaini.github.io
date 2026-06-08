@@ -45,7 +45,7 @@
   .site-social{gap:10px}
   .site-social a{border:1px solid var(--line);border-radius:999px;padding:8px 13px;font-size:.84rem}
   .site-social a:hover{color:var(--gold);border-color:rgba(231,200,115,.45);background:rgba(231,200,115,.08);transform:translateY(-2px)}
-  @media(max-width:900px){.site-nav{min-height:74px;padding:14px 18px}.site-logo{font-size:1.55rem}.site-links,.site-social{display:none}}
+  @media(max-width:900px){.site-nav{align-items:flex-start;flex-direction:column;min-height:74px;padding:14px 18px}.site-logo{font-size:1.55rem}.site-social{display:none}.site-links{display:flex;gap:8px;flex-wrap:wrap}.site-links a{display:none;border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:.78rem}.site-links a.tool-link{display:inline-flex}}
   .wrap{position:relative;z-index:2;max-width:920px;margin:0 auto;padding:0 22px}
   header{text-align:center;padding:74px 0 26px}
   .eyebrow{letter-spacing:.42em;text-transform:uppercase;font-size:.7rem;color:var(--gold);font-weight:600;margin-bottom:18px}
@@ -160,8 +160,9 @@
     <a href="../../index.html#reviews">Reviews</a>
     <a href="../../articles.html">Articles</a>
     <a href="https://shambhavaa.blog" target="_blank" rel="noopener noreferrer">Blog</a>
-    <a href="../janma-finder/">Janma Finder</a>
-    <a href="./">Compatibility</a>
+    <a class="tool-link" href="../janma-finder/">Janma Finder</a>
+    <a class="tool-link" href="./">Compatibility</a>
+    <a class="tool-link" href="../third-chart/">Third Chart</a>
     <a href="../../faq.html">FAQ</a>
   </div>
   <div class="site-social" aria-label="Social links">

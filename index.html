@@ -155,6 +155,7 @@
     color: var(--gold); border-color: rgba(201,168,106,0.5);
     background: rgba(201,168,106,0.08); transform: translateY(-2px);
   }
+  .sh-mobile-tools { display: none; }
   .sh-nav-cta {
     background: var(--green); color: #fff; border: none;
     padding: 8px 16px; border-radius: 20px; font-size: 12px;
@@ -376,6 +377,19 @@
     .sh-book-mini { padding: 9px 12px; font-size: 12px; }
     .sh-social-links.nav-social { display: none; }
     .sh-nav-links { display: none; }
+    .sh-mobile-tools {
+      position: sticky; top: 74px; z-index: 49;
+      display: flex; gap: 8px; overflow-x: auto;
+      padding: 10px 18px; border-bottom: 1px solid var(--gold-border);
+      background: rgba(11,16,32,0.94); backdrop-filter: blur(14px);
+      scrollbar-width: none;
+    }
+    .sh-mobile-tools::-webkit-scrollbar { display: none; }
+    .sh-mobile-tools a {
+      flex: 0 0 auto; color: var(--gold); border: 1px solid var(--gold-border);
+      border-radius: 999px; padding: 8px 12px; font-size: 13px;
+      background: rgba(201,168,106,0.08);
+    }
     .sh-hero { padding: 56px 18px 40px; }
     .sh-hero-title { font-size: 40px; }
     .sh-hero-sub { font-size: 17px; }
@@ -417,6 +431,11 @@
       <a href="https://www.tumblr.com/cosmicdecoderr" target="_blank" rel="noopener noreferrer">Tumblr</a>
     </div>
   </nav>
+  <div class="sh-mobile-tools" aria-label="Mobile tool links">
+    <a href="tools/janma-finder/">Janma Finder</a>
+    <a href="tools/compatibility/">Compatibility</a>
+    <a href="tools/third-chart/">Third Chart</a>
+  </div>
 
   <!-- HERO -->
   <section class="sh-hero">

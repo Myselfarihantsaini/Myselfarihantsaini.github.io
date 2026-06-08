@@ -42,6 +42,12 @@
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
     mix-blend-mode:multiply;
   }
+  .tool-nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px;border-bottom:1px solid var(--line);background:rgba(244,236,220,.88);backdrop-filter:blur(12px)}
+  .tool-logo{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--ink);text-decoration:none;white-space:nowrap}
+  .tool-links{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  .tool-links a{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--line);padding:8px 10px;text-decoration:none;background:rgba(255,255,255,.34);transition:.2s}
+  .tool-links a:hover{color:var(--gold);border-color:var(--gold);background:rgba(176,132,22,.07)}
+  @media(max-width:680px){.tool-nav{align-items:flex-start;flex-direction:column;padding:13px 18px}.tool-logo{font-size:1.45rem}.tool-links{justify-content:flex-start}.tool-links a{font-size:.58rem;padding:7px 9px}}
   .wrap{max-width:1180px;margin:0 auto;padding:0 24px 120px;position:relative;z-index:1}
 
   /* ---------- Masthead ---------- */
@@ -242,6 +248,14 @@
 </style>
 </head>
 <body>
+<nav class="tool-nav" aria-label="Tool navigation">
+  <a class="tool-logo" href="../../">Shambhavaa</a>
+  <div class="tool-links">
+    <a href="./">Janma Finder</a>
+    <a href="../compatibility/">Compatibility</a>
+    <a href="../third-chart/">Third Chart</a>
+  </div>
+</nav>
 <div class="wrap">
 
   <header class="masthead">
