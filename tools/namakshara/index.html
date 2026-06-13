@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-9194178610009666">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9194178610009666" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Namakshara — Advanced Vedic Name Correction</title>
+<meta name="description" content="Use Namakshara, Shambhavaa's Vedic name correction tool, to analyse a name through nakshatra syllables, tara bala, rashi placement, Chaldean numbers, and consultation guidance.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#1d0e15">
+<link rel="canonical" href="https://shambhavaa.com/tools/namakshara/">
+<link rel="icon" href="../../favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="../../assets/logo-small.webp">
+<meta property="og:title" content="Namakshara | Vedic Name Correction Tool">
+<meta property="og:description" content="Analyse name spelling, nakshatra syllables, tara bala, rashi harmony, and Chaldean number correction with Shambhavaa.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shambhavaa.com/tools/namakshara/">
+<meta property="og:image" content="https://shambhavaa.com/assets/om_bg.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1d0e15; --surface:#2a1620; --surface2:#341c28; --line:#4a2a38;
+  --ivory:#f3e6cf; --ivory-dim:#c9b69a;
+  --gold:#e0a93e; --sindoor:#e4572e;
+  --friend:#6db883; --neutral:#d9a441; --enemy:#e06a50;
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ivory);font-family:'Karla',sans-serif;font-size:16px;line-height:1.55;min-height:100vh}
+.tool-nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px;border-bottom:1px solid var(--line);background:rgba(29,14,21,.9);backdrop-filter:blur(12px)}
+.tool-logo{font-family:'Rozha One',serif;font-size:30px;line-height:1;color:var(--ivory);text-decoration:none;white-space:nowrap}
+.tool-links{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+.tool-links a{color:var(--ivory-dim);border:1px solid var(--line);border-radius:999px;padding:8px 11px;text-decoration:none;font-size:12px;letter-spacing:.08em;text-transform:uppercase;transition:background .2s,border-color .2s,color .2s}
+.tool-links a:hover{color:var(--gold);border-color:rgba(224,169,62,.55);background:rgba(224,169,62,.08)}
+@media(max-width:680px){.tool-nav{align-items:flex-start;flex-direction:column;padding:13px 18px}.tool-logo{font-size:25px}.tool-links{justify-content:flex-start}.tool-links a{font-size:11px;padding:7px 9px}}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px 80px}
+
+header{position:relative;text-align:center;padding:68px 16px 42px;overflow:hidden}
+.yantra{position:absolute;top:50%;left:50%;width:540px;height:540px;transform:translate(-50%,-52%);opacity:.10;pointer-events:none;animation:spin 240s linear infinite}
+@media (prefers-reduced-motion: reduce){.yantra{animation:none}}
+@keyframes spin{to{transform:translate(-50%,-52%) rotate(360deg)}}
+.eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+h1{font-family:'Rozha One',serif;font-weight:400;font-size:clamp(38px,7vw,62px);line-height:1.05}
+h1 .accent{color:var(--sindoor)}
+header p{max-width:560px;margin:18px auto 0;color:var(--ivory-dim)}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.form-grid .full{grid-column:1/-1}
+@media (max-width:640px){.form-grid{grid-template-columns:1fr}}
+label{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+input,select{width:100%;padding:12px 14px;border-radius:10px;background:var(--bg);border:1px solid var(--line);color:var(--ivory);font-family:'Karla',sans-serif;font-size:16px}
+input:focus,select:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+input::placeholder{color:#7d6a58}
+.hint{font-size:13px;color:var(--ivory-dim);margin-top:6px}
+button.analyze{margin-top:22px;width:100%;padding:15px;border:none;border-radius:10px;background:var(--sindoor);color:#fff;font-family:'Karla',sans-serif;font-size:17px;font-weight:700;letter-spacing:.04em;cursor:pointer;transition:transform .12s ease,background .12s ease}
+button.analyze:hover{background:#f0653b}
+button.analyze:active{transform:scale(.99)}
+button.analyze:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.err{color:var(--enemy);margin-top:12px;font-weight:700;display:none}
+
+.geo-results{position:absolute;left:0;right:0;top:100%;z-index:20;background:var(--surface2);border:1px solid var(--gold);border-radius:10px;margin-top:4px;overflow:hidden;display:none;box-shadow:0 12px 30px rgba(0,0,0,.45)}
+.geo-results button{display:block;width:100%;text-align:left;padding:11px 14px;background:none;border:none;border-bottom:1px solid var(--line);color:var(--ivory);font-family:'Karla',sans-serif;font-size:15px;cursor:pointer}
+.geo-results button:last-child{border-bottom:none}
+.geo-results button:hover,.geo-results button:focus-visible{background:var(--surface);outline:none}
+.geo-results button small{display:block;color:var(--ivory-dim);font-size:12px}
+.hint.ok{color:var(--friend)}
+.hint.bad{color:var(--enemy)}
+
+#results{display:none;margin-top:34px}
+.section-title{font-family:'Rozha One',serif;font-weight:400;font-size:26px;margin:42px 0 16px}
+.section-title small{display:block;font-family:'Karla',sans-serif;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.kv .item{background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+.kv .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.kv .v{font-size:17px;font-weight:700;margin-top:3px}
+.kv .v small{display:block;font-weight:400;font-size:13px;color:var(--ivory-dim)}
+
+.medallions{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:640px){.medallions{grid-template-columns:1fr}}
+.med{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 16px;text-align:center}
+.med .diamond{width:92px;height:92px;margin:0 auto 12px;position:relative;display:flex;align-items:center;justify-content:center}
+.med .diamond svg{position:absolute;inset:0}
+.med .num{font-family:'Rozha One',serif;font-size:36px;color:var(--gold);position:relative;z-index:1}
+.med .label{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ivory-dim)}
+.med .planet{font-size:15px;margin-top:3px}
+.med .sub{font-size:13px;color:var(--ivory-dim);margin-top:6px}
+
+.verdicts{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+@media (max-width:640px){.verdicts{grid-template-columns:1fr}}
+.verdict{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+.verdict h4{font-size:14px;font-weight:700;color:var(--ivory-dim);margin-bottom:8px}
+.chip{display:inline-block;padding:5px 14px;border-radius:99px;font-weight:700;font-size:14px;color:#1d0e15}
+.chip.friend{background:var(--friend)} .chip.neutral{background:var(--neutral)} .chip.enemy{background:var(--enemy)}
+.note{margin-top:16px;background:var(--surface2);border-left:4px solid var(--gold);border-radius:8px;padding:14px 18px;font-size:15px}
+.note.warn{border-left-color:var(--enemy)}
+.note.good{border-left-color:var(--friend)}
+
+.syll-row{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.syll{background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:10px 16px;text-align:center;min-width:74px}
+.syll.hit{border-color:var(--friend);box-shadow:0 0 0 1px var(--friend)}
+.syll .s{font-family:'Rozha One',serif;font-size:20px}
+.syll .p{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ivory-dim)}
+
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{text-align:left;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:12px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr.best td{background:rgba(224,169,62,.08)}
+.name-cell{font-weight:700;font-size:16px;white-space:nowrap}
+.badge{display:inline-block;margin-left:8px;padding:2px 10px;border-radius:99px;background:var(--gold);color:#1d0e15;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.dot.friend{background:var(--friend)} .dot.neutral{background:var(--neutral)} .dot.enemy{background:var(--enemy)}
+.tick{color:var(--friend);font-weight:700}.cross{color:var(--ivory-dim)}
+.tara-good{color:var(--friend);font-weight:700}.tara-bad{color:var(--enemy);font-weight:700}.tara-mid{color:var(--neutral);font-weight:700}
+.tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+
+footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--ivory-dim)}
+
+/* verdict + candidate cards */
+.verdict-box{border-radius:var(--radius);padding:20px 22px;margin-top:8px;border:1px solid var(--line)}
+.verdict-box.good{background:rgba(109,184,131,.08);border-color:rgba(109,184,131,.55)}
+.verdict-box.warn{background:rgba(224,106,80,.08);border-color:rgba(224,106,80,.55)}
+.verdict-box h3{font-family:'Rozha One',serif;font-weight:400;font-size:23px;margin-bottom:6px}
+.verdict-box ul{margin:8px 0 0 18px;color:var(--ivory)}
+.verdict-box li{margin:3px 0}
+.cand{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin-bottom:14px}
+.cand.best{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.cand.orig{opacity:.92}
+.cand-head{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.cand-name{font-family:'Rozha One',serif;font-size:23px;display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.bar{height:8px;background:var(--surface2);border-radius:99px;overflow:hidden;width:160px;flex-shrink:0}
+.bar>span{display:block;height:100%;background:linear-gradient(90deg,var(--neutral),var(--gold))}
+.cand-meta{font-size:13px;color:var(--ivory-dim);margin:8px 0 12px}
+.cand-meta b{color:var(--ivory);font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.fchip{font-size:12px;padding:4px 11px;border-radius:99px;border:1px solid var(--line);white-space:nowrap}
+.fchip .d{font-weight:700;margin-left:5px}
+.fchip.good{color:var(--friend);border-color:rgba(109,184,131,.45)}
+.fchip.bad{color:var(--enemy);border-color:rgba(224,106,80,.45)}
+.fchip.mid{color:var(--ivory-dim)}
+.badge.rec{background:var(--gold);color:#1d0e15}
+.badge.min{background:var(--friend);color:#1d0e15}
+.badge.cur{background:var(--line);color:var(--ivory)}
+.badge.sound{background:transparent;border:1px solid var(--line);color:var(--ivory-dim)}
+.consult-cta{margin-top:30px;background:linear-gradient(135deg,rgba(224,169,62,.16),rgba(228,87,46,.12));border:1px solid rgba(224,169,62,.45);border-radius:var(--radius);padding:22px}
+.consult-cta h3{font-family:'Rozha One',serif;font-weight:400;font-size:26px;margin-bottom:6px}
+.consult-cta p{color:var(--ivory-dim);max-width:62ch}
+.consult-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.consult-actions a{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:999px;padding:11px 16px;font-weight:700}
+.consult-actions .primary{background:var(--sindoor);color:#fff}
+.consult-actions .secondary{border:1px solid var(--line);color:var(--gold);background:rgba(224,169,62,.08)}
+</style>
+</head>
+<body>
+<nav class="tool-nav" aria-label="Tool navigation">
+  <a class="tool-logo" href="../../">Shambhavaa</a>
+  <div class="tool-links">
+    <a href="../janma-finder/">Janma Finder</a>
+    <a href="../compatibility/">Compatibility</a>
+    <a href="../third-chart/">Third Chart</a>
+    <a href="./">Namakshara</a>
+  </div>
+</nav>
+
+<header>
+  <svg class="yantra" viewBox="0 0 200 200" aria-hidden="true">
+    <g fill="none" stroke="#e0a93e" stroke-width="0.6">
+      <circle cx="100" cy="100" r="96"/><circle cx="100" cy="100" r="78"/>
+      <rect x="32" y="32" width="136" height="136"/>
+      <rect x="32" y="32" width="136" height="136" transform="rotate(45 100 100)"/>
+      <polygon points="100,18 171,141 29,141"/><polygon points="100,182 171,59 29,59"/>
+      <circle cx="100" cy="100" r="8"/>
+    </g>
+  </svg>
+  <div class="eyebrow">Avakahada Chakra · Tara Bala · Anka Shastra</div>
+  <h1>Nama<span class="accent">kshara</span></h1>
+  <p>Casts the Moon for the birth moment to find the janma nakshatra and rashi, then weighs a name by syllable, tara bala, rashi placement, and Chaldean number harmony — and tunes the spelling accordingly.</p>
+</header>
+
+<div class="wrap">
+  <div class="card">
+    <div class="form-grid">
+      <div class="full">
+        <label for="fullname">Full name (as commonly written)</label>
+        <input id="fullname" type="text" placeholder="e.g. Aarav Sharma" autocomplete="off">
+        <div class="hint">Spelling variants are generated for the first name; surname stays as is.</div>
+      </div>
+      <div>
+        <label for="dob">Date of birth</label>
+        <input id="dob" type="date">
+      </div>
+      <div>
+        <label for="gender">Gender</label>
+        <select id="gender">
+          <option value="">Select gender</option>
+          <option value="Female">Female</option>
+          <option value="Male">Male</option>
+          <option value="Non-binary">Non-binary</option>
+          <option value="Prefer not to say">Prefer not to say</option>
+        </select>
+        <div class="hint">Used for consultation context and culturally suitable name guidance.</div>
+      </div>
+      <div>
+        <label for="tob">Time of birth</label>
+        <input id="tob" type="time">
+        <div class="hint">Needed to cast the Moon. If unknown, noon is assumed (flagged).</div>
+      </div>
+      <div class="full" style="position:relative">
+        <label for="place">Birth place</label>
+        <input id="place" type="text" placeholder="Start typing — e.g. Jaipur, Varanasi, London…" autocomplete="off">
+        <div class="geo-results" id="geoResults"></div>
+        <div class="hint" id="geoStatus">Pick a place from the suggestions — coordinates and timezone (with historical DST) are resolved automatically.</div>
+      </div>
+      <div>
+        <label for="nak">Janma nakshatra</label>
+        <select id="nak">
+          <option value="auto">Auto — cast from birth details</option>
+        </select>
+        <div class="hint">Pick manually only if you already know it.</div>
+      </div>
+    </div>
+    <button class="analyze" id="go">Cast &amp; analyse</button>
+    <div class="err" id="err"></div>
+  </div>
+
+  <div id="results">
+    <div id="kundali"></div>
+    <h2 class="section-title"><small>Anka Shastra</small>The three numbers</h2>
+    <div class="medallions" id="medallions"></div>
+    <div class="verdicts" id="verdicts"></div>
+    <div id="compoundNote"></div>
+    <div id="nakBlock"></div>
+    <div id="taraBlock"></div>
+
+    <div id="verdictBox"></div>
+
+    <h2 class="section-title"><small>Sanskara</small>Suggested spellings</h2>
+    <div id="suggCards"></div>
+    <div class="note" id="suggNote"></div>
+    <div id="remedy"></div>
+    <div id="consultationCta"></div>
+  </div>
+
+  <footer>
+    Lunar position from a truncated Meeus lunar theory (accurate to a few arc-minutes) with a Lahiri-style ayanamsa; nakshatra results near a boundary are flagged. Friendship tables follow Parashari natural relationships; tara bala counts from the janma nakshatra; syllables follow the classical Avakahada chakra. Schools differ on transliteration and on minor table entries — use this as a rigorous starting point, and confirm boundary cases against a full ephemeris or a practising jyotishi. Gemstone notes are informational; traditional practice prescribes gems only after a full chart reading.
+  </footer>
+</div>
+
+<script>
+/* ================= DATA ================= */
+const CHALDEAN = {a:1,b:2,c:3,d:4,e:5,f:8,g:3,h:5,i:1,j:1,k:2,l:3,m:4,n:5,o:7,p:8,q:1,r:2,s:3,t:4,u:6,v:6,w:6,x:5,y:1,z:7};
+
+const PLANETS = {
+  1:{en:"Sun",sa:"Surya"},2:{en:"Moon",sa:"Chandra"},3:{en:"Jupiter",sa:"Guru"},
+  4:{en:"Rahu",sa:"Rahu"},5:{en:"Mercury",sa:"Budha"},6:{en:"Venus",sa:"Shukra"},
+  7:{en:"Ketu",sa:"Ketu"},8:{en:"Saturn",sa:"Shani"},9:{en:"Mars",sa:"Mangal"}
+};
+const REL = {
+  1:{f:[2,3,9],n:[5,7],e:[4,6,8]}, 2:{f:[1,5],n:[3,6,7,8,9],e:[4]},
+  3:{f:[1,2,9],n:[7,8],e:[4,5,6]}, 4:{f:[5,6,8],n:[3,7],e:[1,2,9]},
+  5:{f:[1,4,6],n:[3,7,8,9],e:[2]}, 6:{f:[4,5,8],n:[3,7,9],e:[1,2]},
+  7:{f:[6,8,9],n:[3,4,5],e:[1,2]}, 8:{f:[4,5,6],n:[3,7],e:[1,2,9]},
+  9:{f:[1,2,3],n:[6,7,8],e:[4,5]}
+};
+const COMPOUNDS = {
+  10:["fortunate","a wheel of fortune — rise and self-confidence"],
+  13:["karmic","upheaval and regeneration; traditionally softened"],
+  14:["karmic","movement and risk; gains can be unstable"],
+  15:["fortunate","magnetic and persuasive; favourable for public life"],
+  16:["karmic","the struck tower; sudden reversals are warned against"],
+  18:["karmic","conflict and hidden opposition; usually avoided"],
+  19:["fortunate","the Prince of Heaven — among the most auspicious"],
+  21:["fortunate","crown of the magi; success after effort"],
+  22:["karmic","good judgement clouded by illusion; treated with caution"],
+  23:["fortunate","the Royal Star of the Lion — protection and success"],
+  24:["fortunate","help from those in authority; gains in partnership"],
+  26:["karmic","gains through others can turn; partnerships need care"],
+  27:["fortunate","the sceptre — authority and creative reward"],
+  29:["karmic","uncertainty and deception by others; usually corrected"],
+  31:["karmic","self-contained isolation; hard for worldly aims"],
+  32:["fortunate","communicative charm; strong with firm plans"],
+  33:["fortunate","like 24 — favour, love, and assistance"],
+  35:["karmic","like 26 — caution in financial partnerships"],
+  37:["fortunate","good fortune through friendships and partnerships"],
+  38:["karmic","like 29 — trials through trusted people"],
+  41:["fortunate","like 32 — magnetic and lucky in dealings"],
+  43:["karmic","upheaval and revolution; traditionally avoided"],
+  44:["karmic","like 26 — heavy material lessons"],
+  45:["fortunate","like 27 — creative authority"],
+  48:["karmic","a number of postponement"]
+};
+
+/* Avakahada chakra + attributes: deity, gana, yoni */
+const NAKSHATRAS = [
+ {n:"Ashwini",lord:"Ketu",deity:"Ashwini Kumaras",gana:"Deva",yoni:"Horse",s:[["chu"],["che"],["cho"],["la"]]},
+ {n:"Bharani",lord:"Venus",deity:"Yama",gana:"Manushya",yoni:"Elephant",s:[["li","lee"],["lu","loo"],["le"],["lo"]]},
+ {n:"Krittika",lord:"Sun",deity:"Agni",gana:"Rakshasa",yoni:"Goat",s:[["a"],["i","ee"],["u"],["e","ea"]]},
+ {n:"Rohini",lord:"Moon",deity:"Prajapati",gana:"Manushya",yoni:"Serpent",s:[["o"],["va","ba"],["vi","bi"],["vu","bu"]]},
+ {n:"Mrigashira",lord:"Mars",deity:"Soma",gana:"Deva",yoni:"Serpent",s:[["ve","we","be"],["vo","wo","bo"],["ka"],["ki"]]},
+ {n:"Ardra",lord:"Rahu",deity:"Rudra",gana:"Manushya",yoni:"Dog",s:[["ku"],["gha"],["ing","na"],["chha"]]},
+ {n:"Punarvasu",lord:"Jupiter",deity:"Aditi",gana:"Deva",yoni:"Cat",s:[["ke"],["ko"],["ha"],["hi"]]},
+ {n:"Pushya",lord:"Saturn",deity:"Brihaspati",gana:"Deva",yoni:"Sheep",s:[["hu"],["he"],["ho"],["da"]]},
+ {n:"Ashlesha",lord:"Mercury",deity:"Nagas",gana:"Rakshasa",yoni:"Cat",s:[["di"],["du"],["de"],["do"]]},
+ {n:"Magha",lord:"Ketu",deity:"Pitris",gana:"Rakshasa",yoni:"Rat",s:[["ma"],["mi"],["mu"],["me"]]},
+ {n:"Purva Phalguni",lord:"Venus",deity:"Bhaga",gana:"Manushya",yoni:"Rat",s:[["mo"],["ta"],["ti"],["tu"]]},
+ {n:"Uttara Phalguni",lord:"Sun",deity:"Aryaman",gana:"Manushya",yoni:"Bull",s:[["te"],["to"],["pa"],["pi"]]},
+ {n:"Hasta",lord:"Moon",deity:"Savitr",gana:"Deva",yoni:"Buffalo",s:[["pu"],["sha"],["na"],["tha"]]},
+ {n:"Chitra",lord:"Mars",deity:"Vishwakarma",gana:"Rakshasa",yoni:"Tiger",s:[["pe"],["po"],["ra"],["ri"]]},
+ {n:"Swati",lord:"Rahu",deity:"Vayu",gana:"Deva",yoni:"Buffalo",s:[["ru"],["re"],["ro"],["taa","ta"]]},
+ {n:"Vishakha",lord:"Jupiter",deity:"Indra-Agni",gana:"Rakshasa",yoni:"Tiger",s:[["ti"],["tu"],["te"],["to"]]},
+ {n:"Anuradha",lord:"Saturn",deity:"Mitra",gana:"Deva",yoni:"Deer",s:[["na"],["ni"],["nu"],["ne"]]},
+ {n:"Jyeshtha",lord:"Mercury",deity:"Indra",gana:"Rakshasa",yoni:"Deer",s:[["no"],["ya"],["yi"],["yu"]]},
+ {n:"Mula",lord:"Ketu",deity:"Nirriti",gana:"Rakshasa",yoni:"Dog",s:[["ye"],["yo"],["bha"],["bhi"]]},
+ {n:"Purva Ashadha",lord:"Venus",deity:"Apas",gana:"Manushya",yoni:"Monkey",s:[["bhu","bu"],["dha"],["pha","fa"],["dhha"]]},
+ {n:"Uttara Ashadha",lord:"Sun",deity:"Vishvedevas",gana:"Manushya",yoni:"Mongoose",s:[["bhe"],["bho"],["ja"],["ji"]]},
+ {n:"Shravana",lord:"Moon",deity:"Vishnu",gana:"Deva",yoni:"Monkey",s:[["khi","ju"],["khu","je"],["khe","jo"],["kho"]]},
+ {n:"Dhanishta",lord:"Mars",deity:"Ashta Vasus",gana:"Rakshasa",yoni:"Lion",s:[["ga"],["gi"],["gu"],["ge"]]},
+ {n:"Shatabhisha",lord:"Rahu",deity:"Varuna",gana:"Rakshasa",yoni:"Horse",s:[["go"],["sa"],["si"],["su"]]},
+ {n:"Purva Bhadrapada",lord:"Jupiter",deity:"Aja Ekapada",gana:"Manushya",yoni:"Lion",s:[["se"],["so"],["da"],["di"]]},
+ {n:"Uttara Bhadrapada",lord:"Saturn",deity:"Ahir Budhnya",gana:"Manushya",yoni:"Cow",s:[["du"],["tha"],["jha"],["gya","na"]]},
+ {n:"Revati",lord:"Mercury",deity:"Pushan",gana:"Deva",yoni:"Elephant",s:[["de"],["do"],["cha"],["chi"]]}
+];
+
+const RASHIS = [
+ ["Mesha","Aries"],["Vrishabha","Taurus"],["Mithuna","Gemini"],["Karka","Cancer"],
+ ["Simha","Leo"],["Kanya","Virgo"],["Tula","Libra"],["Vrishchika","Scorpio"],
+ ["Dhanu","Sagittarius"],["Makara","Capricorn"],["Kumbha","Aquarius"],["Meena","Pisces"]
+];
+
+const TARAS = [
+ ["Janma","sensitive but classical for naming","mid"],
+ ["Sampat","wealth and gain","good"],
+ ["Vipat","danger — avoided","bad"],
+ ["Kshema","wellbeing","good"],
+ ["Pratyari","obstruction — avoided","bad"],
+ ["Sadhaka","accomplishment","good"],
+ ["Vadha","destructive — avoided","bad"],
+ ["Mitra","friendship","good"],
+ ["Ati-Mitra","great friendship","good"]
+];
+
+/* Vimshottari sequence starting from Ashwini */
+const DASHA = [["Ketu",7],["Venus",20],["Sun",6],["Moon",10],["Mars",7],["Rahu",18],["Jupiter",16],["Saturn",19],["Mercury",17]];
+
+const REMEDIES = {
+ 1:{gem:"Ruby (Manik)",color:"Copper-red & gold",day:"Sunday",mantra:"Om Hram Hrim Hraum Sah Suryaya Namah"},
+ 2:{gem:"Pearl (Moti)",color:"White & silver",day:"Monday",mantra:"Om Shram Shrim Shraum Sah Chandraya Namah"},
+ 3:{gem:"Yellow sapphire (Pukhraj)",color:"Yellow & saffron",day:"Thursday",mantra:"Om Gram Grim Graum Sah Gurave Namah"},
+ 4:{gem:"Hessonite (Gomed)",color:"Smoky brown",day:"Saturday",mantra:"Om Bhram Bhrim Bhraum Sah Rahave Namah"},
+ 5:{gem:"Emerald (Panna)",color:"Green",day:"Wednesday",mantra:"Om Bram Brim Braum Sah Budhaya Namah"},
+ 6:{gem:"Diamond / white sapphire",color:"White & pastels",day:"Friday",mantra:"Om Dram Drim Draum Sah Shukraya Namah"},
+ 7:{gem:"Cat's eye (Lehsunia)",color:"Grey & smoke",day:"Tuesday",mantra:"Om Sram Srim Sraum Sah Ketave Namah"},
+ 8:{gem:"Blue sapphire (Neelam)",color:"Deep blue & black",day:"Saturday",mantra:"Om Pram Prim Praum Sah Shanaye Namah"},
+ 9:{gem:"Red coral (Moonga)",color:"Red",day:"Tuesday",mantra:"Om Kram Krim Kraum Sah Bhaumaya Namah"}
+};
+
+/* reverse syllable map, longest first so 'chha' wins over 'ch...' */
+const SYL_MAP = [];
+NAKSHATRAS.forEach((nk,ni)=>nk.s.forEach((arr,pi)=>arr.forEach(s=>SYL_MAP.push({syl:s,nak:ni,pada:pi+1}))));
+SYL_MAP.sort((a,b)=>b.syl.length - a.syl.length);
+
+/* ================= ASTRONOMY ================= */
+const d2r = Math.PI/180;
+function julianDay(y,m,d,utHours){
+  if(m<=2){y--;m+=12;}
+  const A=Math.floor(y/100), B=2-A+Math.floor(A/4);
+  return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524.5+utHours/24;
+}
+function norm360(x){x%=360;return x<0?x+360:x;}
+/* truncated Meeus lunar theory — geocentric ecliptic longitude, ~few arcmin accuracy */
+function moonLongitude(jd){
+  const T=(jd-2451545.0)/36525;
+  const Lp=norm360(218.3164477+481267.88123421*T-0.0015786*T*T);
+  const D =norm360(297.8501921+445267.1114034*T-0.0018819*T*T);
+  const M =norm360(357.5291092+ 35999.0502909*T-0.0001536*T*T);
+  const Mp=norm360(134.9633964+477198.8675055*T+0.0087414*T*T);
+  const F =norm360( 93.2720950+483202.0175233*T-0.0036539*T*T);
+  const s=a=>Math.sin(a*d2r);
+  let dL =
+    6.288774*s(Mp) + 1.274027*s(2*D-Mp) + 0.658314*s(2*D) + 0.213618*s(2*Mp)
+   -0.185116*s(M) - 0.114332*s(2*F) + 0.058793*s(2*D-2*Mp) + 0.057066*s(2*D-M-Mp)
+   +0.053322*s(2*D+Mp) + 0.045758*s(2*D-M) - 0.040923*s(M-Mp) - 0.034720*s(D)
+   -0.030383*s(M+Mp) + 0.015327*s(2*D-2*F) - 0.012528*s(2*F+Mp) - 0.010980*s(2*F-Mp)
+   +0.010675*s(4*D-Mp) + 0.010034*s(3*Mp) + 0.008548*s(4*D-2*Mp) - 0.007888*s(2*D+M-Mp)
+   -0.006766*s(2*D+M) - 0.005163*s(D-Mp);
+  return norm360(Lp+dL);
+}
+/* Lahiri-style ayanamsa, linearised about J2000 (≈23°51.2' + 50.29"/yr) */
+function ayanamsa(jd){ return 23.853 + (jd-2451545.0)/365.25*0.0139697; }
+
+function gmst(jd){ return norm360(280.46061837 + 360.98564736629*(jd-2451545.0)); }
+/* sidereal ascendant (lagna) from JD, geographic latitude and east longitude */
+function lagnaSidereal(jd,lat,lonEast){
+  const ramc=norm360(gmst(jd)+lonEast);
+  const eps=23.4393*d2r, phi=lat*d2r, R=ramc*d2r;
+  const trop=norm360(Math.atan2(Math.cos(R), -(Math.sin(R)*Math.cos(eps)+Math.tan(phi)*Math.sin(eps)))/d2r);
+  return norm360(trop - ayanamsa(jd));
+}
+const RASHI_LORDS=[9,6,5,2,1,5,6,9,3,8,8,3]; /* Mesha→Mars … Meena→Jupiter, as numbers */
+const LORD_NUM={Sun:1,Moon:2,Jupiter:3,Rahu:4,Mercury:5,Venus:6,Ketu:7,Saturn:8,Mars:9};
+
+/* compact city gazetteer: [name, utc offset (standard), lat, lonEast] */
+const CITIES=[
+["Jaipur, India",5.5,26.91,75.79],["Delhi, India",5.5,28.61,77.21],["Mumbai, India",5.5,19.08,72.88,"bombay"],
+["Kolkata, India",5.5,22.57,88.36,"calcutta"],["Chennai, India",5.5,13.08,80.27,"madras"],["Bengaluru, India",5.5,12.97,77.59,"bangalore"],
+["Hyderabad, India",5.5,17.39,78.49],["Ahmedabad, India",5.5,23.02,72.57],["Pune, India",5.5,18.52,73.86,"poona"],
+["Surat, India",5.5,21.17,72.83],["Lucknow, India",5.5,26.85,80.95],["Kanpur, India",5.5,26.45,80.33,"cawnpore"],
+["Nagpur, India",5.5,21.15,79.09],["Indore, India",5.5,22.72,75.86],["Bhopal, India",5.5,23.26,77.41],
+["Patna, India",5.5,25.59,85.14],["Vadodara, India",5.5,22.31,73.18,"baroda"],["Ludhiana, India",5.5,30.90,75.85],
+["Agra, India",5.5,27.18,78.01],["Varanasi, India",5.5,25.32,82.99,"banaras kashi benares"],["Amritsar, India",5.5,31.63,74.87],
+["Prayagraj, India",5.5,25.44,81.85,"allahabad"],["Ranchi, India",5.5,23.34,85.31],["Jodhpur, India",5.5,26.24,73.02],
+["Udaipur, India",5.5,24.59,73.71],["Kota, India",5.5,25.21,75.86],["Bikaner, India",5.5,28.02,73.31],
+["Ajmer, India",5.5,26.45,74.64],["Alwar, India",5.5,27.55,76.63],["Sikar, India",5.5,27.61,75.14],
+["Gwalior, India",5.5,26.22,78.18],["Jabalpur, India",5.5,23.18,79.99],["Ujjain, India",5.5,23.18,75.78],
+["Raipur, India",5.5,21.25,81.63],["Bhubaneswar, India",5.5,20.30,85.82],["Cuttack, India",5.5,20.46,85.88],
+["Guwahati, India",5.5,26.14,91.74],["Shillong, India",5.5,25.57,91.88],["Imphal, India",5.5,24.82,93.94],
+["Srinagar, India",5.5,34.08,74.80],["Jammu, India",5.5,32.73,74.86],["Chandigarh, India",5.5,30.73,76.78],
+["Shimla, India",5.5,31.10,77.17,"simla"],["Dehradun, India",5.5,30.32,78.03],["Haridwar, India",5.5,29.95,78.16],
+["Meerut, India",5.5,28.98,77.71],["Noida, India",5.5,28.54,77.39],["Gurugram, India",5.5,28.46,77.03,"gurgaon"],
+["Ghaziabad, India",5.5,28.67,77.42],["Faridabad, India",5.5,28.41,77.31],["Rajkot, India",5.5,22.30,70.80],
+["Bhavnagar, India",5.5,21.76,72.15],["Jamnagar, India",5.5,22.47,70.06],["Nashik, India",5.5,20.00,73.79],
+["Chhatrapati Sambhajinagar, India",5.5,19.88,75.34,"aurangabad"],["Solapur, India",5.5,17.66,75.91],["Kolhapur, India",5.5,16.70,74.24],
+["Panaji, India",5.5,15.49,73.83],["Mangaluru, India",5.5,12.91,74.86,"mangalore"],["Mysuru, India",5.5,12.30,76.64,"mysore"],
+["Hubballi, India",5.5,15.36,75.12,"hubli dharwad"],["Vijayawada, India",5.5,16.51,80.65],["Visakhapatnam, India",5.5,17.69,83.22],
+["Tirupati, India",5.5,13.63,79.42],["Warangal, India",5.5,17.97,79.59],["Coimbatore, India",5.5,11.02,76.96],
+["Madurai, India",5.5,9.93,78.12],["Tiruchirappalli, India",5.5,10.79,78.70],["Salem, India",5.5,11.66,78.15],
+["Thanjavur, India",5.5,10.79,79.14],["Thiruvananthapuram, India",5.5,8.52,76.94,"trivandrum"],["Kochi, India",5.5,9.93,76.27,"cochin"],
+["Kozhikode, India",5.5,11.26,75.78,"calicut"],["Thrissur, India",5.5,10.53,76.21],["Siliguri, India",5.5,26.73,88.40],
+["Asansol, India",5.5,23.69,86.97],["Dhanbad, India",5.5,23.80,86.43],["Jamshedpur, India",5.5,22.80,86.20],
+["Gaya, India",5.5,24.79,84.99],["Muzaffarpur, India",5.5,26.12,85.38],["Gorakhpur, India",5.5,26.76,83.37],
+["Bareilly, India",5.5,28.37,79.43],["Aligarh, India",5.5,27.90,78.09],["Jhansi, India",5.5,25.45,78.57],
+["Kathmandu, Nepal",5.75,27.72,85.32],["Dhaka, Bangladesh",6,23.81,90.41],["Colombo, Sri Lanka",5.5,6.93,79.85],
+["Karachi, Pakistan",5,24.86,67.01],["Lahore, Pakistan",5,31.55,74.34],["Islamabad, Pakistan",5,33.69,73.06],
+["Dubai, UAE",4,25.20,55.27],["Abu Dhabi, UAE",4,24.45,54.38],["Muscat, Oman",4,23.59,58.41],
+["Doha, Qatar",3,25.29,51.53],["Riyadh, Saudi Arabia",3,24.71,46.68],["Singapore",8,1.35,103.82],
+["Kuala Lumpur, Malaysia",8,3.14,101.69],["Bangkok, Thailand",7,13.76,100.50],["Jakarta, Indonesia",7,-6.21,106.85],
+["Hong Kong",8,22.32,114.17],["Tokyo, Japan",9,35.68,139.69],["Sydney, Australia",10,-33.87,151.21],
+["Melbourne, Australia",10,-37.81,144.96],["Auckland, New Zealand",12,-36.85,174.76],
+["London, UK",0,51.51,-0.13],["Paris, France",1,48.86,2.35],["Berlin, Germany",1,52.52,13.40],
+["Amsterdam, Netherlands",1,52.37,4.90],["Zurich, Switzerland",1,47.38,8.54],["Rome, Italy",1,41.90,12.50],
+["Madrid, Spain",1,40.42,-3.70],["Moscow, Russia",3,55.76,37.62],["Istanbul, Türkiye",3,41.01,28.98],
+["Nairobi, Kenya",3,-1.29,36.82],["Johannesburg, South Africa",2,-26.20,28.05],["Lagos, Nigeria",1,6.52,3.38],
+["Cairo, Egypt",2,30.04,31.24],["New York, USA",-5,40.71,-74.01],["Boston, USA",-5,42.36,-71.06],
+["Washington DC, USA",-5,38.91,-77.04],["Toronto, Canada",-5,43.65,-79.38],["Chicago, USA",-6,41.88,-87.63],
+["Houston, USA",-6,29.76,-95.37],["Dallas, USA",-6,32.78,-96.80],["Denver, USA",-7,39.74,-104.99],
+["Phoenix, USA",-7,33.45,-112.07],["Los Angeles, USA",-8,34.05,-118.24],["San Francisco, USA",-8,37.77,-122.42],
+["Seattle, USA",-8,47.61,-122.33],["Vancouver, Canada",-8,49.28,-123.12],["Mexico City, Mexico",-6,19.43,-99.13],
+["São Paulo, Brazil",-3,-23.55,-46.63],["Buenos Aires, Argentina",-3,-34.60,-58.38],
+/* ---- expanded India coverage (district HQs & towns), all IST 5.5 ---- */
+/* Rajasthan */
+["Bhilwara, India",5.5,25.35,74.64],["Pali, India",5.5,25.77,73.33],["Tonk, India",5.5,26.17,75.79],
+["Sawai Madhopur, India",5.5,26.02,76.34],["Bharatpur, India",5.5,27.22,77.49],["Dholpur, India",5.5,26.70,77.89],
+["Karauli, India",5.5,26.50,77.02],["Dausa, India",5.5,26.89,76.34],["Nagaur, India",5.5,27.20,73.74],
+["Churu, India",5.5,28.30,74.96],["Jhunjhunu, India",5.5,28.13,75.40],["Hanumangarh, India",5.5,29.58,74.32],
+["Sri Ganganagar, India",5.5,29.92,73.88],["Jaisalmer, India",5.5,26.92,70.91],["Barmer, India",5.5,25.75,71.39],
+["Jalore, India",5.5,25.35,72.62],["Sirohi, India",5.5,24.88,72.86],["Mount Abu, India",5.5,24.59,72.71],
+["Banswara, India",5.5,23.55,74.45],["Dungarpur, India",5.5,23.84,73.71],["Pratapgarh Raj, India",5.5,24.03,74.78],
+["Chittorgarh, India",5.5,24.88,74.62],["Rajsamand, India",5.5,25.07,73.88],["Bundi, India",5.5,25.44,75.64],
+["Baran, India",5.5,25.10,76.51],["Jhalawar, India",5.5,24.60,76.16],["Beawar, India",5.5,26.10,74.32],
+["Kishangarh, India",5.5,26.59,74.86],["Abu Road, India",5.5,24.48,72.78],["Nathdwara, India",5.5,24.94,73.82],
+["Pushkar, India",5.5,26.49,74.55],
+/* Uttar Pradesh */
+["Ayodhya, India",5.5,26.80,82.20,"faizabad"],["Mathura, India",5.5,27.49,77.67],["Vrindavan, India",5.5,27.58,77.70],
+["Moradabad, India",5.5,28.84,78.77],["Saharanpur, India",5.5,29.97,77.55],["Muzaffarnagar, India",5.5,29.47,77.70],
+["Firozabad, India",5.5,27.15,78.40],["Etawah, India",5.5,26.78,79.02],["Mainpuri, India",5.5,27.23,79.03],
+["Jaunpur, India",5.5,25.75,82.68],["Ghazipur, India",5.5,25.58,83.58],["Ballia, India",5.5,25.76,84.15],
+["Mau, India",5.5,25.94,83.56],["Azamgarh, India",5.5,26.07,83.18],["Mirzapur, India",5.5,25.15,82.57],
+["Sultanpur, India",5.5,26.26,82.07],["Rae Bareli, India",5.5,26.23,81.24],["Pratapgarh UP, India",5.5,25.90,81.95],
+["Fatehpur, India",5.5,25.93,80.81],["Banda, India",5.5,25.48,80.34],["Hardoi, India",5.5,27.40,80.13],
+["Sitapur, India",5.5,27.57,80.68],["Lakhimpur Kheri, India",5.5,27.95,80.78],["Bahraich, India",5.5,27.57,81.60],
+["Gonda, India",5.5,27.13,81.96],["Basti, India",5.5,26.81,82.73],["Deoria, India",5.5,26.50,83.78],
+["Etah, India",5.5,27.56,78.66],["Budaun, India",5.5,28.04,79.12],["Shahjahanpur, India",5.5,27.88,79.91],
+["Pilibhit, India",5.5,28.63,79.80],["Rampur, India",5.5,28.81,79.03],["Bijnor, India",5.5,29.37,78.14],
+["Amroha, India",5.5,28.90,78.47],["Hapur, India",5.5,28.73,77.78],["Bulandshahr, India",5.5,28.41,77.85],
+["Unnao, India",5.5,26.55,80.49],["Kannauj, India",5.5,27.05,79.92],["Orai, India",5.5,25.99,79.45],
+/* Madhya Pradesh */
+["Sagar, India",5.5,23.84,78.74],["Satna, India",5.5,24.58,80.83],["Rewa, India",5.5,24.53,81.30],
+["Singrauli, India",5.5,24.20,82.67],["Chhatarpur, India",5.5,24.92,79.59],["Khajuraho, India",5.5,24.85,79.93],
+["Vidisha, India",5.5,23.52,77.81],["Ratlam, India",5.5,23.33,75.04],["Mandsaur, India",5.5,24.07,75.07],
+["Neemuch, India",5.5,24.47,74.87],["Dewas, India",5.5,22.96,76.05],["Khandwa, India",5.5,21.83,76.35],
+["Khargone, India",5.5,21.82,75.61],["Burhanpur, India",5.5,21.31,76.23],["Chhindwara, India",5.5,22.06,78.94],
+["Betul, India",5.5,21.90,77.90],["Narmadapuram, India",5.5,22.75,77.73,"hoshangabad"],["Katni, India",5.5,23.83,80.39],
+["Damoh, India",5.5,23.83,79.44],["Guna, India",5.5,24.65,77.31],["Shivpuri, India",5.5,25.42,77.66],
+["Morena, India",5.5,26.50,78.00],["Bhind, India",5.5,26.56,78.79],["Datia, India",5.5,25.67,78.46],
+["Balaghat, India",5.5,21.81,80.18],["Seoni, India",5.5,22.09,79.54],["Mandla, India",5.5,22.60,80.37],
+["Sehore, India",5.5,23.20,77.09],["Raisen, India",5.5,23.33,77.78],
+/* Bihar & Jharkhand */
+["Bhagalpur, India",5.5,25.24,86.99],["Darbhanga, India",5.5,26.15,85.90],["Purnia, India",5.5,25.78,87.47],
+["Begusarai, India",5.5,25.42,86.13],["Saharsa, India",5.5,25.88,86.60],["Katihar, India",5.5,25.54,87.57],
+["Munger, India",5.5,25.38,86.47],["Chapra, India",5.5,25.78,84.75],["Siwan, India",5.5,26.22,84.36],
+["Motihari, India",5.5,26.65,84.92],["Bettiah, India",5.5,26.80,84.50],["Sitamarhi, India",5.5,26.59,85.49],
+["Hajipur, India",5.5,25.69,85.21],["Arrah, India",5.5,25.56,84.66],["Sasaram, India",5.5,24.95,84.03],
+["Bihar Sharif, India",5.5,25.20,85.52,"nalanda"],["Nawada, India",5.5,24.88,85.54],["Jamui, India",5.5,24.92,86.22],
+["Bodh Gaya, India",5.5,24.70,84.99],["Bokaro, India",5.5,23.67,86.15],
+["Hazaribagh, India",5.5,23.99,85.36],["Deoghar, India",5.5,24.48,86.70],["Giridih, India",5.5,24.18,86.30],
+["Dumka, India",5.5,24.27,87.25],["Medininagar, India",5.5,24.04,84.07,"daltonganj"],["Ramgarh, India",5.5,23.63,85.52],
+/* Maharashtra */
+["Thane, India",5.5,19.22,72.98],["Navi Mumbai, India",5.5,19.03,73.03],["Kalyan, India",5.5,19.24,73.13],
+["Vasai-Virar, India",5.5,19.39,72.83],["Amravati, India",5.5,20.93,77.75],["Akola, India",5.5,20.71,77.00],
+["Nanded, India",5.5,19.16,77.32],["Latur, India",5.5,18.40,76.58],["Jalgaon, India",5.5,21.01,75.56],
+["Dhule, India",5.5,20.90,74.78],["Ahmednagar, India",5.5,19.09,74.74],["Satara, India",5.5,17.69,74.00],
+["Sangli, India",5.5,16.85,74.58],["Ratnagiri, India",5.5,16.99,73.31],["Chandrapur, India",5.5,19.95,79.30],
+["Wardha, India",5.5,20.74,78.60],["Gondia, India",5.5,21.46,80.20],["Beed, India",5.5,18.99,75.76],
+["Dharashiv, India",5.5,18.18,76.04,"osmanabad"],["Parbhani, India",5.5,19.27,76.77],["Jalna, India",5.5,19.84,75.89],
+["Bhandara, India",5.5,21.17,79.65],["Yavatmal, India",5.5,20.39,78.13],["Nandurbar, India",5.5,21.37,74.24],
+["Shirdi, India",5.5,19.77,74.48],["Pandharpur, India",5.5,17.68,75.33],
+/* Gujarat */
+["Gandhinagar, India",5.5,23.22,72.65],["Junagadh, India",5.5,21.52,70.46],["Anand, India",5.5,22.56,72.95],
+["Nadiad, India",5.5,22.69,72.86],["Bharuch, India",5.5,21.70,72.99],["Navsari, India",5.5,20.95,72.93],
+["Valsad, India",5.5,20.60,72.93],["Vapi, India",5.5,20.37,72.91],["Mehsana, India",5.5,23.60,72.40],
+["Palanpur, India",5.5,24.17,72.43],["Patan, India",5.5,23.85,72.13],["Morbi, India",5.5,22.82,70.84],
+["Surendranagar, India",5.5,22.73,71.64],["Porbandar, India",5.5,21.64,69.61],["Veraval, India",5.5,20.91,70.37],
+["Bhuj, India",5.5,23.24,69.67],["Gandhidham, India",5.5,23.08,70.13],["Dwarka, India",5.5,22.24,68.97],
+["Somnath, India",5.5,20.89,70.40],["Dahod, India",5.5,22.83,74.26],["Godhra, India",5.5,22.78,73.61],
+/* Punjab, Haryana, HP, J&K, Uttarakhand */
+["Jalandhar, India",5.5,31.33,75.58],["Patiala, India",5.5,30.34,76.39],["Bathinda, India",5.5,30.21,74.94],
+["Mohali, India",5.5,30.70,76.72],["Pathankot, India",5.5,32.27,75.65],["Hoshiarpur, India",5.5,31.53,75.91],
+["Moga, India",5.5,30.82,75.17],["Firozpur, India",5.5,30.93,74.61],["Phagwara, India",5.5,31.22,75.77],
+["Khanna, India",5.5,30.70,76.22],["Ambala, India",5.5,30.38,76.78],["Panipat, India",5.5,29.39,76.97],
+["Karnal, India",5.5,29.69,76.99],["Hisar, India",5.5,29.15,75.72],["Rohtak, India",5.5,28.90,76.61],
+["Sonipat, India",5.5,28.99,77.02],["Yamunanagar, India",5.5,30.13,77.29],["Panchkula, India",5.5,30.69,76.86],
+["Sirsa, India",5.5,29.53,75.03],["Bhiwani, India",5.5,28.79,76.13],["Rewari, India",5.5,28.20,76.62],
+["Kurukshetra, India",5.5,29.97,76.88],["Kaithal, India",5.5,29.80,76.40],["Jhajjar, India",5.5,28.61,76.66],
+["Dharamshala, India",5.5,32.22,76.32],["Mandi, India",5.5,31.71,76.93],["Solan, India",5.5,30.91,77.10],
+["Kullu, India",5.5,31.96,77.11],["Manali, India",5.5,32.24,77.19],["Una, India",5.5,31.47,76.27],
+["Rishikesh, India",5.5,30.09,78.27],["Nainital, India",5.5,29.38,79.46],["Haldwani, India",5.5,29.22,79.51],
+["Roorkee, India",5.5,29.85,77.89],["Mussoorie, India",5.5,30.46,78.07],["Almora, India",5.5,29.60,79.66],
+["Anantnag, India",5.5,33.73,75.15],["Baramulla, India",5.5,34.20,74.34],["Udhampur, India",5.5,32.93,75.13],
+["Kathua, India",5.5,32.37,75.52],["Leh, India",5.5,34.16,77.58],["Katra, India",5.5,32.99,74.95],
+/* South India */
+["Tirunelveli, India",5.5,8.71,77.76],["Thoothukudi, India",5.5,8.76,78.13,"tuticorin"],["Erode, India",5.5,11.34,77.72],
+["Vellore, India",5.5,12.92,79.13],["Tiruppur, India",5.5,11.11,77.34],["Dindigul, India",5.5,10.36,77.98],
+["Kanyakumari, India",5.5,8.08,77.54],["Nagercoil, India",5.5,8.18,77.43],["Karur, India",5.5,10.96,78.08],
+["Cuddalore, India",5.5,11.75,79.77],["Kumbakonam, India",5.5,10.96,79.39],["Rameswaram, India",5.5,9.29,79.31],
+["Guntur, India",5.5,16.31,80.44],["Nellore, India",5.5,14.44,79.99],["Kurnool, India",5.5,15.83,78.04],
+["Kadapa, India",5.5,14.47,78.82],["Anantapur, India",5.5,14.68,77.60],["Rajahmundry, India",5.5,17.00,81.78],
+["Kakinada, India",5.5,16.99,82.25],["Eluru, India",5.5,16.71,81.10],["Ongole, India",5.5,15.50,80.05],
+["Karimnagar, India",5.5,18.44,79.13],["Nizamabad, India",5.5,18.67,78.09],["Khammam, India",5.5,17.25,80.15],
+["Mahbubnagar, India",5.5,16.74,78.00],["Belagavi, India",5.5,15.85,74.50,"belgaum"],["Davangere, India",5.5,14.47,75.92],
+["Ballari, India",5.5,15.14,76.92,"bellary"],["Vijayapura, India",5.5,16.83,75.71,"bijapur"],["Kalaburagi, India",5.5,17.33,76.83,"gulbarga"],
+["Shivamogga, India",5.5,13.93,75.57,"shimoga"],["Tumakuru, India",5.5,13.34,77.10,"tumkur"],["Hassan, India",5.5,13.01,76.10],
+["Udupi, India",5.5,13.34,74.75],["Bidar, India",5.5,17.91,77.52],["Raichur, India",5.5,16.21,77.36],
+["Hospet, India",5.5,15.27,76.39],["Hampi, India",5.5,15.34,76.46],["Kollam, India",5.5,8.89,76.61],
+["Alappuzha, India",5.5,9.50,76.34],["Kottayam, India",5.5,9.59,76.52],["Palakkad, India",5.5,10.78,76.65],
+["Kannur, India",5.5,11.87,75.37],["Kasaragod, India",5.5,12.50,74.99],["Malappuram, India",5.5,11.07,76.07],
+["Guruvayur, India",5.5,10.59,76.04],
+/* East & Northeast */
+["Durgapur, India",5.5,23.55,87.31],["Howrah, India",5.5,22.59,88.31],["Kharagpur, India",5.5,22.35,87.32],
+["Bardhaman, India",5.5,23.26,87.86,"burdwan"],["Malda, India",5.5,25.00,88.14],["Darjeeling, India",5.5,27.04,88.26],
+["Jalpaiguri, India",5.5,26.52,88.72],["Krishnanagar, India",5.5,23.40,88.50],["Berhampore WB, India",5.5,24.10,88.25],
+["Rourkela, India",5.5,22.26,84.85],["Sambalpur, India",5.5,21.47,83.97],["Brahmapur, India",5.5,19.31,84.79,"berhampur"],
+["Balasore, India",5.5,21.49,86.93],["Puri, India",5.5,19.81,85.83],["Konark, India",5.5,19.89,86.09],
+["Agartala, India",5.5,23.83,91.28],["Aizawl, India",5.5,23.73,92.72],["Kohima, India",5.5,25.67,94.11],
+["Dimapur, India",5.5,25.91,93.73],["Itanagar, India",5.5,27.08,93.61],["Gangtok, India",5.5,27.33,88.61],
+["Dibrugarh, India",5.5,27.47,94.91],["Silchar, India",5.5,24.83,92.78],["Tezpur, India",5.5,26.63,92.80],
+["Jorhat, India",5.5,26.75,94.20],["Tinsukia, India",5.5,27.49,95.36],["Nagaon, India",5.5,26.35,92.69],
+["Port Blair, India",5.5,11.62,92.73],
+/* Chhattisgarh & central */
+["Bhilai, India",5.5,21.21,81.38],["Bilaspur CG, India",5.5,22.08,82.15],["Korba, India",5.5,22.36,82.74],
+["Durg, India",5.5,21.19,81.28],["Raigarh, India",5.5,21.90,83.40],["Jagdalpur, India",5.5,19.08,82.03],
+["Ambikapur, India",5.5,23.12,83.20],
+/* extra global picks */
+["Kuwait City, Kuwait",3,29.38,47.99],["Manama, Bahrain",3,26.23,50.59],["Tehran, Iran",3.5,35.69,51.39],
+["Kabul, Afghanistan",4.5,34.53,69.17],["Yangon, Myanmar",6.5,16.87,96.20],["Male, Maldives",5,4.18,73.51],
+["Thimphu, Bhutan",6,27.47,89.64],["Manila, Philippines",8,14.60,120.98],["Ho Chi Minh City, Vietnam",7,10.82,106.63],
+["Calgary, Canada",-7,51.05,-114.07],["Edinburgh, UK",0,55.95,-3.19],["Birmingham, UK",0,52.49,-1.89],
+["Manchester, UK",0,53.48,-2.24],["Leicester, UK",0,52.64,-1.13],["Atlanta, USA",-5,33.75,-84.39],
+["Jersey City, USA",-5,40.73,-74.08],["San Jose, USA",-8,37.34,-121.89],["Fremont, USA",-8,37.55,-121.99],
+["Austin, USA",-6,30.27,-97.74],["Frankfurt, Germany",1,50.11,8.68],["Munich, Germany",1,48.14,11.58],
+["Stockholm, Sweden",1,59.33,18.06],["Dublin, Ireland",0,53.35,-6.26],["Lisbon, Portugal",0,38.72,-9.14]
+];
+
+function castMoon(y,m,d,localHours,tz){
+  const jd = julianDay(y,m,d,localHours - tz);
+  const trop = moonLongitude(jd);
+  const ayan = ayanamsa(jd);
+  const sid = norm360(trop - ayan);
+  const nak = Math.floor(sid / (360/27));
+  const pada = Math.floor(sid / (360/108)) % 4 + 1;
+  const rashi = Math.floor(sid/30);
+  const within = sid - nak*(360/27);
+  const frac = within / (360/27);
+  const distToEdge = Math.min(within, (360/27)-within);
+  return {sid, ayan, nak, pada, rashi, frac, boundary: distToEdge < 0.30};
+}
+
+/* ================= NUMEROLOGY ================= */
+function lettersValue(str){let s=0;for(const c of str.toLowerCase()) if(CHALDEAN[c]) s+=CHALDEAN[c];return s;}
+function reduce1to9(n){while(n>9) n=String(n).split("").reduce((a,d)=>a+ +d,0);return n;}
+function nameNumbers(name){const c=lettersValue(name);return{compound:c,single:reduce1to9(c)};}
+function relation(a,b){if(!a||!b)return"neutral";const r=REL[a];if(r.f.includes(b))return"friend";if(r.e.includes(b))return"enemy";return"neutral";}
+const REL_SCORE={friend:2,neutral:1,enemy:0};
+
+/* ================= TARA & RASHI ================= */
+function taraOf(janmaNak,namaNak){
+  const count=((namaNak-janmaNak)+27)%27;       /* 0 = janma itself */
+  return count%9;                                /* index into TARAS */
+}
+function rashiOfPada(nak,pada){ return Math.floor((nak*4+(pada-1))/9); }
+function rashiRelation(janmaR,namaR){
+  const d=((namaR-janmaR)+12)%12+1;             /* counted inclusive */
+  if(d===1) return {d,label:"Same rashi",cls:"good"};
+  if(d===5||d===9) return {d,label:`Trikona (${d})`,cls:"good"};
+  if(d===6||d===8) return {d,label:`Shadashtaka (${d})`,cls:"bad"};
+  if(d===2||d===12) return {d,label:`Dwirdwadasha (${d})`,cls:"bad"};
+  if(d===4||d===10) return {d,label:`Kendra (${d})`,cls:"good"};
+  if(d===3||d===11) return {d,label:`Upachaya (${d})`,cls:"good"};
+  return {d,label:`House ${d}`,cls:"mid"};
+}
+/* find the nama nakshatra implied by a name's opening — prefer the most auspicious reading when ambiguous */
+function namaNakshatraOf(name, janmaNak){
+  const low=name.trim().toLowerCase();
+  const matches=SYL_MAP.filter(s=>low.startsWith(s.syl));
+  if(!matches.length) return null;
+  if(janmaNak==null) return {pick:matches[0],alts:matches.length-1};
+  const rank=t=>TARAS[t][2]==="good"?2:(TARAS[t][2]==="mid"?1:0);
+  matches.sort((a,b)=>rank(taraOf(janmaNak,b.nak))-rank(taraOf(janmaNak,a.nak)));
+  return {pick:matches[0],alts:matches.length-1};
+}
+
+/* ================= SUGGESTION ENGINE ================= */
+function titleCase(s){return s.charAt(0).toUpperCase()+s.slice(1).toLowerCase();}
+/* Levenshtein edit distance */
+function lev(a,b){
+  const m=a.length,n=b.length,d=[];
+  for(let i=0;i<=m;i++){d[i]=[i];}
+  for(let j=0;j<=n;j++){d[0][j]=j;}
+  for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)
+    d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+  return d[m][n];
+}
+const isVowel=c=>"aeiou".includes(c);
+/* generate spelling variants, each tagged with phonetic safety + edit distance from the original.
+   Corrections in practice ADD or substitute like-sounds — they rarely drop letters — so deletion is omitted. */
+function genVariants(f){
+  const out=new Map();
+  const put=(v,safe)=>{
+    if(v.length<2||v.length>f.length+2) return;
+    if(!out.has(v) || (!out.get(v)&&safe)) out.set(v,safe);
+  };
+  put(f,true);                                              /* the original spelling */
+  for(let i=0;i<f.length;i++) put(f.slice(0,i+1)+f[i]+f.slice(i+1), true);   /* double a letter — sound preserved */
+  for(let i=1;i<=f.length;i++) put(f.slice(0,i)+"h"+f.slice(i), false);      /* add 'h' — usually aspirates/changes the consonant */
+  for(let i=1;i<=f.length;i++) for(const v of ["a","e","i","u"]) put(f.slice(0,i)+v+f.slice(i), false); /* inserted vowel adds a syllable */
+  const SAFE=[["i","ee"],["ee","i"],["u","oo"],["oo","u"],["v","w"],["w","v"],["c","k"],["k","c"]];
+  const UNSAFE=[["j","z"],["z","j"],["sh","s"],["s","sh"]];
+  for(const[a,b]of SAFE) if(f.includes(a)) put(f.replace(a,b),true);
+  for(const[a,b]of UNSAFE) if(f.includes(a)) put(f.replace(a,b),false);
+  return [...out.entries()].map(([v,safe])=>({v,safe,dist:lev(f,v)}));
+}
+
+function scoreCandidate(fullName,mulank,bhagyank,janma,lagnaLord){
+  const {compound,single}=nameNumbers(fullName);
+  const rm=relation(single,mulank), rb=relation(single,bhagyank);
+  const RL={friend:"friendly",neutral:"neutral",enemy:"inimical"};
+  let score=0; const factors=[];
+  const add=(t,d)=>{score+=d;factors.push({t,d,k:d>0?"good":(d<0?"bad":"mid")});};
+
+  add(`Mulank ${mulank} (${PLANETS[mulank].en}): ${RL[rm]}`, REL_SCORE[rm]*3);
+  add(`Bhagyank ${bhagyank} (${PLANETS[bhagyank].en}): ${RL[rb]}`, REL_SCORE[rb]*3);
+  if(lagnaLord){const r=relation(single,lagnaLord);add(`Lagna lord ${PLANETS[lagnaLord].en}: ${RL[r]}`,REL_SCORE[r]*2);}
+
+  const comp=COMPOUNDS[compound];
+  if(comp&&comp[0]==="fortunate") add(`Compound ${compound}: fortunate`,3);
+  else if(comp&&comp[0]==="karmic") add(`Compound ${compound}: karmic`,-4);
+  if(single===4||single===8) add(`${PLANETS[single].en} number: tempered in practice`,-1);
+
+  let syl=null,tara=null,rrel=null;
+  if(janma){
+    const nakLord=LORD_NUM[NAKSHATRAS[janma.nak].lord];
+    const moonLord=RASHI_LORDS[janma.rashi];
+    const rN=relation(single,nakLord); add(`Nakshatra lord ${PLANETS[nakLord].en}: ${RL[rN]}`,REL_SCORE[rN]*2);
+    const rMo=relation(single,moonLord); add(`Moon-sign lord ${PLANETS[moonLord].en}: ${RL[rMo]}`,REL_SCORE[rMo]*2);
+
+    const own=[]; NAKSHATRAS[janma.nak].s.forEach((arr,pi)=>arr.forEach(x=>own.push({syl:x,pada:pi+1})));
+    const low=fullName.trim().toLowerCase();
+    for(const s of own){ if(low.startsWith(s.syl)){syl=s;break;} }
+    if(syl){ const ownPada=janma.pada&&syl.pada===janma.pada; add(`Opens with “${titleCase(syl.syl)}”${ownPada?" — own pada":" — sibling pada"}`, ownPada?5:4); }
+    else add(`No janma-nakshatra opening syllable`,0);
+
+    const nn=namaNakshatraOf(fullName,janma.nak);
+    if(nn){
+      const t=taraOf(janma.nak,nn.pick.nak);
+      tara={idx:t,info:TARAS[t],nak:nn.pick.nak,alts:nn.alts};
+      add(`Tara: ${TARAS[t][0]}`, TARAS[t][2]==="good"?3:(TARAS[t][2]==="mid"?2:-4));
+      const nr=rashiOfPada(nn.pick.nak,nn.pick.pada);
+      rrel={...rashiRelation(janma.rashi,nr),nr};
+      add(`Rashi: ${rrel.label}`, rrel.cls==="good"?2:(rrel.cls==="bad"?-3:0));
+    }
+  }
+  return {compound,single,rm,rb,comp,syl,tara,rrel,score,factors};
+}
+
+/* ================= UI ================= */
+const nakSel=document.getElementById("nak");
+NAKSHATRAS.forEach((nk,i)=>{const o=document.createElement("option");o.value=i;o.textContent=(i+1)+". "+nk.n+" ("+nk.lord+")";nakSel.appendChild(o);});
+
+/* ============ location finder ============ */
+let selectedPlace = null; /* {label, lat, lon, tzName?, fixedOffset?} */
+const placeInput=document.getElementById("place");
+const geoBox=document.getElementById("geoResults");
+const geoStatus=document.getElementById("geoStatus");
+
+function norm(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z ]/g," ").replace(/\s+/g," ").trim();}
+function localFallback(q){
+  const s=norm(q);
+  if(!s) return [];
+  const scored=[];
+  for(const c of CITIES){
+    const name=norm(c[0]);
+    const alias=c[4]?norm(c[4]):"";
+    const city=name.split(",")[0];
+    let rank=-1;
+    if(city.startsWith(s)) rank=0;
+    else if(alias && alias.split(" ").some(a=>a.startsWith(s))) rank=1;
+    else if(name.startsWith(s)) rank=2;
+    else if(city.includes(s)) rank=3;
+    else if(alias.includes(s)) rank=4;
+    else if(name.includes(s)) rank=5;
+    if(rank>=0) scored.push({rank,len:city.length,p:{label:c[0],lat:c[2],lon:c[3],fixedOffset:c[1]}});
+  }
+  scored.sort((a,b)=>a.rank-b.rank||a.len-b.len||a.p.label.localeCompare(b.p.label));
+  return scored.slice(0,8).map(x=>x.p);
+}
+async function geocodeLive(q){
+  try{
+    const r=await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=6&language=en&format=json`);
+    if(!r.ok) throw 0;
+    const j=await r.json();
+    return (j.results||[]).map(x=>({
+      label:[x.name,x.admin1,x.country].filter(Boolean).join(", "),
+      lat:x.latitude, lon:x.longitude, tzName:x.timezone, live:true
+    }));
+  }catch(e){ return null; }
+}
+function mergeResults(local,live){
+  if(!live||!live.length) return local;
+  const seen=new Set(local.map(p=>norm(p.label).split(",")[0]));
+  const merged=[...local];
+  for(const p of live){ if(!seen.has(norm(p.label).split(",")[0])){ merged.push(p); seen.add(norm(p.label).split(",")[0]); } }
+  return merged.slice(0,8);
+}
+function renderGeo(list){
+  if(!list.length){geoBox.style.display="none";return;}
+  geoBox.innerHTML=list.map((p,i)=>
+    `<button type="button" data-i="${i}">${p.label}<small>${Math.abs(p.lat).toFixed(2)}°${p.lat>=0?"N":"S"} ${Math.abs(p.lon).toFixed(2)}°${p.lon>=0?"E":"W"}${p.tzName?" · "+p.tzName:""}</small></button>`).join("");
+  geoBox.style.display="block";
+  [...geoBox.querySelectorAll("button")].forEach(b=>b.addEventListener("click",()=>selectPlace(list[+b.dataset.i])));
+}
+function selectPlace(p){
+  selectedPlace=p;
+  placeInput.value=p.label;
+  geoBox.style.display="none";
+  geoStatus.className="hint ok";
+  geoStatus.textContent=`✓ ${p.label} — ${Math.abs(p.lat).toFixed(2)}°${p.lat>=0?"N":"S"} ${Math.abs(p.lon).toFixed(2)}°${p.lon>=0?"E":"W"}${p.tzName?" · zone "+p.tzName:" · UTC"+(p.fixedOffset>=0?"+":"")+p.fixedOffset}`;
+}
+let geoTimer=null, geoReq=0;
+placeInput.addEventListener("input",()=>{
+  selectedPlace=null;
+  geoStatus.className="hint";
+  geoStatus.textContent="Pick a place from the list. Type a nearby town if your village isn't listed — a few km makes no practical difference.";
+  const q=placeInput.value.trim();
+  if(q.length<2){geoBox.style.display="none";return;}
+  /* instant offline matches — never depends on the network */
+  const local=localFallback(q);
+  renderGeo(local);
+  /* try to enrich with live results (works when the file is opened directly in a browser) */
+  clearTimeout(geoTimer);
+  const reqId=++geoReq;
+  geoTimer=setTimeout(async()=>{
+    const live=await geocodeLive(q);
+    if(reqId!==geoReq || selectedPlace) return;       /* superseded or already chosen */
+    if(live && live.length) renderGeo(mergeResults(local,live));
+  },300);
+});
+document.addEventListener("click",e=>{ if(!geoBox.contains(e.target)&&e.target!==placeInput) geoBox.style.display="none"; });
+
+/* UTC offset (hours) of an IANA zone for a given local wall-clock moment — tz database handles DST & history */
+function offsetForZone(tzName,y,m,d,h,mi){
+  let guessUTC=Date.UTC(y,m-1,d,h,mi);
+  for(let i=0;i<2;i++){
+    const f=new Intl.DateTimeFormat("en-US",{timeZone:tzName,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hour12:false});
+    const parts=Object.fromEntries(f.formatToParts(new Date(guessUTC)).map(p=>[p.type,p.value]));
+    const asLocal=Date.UTC(+parts.year,+parts.month-1,+parts.day,parts.hour==="24"?0:+parts.hour,+parts.minute);
+    const off=(asLocal-guessUTC)/3600000;
+    guessUTC=Date.UTC(y,m-1,d,h,mi)-off*3600000;
+    if(i===1)return off;
+  }
+}
+function placeOffset(y,m,d,h,mi){
+  if(!selectedPlace) return null;
+  if(selectedPlace.tzName){
+    try{ return offsetForZone(selectedPlace.tzName,y,m,d,h,mi); }catch(e){}
+  }
+  return selectedPlace.fixedOffset ?? null;
+}
+
+const diamondSVG=`<svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="#e0a93e" stroke-width="1.4" opacity="0.85"><rect x="16" y="16" width="68" height="68" transform="rotate(45 50 50)"/><rect x="26" y="26" width="48" height="48" transform="rotate(45 50 50)" opacity="0.5"/></g></svg>`;
+function medallion(label,num,sub){const p=PLANETS[num];return`<div class="med"><div class="diamond">${diamondSVG}<span class="num">${num}</span></div><div class="label">${label}</div><div class="planet">${p.sa} · ${p.en}</div>${sub?`<div class="sub">${sub}</div>`:""}</div>`;}
+function chip(rel){const t={friend:"Friendly",neutral:"Neutral",enemy:"Inimical"}[rel];return`<span class="chip ${rel}">${t}</span>`;}
+function relCell(rel){const t={friend:"Friendly",neutral:"Neutral",enemy:"Inimical"}[rel];return`<span class="dot ${rel}"></span>${t}`;}
+function degFmt(x){const d=Math.floor(x),m=Math.round((x-d)*60);return`${d}°${String(m).padStart(2,"0")}′`;}
+function taraCell(t){if(!t)return`<span class="cross">—</span>`;const cls=t.info[2]==="good"?"tara-good":(t.info[2]==="bad"?"tara-bad":"tara-mid");return`<span class="${cls}">${t.info[0]}</span>`;}
+function rashiCell(r){if(!r)return`<span class="cross">—</span>`;const cls=r.cls==="good"?"tara-good":(r.cls==="bad"?"tara-bad":"tara-mid");return`<span class="${cls}">${r.label}</span>`;}
+
+document.getElementById("go").addEventListener("click",()=>{
+  const err=document.getElementById("err"); err.style.display="none";
+  const rawName=document.getElementById("fullname").value.trim();
+  const dobVal=document.getElementById("dob").value;
+  const genderVal=document.getElementById("gender").value;
+  if(!rawName||!/[a-zA-Z]/.test(rawName)){err.textContent="Enter a name using Roman letters (A–Z).";err.style.display="block";return;}
+  if(!dobVal){err.textContent="Enter the date of birth — it gives the Mulank, Bhagyank, and the Moon's position.";err.style.display="block";return;}
+  if(!genderVal){err.textContent="Select gender so the consultation note can be prepared correctly.";err.style.display="block";return;}
+
+  const [Y,M,D]=dobVal.split("-").map(Number);
+  const mulank=reduce1to9(D);
+  const bhagyank=reduce1to9((String(Y)+String(M).padStart(2,"0")+String(D).padStart(2,"0")).split("").reduce((a,d)=>a+ +d,0));
+
+  /* ---- janma details ---- */
+  let janma=null, autoUsed=false, timeAssumed=false, cast=null, lagna=null, tzAssumed=false;
+  const tobVal=document.getElementById("tob").value;
+  let hours=12, mins=0;
+  if(tobVal){const[h,mi]=tobVal.split(":").map(Number);hours=h+mi/60;mins=mi;}
+  let tz=placeOffset(Y,M,D,Math.floor(hours),mins);
+  if(tz===null){ tz=5.5; tzAssumed=true; }   /* no place chosen → assume IST */
+  if(nakSel.value==="auto"){
+    timeAssumed=!tobVal;
+    cast=castMoon(Y,M,D,hours,tz);
+    janma={nak:cast.nak,pada:cast.pada,rashi:cast.rashi};
+    autoUsed=true;
+  }else if(nakSel.value!==""){
+    const ni=+nakSel.value;
+    janma={nak:ni,pada:null,rashi:rashiOfPada(ni,2)}; /* mid-pada rashi estimate */
+  }
+  /* lagna needs time + a resolved place */
+  if(tobVal && selectedPlace){
+    const jdB=julianDay(Y,M,D,hours-tz);
+    const lag=lagnaSidereal(jdB,selectedPlace.lat,selectedPlace.lon);
+    const lr=Math.floor(lag/30);
+    lagna={deg:lag,rashi:lr,lordNum:RASHI_LORDS[lr]};
+  }
+
+  /* ---- kundali snapshot ---- */
+  const kd=document.getElementById("kundali");
+  if(autoUsed&&cast){
+    const nk=NAKSHATRAS[cast.nak];
+    const inRashi=cast.sid-cast.rashi*30;
+    const lordIdx=cast.nak%9;
+    const balYears=DASHA[lordIdx][1]*(1-cast.frac);
+    const by=Math.floor(balYears), bm=Math.round((balYears-by)*12);
+    kd.innerHTML=`
+      <h2 class="section-title"><small>Janma Kundali</small>The Moon at birth</h2>
+      <div class="card">
+        <div class="kv">
+          <div class="item"><div class="k">Sidereal Moon</div><div class="v">${degFmt(inRashi)} ${RASHIS[cast.rashi][0]}<small>${degFmt(cast.sid)} absolute · ayanamsa ${degFmt(cast.ayan)}</small></div></div>
+          <div class="item"><div class="k">Janma rashi</div><div class="v">${RASHIS[cast.rashi][0]}<small>${RASHIS[cast.rashi][1]} Moon sign</small></div></div>
+          <div class="item"><div class="k">Gender</div><div class="v">${genderVal}<small>used for consultation context</small></div></div>
+          <div class="item"><div class="k">Janma nakshatra</div><div class="v">${nk.n} · pada ${cast.pada}<small>Lord ${nk.lord} · Deity ${nk.deity}</small></div></div>
+          <div class="item"><div class="k">Gana / Yoni</div><div class="v">${nk.gana}<small>${nk.yoni} yoni</small></div></div>
+          <div class="item"><div class="k">Dasha at birth</div><div class="v">${DASHA[lordIdx][0]}<small>balance ≈ ${by}y ${bm}m</small></div></div>
+          ${lagna?`<div class="item"><div class="k">Lagna · ascendant</div><div class="v">${RASHIS[lagna.rashi][0]} ${degFmt(lagna.deg-lagna.rashi*30)}<small>${RASHIS[lagna.rashi][1]} rising · lord ${PLANETS[lagna.lordNum].sa}</small></div></div>`:""}
+        </div>
+        ${!lagna?`<div class="note">Choose a birth place from the location finder (plus the time) to compute the lagna — the rising sign sharpens the name verdict.</div>`:""}
+        ${tzAssumed?`<div class="note warn">No birth place selected, so IST (UTC+5:30) was assumed for the timezone. Pick a place for an exact conversion.</div>`:
+          `<div class="note">Timezone resolved for ${selectedPlace.label}: UTC${tz>=0?"+":""}${tz} at the birth moment${selectedPlace.tzName?" (from the "+selectedPlace.tzName+" zone history, DST-aware)":""}.</div>`}
+        ${timeAssumed?`<div class="note warn">No birth time was given, so noon was assumed — the Moon moves ≈13° a day, so the nakshatra can differ. Add the time for a reliable result.</div>`:""}
+        ${cast.boundary?`<div class="note warn">The Moon sits within ≈0.3° of a nakshatra boundary at this moment. Verify against a full ephemeris before relying on this nakshatra.</div>`:""}
+      </div>`;
+  } else { kd.innerHTML=""; }
+
+  /* ---- numbers ---- */
+  const {compound,single}=nameNumbers(rawName);
+  const rm=relation(single,mulank), rb=relation(single,bhagyank);
+  document.getElementById("medallions").innerHTML=
+    medallion("Name number · Namank",single,`Compound ${compound}`)+
+    medallion("Birth number · Mulank",mulank,`Day of birth: ${D}`)+
+    medallion("Destiny number · Bhagyank",bhagyank,"Full date reduced");
+  document.getElementById("verdicts").innerHTML=`
+    <div class="verdict"><h4>Name ${single} (${PLANETS[single].en}) with Mulank ${mulank} (${PLANETS[mulank].en})</h4>${chip(rm)}</div>
+    <div class="verdict"><h4>Name ${single} (${PLANETS[single].en}) with Bhagyank ${bhagyank} (${PLANETS[bhagyank].en})</h4>${chip(rb)}</div>
+    ${lagna?`<div class="verdict" style="grid-column:1/-1"><h4>Name ${single} (${PLANETS[single].en}) with lagna lord ${PLANETS[lagna.lordNum].sa} — ${RASHIS[lagna.rashi][0]} rising</h4>${chip(relation(single,lagna.lordNum))}</div>`:""}`;
+  const compInfo=COMPOUNDS[compound];
+  document.getElementById("compoundNote").innerHTML=compInfo
+    ?`<div class="note ${compInfo[0]==="karmic"?"warn":"good"}"><strong>Compound ${compound}</strong> — a ${compInfo[0]} number in the Chaldean tradition: ${compInfo[1]}.</div>`
+    :`<div class="note"><strong>Compound ${compound}</strong> — no special karmic or fortunate weight; the single digit ${single} (${PLANETS[single].en}) carries the result.</div>`;
+
+  /* ---- syllable block ---- */
+  const nb=document.getElementById("nakBlock");
+  if(janma){
+    const nk=NAKSHATRAS[janma.nak];
+    const own=[]; nk.s.forEach((arr,pi)=>arr.forEach(x=>own.push({syl:x,pada:pi+1})));
+    const low=rawName.toLowerCase();
+    let hit=null; for(const s of own){if(low.startsWith(s.syl)){hit=s;break;}}
+    nb.innerHTML=`
+      <h2 class="section-title"><small>Avakahada Chakra</small>${nk.n} · ruled by ${nk.lord}</h2>
+      <div class="card">
+        <p style="color:var(--ivory-dim)">Auspicious opening syllables${janma.pada?` — your pada (${janma.pada}) is highlighted in tradition as the strongest`:""}:</p>
+        <div class="syll-row">${own.map(s=>`<div class="syll ${hit&&hit.syl===s.syl?"hit":""}"><div class="s">${titleCase(s.syl)}</div><div class="p">Pada ${s.pada}${janma.pada===s.pada?" ★":""}</div></div>`).join("")}</div>
+        ${hit
+          ?`<div class="note good"><strong>${rawName.split(/\s+/)[0]}</strong> opens with <strong>${titleCase(hit.syl)}</strong> — it honours ${nk.n}${janma.pada?(hit.pada===janma.pada?" in your own pada, the classical ideal.":" (pada "+hit.pada+", a sibling pada — still auspicious)."):"."}</div>`
+          :`<div class="note warn">The name does not open with a ${nk.n} syllable. Tradition keeps it as the <em>vyavaharika</em> (worldly) name and assigns a nakshatra-aligned name for ritual use — or shifts the everyday spelling toward a syllable above.</div>`}
+      </div>`;
+  } else nb.innerHTML="";
+
+  /* ---- tara bala of current name ---- */
+  const tb=document.getElementById("taraBlock");
+  if(janma){
+    const nn=namaNakshatraOf(rawName,janma.nak);
+    if(nn){
+      const t=taraOf(janma.nak,nn.pick.nak);
+      const info=TARAS[t];
+      const nr=rashiOfPada(nn.pick.nak,nn.pick.pada);
+      const rr=rashiRelation(janma.rashi,nr);
+      tb.innerHTML=`
+        <h2 class="section-title"><small>Tara Bala &amp; Rashi Maitri</small>The name as a star</h2>
+        <div class="card">
+          <div class="kv">
+            <div class="item"><div class="k">Nama nakshatra</div><div class="v">${NAKSHATRAS[nn.pick.nak].n}<small>from opening syllable “${titleCase(nn.pick.syl)}” (pada ${nn.pick.pada})${nn.alts?` · ${nn.alts} alternate reading${nn.alts>1?"s":""}`:""}</small></div></div>
+            <div class="item"><div class="k">Tara from janma</div><div class="v"><span class="${info[2]==="good"?"tara-good":(info[2]==="bad"?"tara-bad":"tara-mid")}">${t+1}. ${info[0]}</span><small>${info[1]}</small></div></div>
+            <div class="item"><div class="k">Nama rashi vs janma rashi</div><div class="v"><span class="${rr.cls==="good"?"tara-good":(rr.cls==="bad"?"tara-bad":"tara-mid")}">${rr.label}</span><small>${RASHIS[nr][0]} from ${RASHIS[janma.rashi][0]}</small></div></div>
+          </div>
+          ${info[2]==="bad"||rr.cls==="bad"
+            ?`<div class="note warn">A name falling in ${info[2]==="bad"?info[0]+" tara":""}${info[2]==="bad"&&rr.cls==="bad"?" and ":""}${rr.cls==="bad"?rr.label:""} from the janma position is classically corrected — the suggestions below favour syllables that land in Sampat, Kshema, Sadhaka, Mitra, or Ati-Mitra taras.</div>`
+            :`<div class="note good">The name's star sits well relative to the birth star — corrections below focus mainly on the number harmony.</div>`}
+        </div>`;
+    } else {
+      tb.innerHTML=`<h2 class="section-title"><small>Tara Bala</small>The name as a star</h2><div class="card"><div class="note">The opening of this name doesn't map cleanly onto an Avakahada syllable, so tara bala can't be read from it. The suggestions below include variants that do.</div></div>`;
+    }
+  } else tb.innerHTML="";
+
+  /* ---- suggestions ---- */
+  const parts=rawName.split(/\s+/), first=parts[0], rest=parts.slice(1).join(" ");
+  const firstLow=first.toLowerCase();
+  const lagnaLord=lagna?lagna.lordNum:null;
+
+  const cands=genVariants(firstLow).map(o=>{
+    const full=titleCase(o.v)+(rest?" "+rest:"");
+    const sc=scoreCandidate(full,mulank,bhagyank,janma,lagnaLord);
+    /* minimal-change & pronunciation nudge — small, so the astrology dominates */
+    const nudge=(o.safe?1:0)+Math.max(0,2-o.dist);
+    return {display:full,v:o.v,dist:o.dist,safe:o.safe,total:sc.score+nudge,...sc};
+  });
+  /* dedupe by spelling, keep the best-scoring instance */
+  const byName=new Map();
+  for(const c of cands){ const k=c.display.toLowerCase(); if(!byName.has(k)||byName.get(k).total<c.total) byName.set(k,c); }
+  const all=[...byName.values()];
+
+  const orig=all.find(c=>c.dist===0);
+  const bySC=(a,b)=>b.total-a.total||a.dist-b.dist||a.display.length-b.display.length;
+  const safe=all.filter(c=>c.dist>0&&c.safe).sort(bySC);
+  const unsafe=all.filter(c=>c.dist>0&&!c.safe).sort(bySC);
+
+  /* recommend from sound-preserving spellings first; fall back to sound-changing only if nothing safe improves the name.
+     Crucially: if nothing beats the original, best stays null and the original stands. */
+  let best=null, fellBack=false;
+  if(safe.length && safe[0].total>orig.total) best=safe[0];
+  else if(unsafe.length && unsafe[0].total>orig.total){ best=unsafe[0]; fellBack=true; }
+
+  /* ---- verdict: does the name actually need correction? (tiered by severity) ---- */
+  const serious=[], minor=[];
+  if(orig.rm==="enemy") serious.push(`the name number ${orig.single} (${PLANETS[orig.single].en}) is inimical to the Mulank ${mulank} (${PLANETS[mulank].en})`);
+  if(orig.rb==="enemy") serious.push(`the name number is inimical to the Bhagyank ${bhagyank} (${PLANETS[bhagyank].en})`);
+  if(orig.comp&&orig.comp[0]==="karmic") serious.push(`the compound number ${orig.compound} is treated as karmic`);
+  if(janma&&orig.tara&&orig.tara.info[2]==="bad") serious.push(`the name falls in ${orig.tara.info[0]} tara from the birth star`);
+  if(janma&&orig.rrel&&orig.rrel.cls==="bad") serious.push(`the name's rashi sits in ${orig.rrel.label} from the janma rashi`);
+  if(janma&&!orig.syl) minor.push(`it does not open with a ${NAKSHATRAS[janma.nak].n} syllable — classically the everyday name may differ from the ritual nakshatra name, so this alone is a refinement, not a fault`);
+
+  const realGain=best && (best.total-orig.total)>=3;       /* a meaningful improvement */
+  const needsCorrection=serious.length>0;
+
+  const vb=document.getElementById("verdictBox");
+  if(serious.length){
+    vb.className="verdict-box warn";
+    vb.innerHTML=`<h3>A correction is worth considering</h3>
+      <p>For <b>${titleCase(firstLow)}</b>, ${serious.length===1?"one point stands out":"a few points stand out"}:</p>
+      <ul>${serious.concat(minor).map(p=>`<li>${p}</li>`).join("")}</ul>
+      ${best?`<p style="margin-top:10px">The smallest sound-${fellBack?"changing":"preserving"} spelling that improves this is <b>${best.display.split(/\s+/)[0]}</b>, below.${fellBack?" No spelling that keeps the exact pronunciation resolved it, so this one alters the sound slightly.":""}</p>`
+            :`<p style="margin-top:10px">None of the simple spelling changes explored improve on the original here — this is a case to take to a practising jyotishi rather than force a respelling.</p>`}`;
+  } else if(minor.length){
+    vb.className="verdict-box good";
+    vb.innerHTML=`<h3>Largely harmonious — one optional refinement</h3>
+      <p><b>${titleCase(firstLow)}</b> has no fault in its numbers or star. The only note: ${minor[0]}.</p>
+      ${best&&realGain?`<p style="margin-top:10px">If you'd like to align the syllable too, <b>${best.display.split(/\s+/)[0]}</b> below does so while keeping the name recognisable.</p>`
+                      :`<p style="margin-top:10px">No respelling improves on it, so the working name is best left as it is — or a separate nakshatra name kept only for ritual use.</p>`}`;
+  } else if(best&&realGain){
+    vb.className="verdict-box good";
+    vb.innerHTML=`<h3>The name works; a lighter tuning is optional</h3>
+      <p><b>${titleCase(firstLow)}</b> has no classical fault. If you wish to strengthen it further, <b>${best.display.split(/\s+/)[0]}</b> scores a little higher — polish, not a remedy.</p>`;
+  } else {
+    vb.className="verdict-box good";
+    vb.innerHTML=`<h3>The name is already harmonious</h3>
+      <p>By these measures <b>${titleCase(firstLow)}</b> sits well with the chart — no correction is needed. Tradition's counsel here is to leave a working name unchanged. The alternatives below are shown only for comparison.</p>`;
+  }
+
+  /* ---- choose what to display: lead with the highlighted option ---- */
+  const ranked=[...safe,...unsafe];
+  /* the minimal sound-preserving improver (smallest edit that still helps) */
+  const minimalCand=safe.filter(c=>c.total>orig.total).sort((a,b)=>a.dist-b.dist||b.total-a.total)[0];
+  const minimalPick=minimalCand?minimalCand.display:null;
+
+  let showList;
+  if(best){
+    const others=ranked.filter(c=>c.display!==best.display).slice(0,4);
+    showList=[best,...others,orig];
+  } else {
+    showList=[orig,...ranked.slice(0,5)];
+  }
+
+  const maxTotal=Math.max(...showList.map(c=>c.total),1);
+  const origStands=!best;
+  document.getElementById("suggCards").innerHTML=showList.map(c=>{
+    const isOrig=c.dist===0;
+    const isBest=(best&&c.display===best.display) || (origStands&&isOrig);
+    const badges=[];
+    if(best&&c.display===best.display) badges.push(`<span class="badge rec">recommended</span>`);
+    if(isOrig) badges.push(`<span class="badge cur">current${origStands?" · already best":""}</span>`);
+    if(c.display===minimalPick&&!isOrig&&best) badges.push(`<span class="badge min">minimal change</span>`);
+    const change=isOrig?"unchanged":`${c.dist} letter${c.dist>1?"s":""} changed · ${c.safe?"sounds the same":"sound differs"}`;
+    const chips=c.factors.map(f=>
+      `<span class="fchip ${f.k}">${f.t}<span class="d">${f.d>0?"+"+f.d:(f.d<0?f.d:"·")}</span></span>`).join("");
+    return `<div class="cand ${isBest?"best":""} ${isOrig?"orig":""}">
+      <div class="cand-head">
+        <div class="cand-name">${c.display.split(/\s+/)[0]}${rest?` <span style="font-family:'Karla';font-size:15px;color:var(--ivory-dim)">${rest}</span>`:""} ${badges.join(" ")}</div>
+        <div class="bar" title="relative score"><span style="width:${Math.max(6,Math.round(c.total/maxTotal*100))}%"></span></div>
+      </div>
+      <div class="cand-meta">Compound <b>${c.compound}</b> → <b>${c.single} ${PLANETS[c.single].en}</b> · ${change}</div>
+      <div class="chips">${chips}</div>
+    </div>`;
+  }).join("");
+
+  document.getElementById("suggNote").innerHTML=
+    `Each spelling is weighed on the name number's friendship with the Mulank, Bhagyank${lagna?", lagna lord":""}${janma?", janma-nakshatra lord and Moon-sign lord":""}; the fortunate/karmic compound; ${janma?"the opening syllable, tara from the birth star, and rashi placement; ":""}and then nudged toward the smallest, sound-preserving change. Green factors help the name, red ones weigh against it. A correction is adopted gradually — signature first, then everyday use, ideally begun on an auspicious day.`;
+
+  /* ---- remedies for the recommended (or current) name's planet ---- */
+  const chosen=best||orig;
+  const bestNum=chosen.single, rem=REMEDIES[bestNum], pl=PLANETS[bestNum];
+  document.getElementById("remedy").innerHTML=`
+    <h2 class="section-title"><small>Graha of the chosen name</small>Strengthening ${pl.sa} (${pl.en})</h2>
+    <div class="card">
+      <div class="kv">
+        <div class="item"><div class="k">Ratna · gem</div><div class="v">${rem.gem}<small>worn only after a full chart reading</small></div></div>
+        <div class="item"><div class="k">Colour</div><div class="v">${rem.color}</div></div>
+        <div class="item"><div class="k">Vara · day</div><div class="v">${rem.day}<small>favourable for beginning the new spelling</small></div></div>
+        <div class="item"><div class="k">Beeja mantra</div><div class="v" style="font-size:15px">${rem.mantra}</div></div>
+      </div>
+    </div>`;
+
+  const consultationText=[
+    "Hi, I want a Namakshara name correction consultation.",
+    `Name: ${rawName}`,
+    `Gender: ${genderVal}`,
+    `DOB: ${dobVal}`,
+    `Time: ${tobVal || "Unknown"}`,
+    `Place: ${selectedPlace ? selectedPlace.label : (document.getElementById("place").value.trim() || "Not selected")}`,
+    `Current number: ${single} (${PLANETS[single].en})`,
+    `Suggested spelling: ${(best||orig).display}`
+  ].join("\n");
+  document.getElementById("consultationCta").innerHTML=`
+    <div class="consult-cta">
+      <h3>Want this checked as a consultation?</h3>
+      <p>This tool gives a structured first reading. A full consultation checks gender context, chart strength, lagna, dasha, family naming tradition, and whether a spelling change should actually be adopted.</p>
+      <div class="consult-actions">
+        <a class="primary" href="https://wa.me/919057918251?text=${encodeURIComponent(consultationText)}" target="_blank" rel="noopener noreferrer">Book Name Consultation</a>
+        <a class="secondary" href="../../#services">View Consultations</a>
+      </div>
+    </div>`;
+
+  document.getElementById("results").style.display="block";
+  document.getElementById("results").scrollIntoView({behavior:"smooth",block:"start"});
+});
+</script>
+</body>
+</html>
