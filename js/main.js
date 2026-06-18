@@ -727,8 +727,13 @@ function initLeadForms() {
                 ? serviceField.options[serviceField.selectedIndex].text
                 : (formData.get('service') || 'General consultation');
 
+            const serviceValue = serviceField ? serviceField.value : '';
+            const isIshaService = ['tarot', 'vastu', 'numerology', 'manifestation'].includes(serviceValue);
+            const targetNumber = isIshaService ? '917795374787' : '919057918251';
+            const recipientName = isIshaService ? 'Isha' : 'Arihant';
+
             const message = [
-                'Hi Arihant, I would like to book a consultation.',
+                `Hi ${recipientName}, I would like to book a consultation.`,
                 '',
                 `Name: ${formData.get('name') || ''}`,
                 `Email: ${formData.get('email') || ''}`,
@@ -738,7 +743,7 @@ function initLeadForms() {
                 `${formData.get('message') || ''}`
             ].join('\n');
 
-            const whatsappUrl = `https://wa.me/919057918251?text=${encodeURIComponent(message)}`;
+            const whatsappUrl = `https://wa.me/${targetNumber}?text=${encodeURIComponent(message)}`;
             const openedWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
             if (!openedWindow) {
                 window.location.href = whatsappUrl;
