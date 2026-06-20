@@ -729,8 +729,9 @@ function initLeadForms() {
 
             const serviceValue = serviceField ? serviceField.value : '';
             const isIshaService = ['tarot', 'vastu', 'numerology', 'manifestation'].includes(serviceValue);
-            const targetNumber = isIshaService ? '917795374787' : '919057918251';
-            const recipientName = isIshaService ? 'Isha' : 'Arihant';
+            const isManasaviService = serviceValue === 'kundali-prediction' || selectedService.toLowerCase().includes('kundali prediction');
+            const targetNumber = isManasaviService ? '919079249680' : (isIshaService ? '917795374787' : '919057918251');
+            const recipientName = isManasaviService ? 'Manasavi' : (isIshaService ? 'Isha' : 'Arihant');
 
             const message = [
                 `Hi ${recipientName}, I would like to book a consultation.`,
