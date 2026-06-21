@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-adsense-account" content="ca-pub-9194178610009666">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9194178610009666" crossorigin="anonymous"></script>
+<title>Vivah Jyotish — Marriage reading from your kundali</title>
+<meta name="description" content="Use Vivah Jyotish, Shambhavaa's marriage astrology tool, to read marriage indicators from kundali details, planetary placements, and dasha-transit timing.">
+<link rel="canonical" href="https://shambhavaa.com/tools/vivah-jyotish/">
+<link rel="icon" href="../../assets/logo.png" type="image/png">
+<meta property="og:title" content="Vivah Jyotish | Marriage Reading Tool">
+<meta property="og:description" content="A kundali-based marriage astrology tool for relationship timing, chart indicators, and practical marriage reading.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shambhavaa.com/tools/vivah-jyotish/">
+<meta property="og:image" content="https://shambhavaa.com/assets/om_bg.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1d1510;          /* deep manuscript ink ground */
+    --ink-2:#2a1f17;
+    --paper:#f3e7cb;        /* aged palm-leaf paper */
+    --paper-2:#e9d9b4;
+    --paper-line:#cdb88a;
+    --sindoor:#c1361b;      /* vermilion — the auspicious accent */
+    --sindoor-deep:#8f2412;
+    --turmeric:#cf9526;     /* gold / turmeric */
+    --maroon:#5e1a14;
+    --text-ink:#3a2a1c;     /* text on paper */
+    --text-mute:#7a6648;
+    --cream:#ecd9b2;        /* text on ink */
+    --cream-mute:#b39c74;
+    --display:"Marcellus", "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    --body:"Spectral", Georgia, "Times New Roman", serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  .tool-nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 24px;border-bottom:1px solid rgba(207,149,38,.35);background:rgba(29,21,16,.92);backdrop-filter:blur(12px)}
+  .tool-logo{font-family:var(--display);font-size:28px;color:var(--paper);text-decoration:none}
+  .tool-links{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+  .tool-links a{color:var(--cream);border:1px solid rgba(207,149,38,.4);border-radius:999px;padding:8px 12px;text-decoration:none;font-family:var(--display);font-size:13px;letter-spacing:.05em;background:rgba(207,149,38,.08)}
+  .tool-links a:hover{border-color:var(--turmeric);color:var(--turmeric)}
+  @media(max-width:680px){.tool-nav{align-items:flex-start;flex-direction:column;padding:13px 18px}.tool-logo{font-size:25px}.tool-links{justify-content:flex-start}.tool-links a{font-size:11px;padding:7px 9px}}
+  body{
+    background:
+      radial-gradient(120% 90% at 50% -10%, #2c2016 0%, var(--ink) 55%, #140e0a 100%);
+    color:var(--cream);
+    font-family:var(--body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  .wrap{max-width:1060px;margin:0 auto;padding:clamp(20px,4vw,52px) clamp(16px,4vw,40px) 80px}
+
+  /* ---------- masthead ---------- */
+  header.masthead{text-align:center;position:relative;padding-bottom:26px;margin-bottom:34px}
+  .eyebrow{
+    font-family:var(--display);
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    font-size:13px;
+    color:var(--turmeric);
+    margin:0 0 14px;
+    padding-left:.42em;
+  }
+  h1{
+    font-family:var(--display);
+    font-weight:400;
+    font-size:clamp(31px,6vw,56px);
+    line-height:1.04;
+    margin:0;
+    color:var(--paper);
+  }
+  h1 em{color:var(--sindoor);font-style:normal}
+  .dek{
+    max-width:46ch;margin:16px auto 0;
+    color:var(--cream-mute);font-size:16px;
+  }
+  .rule{
+    width:100%;height:1px;margin:30px auto 0;
+    background:linear-gradient(90deg,transparent,var(--turmeric),transparent);
+    opacity:.5;
+  }
+  .sun{
+    width:34px;height:34px;margin:0 auto 18px;display:block;color:var(--sindoor);
+  }
+
+  /* ---------- panels ---------- */
+  .panel{
+    background:
+      linear-gradient(180deg,var(--paper) 0%,var(--paper-2) 100%);
+    color:var(--text-ink);
+    border-radius:6px;
+    border:1px solid #c9b083;
+    box-shadow:0 1px 0 #fff7e6 inset, 0 18px 40px -22px rgba(0,0,0,.7);
+    padding:clamp(20px,3.4vw,34px);
+    position:relative;
+  }
+  .panel::before{ /* corner tick marks, manuscript margin feel */
+    content:"";position:absolute;inset:9px;border:1px solid var(--paper-line);
+    border-radius:3px;pointer-events:none;opacity:.55;
+    -webkit-mask:linear-gradient(#000 0 0) padding-box;
+  }
+  .panel-head{font-family:var(--display);font-size:13px;letter-spacing:.32em;
+    text-transform:uppercase;color:var(--maroon);margin:0 0 4px}
+  .panel-sub{color:var(--text-mute);font-size:14.5px;margin:0 0 22px}
+
+  /* ---------- tabs ---------- */
+  .tabs{display:flex;gap:0;margin-bottom:24px;border-bottom:1px solid var(--paper-line)}
+  .tab{
+    appearance:none;background:none;border:none;cursor:pointer;
+    font-family:var(--display);font-size:14px;letter-spacing:.06em;
+    color:var(--text-mute);padding:10px 16px 12px;position:relative;
+  }
+  .tab[aria-selected="true"]{color:var(--maroon)}
+  .tab[aria-selected="true"]::after{
+    content:"";position:absolute;left:8px;right:8px;bottom:-1px;height:2px;background:var(--sindoor)
+  }
+  .tab:focus-visible{outline:2px solid var(--sindoor);outline-offset:2px;border-radius:3px}
+
+  /* ---------- form grid ---------- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px 18px}
+  .field label{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--text-mute);margin-bottom:5px;font-family:var(--display)}
+  .field .sa{color:var(--sindoor-deep);font-style:italic;text-transform:none;letter-spacing:0;font-family:var(--body)}
+  select,input[type="number"],input[type="date"],input[type="time"],input[type="text"]{
+    width:100%;font-family:var(--body);font-size:15px;color:var(--text-ink);
+    background:#fbf3df;border:1px solid #c4a874;border-radius:4px;padding:9px 10px;
+  }
+  select:focus,input:focus{outline:2px solid var(--sindoor);outline-offset:0;border-color:var(--sindoor)}
+  .asc-field select{background:#f6e6c5;border-color:var(--sindoor);box-shadow:0 0 0 1px rgba(193,54,27,.25)}
+
+  .place-field{position:relative}
+  .place-list{position:absolute;z-index:20;left:0;right:0;top:100%;margin:4px 0 0;padding:4px;
+    list-style:none;background:#fbf3df;border:1px solid var(--sindoor);border-radius:5px;
+    box-shadow:0 16px 32px -16px rgba(0,0,0,.5);max-height:248px;overflow:auto;display:none}
+  .place-list.open{display:block}
+  .place-list li{padding:8px 10px;border-radius:4px;cursor:pointer;font-size:14px;color:var(--text-ink);line-height:1.3}
+  .place-list li .reg{display:block;font-size:12px;color:var(--text-mute)}
+  .place-list li.active,.place-list li:hover{background:rgba(193,54,27,.12)}
+  .place-list li.none{cursor:default;color:var(--text-mute);font-style:italic}
+  .place-list li.none:hover{background:none}
+  .place-resolved{margin:12px 0 0;font-size:13.5px;color:var(--maroon);min-height:1px}
+  .place-resolved b{color:var(--text-ink)}
+
+  .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px;align-items:center}
+  .btn{
+    appearance:none;cursor:pointer;font-family:var(--display);letter-spacing:.08em;
+    font-size:15px;border-radius:4px;padding:12px 26px;border:1px solid transparent;transition:.15s;
+  }
+  .btn-primary{background:var(--sindoor);color:#fff4e8;box-shadow:0 8px 18px -10px var(--sindoor-deep)}
+  .btn-primary:hover{background:var(--sindoor-deep)}
+  .btn-ghost{background:transparent;color:var(--maroon);border-color:#c19b6a}
+  .btn-ghost:hover{background:#efe0bf}
+  .btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .hint{font-size:13px;color:var(--text-mute);margin-left:auto}
+
+  .note{font-size:13px;color:var(--text-mute);margin:16px 0 0;padding:11px 14px;
+    background:#f7ecd2;border-left:3px solid var(--turmeric);border-radius:0 4px 4px 0}
+
+  .err{color:var(--sindoor-deep);font-size:14px;margin-top:14px;min-height:1px}
+
+  .finetune{margin-top:22px;border-top:1px solid var(--paper-line);padding-top:16px}
+  .finetune summary{cursor:pointer;font-family:var(--display);letter-spacing:.06em;color:var(--maroon);
+    font-size:14px;list-style:none}
+  .finetune summary::-webkit-details-marker{display:none}
+  .finetune summary::before{content:"+ ";color:var(--sindoor);font-weight:600}
+  .finetune[open] summary::before{content:"– "}
+  .finetune summary:focus-visible{outline:2px solid var(--sindoor);outline-offset:3px;border-radius:3px}
+
+  /* ---------- results ---------- */
+  #results{margin-top:34px;display:none}
+  #results.show{display:block;animation:rise .5s ease both}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+  .verdict{text-align:center;margin-bottom:26px}
+  .verdict .lead{font-family:var(--display);font-size:clamp(24px,4.4vw,38px);color:var(--paper);margin:0}
+  .verdict .lead .hl{color:var(--sindoor)}
+  .tags{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:18px}
+  .tag{font-size:13px;letter-spacing:.04em;padding:6px 14px;border-radius:999px;
+    border:1px solid var(--turmeric);color:var(--turmeric);background:rgba(207,149,38,.08)}
+  .tag.warn{border-color:var(--sindoor);color:#e98b76;background:rgba(193,54,27,.12)}
+
+  .result-cols{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:26px;align-items:start}
+  @media(max-width:760px){.result-cols{grid-template-columns:1fr}}
+
+  /* chart card */
+  .chart-card{background:linear-gradient(180deg,var(--paper),var(--paper-2));
+    border:1px solid #c9b083;border-radius:6px;padding:22px;color:var(--text-ink);
+    box-shadow:0 18px 40px -22px rgba(0,0,0,.7)}
+  .chart-card h3{font-family:var(--display);letter-spacing:.28em;text-transform:uppercase;
+    font-size:12px;color:var(--maroon);text-align:center;margin:0 0 4px}
+  .chart-card .csub{text-align:center;color:var(--text-mute);font-size:13px;margin:0 0 14px}
+  svg.kundali{width:100%;height:auto;display:block}
+  .legend{display:grid;grid-template-columns:1fr 1fr;gap:2px 14px;margin-top:16px;font-size:12.5px;color:var(--text-mute)}
+  .legend b{color:var(--text-ink);font-weight:600}
+  .positions{margin-top:16px;border-top:1px solid var(--paper-line);padding-top:12px}
+  .positions table{width:100%;border-collapse:collapse;font-size:12.5px}
+  .positions caption{font-family:var(--display);letter-spacing:.2em;text-transform:uppercase;font-size:10.5px;
+    color:var(--maroon);text-align:left;margin-bottom:7px}
+  .positions td{padding:2.5px 0;color:var(--text-ink);vertical-align:baseline}
+  .positions td.b{font-weight:600;width:34%}
+  .positions td.deg{font-variant-numeric:tabular-nums;color:var(--maroon);width:24%;white-space:nowrap}
+  .positions td.nak{color:var(--text-mute);font-style:italic;text-align:right}
+  .positions tr.asc td{color:var(--sindoor-deep)}
+
+  /* reading sections */
+  .reading{display:flex;flex-direction:column;gap:2px}
+  .sec{padding:16px 0;border-bottom:1px solid rgba(207,149,38,.22)}
+  .sec:last-child{border-bottom:none}
+  .sec h4{font-family:var(--display);font-size:13px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--turmeric);margin:0 0 7px;display:flex;align-items:center;gap:9px}
+  .sec h4 .dot{width:7px;height:7px;border-radius:50%;background:var(--sindoor);flex:none}
+  .sec p{margin:0;color:var(--cream);font-size:15.5px}
+  .sec p + p{margin-top:8px}
+  .sec .fact{color:var(--cream-mute);font-size:13.5px}
+
+  .houses-block{margin-top:34px}
+  .houses-h{font-family:var(--display);letter-spacing:.28em;text-transform:uppercase;font-size:13px;
+    color:var(--turmeric);text-align:center;margin:0 0 5px}
+  .houses-sub{text-align:center;color:var(--cream-mute);font-size:14px;max-width:56ch;margin:0 auto 22px}
+  .houses-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:14px}
+  .hcard{background:linear-gradient(180deg,var(--paper),var(--paper-2));border:1px solid #c9b083;
+    border-radius:6px;padding:16px 18px;color:var(--text-ink);box-shadow:0 14px 32px -26px rgba(0,0,0,.7)}
+  .hcard.key{border-color:var(--sindoor);box-shadow:0 0 0 1px rgba(193,54,27,.25),0 14px 32px -26px rgba(0,0,0,.7)}
+  .hcard .htop{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+  .hbadge{font-family:var(--display);font-size:13px;width:27px;height:27px;flex:none;display:grid;
+    place-items:center;border-radius:50%;background:var(--maroon);color:#f3e3c4}
+  .hcard.key .hbadge{background:var(--sindoor)}
+  .hname{font-family:var(--display);font-size:16px;color:var(--maroon);line-height:1.15}
+  .hname .hsa{display:block;font-size:11px;color:var(--text-mute);letter-spacing:.04em;font-style:italic}
+  .hgov{font-size:12.5px;color:var(--text-mute);margin:0 0 9px}
+  .hread{font-size:13.5px;color:var(--text-ink);margin:0}
+  .hlabel{display:inline-block;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;
+    padding:2px 9px;border-radius:999px;margin-bottom:6px}
+  .hlabel.pos{background:rgba(207,149,38,.16);color:#8a5f10;border:1px solid var(--turmeric)}
+  .hlabel.neu{background:rgba(122,90,44,.12);color:#6b5430;border:1px solid #b89a64}
+  .hlabel.neg{background:rgba(193,54,27,.12);color:#8f2412;border:1px solid var(--sindoor)}
+
+  .disclaimer{margin-top:38px;text-align:center;color:var(--cream-mute);font-size:13px;max-width:62ch;margin-inline:auto}
+  .disclaimer a{color:var(--turmeric)}
+  footer{margin-top:30px;text-align:center;color:#7d6647;font-size:12px;letter-spacing:.04em}
+
+  @media (prefers-reduced-motion: reduce){
+    #results.show{animation:none}
+  }
+</style>
+</head>
+<body>
+<nav class="tool-nav" aria-label="Tool navigation">
+  <a class="tool-logo" href="../../">Shambhavaa</a>
+  <div class="tool-links">
+    <a href="../janma-finder/">Janma Finder</a>
+    <a href="../namakshara/">Namakshara</a>
+    <a href="./">Vivah Jyotish</a>
+  </div>
+</nav>
+<div class="wrap">
+
+  <header class="masthead">
+    <svg class="sun" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="17" fill="none" stroke="currentColor" stroke-width="4"/>
+      <g stroke="currentColor" stroke-width="4" stroke-linecap="round">
+        <line x1="50" y1="6" x2="50" y2="20"/><line x1="50" y1="80" x2="50" y2="94"/>
+        <line x1="6" y1="50" x2="20" y2="50"/><line x1="80" y1="50" x2="94" y2="50"/>
+        <line x1="19" y1="19" x2="29" y2="29"/><line x1="71" y1="71" x2="81" y2="81"/>
+        <line x1="81" y1="19" x2="71" y2="29"/><line x1="29" y1="71" x2="19" y2="81"/>
+      </g>
+    </svg>
+    <p class="eyebrow">विवाह ज्योतिष · Vivah Jyotish</p>
+    <h1>What your <em>kundali</em> says<br>about marriage</h1>
+    <p class="dek">Enter your date, time and place of birth, and the chart answers: the <em>kind of marriage</em> you'll have, <em>how you'll meet</em> your partner, whether there's a <em>delay</em>, how your <em>family</em> will react — and <em>when</em> it may happen, by daśā and transit.</p>
+    <div class="rule"></div>
+  </header>
+
+  <section class="panel" aria-label="Birth details">
+    <p class="panel-head">Your birth details</p>
+    <p class="panel-sub">Date, time and place of birth — that's all. Your chart is cast from these (sidereal · Lahiri ayanamsa).</p>
+    <div class="grid">
+      <div class="field"><label for="bdate">Date of birth</label><input type="date" id="bdate" value="1995-06-15"></div>
+      <div class="field"><label for="btime">Time of birth</label><input type="time" id="btime" value="09:30"></div>
+      <div class="field place-field">
+        <label for="placeInput">Place of birth</label>
+        <input type="text" id="placeInput" autocomplete="off" placeholder="Type a city or town…" aria-expanded="false" aria-autocomplete="list" role="combobox" aria-controls="placeList">
+        <ul class="place-list" id="placeList" role="listbox"></ul>
+      </div>
+    </div>
+    <p class="place-resolved" id="placeResolved"></p>
+
+    <details class="finetune" id="coordsDetails">
+      <summary>Place not listed? Enter coordinates manually</summary>
+      <p class="panel-sub" style="margin-top:14px">Latitude/longitude in decimal degrees (negative for South / West). India is always UTC+5:30.</p>
+      <div class="grid">
+        <div class="field"><label for="blat">Latitude °</label><input type="number" id="blat" step="0.0001" value="27.1767"></div>
+        <div class="field"><label for="blon">Longitude °</label><input type="number" id="blon" step="0.0001" value="78.0081"></div>
+        <div class="field"><label for="btz">Time zone (h from UTC)</label><input type="number" id="btz" step="0.25" value="5.5"></div>
+      </div>
+    </details>
+
+    <div class="field" style="margin-top:18px;max-width:260px">
+      <label for="gender">Reading focused on</label>
+      <select id="gender">
+        <option value="any">Anyone</option>
+        <option value="bride">A bride (Jupiter = partner)</option>
+        <option value="groom">A groom (Venus = partner)</option>
+      </select>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="readBtn" type="button">Read my marriage</button>
+      <span class="hint">Accurate birth time matters most — it sets the ascendant.</span>
+    </div>
+    <p class="err" id="err" role="alert"></p>
+    <p class="note">Just type your birth city — latitude, longitude and time zone are filled in for you. Positions are then computed from a high-precision ephemeris (sidereal, Lahiri ayanamsa) with ΔT, nutation and precession applied. The exact birth minute sets the ascendant, so enter the time as precisely as you can. For places outside India that observe daylight-saving time, the offset shown is standard time — nudge it by an hour under “Enter coordinates manually” if the birth fell during summer time.</p>
+
+    <details class="finetune">
+      <summary>Already know your exact chart? Fine-tune the placements</summary>
+      <p class="panel-sub" style="margin-top:16px">Reading fills these in for you. Adjust any sign and update — Ketu stays opposite Rahu.</p>
+      <div class="grid" id="manualGrid"><!-- selects injected --></div>
+      <div class="actions">
+        <button class="btn btn-ghost" id="readManualBtn" type="button">Update reading</button>
+        <button class="btn btn-ghost" id="exampleBtn" type="button">Load an example</button>
+      </div>
+    </details>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results" aria-live="polite">
+    <div class="verdict">
+      <p class="lead" id="verdictLead"></p>
+      <div class="tags" id="tags"></div>
+    </div>
+    <div class="result-cols">
+      <div class="chart-card">
+        <h3>Your Kundali</h3>
+        <p class="csub">North-Indian chart · marriage house glows</p>
+        <svg class="kundali" id="chartSvg" viewBox="0 0 300 300" role="img" aria-label="North Indian birth chart"></svg>
+        <div class="legend" id="legend"></div>
+        <div class="positions" id="positions"></div>
+      </div>
+      <div class="reading" id="reading"></div>
+    </div>
+
+    <div class="houses-block">
+      <h3 class="houses-h">The relationship houses</h3>
+      <p class="houses-sub">Marriage is never read from the 7th alone. Here's how the wider houses of love, home and union sit in your chart.</p>
+      <div class="houses-grid" id="housesGrid"></div>
+    </div>
+
+    <p class="disclaimer">
+      This reads traditional Vedic indicators for entertainment and cultural interest — it is not a prediction or a substitute for a professional jyotishi, and no real-life decision should rest on it. Charts are far richer than any single tool can capture (dashas, divisional charts, planetary strength, and more).
+    </p>
+  </section>
+
+  <footer>Built on classical vivah-jyotish rules · 7th house · Shukra &amp; Guru · Mangal dosha</footer>
+</div>
+
+<script>
+/* ============================== ASTROLOGY DATA ============================== */
+const SIGNS = [
+  {en:"Aries",       sa:"Mesha",       lord:"Mars",    nature:"movable", element:"fire"},
+  {en:"Taurus",      sa:"Vrishabha",   lord:"Venus",   nature:"fixed",   element:"earth"},
+  {en:"Gemini",      sa:"Mithuna",     lord:"Mercury", nature:"dual",    element:"air"},
+  {en:"Cancer",      sa:"Karka",       lord:"Moon",    nature:"movable", element:"water"},
+  {en:"Leo",         sa:"Simha",       lord:"Sun",     nature:"fixed",   element:"fire"},
+  {en:"Virgo",       sa:"Kanya",       lord:"Mercury", nature:"dual",    element:"earth"},
+  {en:"Libra",       sa:"Tula",        lord:"Venus",   nature:"movable", element:"air"},
+  {en:"Scorpio",     sa:"Vrishchika",  lord:"Mars",    nature:"fixed",   element:"water"},
+  {en:"Sagittarius", sa:"Dhanu",       lord:"Jupiter", nature:"dual",    element:"fire"},
+  {en:"Capricorn",   sa:"Makara",      lord:"Saturn",  nature:"movable", element:"earth"},
+  {en:"Aquarius",    sa:"Kumbha",      lord:"Saturn",  nature:"fixed",   element:"air"},
+  {en:"Pisces",      sa:"Meena",       lord:"Jupiter", nature:"dual",    element:"water"},
+];
+const PLANETS = ["Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu"];
+const SA = {Sun:"Surya",Moon:"Chandra",Mars:"Mangal",Mercury:"Budha",Jupiter:"Guru",Venus:"Shukra",Saturn:"Shani",Rahu:"Rahu",Ketu:"Ketu"};
+const ABBR = {Sun:"Su",Moon:"Mo",Mars:"Ma",Mercury:"Me",Jupiter:"Ju",Venus:"Ve",Saturn:"Sa",Rahu:"Ra",Ketu:"Ke"};
+const BENEFIC = {Jupiter:1,Venus:1,Mercury:1,Moon:1};
+const MALEFIC = {Sun:1,Mars:1,Saturn:1,Rahu:1,Ketu:1};
+// how/where the partner is met — keyed by the house the 7th lord sits in
+const MEET = {
+ 1:["through your own initiative","you tend to take the lead yourself, and the meeting happens close to home or within your own circle"],
+ 2:["through family and close circles","an introduction within the family or close community — often tied to home, finances, or known people"],
+ 3:["through friends, siblings or short trips","via a sibling, cousin, neighbour or a casual nearby outing; messages and introductions play a part"],
+ 4:["close to home or your native place","through family, your mother's side, or in your home town — comfort and familiarity surround it"],
+ 5:["through romance and joyful settings","a genuine love connection, met in a creative, festive, educational or playful setting"],
+ 6:["through work or daily routine","at the workplace or through colleagues and service — sometimes after an early struggle or false start"],
+ 7:["naturally, as if life arranges it","through partnership or business dealings; the meeting can feel almost destined, with little chasing"],
+ 8:["suddenly and unexpectedly","a sudden, fated encounter — possibly through in-laws, shared resources, or a turning-point event"],
+ 9:["through study, travel or elders","via higher studies, a journey, a mentor or temple/dharmic setting, or an introduction by elders — a different city or culture is quite possible"],
+ 10:["through career or public life","at work or through your professional standing — someone met via your career, reputation or a public role"],
+ 11:["through friends and social networks","the classic 'met through friends' — gatherings, groups, or a friend-of-a-friend"],
+ 12:["in a distant or private setting","far from your birthplace, abroad, or in a quiet/secluded setting — a more private meeting"]
+};
+// fields the user edits (Ketu derived)
+const INPUTS = ["Asc","Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu"];
+
+/* ============================== UI: build selects ============================== */
+const grid = document.getElementById("manualGrid");
+function signOptions(){
+  return SIGNS.map((s,i)=>`<option value="${i}">${s.en} · ${s.sa}</option>`).join("");
+}
+INPUTS.forEach(key=>{
+  const label = key==="Asc" ? "Ascendant <span class='sa'>(Lagna)</span>"
+              : `${key} <span class='sa'>(${SA[key]})</span>`;
+  const wrap = document.createElement("div");
+  wrap.className = "field" + (key==="Asc" ? " asc-field" : "");
+  wrap.innerHTML = `<label for="sel-${key}">${label}</label>
+    <select id="sel-${key}"><option value="" selected disabled>—</option>${signOptions()}</select>`;
+  grid.appendChild(wrap);
+});
+
+/* ============================== PLACE GAZETTEER + AUTOCOMPLETE ============================== */
+// [name, region, country, lat, lon, tzHours]  (India = +5.5, no DST)
+const PLACES=[
+ ["Agra","Uttar Pradesh","India",27.18,78.01,5.5],["Mathura","Uttar Pradesh","India",27.49,77.67,5.5],
+ ["Vrindavan","Uttar Pradesh","India",27.58,77.70,5.5],["Aligarh","Uttar Pradesh","India",27.88,78.08,5.5],
+ ["Firozabad","Uttar Pradesh","India",27.15,78.40,5.5],["Etawah","Uttar Pradesh","India",26.78,79.02,5.5],
+ ["Mainpuri","Uttar Pradesh","India",27.23,79.03,5.5],["Lucknow","Uttar Pradesh","India",26.85,80.95,5.5],
+ ["Kanpur","Uttar Pradesh","India",26.45,80.33,5.5],["Varanasi","Uttar Pradesh","India",25.32,82.97,5.5],
+ ["Prayagraj (Allahabad)","Uttar Pradesh","India",25.44,81.85,5.5],["Gorakhpur","Uttar Pradesh","India",26.76,83.37,5.5],
+ ["Bareilly","Uttar Pradesh","India",28.37,79.43,5.5],["Moradabad","Uttar Pradesh","India",28.84,78.77,5.5],
+ ["Saharanpur","Uttar Pradesh","India",29.97,77.55,5.5],["Meerut","Uttar Pradesh","India",28.98,77.71,5.5],
+ ["Ghaziabad","Uttar Pradesh","India",28.67,77.45,5.5],["Noida","Uttar Pradesh","India",28.54,77.39,5.5],
+ ["Muzaffarnagar","Uttar Pradesh","India",29.47,77.70,5.5],["Jhansi","Uttar Pradesh","India",25.45,78.58,5.5],
+ ["Ayodhya","Uttar Pradesh","India",26.80,82.20,5.5],["Sultanpur","Uttar Pradesh","India",26.26,82.07,5.5],
+ ["Rae Bareli","Uttar Pradesh","India",26.23,81.24,5.5],["Sitapur","Uttar Pradesh","India",27.57,80.68,5.5],
+ ["Shahjahanpur","Uttar Pradesh","India",27.88,79.91,5.5],["Rampur","Uttar Pradesh","India",28.81,79.03,5.5],
+ ["Bulandshahr","Uttar Pradesh","India",28.40,77.85,5.5],["Hapur","Uttar Pradesh","India",28.73,77.78,5.5],
+ ["Mau","Uttar Pradesh","India",25.94,83.56,5.5],["Azamgarh","Uttar Pradesh","India",26.07,83.18,5.5],
+ ["Jaunpur","Uttar Pradesh","India",25.75,82.69,5.5],["Mirzapur","Uttar Pradesh","India",25.15,82.57,5.5],
+ ["Farrukhabad","Uttar Pradesh","India",27.39,79.58,5.5],["Budaun","Uttar Pradesh","India",28.03,79.12,5.5],
+ ["Basti","Uttar Pradesh","India",26.81,82.73,5.5],["Deoria","Uttar Pradesh","India",26.50,83.79,5.5],
+ ["Ballia","Uttar Pradesh","India",25.76,84.15,5.5],["Ghazipur","Uttar Pradesh","India",25.58,83.58,5.5],
+ ["New Delhi","Delhi","India",28.61,77.21,5.5],["Delhi","Delhi","India",28.66,77.23,5.5],
+ ["Gurugram","Haryana","India",28.46,77.03,5.5],["Faridabad","Haryana","India",28.41,77.31,5.5],
+ ["Rohtak","Haryana","India",28.89,76.61,5.5],["Hisar","Haryana","India",29.15,75.72,5.5],
+ ["Panipat","Haryana","India",29.39,76.97,5.5],["Karnal","Haryana","India",29.69,76.99,5.5],
+ ["Ambala","Haryana","India",30.38,76.78,5.5],["Sonipat","Haryana","India",28.99,77.02,5.5],
+ ["Chandigarh","Chandigarh","India",30.73,76.78,5.5],["Ludhiana","Punjab","India",30.90,75.86,5.5],
+ ["Amritsar","Punjab","India",31.63,74.87,5.5],["Jalandhar","Punjab","India",31.33,75.58,5.5],
+ ["Patiala","Punjab","India",30.34,76.39,5.5],["Bathinda","Punjab","India",30.21,74.95,5.5],
+ ["Mohali","Punjab","India",30.70,76.72,5.5],["Pathankot","Punjab","India",32.27,75.65,5.5],
+ ["Jaipur","Rajasthan","India",26.91,75.79,5.5],["Jodhpur","Rajasthan","India",26.29,73.02,5.5],
+ ["Udaipur","Rajasthan","India",24.59,73.71,5.5],["Kota","Rajasthan","India",25.21,75.86,5.5],
+ ["Ajmer","Rajasthan","India",26.45,74.64,5.5],["Bikaner","Rajasthan","India",28.02,73.31,5.5],
+ ["Bhilwara","Rajasthan","India",25.35,74.64,5.5],["Alwar","Rajasthan","India",27.55,76.63,5.5],
+ ["Sikar","Rajasthan","India",27.61,75.14,5.5],["Pushkar","Rajasthan","India",26.49,74.55,5.5],
+ ["Sri Ganganagar","Rajasthan","India",29.92,73.88,5.5],
+ ["Mumbai","Maharashtra","India",19.08,72.88,5.5],["Pune","Maharashtra","India",18.52,73.86,5.5],
+ ["Nagpur","Maharashtra","India",21.15,79.09,5.5],["Nashik","Maharashtra","India",19.99,73.79,5.5],
+ ["Aurangabad","Maharashtra","India",19.88,75.34,5.5],["Solapur","Maharashtra","India",17.66,75.91,5.5],
+ ["Kolhapur","Maharashtra","India",16.70,74.24,5.5],["Amravati","Maharashtra","India",20.93,77.78,5.5],
+ ["Nanded","Maharashtra","India",19.16,77.32,5.5],["Sangli","Maharashtra","India",16.85,74.58,5.5],
+ ["Jalgaon","Maharashtra","India",21.01,75.56,5.5],["Akola","Maharashtra","India",20.71,77.00,5.5],
+ ["Latur","Maharashtra","India",18.40,76.58,5.5],["Ahmednagar","Maharashtra","India",19.09,74.74,5.5],
+ ["Thane","Maharashtra","India",19.22,72.98,5.5],["Navi Mumbai","Maharashtra","India",19.03,73.03,5.5],
+ ["Shirdi","Maharashtra","India",19.77,74.48,5.5],
+ ["Ahmedabad","Gujarat","India",23.03,72.57,5.5],["Surat","Gujarat","India",21.17,72.83,5.5],
+ ["Vadodara","Gujarat","India",22.31,73.18,5.5],["Rajkot","Gujarat","India",22.30,70.80,5.5],
+ ["Bhavnagar","Gujarat","India",21.76,72.15,5.5],["Jamnagar","Gujarat","India",22.47,70.06,5.5],
+ ["Gandhinagar","Gujarat","India",23.22,72.65,5.5],["Junagadh","Gujarat","India",21.52,70.46,5.5],
+ ["Anand","Gujarat","India",22.56,72.96,5.5],["Dwarka","Gujarat","India",22.24,68.97,5.5],
+ ["Bhopal","Madhya Pradesh","India",23.26,77.41,5.5],["Indore","Madhya Pradesh","India",22.72,75.86,5.5],
+ ["Jabalpur","Madhya Pradesh","India",23.18,79.99,5.5],["Gwalior","Madhya Pradesh","India",26.22,78.18,5.5],
+ ["Ujjain","Madhya Pradesh","India",23.18,75.78,5.5],["Sagar","Madhya Pradesh","India",23.84,78.74,5.5],
+ ["Ratlam","Madhya Pradesh","India",23.33,75.04,5.5],["Rewa","Madhya Pradesh","India",24.53,81.30,5.5],
+ ["Satna","Madhya Pradesh","India",24.58,80.83,5.5],["Dewas","Madhya Pradesh","India",22.96,76.06,5.5],
+ ["Patna","Bihar","India",25.59,85.14,5.5],["Gaya","Bihar","India",24.80,85.00,5.5],
+ ["Bhagalpur","Bihar","India",25.24,86.99,5.5],["Muzaffarpur","Bihar","India",26.12,85.39,5.5],
+ ["Darbhanga","Bihar","India",26.15,85.90,5.5],["Purnia","Bihar","India",25.78,87.47,5.5],
+ ["Arrah","Bihar","India",25.56,84.66,5.5],["Begusarai","Bihar","India",25.42,86.13,5.5],
+ ["Ranchi","Jharkhand","India",23.34,85.31,5.5],["Jamshedpur","Jharkhand","India",22.80,86.18,5.5],
+ ["Dhanbad","Jharkhand","India",23.80,86.43,5.5],["Bokaro","Jharkhand","India",23.67,86.15,5.5],
+ ["Deoghar","Jharkhand","India",24.48,86.70,5.5],
+ ["Kolkata","West Bengal","India",22.57,88.36,5.5],["Howrah","West Bengal","India",22.59,88.31,5.5],
+ ["Durgapur","West Bengal","India",23.52,87.31,5.5],["Asansol","West Bengal","India",23.68,86.97,5.5],
+ ["Siliguri","West Bengal","India",26.73,88.40,5.5],["Bardhaman","West Bengal","India",23.25,87.86,5.5],
+ ["Malda","West Bengal","India",25.01,88.14,5.5],["Kharagpur","West Bengal","India",22.35,87.32,5.5],
+ ["Darjeeling","West Bengal","India",27.04,88.26,5.5],
+ ["Bhubaneswar","Odisha","India",20.30,85.82,5.5],["Cuttack","Odisha","India",20.46,85.88,5.5],
+ ["Rourkela","Odisha","India",22.26,84.85,5.5],["Puri","Odisha","India",19.81,85.83,5.5],
+ ["Sambalpur","Odisha","India",21.47,83.97,5.5],["Berhampur","Odisha","India",19.31,84.79,5.5],
+ ["Raipur","Chhattisgarh","India",21.25,81.63,5.5],["Bhilai","Chhattisgarh","India",21.21,81.38,5.5],
+ ["Bilaspur","Chhattisgarh","India",22.08,82.15,5.5],["Korba","Chhattisgarh","India",22.35,82.69,5.5],
+ ["Durg","Chhattisgarh","India",21.19,81.28,5.5],
+ ["Hyderabad","Telangana","India",17.39,78.49,5.5],["Warangal","Telangana","India",18.00,79.59,5.5],
+ ["Nizamabad","Telangana","India",18.67,78.09,5.5],["Karimnagar","Telangana","India",18.44,79.13,5.5],
+ ["Khammam","Telangana","India",17.25,80.15,5.5],
+ ["Vijayawada","Andhra Pradesh","India",16.51,80.65,5.5],["Visakhapatnam","Andhra Pradesh","India",17.69,83.22,5.5],
+ ["Guntur","Andhra Pradesh","India",16.31,80.44,5.5],["Nellore","Andhra Pradesh","India",14.44,79.99,5.5],
+ ["Kurnool","Andhra Pradesh","India",15.83,78.04,5.5],["Tirupati","Andhra Pradesh","India",13.63,79.42,5.5],
+ ["Rajahmundry","Andhra Pradesh","India",17.00,81.78,5.5],["Kakinada","Andhra Pradesh","India",16.99,82.25,5.5],
+ ["Anantapur","Andhra Pradesh","India",14.68,77.60,5.5],["Kadapa","Andhra Pradesh","India",14.47,78.82,5.5],
+ ["Bengaluru","Karnataka","India",12.97,77.59,5.5],["Mysuru","Karnataka","India",12.30,76.64,5.5],
+ ["Hubballi","Karnataka","India",15.36,75.12,5.5],["Mangaluru","Karnataka","India",12.91,74.86,5.5],
+ ["Belagavi","Karnataka","India",15.85,74.50,5.5],["Kalaburagi","Karnataka","India",17.33,76.83,5.5],
+ ["Davanagere","Karnataka","India",14.47,75.92,5.5],["Shivamogga","Karnataka","India",13.93,75.57,5.5],
+ ["Ballari","Karnataka","India",15.14,76.92,5.5],["Tumakuru","Karnataka","India",13.34,77.10,5.5],
+ ["Udupi","Karnataka","India",13.34,74.75,5.5],
+ ["Chennai","Tamil Nadu","India",13.08,80.27,5.5],["Coimbatore","Tamil Nadu","India",11.02,76.96,5.5],
+ ["Madurai","Tamil Nadu","India",9.93,78.12,5.5],["Tiruchirappalli","Tamil Nadu","India",10.79,78.70,5.5],
+ ["Salem","Tamil Nadu","India",11.66,78.15,5.5],["Tirunelveli","Tamil Nadu","India",8.71,77.76,5.5],
+ ["Erode","Tamil Nadu","India",11.34,77.72,5.5],["Vellore","Tamil Nadu","India",12.92,79.13,5.5],
+ ["Thoothukudi","Tamil Nadu","India",8.76,78.13,5.5],["Thanjavur","Tamil Nadu","India",10.79,79.14,5.5],
+ ["Tiruppur","Tamil Nadu","India",11.11,77.34,5.5],["Dindigul","Tamil Nadu","India",10.36,77.98,5.5],
+ ["Kochi","Kerala","India",9.93,76.27,5.5],["Thiruvananthapuram","Kerala","India",8.52,76.94,5.5],
+ ["Kozhikode","Kerala","India",11.26,75.78,5.5],["Thrissur","Kerala","India",10.53,76.21,5.5],
+ ["Kollam","Kerala","India",8.89,76.61,5.5],["Kannur","Kerala","India",11.87,75.37,5.5],
+ ["Kottayam","Kerala","India",9.59,76.52,5.5],["Palakkad","Kerala","India",10.79,76.65,5.5],
+ ["Alappuzha","Kerala","India",9.50,76.34,5.5],
+ ["Guwahati","Assam","India",26.14,91.74,5.5],["Dibrugarh","Assam","India",27.47,94.91,5.5],
+ ["Silchar","Assam","India",24.83,92.78,5.5],["Jorhat","Assam","India",26.75,94.20,5.5],
+ ["Dehradun","Uttarakhand","India",30.32,78.03,5.5],["Haridwar","Uttarakhand","India",29.95,78.16,5.5],
+ ["Rishikesh","Uttarakhand","India",30.09,78.27,5.5],["Haldwani","Uttarakhand","India",29.22,79.51,5.5],
+ ["Nainital","Uttarakhand","India",29.39,79.45,5.5],["Roorkee","Uttarakhand","India",29.85,77.89,5.5],
+ ["Shimla","Himachal Pradesh","India",31.10,77.17,5.5],["Dharamshala","Himachal Pradesh","India",32.22,76.32,5.5],
+ ["Manali","Himachal Pradesh","India",32.24,77.19,5.5],["Solan","Himachal Pradesh","India",30.91,77.10,5.5],
+ ["Srinagar","Jammu and Kashmir","India",34.08,74.80,5.5],["Jammu","Jammu and Kashmir","India",32.73,74.87,5.5],
+ ["Leh","Ladakh","India",34.16,77.58,5.5],
+ ["Imphal","Manipur","India",24.82,93.94,5.5],["Agartala","Tripura","India",23.83,91.28,5.5],
+ ["Aizawl","Mizoram","India",23.73,92.72,5.5],["Shillong","Meghalaya","India",25.58,91.89,5.5],
+ ["Kohima","Nagaland","India",25.67,94.12,5.5],["Itanagar","Arunachal Pradesh","India",27.08,93.61,5.5],
+ ["Gangtok","Sikkim","India",27.33,88.61,5.5],["Panaji","Goa","India",15.49,73.83,5.5],
+ ["Margao","Goa","India",15.27,73.96,5.5],["Puducherry","Puducherry","India",11.91,79.81,5.5],
+ ["Port Blair","Andaman & Nicobar","India",11.62,92.73,5.5],["Daman","Daman & Diu","India",20.40,72.84,5.5],
+ ["Silvassa","Dadra & Nagar Haveli","India",20.27,73.01,5.5],["Kavaratti","Lakshadweep","India",10.57,72.64,5.5],
+ // ---- world (standard time; adjust for DST if applicable) ----
+ ["London","England","United Kingdom",51.51,-0.13,0],["Manchester","England","United Kingdom",53.48,-2.24,0],
+ ["Birmingham","England","United Kingdom",52.49,-1.89,0],["Dublin","Leinster","Ireland",53.35,-6.26,0],
+ ["Paris","Île-de-France","France",48.86,2.35,1],["Berlin","Berlin","Germany",52.52,13.40,1],
+ ["Frankfurt","Hesse","Germany",50.11,8.68,1],["Munich","Bavaria","Germany",48.14,11.58,1],
+ ["Amsterdam","North Holland","Netherlands",52.37,4.90,1],["Brussels","Brussels","Belgium",50.85,4.35,1],
+ ["Zurich","Zürich","Switzerland",47.37,8.54,1],["Geneva","Geneva","Switzerland",46.20,6.14,1],
+ ["Rome","Lazio","Italy",41.90,12.50,1],["Milan","Lombardy","Italy",45.46,9.19,1],
+ ["Madrid","Madrid","Spain",40.42,-3.70,1],["Barcelona","Catalonia","Spain",41.39,2.17,1],
+ ["Lisbon","Lisbon","Portugal",38.72,-9.13,0],["Vienna","Vienna","Austria",48.21,16.37,1],
+ ["Stockholm","Stockholm","Sweden",59.33,18.07,1],["Copenhagen","Capital","Denmark",55.68,12.57,1],
+ ["Athens","Attica","Greece",37.98,23.73,2],["Moscow","Moscow","Russia",55.76,37.62,3],
+ ["Istanbul","Istanbul","Turkey",41.01,28.98,3],
+ ["Dubai","Dubai","UAE",25.20,55.27,4],["Abu Dhabi","Abu Dhabi","UAE",24.45,54.38,4],
+ ["Sharjah","Sharjah","UAE",25.35,55.39,4],["Doha","Doha","Qatar",25.29,51.53,3],
+ ["Riyadh","Riyadh","Saudi Arabia",24.71,46.68,3],["Jeddah","Makkah","Saudi Arabia",21.49,39.19,3],
+ ["Mecca","Makkah","Saudi Arabia",21.42,39.83,3],["Kuwait City","Kuwait","Kuwait",29.38,47.99,3],
+ ["Manama","Capital","Bahrain",26.22,50.58,3],["Muscat","Muscat","Oman",23.59,58.41,4],
+ ["Tehran","Tehran","Iran",35.69,51.39,3.5],["Baghdad","Baghdad","Iraq",33.31,44.36,3],
+ ["Amman","Amman","Jordan",31.95,35.93,3],["Beirut","Beirut","Lebanon",33.89,35.50,2],
+ ["Tel Aviv","Tel Aviv","Israel",32.08,34.78,2],["Cairo","Cairo","Egypt",30.04,31.24,2],
+ ["Nairobi","Nairobi","Kenya",-1.29,36.82,3],["Lagos","Lagos","Nigeria",6.52,3.38,1],
+ ["Johannesburg","Gauteng","South Africa",-26.20,28.05,2],["Cape Town","Western Cape","South Africa",-33.92,18.42,2],
+ ["Accra","Greater Accra","Ghana",5.60,-0.19,0],["Port Louis","Port Louis","Mauritius",-20.16,57.50,4],
+ ["Kabul","Kabul","Afghanistan",34.56,69.21,4.5],
+ ["Karachi","Sindh","Pakistan",24.86,67.01,5],["Lahore","Punjab","Pakistan",31.55,74.34,5],
+ ["Islamabad","Capital","Pakistan",33.68,73.05,5],["Kathmandu","Bagmati","Nepal",27.72,85.32,5.75],
+ ["Colombo","Western","Sri Lanka",6.93,79.86,5.5],["Kandy","Central","Sri Lanka",7.29,80.64,5.5],
+ ["Dhaka","Dhaka","Bangladesh",23.81,90.41,6],["Thimphu","Thimphu","Bhutan",27.47,89.64,6],
+ ["Yangon","Yangon","Myanmar",16.87,96.20,6.5],["Bangkok","Bangkok","Thailand",13.76,100.50,7],
+ ["Hanoi","Hanoi","Vietnam",21.03,105.85,7],["Ho Chi Minh City","HCMC","Vietnam",10.82,106.63,7],
+ ["Jakarta","Jakarta","Indonesia",-6.21,106.85,7],["Singapore","Singapore","Singapore",1.35,103.82,8],
+ ["Kuala Lumpur","Federal Territory","Malaysia",3.14,101.69,8],["Manila","Metro Manila","Philippines",14.60,120.98,8],
+ ["Hong Kong","Hong Kong","China",22.32,114.17,8],["Beijing","Beijing","China",39.90,116.41,8],
+ ["Shanghai","Shanghai","China",31.23,121.47,8],["Taipei","Taipei","Taiwan",25.03,121.57,8],
+ ["Seoul","Seoul","South Korea",37.57,126.98,9],["Tokyo","Tokyo","Japan",35.68,139.65,9],
+ ["Osaka","Osaka","Japan",34.69,135.50,9],
+ ["Sydney","New South Wales","Australia",-33.87,151.21,10],["Melbourne","Victoria","Australia",-37.81,144.96,10],
+ ["Brisbane","Queensland","Australia",-27.47,153.03,10],["Perth","Western Australia","Australia",-31.95,115.86,8],
+ ["Auckland","Auckland","New Zealand",-36.85,174.76,12],
+ ["Toronto","Ontario","Canada",43.65,-79.38,-5],["Montreal","Quebec","Canada",45.50,-73.57,-5],
+ ["Vancouver","British Columbia","Canada",49.28,-123.12,-8],
+ ["New York","New York","USA",40.71,-74.01,-5],["Washington","DC","USA",38.91,-77.04,-5],
+ ["Boston","Massachusetts","USA",42.36,-71.06,-5],["Atlanta","Georgia","USA",33.75,-84.39,-5],
+ ["Chicago","Illinois","USA",41.88,-87.63,-6],["Houston","Texas","USA",29.76,-95.37,-6],
+ ["Dallas","Texas","USA",32.78,-96.80,-6],["Denver","Colorado","USA",39.74,-104.99,-7],
+ ["Phoenix","Arizona","USA",33.45,-112.07,-7],["Los Angeles","California","USA",34.05,-118.24,-8],
+ ["San Francisco","California","USA",37.77,-122.42,-8],["Seattle","Washington","USA",47.61,-122.33,-8],
+ ["Mexico City","CDMX","Mexico",19.43,-99.13,-6],["Sao Paulo","São Paulo","Brazil",-23.55,-46.63,-3],
+ ["Rio de Janeiro","Rio de Janeiro","Brazil",-22.91,-43.17,-3],["Buenos Aires","Buenos Aires","Argentina",-34.60,-58.38,-3],
+ ["Santiago","Santiago","Chile",-33.45,-70.67,-4],["Lima","Lima","Peru",-12.05,-77.04,-5],
+ ["Bogota","Bogotá","Colombia",4.71,-74.07,-5]
+];
+
+const placeInput=document.getElementById("placeInput");
+const placeList=document.getElementById("placeList");
+const placeResolved=document.getElementById("placeResolved");
+let selectedPlace=null, activeIdx=-1, current=[];
+function fmtTz(t){ const s=t<0?"-":"+"; const a=Math.abs(t),hh=Math.floor(a),mm=Math.round((a-hh)*60); return "UTC"+s+hh+":"+String(mm).padStart(2,"0"); }
+function fmtLat(l){ return Math.abs(l).toFixed(2)+"\u00b0"+(l>=0?"N":"S"); }
+function fmtLon(l){ return Math.abs(l).toFixed(2)+"\u00b0"+(l>=0?"E":"W"); }
+function regOf(p){ return p[2]==="India" ? p[1]+", India" : p[1]+", "+p[2]; }
+function selectPlace(p){
+  selectedPlace=p; placeInput.value=p[0];
+  document.getElementById("blat").value=p[3];
+  document.getElementById("blon").value=p[4];
+  document.getElementById("btz").value=p[5];
+  placeResolved.innerHTML="Using <b>"+p[0]+"</b> — "+regOf(p)+" · "+fmtLat(p[3])+", "+fmtLon(p[4])+" · "+fmtTz(p[5]);
+  closeList();
+}
+function closeList(){ placeList.classList.remove("open"); placeInput.setAttribute("aria-expanded","false"); activeIdx=-1; }
+function searchPlaces(q){
+  q=q.trim().toLowerCase(); if(!q) return [];
+  const starts=[], incl=[];
+  for(const p of PLACES){ const n=p[0].toLowerCase(); if(n.startsWith(q)) starts.push(p); else if(n.includes(q)) incl.push(p); }
+  return starts.concat(incl).slice(0,8);
+}
+function renderList(items){
+  current=items; activeIdx=-1;
+  if(!items.length){
+    placeList.innerHTML='<li class="none">No match — open “Enter coordinates manually” below.</li>';
+  } else {
+    placeList.innerHTML=items.map((p,i)=>'<li role="option" data-i="'+i+'">'+p[0]+'<span class="reg">'+regOf(p)+'</span></li>').join("");
+  }
+  placeList.classList.add("open"); placeInput.setAttribute("aria-expanded","true");
+}
+function paintActive(){ [...placeList.querySelectorAll("li[data-i]")].forEach((li,i)=>li.classList.toggle("active",i===activeIdx)); }
+placeInput.addEventListener("input",()=>{ selectedPlace=null; placeResolved.innerHTML=""; renderList(searchPlaces(placeInput.value)); });
+placeInput.addEventListener("focus",()=>{ if(placeInput.value.trim()&&!selectedPlace) renderList(searchPlaces(placeInput.value)); });
+placeInput.addEventListener("keydown",e=>{
+  if(!placeList.classList.contains("open")||!current.length) return;
+  if(e.key==="ArrowDown"){ e.preventDefault(); activeIdx=Math.min(current.length-1,activeIdx+1); paintActive(); }
+  else if(e.key==="ArrowUp"){ e.preventDefault(); activeIdx=Math.max(0,activeIdx-1); paintActive(); }
+  else if(e.key==="Enter"){ e.preventDefault(); selectPlace(current[activeIdx>=0?activeIdx:0]); }
+  else if(e.key==="Escape"){ closeList(); }
+});
+placeList.addEventListener("mousedown",e=>{ const li=e.target.closest("li[data-i]"); if(!li) return; e.preventDefault(); selectPlace(current[+li.dataset.i]); });
+document.addEventListener("click",e=>{ if(!e.target.closest(".place-field")) closeList(); });
+// resolve typed text to a place at read time; returns false if unresolvable
+function resolvePlace(){
+  const q=placeInput.value.trim();
+  if(!q) return true;                                  // empty → use whatever coords are set
+  if(selectedPlace && selectedPlace[0].toLowerCase()===q.toLowerCase()) return true;
+  const lc=q.toLowerCase();
+  const m=PLACES.find(p=>p[0].toLowerCase()===lc)
+        ||PLACES.find(p=>p[0].toLowerCase().startsWith(lc))
+        ||PLACES.find(p=>p[0].toLowerCase().includes(lc));
+  if(m){ selectPlace(m); return true; }
+  return false;
+}
+selectPlace(PLACES[0]);   // default: Agra
+
+/* example */
+document.getElementById("exampleBtn").onclick=()=>{
+  const ex={Asc:6,Sun:1,Moon:7,Mars:0,Mercury:1,Jupiter:8,Venus:2,Saturn:11,Rahu:5};
+  for(const k in ex) document.getElementById("sel-"+k).value=ex[k];
+  document.getElementById("err").textContent="";
+  readManual();
+};
+
+/* ============================== ENGINE ============================== */
+const mod12=n=>((n%12)+12)%12;
+const houseOf=(sign,asc)=>mod12(sign-asc)+1;            // 1..12
+const inSet=(h,set)=>set.indexOf(h)>=0;
+
+function analyze(asc, pos, gender){
+  // derive Ketu
+  pos = Object.assign({}, pos);
+  pos.Ketu = mod12(pos.Rahu + 6);
+
+  const ph = {};                                         // planet -> house
+  PLANETS.forEach(p=> ph[p]=houseOf(pos[p],asc));
+
+  const sevSign = mod12(asc+6), fifSign = mod12(asc+4);
+  const sevLord = SIGNS[sevSign].lord, fifLord = SIGNS[fifSign].lord;
+  const sevLordHouse = ph[sevLord], fifLordHouse = ph[fifLord];
+
+  // does planet (in house ph[p]) occupy or aspect house H?  returns "occupies"/"aspects"/null
+  function touches(p, H){
+    const d = mod12(H - ph[p]);   // 0 = occupies
+    if(d===0) return "occupies";
+    if(d===6) return "aspects";                          // universal 7th drishti
+    if(p==="Mars"    && (d===3||d===7)) return "aspects"; // 4th & 8th
+    if(p==="Jupiter" && (d===4||d===8)) return "aspects"; // 5th & 9th
+    if(p==="Saturn"  && (d===2||d===9)) return "aspects"; // 3rd & 10th
+    return null;
+  }
+  const touch7 = {};                                     // planet -> "occupies"/"aspects"/null
+  PLANETS.forEach(p=> touch7[p]=touches(p,7));
+  const occupants7 = PLANETS.filter(p=>ph[p]===7);
+  const beneficsOn7 = PLANETS.filter(p=>BENEFIC[p] && touch7[p]);
+  const maleficsOn7 = PLANETS.filter(p=>MALEFIC[p] && touch7[p]);
+
+  // ---- generalized report for any relationship house ----
+  const kendraTrik=[1,4,5,7,9,10], dusthana=[6,8,12];
+  function houseInfo(H){
+    const sign = mod12(asc + (H-1));
+    const lord = SIGNS[sign].lord;
+    const lordHouse = ph[lord];
+    const occupants = PLANETS.filter(p=>ph[p]===H);
+    const aspectors = PLANETS.filter(p=> ph[p]!==H && touches(p,H));
+    const benefics = occupants.concat(aspectors).filter(p=>BENEFIC[p]);
+    const malefics = occupants.concat(aspectors).filter(p=>MALEFIC[p]);
+    let sc=0;
+    benefics.forEach(p=> sc += (p==="Jupiter"||p==="Venus")?2:1);
+    malefics.forEach(p=> sc -= (p==="Sun")?1:1.5);
+    if(inSet(lordHouse,kendraTrik)) sc+=1.5;
+    if(inSet(lordHouse,dusthana))   sc-=1.5;
+    return {H, sign, lord, lordHouse, occupants, aspectors, benefics, malefics, score:sc};
+  }
+  const RELHOUSES=[2,4,5,7,8,9,11,12];
+  const relHouses={}; RELHOUSES.forEach(H=> relHouses[H]=houseInfo(H));
+
+  // ---- Mangal / Manglik dosha ----
+  const marsH = ph.Mars;
+  const marsFrom = (ref)=> mod12(pos.Mars - pos[ref]) + 1;
+  const dushHouses=[1,2,4,7,8,12];
+  const manglikLagna = inSet(marsH, dushHouses);
+  const manglikMoon  = inSet(marsFrom("Moon"), dushHouses);
+  const manglikVenus = inSet(marsFrom("Venus"), dushHouses);
+  const marsOwnExalt = (pos.Mars===0||pos.Mars===7||pos.Mars===9); // Aries/Scorpio own, Capricorn exalt
+  const jupNearMars  = (pos.Jupiter===pos.Mars) || mod12(pos.Jupiter-pos.Mars)===4 || mod12(pos.Jupiter-pos.Mars)===8 || mod12(pos.Jupiter-pos.Mars)===6;
+  const manglikSoftened = marsOwnExalt || jupNearMars;
+
+  // ---- love vs arranged ----
+  const dist=(a,b)=>mod12(pos[a]-pos[b]);
+  const conj=(a,b)=>pos[a]===pos[b];
+  // Venus–Mars connection (passion / attraction)
+  const dMV=mod12(ph.Venus-ph.Mars);
+  const venusMars = conj("Venus","Mars") || mod12(pos.Venus-pos.Mars)===6
+                 || dMV===3 || dMV===6 || dMV===7;       // Mars 4/7/8 aspect on Venus
+  // 5th (romance) ↔ 7th (marriage) link
+  const fiveSeven = conj(fifLord,sevLord) || (sevLordHouse===5) || (fifLordHouse===7)
+                 || mod12(pos[fifLord]-pos[sevLord])===6;
+  const rahuRomance = ph.Rahu===7 || conj("Rahu","Venus");
+  const venusIn57 = ph.Venus===5 || ph.Venus===7;
+  let loveScore = (venusMars?1:0)+(fiveSeven?1:0)+(rahuRomance?1:0)+(venusIn57?1:0);
+
+  const jupOn7 = !!touch7.Jupiter, satOn7 = !!touch7.Saturn;
+  const sevLordStrong = inSet(sevLordHouse,[1,4,5,7,9,10]);
+  const arrangedLean = jupOn7 || satOn7 || sevLordStrong;
+
+  let style;
+  if(loveScore>=3) style="A love marriage";
+  else if(loveScore===2) style="A love match your families embrace";
+  else if(loveScore===1) style = arrangedLean ? "Mostly arranged, with a personal spark" : "Could swing either way";
+  else style="A family-arranged match";
+
+  // ---- harmony ----
+  let h=0;
+  if(touch7.Jupiter) h+=2;
+  if(touch7.Venus)   h+=2;
+  if(touch7.Mercury) h+=1;
+  if(touch7.Moon)    h+=1;
+  if(sevLordStrong)  h+=1;
+  if(touch7.Saturn)  h-=2;
+  if(touch7.Mars)    h-=2;
+  if(touch7.Sun)     h-=1;
+  if(touch7.Rahu)    h-=1;
+  if(touch7.Ketu)    h-=1;
+  if(inSet(sevLordHouse,[6,8,12])) h-=2;
+  if(manglikLagna && !manglikSoftened) h-=2;
+  let harmony;
+  if(h>=3) harmony="Warm & supportive";
+  else if(h>=0) harmony="Steady, with give-and-take";
+  else harmony="Needs patience & effort";
+
+  // ---- timing ----
+  const satTouchesVenus = conj("Saturn","Venus") || mod12(pos.Saturn-pos.Venus)===6 || mod12(pos.Venus-pos.Saturn)===2 || mod12(pos.Venus-pos.Saturn)===9;
+  const satTouchesSevLord = conj("Saturn",sevLord) || mod12(pos.Saturn-pos[sevLord])===6 || mod12(pos[sevLord]-pos.Saturn)===2 || mod12(pos[sevLord]-pos.Saturn)===9;
+  const delayed = satOn7 || satTouchesVenus || satTouchesSevLord || inSet(sevLordHouse,[6,8,12]);
+  const venusWell = inSet(ph.Venus,[1,2,4,5,7,9,10,11]);
+  let timing;
+  if(delayed) timing="Later than peers / worth the wait";
+  else if(venusWell && (touch7.Venus||touch7.Jupiter)) timing="On the earlier, easeful side";
+  else timing="Around the usual time";
+
+  // ---- more than one significant tie ----
+  const dualOn7 = (SIGNS[sevSign].nature==="dual") || (SIGNS[pos[sevLord]].nature==="dual");
+  const crowded7 = occupants7.length>=2;
+  const multiplicity = dualOn7 || crowded7;
+
+  // ---- spouse flavour ----
+  const elem = SIGNS[sevSign].element;
+  const flavour = {
+    fire:"spirited, independent and quick to act",
+    earth:"grounded, dependable and practical",
+    air:"sociable, communicative and ideas-driven",
+    water:"emotional, intuitive and deeply caring"
+  }[elem];
+
+  // ---- the four focus summaries ----
+  const rahuFlavour = (ph.Rahu===7) || (pos.Rahu===pos.Venus) || (pos.Rahu===pos[sevLord]);
+  const famScore = (relHouses[2].score + relHouses[4].score + relHouses[9].score)/3;
+  const jupBless = !!touch7.Jupiter || relHouses[9].score>=2;
+  const loveMarriage = loveScore>=3;
+  const familyLabel = loveMarriage
+      ? (famScore>=1 ? "Family supportive" : "Family needs winning over")
+      : (famScore>=0.5 ? "Family-led & smooth" : "Family involved, some friction");
+  const delayLabel = delayed ? "Likely delayed" : (timing.indexOf("earlier")>=0 ? "On the earlier side" : "No major delay");
+  const focus = { meet: MEET[sevLordHouse], rahuFlavour, famScore, jupBless, loveMarriage, familyLabel, delayLabel };
+
+  return {
+    pos, ph, asc, sevSign, fifSign, sevLord, fifLord, sevLordHouse,
+    occupants7, beneficsOn7, maleficsOn7, touch7, relHouses,
+    manglikLagna, manglikMoon, manglikVenus, manglikSoftened,
+    loveScore, style, harmony, h, timing, delayed, multiplicity, dualOn7, crowded7,
+    flavour, elem, gender, focus
+  };
+}
+
+/* ============================== NARRATIVE ============================== */
+function joinNames(list){
+  const n=list.map(p=>p+(SA[p]?` (${SA[p]})`:""));
+  if(n.length===0) return "";
+  if(n.length===1) return n[0];
+  return n.slice(0,-1).join(", ")+" and "+n[n.length-1];
+}
+const ord = n=>({1:"1st",2:"2nd",3:"3rd",4:"4th",5:"5th",6:"6th",7:"7th",8:"8th",9:"9th",10:"10th",11:"11th",12:"12th"}[n]);
+function qualPhrase(sc){
+  if(sc>=3) return "strongly supported";
+  if(sc>=1) return "well supported";
+  if(sc>-1) return "mixed";
+  if(sc>-3) return "under some strain";
+  return "notably challenged";
+}
+function qualClass(sc){ return sc>=1 ? "pos" : (sc>-1 ? "neu" : "neg"); }
+function qualWord(sc){
+  if(sc>=3) return "Strong"; if(sc>=1) return "Supported";
+  if(sc>-1) return "Mixed";  if(sc>-3) return "Tested"; return "Strained";
+}
+function infl(info){
+  const parts=[];
+  if(info.benefics.length) parts.push("helped by "+joinNames(info.benefics));
+  if(info.malefics.length) parts.push("pressured by "+joinNames(info.malefics));
+  return parts.join(", ");
+}
+
+function buildReading(a){
+  const S = [];
+  const cap = s => s.charAt(0).toUpperCase()+s.slice(1);
+  const sevSignName = SIGNS[a.sevSign].en;
+
+  /* 1 — WHAT KIND OF MARRIAGE */
+  const karaka = a.gender==="bride" ? "Jupiter (Guru), the husband-significator"
+              : a.gender==="groom" ? "Venus (Shukra), the wife-significator"
+              : "Venus and Jupiter, the marriage significators";
+  let k = `<b>${a.style}.</b> Your partner is likely <b>${a.flavour}</b> — read from your 7th house in ${sevSignName} and from ${karaka}. `;
+  if(a.beneficsOn7.length) k += `Benefics (${joinNames(a.beneficsOn7)}) grace the marriage house — a warm, affectionate note. `;
+  if(a.maleficsOn7.length) k += `${joinNames(a.maleficsOn7)} also press on it, so the bond asks for some maturity and adjustment. `;
+  k += `Overall tone — <b>${a.harmony}</b>.`;
+  if(a.manglikLagna) k += a.manglikSoftened
+      ? ` You carry a Mangal dosha, but it appears largely cancelled.`
+      : ` You carry a Mangal dosha (Manglik), so the horoscopes should be matched with care.`;
+  if(a.multiplicity) k += ` A dual influence on the 7th hints at a rich relational life — read gently as a long courtship or a strong second chapter, not a fixed prediction.`;
+  S.push({title:"1 · What kind of marriage", body:[k]});
+
+  /* 2 — HOW YOU'LL MEET */
+  let m = `<b>${cap(a.focus.meet[0])}.</b> The lord of your 7th house (${a.sevLord}) sits in the ${ord(a.sevLordHouse)} house, so ${a.focus.meet[1]}. `;
+  if(a.loveScore>=2) m += `Strong romance links (5th–7th, Venus–Mars) say it begins as genuine attraction — a love connection more than a formal introduction. `;
+  else if(a.loveScore===0) m += `With little romantic linkage in the chart, a deliberate introduction is more likely than a chance romance. `;
+  else m += `There's a mild romantic spark, so it could begin either as attraction or as an introduction that grows. `;
+  if(a.focus.rahuFlavour) m += `Rahu's touch hints at something unconventional — perhaps online, long-distance, or across community or cultural lines.`;
+  S.push({title:"2 · How you'll meet your partner", body:[m]});
+
+  /* 3 — IS THERE A DELAY */
+  let d;
+  if(a.delayed){
+    d = `<b>Yes — some delay is likely.</b> `;
+    const reasons=[];
+    if(a.touch7.Saturn) reasons.push("Saturn's gaze on the 7th house");
+    if([6,8,12].includes(a.sevLordHouse)) reasons.push(`the 7th lord placed in the ${ord(a.sevLordHouse)} house (a difficult placement)`);
+    if(reasons.length) d += `This comes from ${reasons.join(" and ")}. `;
+    d += `Saturn rewards patience — such marriages tend to come after the late twenties, but prove steady and lasting.`;
+  } else if(a.timing.indexOf("earlier")>=0){
+    d = `<b>No real delay — if anything, on the earlier side.</b> Venus is well placed and benefics support the 7th, smoothing the path to marriage.`;
+  } else {
+    d = `<b>No significant delay.</b> Nothing in the chart strongly pushes marriage late; expect it around the usual time.`;
+  }
+  if(a.manglikLagna && !a.manglikSoftened) d += ` An active Mangal dosha can itself slow matching until a suitable (Manglik or neutralising) horoscope is found.`;
+  S.push({title:"3 · Is there any delay", body:[d]});
+
+  /* 4 — HOW THE FAMILY WILL REACT */
+  let f;
+  if(a.focus.loveMarriage){
+    f = a.focus.famScore>=1
+      ? `<b>Supportive, even of a love match.</b> Your family houses (2nd, 4th, 9th) are well placed, so although you choose your own partner, the family warms to it and gives their blessing`
+      : `<b>Some initial resistance, then acceptance.</b> A love marriage meets a family that needs winning over — expect hesitation about community, status or expectations at first, easing with time and patience`;
+  } else {
+    f = a.focus.famScore>=0.5
+      ? `<b>Closely involved and smooth.</b> This looks family-led — elders take an active, supportive role and the process stays harmonious`
+      : `<b>Involved, but with some friction.</b> The family is central to the match, yet differences over expectations, finances or matching can surface — patience and clear talk help`;
+  }
+  if(a.focus.jupBless) f += `, with strong blessings from elders (Jupiter / 9th house)`;
+  f += `.`;
+  if(a.ph.Rahu===7 && a.focus.famScore<1) f += ` Rahu in the 7th can raise caste, community or social questions that the family will weigh.`;
+  S.push({title:"4 · How your family will react", body:[f]});
+
+  return S;
+}
+
+/* ============================== MARRIAGE TIMING (daśā + transit) ============================== */
+const VIM_ORDER=["Ketu","Venus","Sun","Moon","Mars","Rahu","Jupiter","Saturn","Mercury"];
+const VIM_Y={Ketu:7,Venus:20,Sun:6,Moon:10,Mars:7,Rahu:18,Jupiter:16,Saturn:19,Mercury:17};
+const DYEAR=365.25;
+function jdToYMD(jd){
+  jd+=0.5; const Z=Math.floor(jd), F=jd-Z; let A=Z;
+  if(Z>=2299161){ const al=Math.floor((Z-1867216.25)/36524.25); A=Z+1+al-Math.floor(al/4); }
+  const B=A+1524, C=Math.floor((B-122.1)/365.25), D=Math.floor(365.25*C), E=Math.floor((B-D)/30.6001);
+  const day=B-D-Math.floor(30.6001*E)+F, month=E<14?E-1:E-13, year=month>2?C-4716:C-4715;
+  return {y:year,m:month,d:Math.floor(day)};
+}
+const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function fmtMY(jd){ const d=jdToYMD(jd); return MON[d.m-1]+" "+d.y; }
+function nowJD(){ return 2440587.5 + Date.now()/86400000; }
+
+function buildDasha(moonLon, birthJD){
+  const span=13+1/3;
+  const nak=Math.floor(moonLon/span)%27;
+  const lord=VIM_ORDER[nak%9];
+  const frac=(moonLon%span)/span;
+  let start=birthJD - VIM_Y[lord]*frac*DYEAR;     // virtual start of running mahadasha
+  const li=VIM_ORDER.indexOf(lord), out=[];
+  for(let m=0;m<10;m++){
+    const ML=VIM_ORDER[(li+m)%9], MY=VIM_Y[ML]; let aStart=start;
+    const ai=VIM_ORDER.indexOf(ML);
+    for(let n=0;n<9;n++){
+      const AL=VIM_ORDER[(ai+n)%9], len=MY*VIM_Y[AL]/120*DYEAR;
+      out.push({maha:ML, antar:AL, start:aStart, end:aStart+len});
+      aStart+=len;
+    }
+    start+=MY*DYEAR;
+  }
+  return out;
+}
+// sidereal sign index of a transiting planet at jd
+function transitSign(name,jd){
+  const T=(jd+deltaT(jdToYMD(jd).y)/86400-2451545.0)/36525;
+  const pA=(5028.796195*T+1.1054348*T*T)/3600;
+  const lon=norm360(geoEclipticJ2000(name,T)+pA+nutation(T).dpsi-ayanamsaDeg(T));
+  return Math.floor(lon/30);
+}
+function marriageTiming(a, birthJD, moonLon){
+  const periods=buildDasha(moonLon, birthJD);
+  const secondLord=SIGNS[mod12(a.asc+1)].lord, eleventhLord=SIGNS[mod12(a.asc+10)].lord;
+  function ms(p){
+    let s=0;
+    if(p===a.sevLord) s+=3;
+    if(a.ph[p]===7) s+=3;
+    if(a.touch7[p]==="aspects") s+=2;
+    if(p==="Venus") s+=3;
+    if(a.gender==="bride" && p==="Jupiter") s+=2;
+    if(p===secondLord) s+=2;
+    if(p===eleventhLord) s+=2;
+    if(p!=="Venus" && a.pos[p]===a.pos.Venus) s+=1;
+    if(p!==a.sevLord && a.pos[p]===a.pos[a.sevLord]) s+=1;
+    return s;
+  }
+  periods.forEach(pr=>{ pr.age=(pr.start-birthJD)/DYEAR; pr.score=0.45*ms(pr.maha)+0.55*ms(pr.antar); });
+  // Jupiter transit triggers: 7th from Lagna, Moon sign, 7th from Moon, 2nd from Lagna
+  const moonSign=Math.floor(moonLon/30);
+  const trig=new Set([mod12(a.asc+6), moonSign, mod12(moonSign+6), mod12(a.asc+1)]);
+  function jupHit(pr){
+    for(let jd=pr.start; jd<pr.end; jd+=30.4){ if(trig.has(transitSign("Jupiter",jd))){ return jd; } }
+    return null;
+  }
+  // favorable windows in a plausible marriage age band
+  let fav=periods.filter(pr=>pr.age>=16 && pr.age<=45 && pr.score>=2.5);
+  if(!fav.length) fav=periods.filter(pr=>pr.age>=16 && pr.age<=45).sort((x,y)=>y.score-x.score).slice(0,4);
+  fav.forEach(pr=>{ pr.jup=jupHit(pr); });
+  const ranked=fav.slice().sort((x,y)=> ((y.jup?1:0)-(x.jup?1:0)) || (y.score-x.score) || (x.start-y.start));
+  const top=ranked.slice(0,3).sort((x,y)=>x.start-y.start);
+  // running dasha
+  const njd=nowJD();
+  const running=periods.find(pr=>njd>=pr.start && njd<pr.end);
+  // next Jupiter transit into 7th-from-Lagna or 7th-from-Moon, from now
+  const s7=mod12(a.asc+6), s7m=mod12(moonSign+6); let jupNext=null, prev=transitSign("Jupiter",njd);
+  for(let jd=njd; jd<njd+16*DYEAR; jd+=20){ const sg=transitSign("Jupiter",jd); if(sg!==prev && (sg===s7||sg===s7m)){ jupNext={jd, which:sg===s7?"your 7th house":"the 7th from your Moon"}; break;} prev=sg; }
+  return {top, running, jupNext, moonSign};
+}
+
+/* ============================== CHART (North Indian) ============================== */
+const HOUSE_XY = {
+  1:[150,58], 2:[78,30], 3:[40,72], 4:[63,150], 5:[40,228],
+  6:[78,272], 7:[150,242], 8:[222,272], 9:[260,228], 10:[237,150],
+  11:[260,72], 12:[222,30]
+};
+function drawChart(a){
+  const svg=document.getElementById("chartSvg");
+  let s="";
+  // backdrop
+  s+=`<rect x="2" y="2" width="296" height="296" fill="#f7ecd0" stroke="#7a5a2c" stroke-width="1.5"/>`;
+  // 7th house (marriage) glow + 5th house (romance) glow
+  const g=HOUSE_XY[7];
+  s+=`<circle cx="${g[0]}" cy="${g[1]}" r="40" fill="#c1361b" opacity="0.13"/>`;
+  const g5=HOUSE_XY[5];
+  s+=`<circle cx="${g5[0]}" cy="${g5[1]}" r="34" fill="#cf9526" opacity="0.14"/>`;
+  // grid lines
+  const L='stroke="#7a5a2c" stroke-width="1.4" fill="none"';
+  s+=`<rect x="6" y="6" width="288" height="288" ${L}/>`;
+  s+=`<line x1="6" y1="6" x2="294" y2="294" ${L}/>`;
+  s+=`<line x1="294" y1="6" x2="6" y2="294" ${L}/>`;
+  s+=`<polygon points="150,6 294,150 150,294 6,150" ${L}/>`;
+  // houses: sign number + planets
+  const byHouse={}; for(let i=1;i<=12;i++) byHouse[i]=[];
+  PLANETS.forEach(p=> byHouse[a.ph[p]].push(p));
+  for(let hN=1;hN<=12;hN++){
+    const [x,y]=HOUSE_XY[hN];
+    const signNum = mod12(a.asc + (hN-1)) + 1;            // rashi number in this house
+    const isSeventh = hN===7, isFirst = hN===1, isFifth = hN===5;
+    s+=`<text x="${x}" y="${y-13}" text-anchor="middle" font-size="9.5" fill="${isSeventh?'#c1361b':(isFifth?'#a9781a':'#9a7b48')}" font-family="Spectral,serif">${signNum}</text>`;
+    if(isFirst) s+=`<text x="${x}" y="${y-25}" text-anchor="middle" font-size="7.5" fill="#8f2412" font-family="Spectral,serif" letter-spacing="0.5">LAGNA</text>`;
+    if(isSeventh) s+=`<text x="${x}" y="${y+30}" text-anchor="middle" font-size="7.5" fill="#8f2412" font-family="Spectral,serif" letter-spacing="0.5">विवाह</text>`;
+    if(isFifth) s+=`<text x="${x}" y="${y+28}" text-anchor="middle" font-size="7.5" fill="#8a5f10" font-family="Spectral,serif" letter-spacing="0.5">प्रेम</text>`;
+    const planets=byHouse[hN];
+    const line = planets.map(p=>ABBR[p]).join(" ");
+    if(line){
+      // wrap if long
+      const chunks=[]; let cur=[];
+      planets.forEach((p,i)=>{ cur.push(ABBR[p]); if(cur.length===3){chunks.push(cur.join(" "));cur=[];} });
+      if(cur.length) chunks.push(cur.join(" "));
+      chunks.forEach((c,i)=>{
+        s+=`<text x="${x}" y="${y+3+i*12}" text-anchor="middle" font-size="11" font-weight="600" fill="#b3331c" font-family="Spectral,serif">${c}</text>`;
+      });
+    }
+  }
+  svg.innerHTML=s;
+
+  // legend
+  const leg=document.getElementById("legend");
+  leg.innerHTML = PLANETS.map(p=>`<div><b>${ABBR[p]}</b> ${p}</div>`).join("");
+}
+
+/* ============================== RENDER ============================== */
+let PRECISE=null;   // exact computed positions (set on birth-detail compute, cleared on manual)
+const HOUSE_MEANINGS = {
+  2:{name:"Family & wealth", sa:"Dhana / Kutumba", gov:"the family you join, shared finances"},
+  4:{name:"Home & comfort",  sa:"Sukha / Bandhu",  gov:"domestic peace, emotional security"},
+  5:{name:"Romance & children", sa:"Putra",         gov:"courtship, affection, progeny"},
+  7:{name:"Marriage & spouse",  sa:"Kalatra / Yuvati", gov:"the partner and the union itself"},
+  8:{name:"Intimacy & longevity", sa:"Randhra / Ayur", gov:"depth, durability, in-laws' resources"},
+  9:{name:"Elders & blessings", sa:"Bhagya / Dharma", gov:"father, fortune, the family's approval"},
+  11:{name:"Fulfilment & circle", sa:"Labha",        gov:"desires met, gains, the social circle"},
+  12:{name:"Private life",      sa:"Vyaya / Shayya",  gov:"the marital bed, privacy, time apart"}
+};
+const REL_ORDER=[2,4,5,7,8,9,11,12];
+
+function render(a){
+  // verdict
+  document.getElementById("verdictLead").innerHTML =
+    `Your chart points to <span class="hl">${a.style.toLowerCase()}</span>.`;
+  // tags — the four focuses at a glance
+  const tags=[a.style, "Meet "+a.focus.meet[0], a.focus.delayLabel, a.focus.familyLabel];
+  if(a.manglikLagna) tags.push(a.manglikSoftened ? "Manglik (softened)" : "Manglik — match carefully");
+  const tagEl=document.getElementById("tags");
+  tagEl.innerHTML = tags.map(t=>{
+    const warn = /match carefully|delayed|winning over|friction/.test(t);
+    return `<span class="tag${warn?' warn':''}">${t}</span>`;
+  }).join("");
+
+  drawChart(a);
+
+  const reading=buildReading(a);
+  if(PRECISE){
+    const t=marriageTiming(a, PRECISE.jdUT, PRECISE.lonDeg.Moon);
+    const body=[];
+    if(t.top.length){
+      const lines=t.top.map(w=>{
+        const a0=Math.round(w.age);
+        return `<b>${fmtMY(w.start)} – ${fmtMY(w.end)}</b> (around age ${a0}): the ${w.maha}\u2013${w.antar} daśā${w.jup?`, reinforced by Jupiter transiting a marriage-trigger sign (~${fmtMY(w.jup)})`:``}.`;
+      });
+      body.push(`The chart's most supportive marriage windows fall here: `+lines.join(" "));
+    }
+    const extra=[];
+    if(t.running) extra.push(`You're currently running the <b>${t.running.maha}\u2013${t.running.antar}</b> period (until ${fmtMY(t.running.end)}).`);
+    if(t.jupNext) extra.push(`Jupiter next transits ${t.jupNext.which} around <b>${fmtMY(t.jupNext.jd)}</b> — a classic trigger to watch.`);
+    if(extra.length) body.push(extra.join(" "));
+    body.push(`<span class="fact">Timing is the least certain part of any reading: treat these as windows of higher likelihood, not fixed dates. Marriage usually wants a supportive daśā and a Jupiter (or Jupiter–Saturn double) transit together.</span>`);
+    reading.push({title:"5 · When it might happen", body});
+  }
+  document.getElementById("reading").innerHTML = reading.map(sec=>
+    `<div class="sec"><h4><span class="dot"></span>${sec.title}</h4>${sec.body.map(p=>`<p>${p}</p>`).join("")}</div>`
+  ).join("");
+
+  // relationship houses grid
+  document.getElementById("housesGrid").innerHTML = REL_ORDER.map(H=>{
+    const info=a.relHouses[H], m=HOUSE_MEANINGS[H];
+    const cls=qualClass(info.score), word=qualWord(info.score);
+    const occ = info.occupants.length ? info.occupants.map(p=>ABBR[p]).join(" ")+" inside" : "";
+    const asp = info.aspectors.length ? "aspect "+info.aspectors.map(p=>ABBR[p]).join(" ") : "";
+    const tail=[occ,asp].filter(Boolean).join(" · ");
+    return `<div class="hcard${H===7?' key':''}">
+      <div class="htop"><span class="hbadge">${H}</span>
+        <span class="hname">${m.name}<span class="hsa">${m.sa}</span></span></div>
+      <p class="hgov">${m.gov}</p>
+      <span class="hlabel ${cls}">${word}</span>
+      <p class="hread">Lord ${info.lord} in the ${ord(info.lordHouse)}${tail?`; ${tail}`:""}.</p>
+    </div>`;
+  }).join("");
+
+  // exact positions table (only when computed from birth details)
+  const posEl=document.getElementById("positions");
+  if(PRECISE){
+    const row=(name,L,sign,cls)=>{
+      const si=sign!==undefined?sign:Math.floor(L/30);
+      return `<tr class="${cls||''}"><td class="b">${name}</td><td class="deg">${degInSign(L)} ${SIGNS[si].en}</td><td class="nak">${nakshatra(L)}</td></tr>`;
+    };
+    let rows=row("Ascendant",PRECISE.ascDeg,a.asc,"asc");
+    PLANETS.forEach(p=> rows+=row(p+" ("+SA[p]+")", PRECISE.lonDeg[p]));
+    posEl.innerHTML=`<table><caption>Sidereal positions · Lahiri</caption>${rows}</table>`;
+  } else {
+    posEl.innerHTML="";
+  }
+
+  const r=document.getElementById("results");
+  r.classList.add("show");
+  r.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function readManual(){
+  const err=document.getElementById("err"); err.textContent="";
+  PRECISE=null;
+  const pos={}; let asc=null; const missing=[];
+  INPUTS.forEach(k=>{
+    const v=document.getElementById("sel-"+k).value;
+    if(v===""){ missing.push(k==="Asc"?"Ascendant":k); return; }
+    if(k==="Asc") asc=+v; else pos[k]=+v;
+  });
+  if(missing.length){ err.textContent="Please choose a sign for: "+missing.join(", ")+"."; return; }
+  render(analyze(asc,pos,document.getElementById("gender").value));
+}
+document.getElementById("readManualBtn").onclick=readManual;
+
+document.getElementById("readBtn").onclick=()=>{
+  const err=document.getElementById("err"); err.textContent="";
+  if(!resolvePlace()){
+    err.textContent="Couldn't find \u201c"+document.getElementById("placeInput").value.trim()+"\u201d. Pick a place from the list, or open \u201cPlace not listed? Enter coordinates manually\u201d below.";
+    document.getElementById("coordsDetails").open=true;
+    return;
+  }
+  let chart;
+  try{ chart=computeFromBirth(); }
+  catch(e){ err.textContent=e.message; return; }
+  PRECISE=chart;
+  document.getElementById("sel-Asc").value=chart.asc;
+  ["Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu"].forEach(p=>{
+    document.getElementById("sel-"+p).value=chart.pos[p];
+  });
+  render(analyze(chart.asc, chart.pos, document.getElementById("gender").value));
+};
+
+/* ============================== HIGH-PRECISION EPHEMERIS ============================== */
+const D2R=Math.PI/180, R2D=180/Math.PI;
+const norm360=x=>((x%360)+360)%360;
+const dsin=a=>Math.sin(a*D2R), dcos=a=>Math.cos(a*D2R);
+const LAHIRI_J2000=23.85294;   // Lahiri (Chitrapaksha) ayanamsa at J2000.0, degrees
+
+function julianDayUT(y,m,d,dayFrac){
+  if(m<=2){y-=1;m+=12;}
+  const A=Math.floor(y/100), B=2-A+Math.floor(A/4);
+  return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524.5+dayFrac;
+}
+// ΔT in seconds — Espenak & Meeus piecewise polynomials (covers ~1800–2150)
+function deltaT(year){
+  let t,u;
+  if(year<1900){ t=year-1800; return Math.max(0,13.72-0.332447*t+0.0068612*t*t+0.0041116*(t*t*t)/100); }
+  if(year<1920){ t=year-1900; return -2.79+1.494119*t-0.0598939*t*t+0.0061966*t*t*t-0.000197*t*t*t*t; }
+  if(year<1941){ t=year-1920; return 21.20+0.84493*t-0.076100*t*t+0.0020936*t*t*t; }
+  if(year<1961){ t=year-1950; return 29.07+0.407*t-t*t/233+t*t*t/2547; }
+  if(year<1986){ t=year-1975; return 45.45+1.067*t-t*t/260-t*t*t/718; }
+  if(year<2005){ t=year-2000; return 63.86+0.3345*t-0.060374*t*t+0.0017275*t*t*t+0.000651814*t*t*t*t+0.00002373599*t*t*t*t*t; }
+  if(year<2050){ t=year-2000; return 62.92+0.32217*t+0.005589*t*t; }
+  u=(year-1820)/100; return -20+32*u*u-0.5628*(2150-year);
+}
+function nutation(T){
+  const Om=125.04452-1934.136261*T+0.0020708*T*T+T*T*T/450000;
+  const L=280.4665+36000.7698*T, Lp=218.3165+481267.8813*T;
+  const dpsi=(-17.20*dsin(Om)-1.32*dsin(2*L)-0.23*dsin(2*Lp)+0.21*dsin(2*Om))/3600;
+  const deps=(9.20*dcos(Om)+0.57*dcos(2*L)+0.10*dcos(2*Lp)-0.09*dcos(2*Om))/3600;
+  return {dpsi,deps};
+}
+function meanObliquity(T){ return 23.4392911-(46.8150*T+0.00059*T*T-0.001813*T*T*T)/3600; }
+function ayanamsaDeg(T){ return LAHIRI_J2000+(5028.796195*T+1.1054348*T*T)/3600; }
+
+// Sun — apparent geocentric longitude (Meeus ch.25), of date
+function sunApparent(T){
+  const L0=norm360(280.46646+36000.76983*T+0.0003032*T*T);
+  const M=357.52911+35999.05029*T-0.0001537*T*T;
+  const C=(1.914602-0.004817*T-0.000014*T*T)*dsin(M)+(0.019993-0.000101*T)*dsin(2*M)+0.000289*dsin(3*M);
+  const trueL=L0+C, Om=125.04-1934.136*T;
+  return norm360(trueL-0.00569-0.00478*dsin(Om));   // apparent (aberration + nutation)
+}
+
+// Moon — Meeus ch.47 (Σl, 59 terms); returns longitude of date, mean equinox
+const MOON_L=[
+ [0,0,1,0,6288774],[2,0,-1,0,1274027],[2,0,0,0,658314],[0,0,2,0,213618],[0,1,0,0,-185116],
+ [0,0,0,2,-114332],[2,0,-2,0,58793],[2,-1,-1,0,57066],[2,0,1,0,53322],[2,-1,0,0,45758],
+ [0,1,-1,0,-40923],[1,0,0,0,-34720],[0,1,1,0,-30383],[2,0,0,-2,15327],[0,0,1,2,-12528],
+ [0,0,1,-2,10980],[4,0,-1,0,10675],[0,0,3,0,10034],[4,0,-2,0,8548],[2,1,-1,0,-7888],
+ [2,1,0,0,-6766],[1,0,-1,0,-5163],[1,1,0,0,4987],[2,-1,1,0,4036],[2,0,2,0,3994],
+ [4,0,0,0,3861],[2,0,-3,0,3665],[0,1,-2,0,-2689],[2,0,-1,2,-2602],[2,-1,-2,0,2390],
+ [1,0,1,0,-2348],[2,-2,0,0,2236],[0,1,2,0,-2120],[0,2,0,0,-2069],[2,-2,-1,0,2048],
+ [2,0,1,-2,-1773],[2,0,0,2,-1595],[4,-1,-1,0,1215],[0,0,2,2,-1110],[3,0,-1,0,-892],
+ [2,1,1,0,-810],[4,-1,-2,0,759],[0,2,-1,0,-713],[2,2,-1,0,-700],[2,1,-2,0,691],
+ [2,-1,0,-2,596],[4,0,1,0,549],[0,0,4,0,537],[4,-1,0,0,520],[1,0,-2,0,-487],
+ [2,1,0,-2,-399],[0,0,2,-2,-381],[1,1,1,0,351],[3,0,-2,0,-340],[4,0,-3,0,330],
+ [2,-1,2,0,327],[0,2,1,0,-323],[1,1,-1,0,299],[2,0,3,0,294]
+];
+function moonLongDate(T){
+  const Lp=norm360(218.3164477+481267.88123421*T-0.0015786*T*T+T*T*T/538841-T*T*T*T/65194000);
+  const D=norm360(297.8501921+445267.1114034*T-0.0018819*T*T+T*T*T/545868-T*T*T*T/113065000);
+  const M=norm360(357.5291092+35999.0502909*T-0.0001536*T*T+T*T*T/24490000);
+  const Mp=norm360(134.9633964+477198.8675055*T+0.0087414*T*T+T*T*T/69699-T*T*T*T/14712000);
+  const F=norm360(93.2720950+483202.0175233*T-0.0036539*T*T-T*T*T/3526000+T*T*T*T/863310000);
+  const E=1-0.002516*T-0.0000074*T*T;
+  const A1=119.75+131.849*T, A2=53.09+479264.290*T;
+  let sumL=0;
+  for(const [cd,cm,cmp,cf,coef] of MOON_L){
+    let term=coef*dsin(cd*D+cm*M+cmp*Mp+cf*F);
+    if(Math.abs(cm)===1) term*=E; else if(Math.abs(cm)===2) term*=E*E;
+    sumL+=term;
+  }
+  sumL+=3958*dsin(A1)+1962*dsin(Lp-F)+318*dsin(A2);
+  return norm360(Lp+sumL/1e6);
+}
+
+// Planets — Keplerian J2000 elements, geocentric J2000 ecliptic longitude with light-time
+const ELEM={
+  Mercury:[0.38709927,0.20563593,7.00497902,252.25032350,77.45779628,48.33076593, 0.00000037,0.00001906,-0.00594749,149472.67411175,0.16047689,-0.12534081],
+  Venus:[0.72333566,0.00677672,3.39467605,181.97909950,131.60246718,76.67984255, 0.00000390,-0.00004107,-0.00078890,58517.81538729,0.00268329,-0.27769418],
+  Earth:[1.00000261,0.01671123,-0.00001531,100.46457166,102.93768193,0.0, 0.00000562,-0.00004392,-0.01294668,35999.37244981,0.32327364,0.0],
+  Mars:[1.52371034,0.09339410,1.84969142,-4.55343205,-23.94362959,49.55953891, 0.00001847,0.00007882,-0.00813131,19140.30268499,0.44441088,-0.29257343],
+  Jupiter:[5.20288700,0.04838624,1.30439695,34.39644051,14.72847983,100.47390909, -0.00011607,-0.00013253,-0.00183714,3034.74612775,0.21252668,0.20469106],
+  Saturn:[9.53667594,0.05386179,2.48599187,49.95424423,92.59887831,113.66242448, -0.00125060,-0.00050991,0.00193609,1222.49362201,-0.41897216,-0.28867794]
+};
+function helioRect(name,T){
+  const e0=ELEM[name];
+  const a=e0[0]+e0[6]*T, e=e0[1]+e0[7]*T, I=(e0[2]+e0[8]*T)*D2R;
+  const L=e0[3]+e0[9]*T, wbar=e0[4]+e0[10]*T, Om=(e0[5]+e0[11]*T)*D2R;
+  let M=norm360(L-wbar)*D2R, E=M+e*Math.sin(M);
+  for(let i=0;i<10;i++) E=E-(E-e*Math.sin(E)-M)/(1-e*Math.cos(E));
+  const xv=a*(Math.cos(E)-e), yv=a*Math.sqrt(1-e*e)*Math.sin(E);
+  const omega=wbar*D2R-Om;
+  const co=Math.cos(omega),so=Math.sin(omega),cO=Math.cos(Om),sO=Math.sin(Om),cI=Math.cos(I),sI=Math.sin(I);
+  return [
+    (co*cO-so*sO*cI)*xv+(-so*cO-co*sO*cI)*yv,
+    (co*sO+so*cO*cI)*xv+(-so*sO+co*cO*cI)*yv,
+    (so*sI)*xv+(co*sI)*yv
+  ];
+}
+function geoEclipticJ2000(name,T){
+  const ex=helioRect("Earth",T);
+  let dist=0,gx=0,gy=0,gz=0;
+  for(let i=0;i<3;i++){
+    const p=helioRect(name, T - dist*0.0057755183/36525);  // retard by light-time
+    gx=p[0]-ex[0]; gy=p[1]-ex[1]; gz=p[2]-ex[2];
+    dist=Math.sqrt(gx*gx+gy*gy+gz*gz);
+  }
+  return norm360(Math.atan2(gy,gx)*R2D);
+}
+
+function gmstDeg(jdUT,T0){
+  return norm360(280.46061837+360.98564736629*(jdUT-2451545.0)+0.000387933*T0*T0-T0*T0*T0/38710000);
+}
+function ascendantDate(lstDeg,epsDeg,latDeg){
+  const ramc=lstDeg*D2R, eps=epsDeg*D2R, lat=latDeg*D2R;
+  // ecliptic longitude of the rising point (Ascendant). The atan2 form already
+  // resolves the correct quadrant — no further adjustment is needed.
+  return norm360(Math.atan2(Math.cos(ramc), -(Math.sin(ramc)*Math.cos(eps)+Math.tan(lat)*Math.sin(eps)))*R2D);
+}
+
+// nakshatra + degree formatting
+const NAK=["Ashwini","Bharani","Krittika","Rohini","Mrigashira","Ardra","Punarvasu","Pushya","Ashlesha",
+ "Magha","Purva Phalguni","Uttara Phalguni","Hasta","Chitra","Swati","Vishakha","Anuradha","Jyeshtha",
+ "Mula","Purva Ashadha","Uttara Ashadha","Shravana","Dhanishta","Shatabhisha","Purva Bhadrapada",
+ "Uttara Bhadrapada","Revati"];
+function nakshatra(lon){ const span=13+1/3; const n=Math.floor(lon/span)%27; const pada=Math.floor((lon%span)/(span/4))+1; return NAK[n]+" "+pada; }
+function degInSign(lon){ let d=lon%30, deg=Math.floor(d), min=Math.round((d-deg)*60); if(min===60){deg+=1;min=0;} return deg+"\u00b0"+String(min).padStart(2,"0")+"'"; }
+function computeFromBirth(){
+  const dateStr=document.getElementById("bdate").value, timeStr=document.getElementById("btime").value;
+  const lat=parseFloat(document.getElementById("blat").value);
+  const lon=parseFloat(document.getElementById("blon").value);
+  const tz=parseFloat(document.getElementById("btz").value);
+  if(!dateStr||!timeStr||isNaN(lat)||isNaN(lon)||isNaN(tz))
+    throw new Error("Please fill date, time, latitude, longitude and time zone.");
+  const [Y,Mo,Dd]=dateStr.split("-").map(Number);
+  const [hh,mm]=timeStr.split(":").map(Number);
+  const localHr=hh+(mm||0)/60;
+
+  const jdUT=julianDayUT(Y,Mo,Dd,(localHr-tz)/24);
+  const dt=deltaT(Y+(Mo-0.5)/12);
+  const jde=jdUT+dt/86400;
+  const T=(jde-2451545.0)/36525;      // dynamical time — for body positions
+  const T0=(jdUT-2451545.0)/36525;    // universal time — for sidereal time
+
+  const {dpsi,deps}=nutation(T);
+  const epsTrue=meanObliquity(T)+deps;
+  const ayan=ayanamsaDeg(T);
+  const pA=(5028.796195*T+1.1054348*T*T)/3600;   // precession J2000 → date
+
+  // tropical apparent longitudes, equinox of date
+  const dateLong={ Sun:sunApparent(T), Moon:norm360(moonLongDate(T)+dpsi) };
+  ["Mercury","Venus","Mars","Jupiter","Saturn"].forEach(p=>{
+    dateLong[p]=norm360(geoEclipticJ2000(p,T)+pA+dpsi);   // J2000 → date frame, apparent
+  });
+  const node=norm360(125.0445479-1934.1362891*T+0.0020754*T*T+T*T*T/467410);
+
+  // sidereal longitudes (subtract ayanamsa of date)
+  const lonDeg={};
+  Object.keys(dateLong).forEach(p=> lonDeg[p]=norm360(dateLong[p]-ayan));
+  lonDeg.Rahu=norm360(node-ayan);
+  lonDeg.Ketu=norm360(lonDeg.Rahu+180);
+
+  const eqEq=dpsi*Math.cos(epsTrue*D2R);                  // equation of the equinoxes
+  const lst=norm360(gmstDeg(jdUT,T0)+eqEq+lon);
+  const ascDeg=norm360(ascendantDate(lst,epsTrue,lat)-ayan);
+
+  const pos={}; ["Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn"].forEach(p=>pos[p]=Math.floor(lonDeg[p]/30));
+  pos.Rahu=Math.floor(lonDeg.Rahu/30);
+  return {asc:Math.floor(ascDeg/30), pos, ascDeg, lonDeg, jdUT};
+}
+</script>
+</body>
+</html>
