@@ -6,11 +6,11 @@
 <meta name="google-adsense-account" content="ca-pub-9194178610009666">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9194178610009666" crossorigin="anonymous"></script>
 <title>5-Minute Kundli Reading Tool | Shambhavaa</title>
-<meta name="description" content="Use Shambhavaa's 5-Minute Kundli tool to cast a quick sidereal birth chart, dasha snapshot, live transit notes, and Vedic astrology reading with location search.">
+<meta name="description" content="Use Shambhavaa's 5-Minute Kundli tool to cast a quick sidereal birth chart, dasha snapshot, life area reading, live transit notes, and Vedic astrology reading with location search.">
 <link rel="canonical" href="https://shambhavaa.com/tools/five-minute-kundli/">
 <link rel="icon" href="../../assets/logo.png">
 <meta property="og:title" content="5-Minute Kundli Reading Tool | Shambhavaa">
-<meta property="og:description" content="Instant Vedic kundli reading with birth date, birth time, location search, dasha, D9, transits, and Sade Sati.">
+<meta property="og:description" content="Instant Vedic kundli reading with birth date, birth time, location search, D9, life areas, transits, and Sade Sati.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shambhavaa.com/tools/five-minute-kundli/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -212,6 +212,18 @@
   .ss.off .sslab{color:#4f6e3c}
   .ss p{margin:0;font-size:14.5px;color:var(--ink)}
 
+  .lifeareas details{border:1px solid var(--line);border-radius:12px;margin-bottom:9px;background:var(--bg2);overflow:hidden}
+  .lifeareas details[open]{background:var(--panel)}
+  .lifeareas summary{cursor:pointer;list-style:none;padding:13px 15px;font-family:'Fraunces';font-weight:600;font-size:15.5px;color:var(--ink);display:flex;align-items:center;gap:9px;user-select:none}
+  .lifeareas summary::-webkit-details-marker{display:none}
+  .lifeareas summary::after{content:"+";margin-left:auto;color:var(--saffron-deep);font-weight:700;font-size:18px;font-family:'Inter'}
+  .lifeareas details[open] summary::after{content:"\2013"}
+  .lifeareas summary .dev{font-family:'Tiro Devanagari Hindi';font-weight:400;font-size:13px;color:var(--ink-faint)}
+  .lifeareas summary:hover{color:var(--saffron-deep)}
+  .lifeareas .lbody{padding:2px 15px 15px;font-size:14.5px;color:var(--ink)}
+  .lifeareas .lbody b{color:var(--saffron-deep)}
+  .lifeareas .win{margin-top:9px}
+
   footer.note{text-align:center;color:var(--ink-faint);font-size:12px;margin-top:20px;line-height:1.6}
 
   @media (max-width:760px){
@@ -364,6 +376,11 @@
         </div>
       </div>
       <div class="qa" id="questions"></div>
+    </div>
+
+    <div class="card">
+      <div class="label">Complete Life Reading · <span class="dev">जीवन के सभी पक्ष</span></div>
+      <div class="lifeareas" id="lifeAreas"></div>
     </div>
 
     <div class="card">
@@ -816,7 +833,11 @@ function drawKundli(chart,mode){
    ============================================================ */
 let CURRENT=null, LANG='en';
 
-function ordinal(n){return n+["th","st","nd","rd"][(n%100>>3^1&&n%10)<4?n%10:0];}
+function ordinal(n){var s=["th","st","nd","rd"],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0]);}
+function digWord(d,L){
+  if(L==='en') return d==='exalted'?'strong (exalted)':d==='debilitated'?'under pressure (debilitated)':d==='own'?'comfortable (own sign)':'placed';
+  return d==='exalted'?'mazboot (uchcha)':d==='debilitated'?'dabaav mein (neecha)':d==='own'?'apne ghar (comfortable)':'sthit';
+}
 
 function renderReading(){
   const c=CURRENT; if(!c)return;
@@ -952,39 +973,57 @@ function renderQuestions(){
     ? ` <span style="color:var(--ink-faint)">★ = an especially strong window. These are openings, not exact dates — readiness and effort still matter.</span>`
     : ` <span style="color:var(--ink-faint)">★ = khaas mazboot window. Ye openings hain, fixed taarikh nahi — taiyari aur koshish bhi maayne rakhti hai.</span>`;
 
-  /* 3 — Career */
+  /* 3 — Career (field + job/business + govt + foreign + timing) */
   const in10=planetsInHouse(c,10), tenthLord=lord(10);
   const careerPlanet = in10[0] || tenthLord;
   const tenthSign=(c.lagnaSign+9)%12;
+  const infl=[...in10,tenthLord];
+  const bizLean=infl.some(p=>['Mercury','Mars','Rahu','Venus'].includes(p));
+  const jobLean=infl.some(p=>['Sun','Saturn'].includes(p));
+  const cmode=(bizLean&&!jobLean)?'biz':(jobLean&&!bizLean)?'job':'either';
+  const sunR=c.recs.Sun;
+  const govt=(tenthLord==='Sun'||in10.includes('Sun'))&&(sunR.dignity==='exalted'||sunR.dignity==='own');
+  const foreignJob=in10.includes('Rahu')||c.recs[tenthLord].house===12||lord(12)===tenthLord;
   const cset=new Set(['Sun','Saturn',tenthLord,...in10]);
   const cwin=favorableWindows(c,cset,{count:1,minAge:18,allowMaha:true});
+  const cmodeTxt=L==='en'
+    ?(cmode==='biz'?' Your 10th leans toward <b>business / independent work</b> more than a regular job.':cmode==='job'?' Your 10th favours a <b>steady job or service</b> over business.':' You can do well in <b>either a job or your own venture</b>.')
+    :(cmode==='biz'?' Aapka 10th <b>business / apna kaam</b> ki taraf zyada jhukta hai, naukri se zyada.':cmode==='job'?' Aapka 10th <b>steady naukri ya service</b> ko business se zyada support karta hai.':' Aap <b>naukri ya apna venture</b> dono mein achha kar sakte ho.');
+  const govtTxt=govt?(L==='en'?' A strong Sun gives real scope for government or authority roles.':' Mazboot Surya sarkari ya authority wale role ka accha scope deta hai.'):'';
+  const forTxt=foreignJob?(L==='en'?' There are clear signs of work with foreign companies or abroad.':' Foreign company ya videsh mein kaam ke saaf sanket hain.'):'';
   const cwinTxt = cwin.length
-    ? (L==='en'?` A strong push for career growth comes in <b>${fmtWin(cwin[0].start)} – ${fmtWin(cwin[0].end)}</b> (${PLANET_HI_NAME[cwin[0].maha]}/${PLANET_HI_NAME[cwin[0].antar]}).`
-               :` Career growth ka strong push <b>${fmtWin(cwin[0].start)} – ${fmtWin(cwin[0].end)}</b> mein aata hai (${PLANET_HI_NAME[cwin[0].maha]}/${PLANET_HI_NAME[cwin[0].antar]}).`)
+    ? (L==='en'?` Career rises strongly in <b>${fmtWin(cwin[0].start)} – ${fmtWin(cwin[0].end)}</b> (${PLANET_HI_NAME[cwin[0].maha]}/${PLANET_HI_NAME[cwin[0].antar]}).`
+               :` Career strong rise <b>${fmtWin(cwin[0].start)} – ${fmtWin(cwin[0].end)}</b> mein (${PLANET_HI_NAME[cwin[0].maha]}/${PLANET_HI_NAME[cwin[0].antar]}).`)
     : '';
   const q3 = L==='en'
-    ? `Your 10th house of career is in <b>${SIGNS[tenthSign].n}</b>, shaped most by <b>${PLANET_HI_NAME[careerPlanet]}</b>${in10.length?' (sitting right in it)':' (its lord)'}. That points toward <b>${CAREER_FIELDS[careerPlanet].en}</b>. Lean into that lane rather than fighting it.${cwinTxt}`
-    : `Career ka 10th house <b>${SIGNS[tenthSign].n}</b> mein hai, aur ise sabse zyada <b>${PLANET_HI_NAME[careerPlanet]}</b> shape karta hai${in10.length?' (jo isi mein baitha hai)':' (iska lord)'}. Yeh ishara karta hai <b>${CAREER_FIELDS[careerPlanet].hi}</b> ki taraf. Is lane ke saath chalo, ulta mat lado.${cwinTxt}`;
+    ? `Your 10th house of career is in <b>${SIGNS[tenthSign].n}</b>, shaped most by <b>${PLANET_HI_NAME[careerPlanet]}</b>, pointing toward <b>${CAREER_FIELDS[careerPlanet].en}</b>.${cmodeTxt}${govtTxt}${forTxt}${cwinTxt}`
+    : `Career ka 10th house <b>${SIGNS[tenthSign].n}</b> mein hai, jise sabse zyada <b>${PLANET_HI_NAME[careerPlanet]}</b> shape karta hai — ishara <b>${CAREER_FIELDS[careerPlanet].hi}</b> ki taraf.${cmodeTxt}${govtTxt}${forTxt}${cwinTxt}`;
 
-  /* 4 — Education */
-  const in5=planetsInHouse(c,5), fifthLord=lord(5);
+  /* 4 — Education (stream + higher + abroad + exams + completion + timing) */
+  const in5=planetsInHouse(c,5), fifthLord=lord(5), ninthLord=lord(9);
   const eduPlanet = in5[0] || fifthLord;
   const meDig=c.recs.Mercury.dignity, juDig=c.recs.Jupiter.dignity;
   const meWeak = meDig==='debilitated', juWeak = juDig==='debilitated';
+  const higher = ['Jupiter','Mercury'].includes(eduPlanet) || ['exalted','own'].includes(juDig) || c.recs[ninthLord].dignity!=='debilitated';
+  const abroadEdu = c.recs[fifthLord].house===12 || c.recs[ninthLord].house===12 || in5.includes('Rahu') || planetsInHouse(c,9).includes('Rahu');
+  const examEdge = ['Saturn','Mars','Sun'].includes(eduPlanet) || planetsInHouse(c,6).some(p=>['Saturn','Mars'].includes(p));
   const eset=new Set(['Mercury','Jupiter',fifthLord]);
   const ewin=favorableWindows(c,eset,{count:1,minAge:5,allowMaha:true});
   const ewinTxt = ewin.length
-    ? (L==='en'?` Study and exams go best during <b>${fmtWin(ewin[0].start)} – ${fmtWin(ewin[0].end)}</b> (${PLANET_HI_NAME[ewin[0].maha]}/${PLANET_HI_NAME[ewin[0].antar]}) — line up important courses or tests then.`
-               :` Padhai aur exam sabse achhe <b>${fmtWin(ewin[0].start)} – ${fmtWin(ewin[0].end)}</b> mein chalte hain (${PLANET_HI_NAME[ewin[0].maha]}/${PLANET_HI_NAME[ewin[0].antar]}) — important course/test usi time rakho.`)
+    ? (L==='en'?` Study and exams go best during <b>${fmtWin(ewin[0].start)} – ${fmtWin(ewin[0].end)}</b> — line up important courses or tests then.`
+               :` Padhai aur exam sabse achhe <b>${fmtWin(ewin[0].start)} – ${fmtWin(ewin[0].end)}</b> mein — important course/test usi time rakho.`)
     : '';
+  const higherTxt = higher?(L==='en'?' Higher studies are well supported — going past graduation suits you.':' Higher studies achhe support hain — graduation se aage jaana suit karta hai.'):(L==='en'?' Keep studies practical and skill-focused rather than endlessly long.':' Padhai practical aur skill-focused rakho, bahut lambi mat kheencho.');
+  const abroadTxt = abroadEdu?(L==='en'?' Studying abroad is a real possibility.':' Videsh mein padhai ki sachchi possibility hai.'):'';
+  const examTxt = examEdge?(L==='en'?' You have the discipline for competitive exams.':' Aapmein competitive exam ke liye discipline hai.'):'';
   const weakTxt = (meWeak||juWeak)
-    ? (L==='en'?` Your study planets (${meWeak?'Mercury':''}${meWeak&&juWeak?' & ':''}${juWeak?'Jupiter':''}) need support — short focused sessions beat long cramming, and the remedy below helps concentration.`
-               :` Aapke study grah (${meWeak?'Budh':''}${meWeak&&juWeak?' & ':''}${juWeak?'Guru':''}) ko support chahiye — chhote focused sessions, lambi ratta-maar se behtar; neeche wala upaay concentration mein madad karta hai.`)
+    ? (L==='en'?` Your study planets need support — short focused sessions beat long cramming.`
+               :` Aapke study grah ko support chahiye — chhote focused sessions, lambi ratta-maar se behtar.`)
     : (L==='en'?` Your study planets are well-placed, so consistency matters more than extra hours.`
                :` Aapke study grah achhe placed hain, isliye ghanton se zyada consistency maayne rakhti hai.`);
   const q4 = L==='en'
-    ? `Your 5th house of intelligence is driven by <b>${PLANET_HI_NAME[eduPlanet]}</b>, which favours <b>${EDU_STREAM[eduPlanet].en}</b>.${weakTxt}${ewinTxt}`
-    : `Buddhi ka 5th house <b>${PLANET_HI_NAME[eduPlanet]}</b> chalata hai, jo <b>${EDU_STREAM[eduPlanet].hi}</b> ke liye accha hai.${weakTxt}${ewinTxt}`;
+    ? `Your 5th house of intelligence is driven by <b>${PLANET_HI_NAME[eduPlanet]}</b>, which favours <b>${EDU_STREAM[eduPlanet].en}</b>.${higherTxt}${abroadTxt}${examTxt}${weakTxt}${ewinTxt}`
+    : `Buddhi ka 5th house <b>${PLANET_HI_NAME[eduPlanet]}</b> chalata hai, jo <b>${EDU_STREAM[eduPlanet].hi}</b> ke liye accha hai.${higherTxt}${abroadTxt}${examTxt}${weakTxt}${ewinTxt}`;
 
   /* 5 — Manglik / Mangal dosha */
   const mhouses=[1,2,4,7,8,12];
@@ -1024,7 +1063,128 @@ function renderQuestions(){
   `;
 }
 
-function fmtDate(ms){const d=new Date(ms);return d.toLocaleDateString(undefined,{month:'short',year:'numeric'});}
+/* ============================================================
+   COMPLETE LIFE READING — all major life areas (12 bhavas)
+   ============================================================ */
+function renderLifeAreas(){
+  const c=CURRENT; if(!c) return; const L=L0();
+  const lord=n=>houseLord(c,n);
+  const inH=h=>planetsInHouse(c,h);
+  const R=p=>c.recs[p];
+  const dw=d=>digWord(d,L);
+  const area=h=>(L==='en'?HOUSES.en:HOUSES.hi)[h-1];
+  const win=(set,opt)=>{const w=favorableWindows(c,set,Object.assign({count:1,allowMaha:true},opt));return w.length?`${fmtWin(w[0].start)} – ${fmtWin(w[0].end)}`:null;};
+  const malefics=p=>['Mars','Saturn','Rahu','Ketu','Sun'].includes(p);
+  const items=[];
+
+  // 1. Health
+  (()=>{
+    const ll=lord(1), r=R(ll);
+    const sixth=inH(6).filter(malefics), eighth=inH(8).filter(malefics);
+    const vuln=[...sixth,...eighth];
+    const t=L==='en'?['Health & body','आरोग्य']:['Aarogya / health','आरोग्य'];
+    const a=L==='en'
+      ? `Your Lagna lord <b>${PLANET_HI_NAME[ll]}</b> is ${dw(r.dignity)} in the ${ordinal(r.house)} house, giving a ${['exalted','own'].includes(r.dignity)?'naturally robust':'sensitive but manageable'} constitution.${vuln.length?` Keep an eye on the areas of ${vuln.map(p=>PLANET_HI_NAME[p]).join(', ')} (in your 6th/8th).`:''} Routine, sleep and food discipline protect you more than anything.`
+      : `Lagna lord <b>${PLANET_HI_NAME[ll]}</b> ${ordinal(r.house)} house mein ${dw(r.dignity)} hai, jisse constitution ${['exalted','own'].includes(r.dignity)?'naturally strong':'sensitive par sambhalने-yogya'} hai.${vuln.length?` ${vuln.map(p=>PLANET_HI_NAME[p]).join(', ')} (6th/8th) wale area pe nazar rakho.`:''} Routine, neend aur khaane ka discipline sabse zyada bachaata hai.`;
+    items.push({t,a});
+  })();
+
+  // 2. Wealth & finances
+  (()=>{
+    const l2=lord(2), l11=lord(11), r2=R(l2), r11=R(l11), ju=R('Jupiter');
+    const dhana = (r2.house===11||r11.house===2||r2.house===r11.house||[2,11].includes(r2.house)||[2,11].includes(r11.house));
+    const w=win(new Set([l2,l11,'Jupiter','Venus']),{minAge:18});
+    const t=L==='en'?['Wealth & finances','धन']:['Dhan / paisa','धन'];
+    const a=L==='en'
+      ? `Income (11th lord <b>${PLANET_HI_NAME[l11]}</b>) is ${dw(r11.dignity)} in your ${ordinal(r11.house)}, and savings (2nd lord <b>${PLANET_HI_NAME[l2]}</b>) ${dw(r2.dignity)}. ${dhana?'There is a genuine wealth-building combination here.':'Wealth builds steadily rather than in sudden jumps.'} Jupiter, the money significator, is ${dw(ju.dignity)}.${w?` Finances clearly improve around <b>${w}</b>.`:''}`
+      : `Income (11th lord <b>${PLANET_HI_NAME[l11]}</b>) aapke ${ordinal(r11.house)} mein ${dw(r11.dignity)} hai, aur savings (2nd lord <b>${PLANET_HI_NAME[l2]}</b>) ${dw(r2.dignity)}. ${dhana?'Yahan asli wealth-building yog hai.':'Paisa achanak nahi, dheere-dheere banta hai.'} Jupiter (dhan karaka) ${dw(ju.dignity)} hai.${w?` Finances saaf taur par <b>${w}</b> ke aas-paas behtar hote hain.`:''}`;
+    items.push({t,a});
+  })();
+
+  // 3. Children
+  (()=>{
+    const l5=lord(5), r5=R(l5), ju=R('Jupiter');
+    const afflict=inH(5).filter(p=>['Mars','Saturn','Rahu','Ketu'].includes(p));
+    const w=win(new Set([l5,'Jupiter']),{minAge:20});
+    const t=L==='en'?['Children & progeny','संतान']:['Santaan / children','संतान'];
+    const a=L==='en'
+      ? `Your 5th house (children) is led by <b>${PLANET_HI_NAME[l5]}</b> (${dw(r5.dignity)} in the ${ordinal(r5.house)}), with Jupiter, the child-significator, ${dw(ju.dignity)}. ${afflict.length?`With ${afflict.map(p=>PLANET_HI_NAME[p]).join('/')} in the 5th, there can be some delay or care needed — not denial.`:'The signs for children are supportive.'}${w?` The favourable window is around <b>${w}</b>.`:''}`
+      : `5th house (santaan) ko <b>${PLANET_HI_NAME[l5]}</b> chalata hai (${ordinal(r5.house)} mein ${dw(r5.dignity)}), aur Jupiter (santaan karaka) ${dw(ju.dignity)} hai. ${afflict.length?`5th mein ${afflict.map(p=>PLANET_HI_NAME[p]).join('/')} hone se thodi der ya extra dhyaan ho sakta hai — denial nahi.`:'Santaan ke sanket supportive hain.'}${w?` Favourable window <b>${w}</b> ke aas-paas.`:''}`;
+    items.push({t,a});
+  })();
+
+  // 4. Family & parents
+  (()=>{
+    const mo=R('Moon'), su=R('Sun'), l2=lord(2), r2=R(l2);
+    const t=L==='en'?['Family & parents','परिवार']:['Parivaar / family','परिवार'];
+    const a=L==='en'
+      ? `Family life (2nd lord <b>${PLANET_HI_NAME[l2]}</b>, ${dw(r2.dignity)}) is ${['exalted','own'].includes(r2.dignity)?'a source of strength':'workable with warmth and patience'}. Your bond with mother (Moon ${dw(mo.dignity)} in the ${ordinal(mo.house)}) and father (Sun ${dw(su.dignity)} in the ${ordinal(su.house)}) shapes much of your support system.`
+      : `Family life (2nd lord <b>${PLANET_HI_NAME[l2]}</b>, ${dw(r2.dignity)}) ${['exalted','own'].includes(r2.dignity)?'aapki taakat hai':'thodi warmth aur patience se theek rehti hai'}. Maa (Chandra ${dw(mo.dignity)}, ${ordinal(mo.house)}) aur pita (Surya ${dw(su.dignity)}, ${ordinal(su.house)}) ke saath bond aapke support system ko banata hai.`;
+    items.push({t,a});
+  })();
+
+  // 5. Property & vehicles
+  (()=>{
+    const l4=lord(4), r4=R(l4), ma=R('Mars'), ve=R('Venus');
+    const w=win(new Set([l4,'Mars','Venus']),{minAge:22});
+    const t=L==='en'?['Property & vehicles','भूमि-वाहन']:['Property & vehicle','भूमि-वाहन'];
+    const a=L==='en'
+      ? `Home and land (4th lord <b>${PLANET_HI_NAME[l4]}</b>, ${dw(r4.dignity)}; Mars ${dw(ma.dignity)}) and vehicles (Venus ${dw(ve.dignity)}) are ${['exalted','own'].includes(r4.dignity)?'strongly indicated':'achievable with steady effort'}.${w?` A good time to acquire property or a vehicle is around <b>${w}</b>.`:''}`
+      : `Ghar-zameen (4th lord <b>${PLANET_HI_NAME[l4]}</b>, ${dw(r4.dignity)}; Mangal ${dw(ma.dignity)}) aur vahan (Shukra ${dw(ve.dignity)}) ${['exalted','own'].includes(r4.dignity)?'strongly indicated':'steady mehnat se possible'} hain.${w?` Property/vehicle lene ka accha time <b>${w}</b> ke aas-paas.`:''}`;
+    items.push({t,a});
+  })();
+
+  // 6. Foreign & travel
+  (()=>{
+    const l12=lord(12), r12=R(l12), rahu=R('Rahu');
+    const yes = r12.house!==12 || inH(12).length || rahu.house===12 || [9,12].includes(rahu.house) || inH(9).includes('Rahu');
+    const w=win(new Set([l12,lord(9),'Rahu']),{minAge:18});
+    const t=L==='en'?['Foreign & travel','विदेश यात्रा']:['Videsh / travel','विदेश यात्रा'];
+    const a=L==='en'
+      ? `Foreign connections (12th lord <b>${PLANET_HI_NAME[l12]}</b> in the ${ordinal(r12.house)}; Rahu in the ${ordinal(rahu.house)}) are ${yes?'clearly present — travel or settling abroad is realistic':'mild — travel happens but settling abroad is less emphasised'}.${w?` Movement is most likely around <b>${w}</b>.`:''}`
+      : `Videsh ka yog (12th lord <b>${PLANET_HI_NAME[l12]}</b> ${ordinal(r12.house)} mein; Rahu ${ordinal(rahu.house)} mein) ${yes?'saaf hai — yatra ya videsh mein basna realistic hai':'halka hai — yatra hoti hai par videsh mein basna kam'}.${w?` Movement sabse zyada <b>${w}</b> ke aas-paas.`:''}`;
+    items.push({t,a});
+  })();
+
+  // 7. Luck & fortune
+  (()=>{
+    const l9=lord(9), r9=R(l9), ju=R('Jupiter');
+    const t=L==='en'?['Luck & fortune','भाग्य']:['Bhagya / luck','भाग्य'];
+    const a=L==='en'
+      ? `Your fortune (9th lord <b>${PLANET_HI_NAME[l9]}</b>, ${dw(r9.dignity)} in the ${ordinal(r9.house)}; Jupiter ${dw(ju.dignity)}) ${['exalted','own'].includes(r9.dignity)?'is a real asset — luck tends to back your efforts':'rewards effort more than chance — luck follows action'}. Faith, mentors and good intentions noticeably lift you.`
+      : `Bhagya (9th lord <b>${PLANET_HI_NAME[l9]}</b>, ${ordinal(r9.house)} mein ${dw(r9.dignity)}; Jupiter ${dw(ju.dignity)}) ${['exalted','own'].includes(r9.dignity)?'asli asset hai — kismat aapki mehnat ka saath deti hai':'chance se zyada mehnat ko phal deta hai — luck action ke peeche aata hai'}. Shraddha, guru aur achhe intentions aapko upar uthaate hain.`;
+    items.push({t,a});
+  })();
+
+  // 8. Spirituality & dharma
+  (()=>{
+    const ke=R('Ketu'), ju=R('Jupiter'), l12=R(lord(12));
+    const incl = [9,12,1,5].includes(ke.house) || ['exalted','own'].includes(ju.dignity);
+    const t=L==='en'?['Spirituality & dharma','धर्म-अध्यात्म']:['Dharm / spirituality','धर्म-अध्यात्म'];
+    const a=L==='en'
+      ? `With Ketu in the ${ordinal(ke.house)} and Jupiter ${dw(ju.dignity)}, your spiritual side is ${incl?'naturally strong — practice, pilgrimage or study of wisdom suits you':'quiet but present — it deepens with age'}. Daily practice (puja, meditation, or seva) steadies the whole chart.`
+      : `Ketu ${ordinal(ke.house)} mein aur Jupiter ${dw(ju.dignity)} ke saath, aapka spiritual side ${incl?'naturally strong hai — sadhana, teerth ya gyaan-adhyayan suit karta hai':'shaant par maujood hai — umar ke saath gehra hota hai'}. Rozana practice (puja, dhyaan ya seva) poori kundli ko sthir karti hai.`;
+    items.push({t,a});
+  })();
+
+  // 9. Obstacles, enemies & disputes
+  (()=>{
+    const l6=lord(6), r6=R(l6);
+    const w=win(new Set([l6,lord(11)]),{minAge:18});
+    const t=L==='en'?['Obstacles & disputes','बाधा-शत्रु']:['Baadha / disputes','बाधा-शत्रु'];
+    const a=L==='en'
+      ? `Your 6th house of enemies, debts and disputes (lord <b>${PLANET_HI_NAME[l6]}</b>, ${dw(r6.dignity)}) shows ${['exalted','own'].includes(r6.dignity)?'a strong ability to defeat rivals and clear debts':'that conflicts are best handled with patience, not confrontation'}. Avoid lending and legal haste; most troubles ease as the supportive period below arrives.${w?` Relief tends to come around <b>${w}</b>.`:''}`
+      : `6th house (shatru, karz, vivaad; lord <b>${PLANET_HI_NAME[l6]}</b>, ${dw(r6.dignity)}) batata hai ${['exalted','own'].includes(r6.dignity)?'ki aap rivals ko haraane aur karz chukaane mein strong ho':'ki jhagdon ko patience se sambhaalo, takraav se nahi'}. Udhaar aur legal jaldbaazi se bacho; zyadatar dikkatein aage wale supportive period mein halki ho jaati hain.${w?` Rahat <b>${w}</b> ke aas-paas.`:''}`;
+    items.push({t,a});
+  })();
+
+  document.getElementById('lifeAreas').innerHTML = items.map((it,i)=>
+    `<details${i===0?' open':''}><summary>${it.t[0]} <span class="dev">${it.t[1]}</span></summary><div class="lbody">${it.a}</div></details>`
+  ).join('');
+}
+function L0(){return LANG;}
+function fmtDate(ms){return fmtWin(ms);}
+
 
 /* ============================================================
    LIVE TRANSITS (gochar) + SADE SATI — computed for today
@@ -1154,6 +1314,7 @@ function showResult(c,meta){
 
   renderQuestions();
   renderTransits();
+  renderLifeAreas();
   renderReading();
 
   const res=document.getElementById('result');
@@ -1355,9 +1516,12 @@ document.getElementById('chartToggle').addEventListener('click',e=>{
 document.getElementById('langSeg').addEventListener('click',e=>{
   const b=e.target.closest('button'); if(!b)return;
   document.querySelectorAll('#langSeg button').forEach(x=>x.classList.remove('on'));
-  b.classList.add('on'); LANG=b.dataset.lang; renderQuestions(); renderTransits(); renderReading();
+  b.classList.add('on'); LANG=b.dataset.lang; renderQuestions(); renderTransits(); renderLifeAreas(); renderReading();
 });
-document.getElementById('printBtn').addEventListener('click',()=>window.print());
+document.getElementById('printBtn').addEventListener('click',()=>{
+  document.querySelectorAll('#lifeAreas details').forEach(d=>d.open=true);
+  window.print();
+});
 </script>
 </body>
 </html>
