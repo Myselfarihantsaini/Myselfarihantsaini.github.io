@@ -6,11 +6,11 @@
 <meta name="google-adsense-account" content="ca-pub-9194178610009666">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9194178610009666" crossorigin="anonymous"></script>
 <title>5-Minute Kundli Reading Tool | Shambhavaa</title>
-<meta name="description" content="Use Shambhavaa's 5-Minute Kundli tool to cast a quick sidereal birth chart, dasha snapshot, and Vedic astrology reading with location search.">
+<meta name="description" content="Use Shambhavaa's 5-Minute Kundli tool to cast a quick sidereal birth chart, dasha snapshot, live transit notes, and Vedic astrology reading with location search.">
 <link rel="canonical" href="https://shambhavaa.com/tools/five-minute-kundli/">
 <link rel="icon" href="../../assets/logo.png">
 <meta property="og:title" content="5-Minute Kundli Reading Tool | Shambhavaa">
-<meta property="og:description" content="Instant Vedic kundli reading with birth date, birth time, and location search.">
+<meta property="og:description" content="Instant Vedic kundli reading with birth date, birth time, location search, dasha, D9, transits, and Sade Sati.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shambhavaa.com/tools/five-minute-kundli/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -194,6 +194,24 @@
   .remedy{background:var(--bg2);border:1px solid var(--line);border-left:3px solid var(--saffron);border-radius:10px;padding:13px 15px}
   .remedy .t{font:600 11px/1 'Inter';letter-spacing:.16em;text-transform:uppercase;color:var(--saffron-deep);margin-bottom:7px}
 
+  .qa{display:flex;flex-direction:column;gap:12px}
+  .qa .q{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:15px 16px}
+  .qa .q .ask{font-family:'Fraunces';font-weight:600;font-size:16px;color:var(--ink);display:flex;gap:9px;align-items:baseline;margin-bottom:7px}
+  .qa .q .ask .n{font:600 11px/1 'Inter';letter-spacing:.05em;color:#fff;background:var(--kumkum);border-radius:50%;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .qa .q .ans{font-size:14.5px;color:var(--ink)}
+  .qa .q .ans b{color:var(--saffron-deep)}
+  .qa .q .win{margin-top:9px;display:flex;flex-wrap:wrap;gap:7px}
+  .qa .q .win .chip{font:600 12px/1 'Inter';background:#fff;border:1px solid var(--gold);color:var(--saffron-deep);border-radius:20px;padding:6px 11px}
+  .qa .q .win .chip b{color:var(--kumkum);font-weight:700}
+
+  .ss{border-radius:12px;padding:14px 15px;border:1px solid var(--line)}
+  .ss.on{background:#fbeee6;border-left:3px solid var(--kumkum)}
+  .ss.off{background:var(--bg2);border-left:3px solid #6e8c5a}
+  .ss .sslab{font:600 12px/1 'Inter';letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+  .ss.on .sslab{color:var(--kumkum)}
+  .ss.off .sslab{color:#4f6e3c}
+  .ss p{margin:0;font-size:14.5px;color:var(--ink)}
+
   footer.note{text-align:center;color:var(--ink-faint);font-size:12px;margin-top:20px;line-height:1.6}
 
   @media (max-width:760px){
@@ -306,6 +324,7 @@
           <div class="kundli-toggle noprint" id="chartToggle">
             <button data-mode="lagna" class="on">Lagna · D1</button>
             <button data-mode="chandra">Chandra</button>
+            <button data-mode="navamsa">Navāṁśa · D9</button>
           </div>
           <svg class="kundli" id="kundli" viewBox="0 0 360 360"></svg>
           <div class="kundli-cap" id="kundliCap">North-Indian style · whole-sign houses</div>
@@ -332,13 +351,23 @@
     </div>
 
     <div class="card">
+      <div class="label">Live Transits &amp; Sade Sati · <span class="dev">गोचर</span></div>
+      <div id="transits"></div>
+    </div>
+
+    <div class="card">
       <div class="langrow noprint" style="margin-bottom:6px">
-        <div class="label" style="margin:0">The Reading · <span class="dev">फलादेश</span></div>
+        <div class="label" style="margin:0">Common Questions · <span class="dev">सामान्य प्रश्न</span></div>
         <div class="seg" id="langSeg">
           <button data-lang="en" class="on">English</button>
           <button data-lang="hi">Hinglish</button>
         </div>
       </div>
+      <div class="qa" id="questions"></div>
+    </div>
+
+    <div class="card">
+      <div class="label">The Full Reading · <span class="dev">फलादेश</span></div>
       <div class="reading" id="reading"></div>
     </div>
 
@@ -617,6 +646,43 @@ const DASHA={
 };
 const PLANET_HI_NAME={Sun:'Sūrya',Moon:'Chandra',Mars:'Maṅgal',Mercury:'Budh',Jupiter:'Guru',Venus:'Śukra',Saturn:'Śani',Rahu:'Rāhu',Ketu:'Ketu'};
 
+// Career field by the planet dominating the 10th house
+const CAREER_FIELDS={
+ Sun:{en:'leadership, administration, government or politics — work that carries your own name and authority',hi:'leadership, administration, sarkari kaam ya politics — jahan aapka apna naam aur authority ho'},
+ Moon:{en:'public-facing work — hospitality, food, care/nursing, real-estate, or anything serving people directly',hi:'public wala kaam — hotel/food, care/nursing, property, ya seedha logon ki seva wala kaam'},
+ Mars:{en:'engineering, defence/police, sports, surgery, real-estate, or work with machines, land and tools',hi:'engineering, defence/police, sports, surgery, property, ya machine-zameen-tools wala kaam'},
+ Mercury:{en:'business and trade, accounts, writing, IT/software, or any communication-and-analysis role',hi:'business-vyapaar, accounts, writing, IT/software, ya communication-analysis wala role'},
+ Jupiter:{en:'teaching, law, finance, advisory or counselling — fields where your knowledge is the product',hi:'teaching, law, finance, advisor ya counselling — jahan aapka gyaan hi product ho'},
+ Venus:{en:'arts, design, media, beauty/fashion, entertainment, or luxury and hospitality',hi:'kala, design, media, beauty/fashion, entertainment, ya luxury-hospitality'},
+ Saturn:{en:'service, long-term institutions, manufacturing, mining, law, or disciplined skilled trades',hi:'service, lambe-time wale institution, manufacturing, mining, law, ya discipline wale skilled trade'},
+ Rahu:{en:'technology, foreign companies, aviation, media, or unconventional new-age fields',hi:'technology, foreign company, aviation, media, ya hatke new-age fields'},
+ Ketu:{en:'research, healing, pharma, spirituality, or a specialised technical niche',hi:'research, healing, pharma, spirituality, ya koi specialised technical niche'}
+};
+// Study stream by the planet behind the 5th house / intelligence
+const EDU_STREAM={
+ Sun:{en:'management, political science, or medicine',hi:'management, political science, ya medical'},
+ Moon:{en:'psychology, hospitality, fine arts or anything people-centred',hi:'psychology, hospitality, fine arts ya people-centric subjects'},
+ Mars:{en:'engineering, defence studies, or sports science',hi:'engineering, defence studies, ya sports science'},
+ Mercury:{en:'commerce, mathematics, IT/computers or communication',hi:'commerce, maths, IT/computer ya communication'},
+ Jupiter:{en:'law, philosophy, finance, or teaching',hi:'law, philosophy, finance, ya teaching'},
+ Venus:{en:'arts, design, fashion, or media',hi:'arts, design, fashion, ya media'},
+ Saturn:{en:'research, geology, law, or long technical courses that reward patience',hi:'research, geology, law, ya lambe technical course jo patience maangte hain'},
+ Rahu:{en:'technology, aviation, or studying abroad',hi:'technology, aviation, ya videsh mein padhai'},
+ Ketu:{en:'research, medical niches, or spiritual and esoteric study',hi:'research, medical niche, ya spiritual-esoteric study'}
+};
+// The pressure each planet brings when it rules the running dasha
+const PROBLEM={
+ Sun:{en:'ego or authority friction — feeling unrecognised, or clashing with bosses or father',hi:'ego ya authority se takraav — pehchaan na milna, ya boss/pita se takraav'},
+ Moon:{en:'emotional ups and downs, overthinking, and an unsettled peace of mind',hi:'emotional ups-downs, zyada sochna, aur mann ki ashanti'},
+ Mars:{en:'anger, conflict, haste or injury risk — strong energy with no clear outlet',hi:'gussa, jhagda, jaldbaazi ya chot ka risk — tez energy ka sahi outlet nahi'},
+ Mercury:{en:'scattered focus, nervousness, and confusion in decisions or communication',hi:'dhyaan bikhra hua, nervousness, aur faislon/baat-cheet mein confusion'},
+ Jupiter:{en:'over-optimism or over-commitment — spreading yourself thin across too many hopes',hi:'zyada optimism ya zyada vaade — khud ko bahut saari ummeedon mein phaila lena'},
+ Venus:{en:'over-indulgence, relationship distractions, or money slipping away on comforts',hi:'over-indulgence, rishton ka distraction, ya shauk-comfort mein paisa nikalna'},
+ Saturn:{en:'delays, heaviness and extra responsibility — slow, tiring, but maturing progress',hi:'delay, bhaari-pan aur extra zimmedari — slow aur thakaane wali, par maturity wali progress'},
+ Rahu:{en:'anxiety, confusion and illusion — chasing too much, too fast',hi:'anxiety, confusion aur bhram — bahut kuch, bahut jaldi paane ki daud'},
+ Ketu:{en:'feeling directionless or detached — low motivation and a pull away from material goals',hi:'direction na milna ya detachment — kam motivation aur material goals se door khinchaav'}
+};
+
 /* ============================================================
    CALCULATION
    ============================================================ */
@@ -656,7 +722,7 @@ function computeChart(o){
     if(g.exalt===sign)dignity='exalted';
     else if(g.debil===sign)dignity='debilitated';
     else if(g.own.includes(sign))dignity='own';
-    recs[p]={lon:L,sign,nakIdx,pada,house,dignity,deg:L-sign*30};
+    recs[p]={lon:L,sign,nakIdx,pada,house,dignity,deg:L-sign*30,d9:Math.floor(L/(30/9))%12};
   }
 
   // dasha
@@ -695,7 +761,7 @@ function computeChart(o){
   if(!antar)antar=antarList[0];
   const nextMaha=seq[seq.indexOf(maha)+1];
 
-  return {JD,ay,ascSid,lagnaSign,lon,recs,
+  return {JD,ay,ascSid,lagnaSign,d9Lagna:Math.floor(ascSid/(30/9))%12,lon,recs,
     nak:{index:nakIndex,pada:moonPada,frac},
     maha,antar,nextMaha,seq};
 }
@@ -708,43 +774,33 @@ const HCENTROID=[[0.5,0.25],[0.25,0.0833],[0.0833,0.25],[0.25,0.5],[0.0833,0.75]
 function drawKundli(chart,mode){
   const M=16,S=360-2*M;
   const X=u=>M+u*S, Y=v=>M+v*S;
-  const refSign = mode==='chandra' ? chart.recs.Moon.sign : chart.lagnaSign;
+  const refSign = mode==='chandra' ? chart.recs.Moon.sign
+                : mode==='navamsa' ? chart.d9Lagna
+                : chart.lagnaSign;
+  const signOf = p => mode==='navamsa' ? chart.recs[p].d9 : chart.recs[p].sign;
   const lines=[
     [[0,0],[1,0]],[[1,0],[1,1]],[[1,1],[0,1]],[[0,1],[0,0]], // outer
     [[0,0],[1,1]],[[1,0],[0,1]], // diagonals
     [[0.5,0],[1,0.5]],[[1,0.5],[0.5,1]],[[0.5,1],[0,0.5]],[[0,0.5],[0.5,0]] // diamond
   ];
   let svg='';
-  // parchment inner
   svg+=`<rect x="${M}" y="${M}" width="${S}" height="${S}" fill="#FCF7EE"/>`;
   for(const ln of lines){
     svg+=`<line x1="${X(ln[0][0])}" y1="${Y(ln[0][1])}" x2="${X(ln[1][0])}" y2="${Y(ln[1][1])}" stroke="#B08D57" stroke-width="1.4"/>`;
   }
-  // place houses
   for(let h=1;h<=12;h++){
     const c=HCENTROID[h-1];
     const cx=X(c[0]), cy=Y(c[1]);
     const sign=((refSign+(h-1))%12);
-    // sign number (small, kumkum)
     svg+=`<text x="${cx}" y="${cy-13}" text-anchor="middle" font-family="Fraunces,serif" font-size="11" fill="#9E2B25" font-weight="600">${sign+1}</text>`;
-    // planets in this house
     const here=[];
-    for(const p of PLANET_ORDER){
-      if(chart.recs[p].house=== (((sign-refSign+12)%12)+1) ){} // not used
-    }
-    for(const p of PLANET_ORDER){
-      const ps=chart.recs[p].sign;
-      if(ps===sign) here.push(p);
-    }
-    // lagna marker
+    for(const p of PLANET_ORDER){ if(signOf(p)===sign) here.push(p); }
     let labels=here.map(p=>{
-      const d=chart.recs[p].dignity;
+      const d = mode==='navamsa' ? '' : chart.recs[p].dignity;
       const mark = d==='exalted'?'↑':d==='debilitated'?'↓':'';
       return GRAHA[p].ab+mark;
     });
-    if(mode==='lagna' && sign===chart.lagnaSign) labels.unshift('La');
-    if(mode==='chandra' && sign===chart.recs.Moon.sign){/* moon already shown */}
-    // stack labels
+    if(sign===refSign) labels.unshift('La');
     const n=labels.length;
     const startY=cy - (n-1)*7 + 2;
     labels.forEach((t,i)=>{
@@ -824,9 +880,234 @@ function renderReading(){
 }
 
 /* ============================================================
-   RENDER: full result
+   COMMON CLIENT QUESTIONS — chart-driven, with daśā timing
    ============================================================ */
+const YR_MS=365.2425*86400000;
+function houseLord(c,houseNum){ return SIGNS[(c.lagnaSign+houseNum-1)%12].lord; }
+function planetsInHouse(c,h){ return PLANET_ORDER.filter(p=>c.recs[p].house===h); }
+
+// scan upcoming maha→antar periods; return windows whose antardasha lord is in lordSet
+function favorableWindows(c,lordSet,opt){
+  const birth=c.seq[0].start, now=Date.now();
+  const out=[];
+  for(const maha of c.seq){
+    const mi=DLORDS.indexOf(maha.lord);
+    let cur=maha.start;
+    for(let i=0;i<9;i++){
+      const ld=DLORDS[(mi+i)%9];
+      const yrs=maha.yrs*(DYEARS[ld]/120);
+      const st=cur, en=cur+yrs*YR_MS; cur=en;
+      if(en<=now) continue;                         // already passed
+      if(opt.minAge && (en-birth)/YR_MS < opt.minAge) continue; // before relevant age
+      const strong = lordSet.has(ld) && lordSet.has(maha.lord); // both → high
+      if(lordSet.has(ld) || (opt.allowMaha && lordSet.has(maha.lord))){
+        out.push({maha:maha.lord,antar:ld,start:st,end:en,strong});
+      }
+    }
+    if(out.length>=(opt.count||2)+2) break;
+  }
+  return out.slice(0,opt.count||2);
+}
+function fmtWin(ms){return new Date(ms).toLocaleDateString(undefined,{month:'short',year:'numeric'});}
+
+function renderQuestions(){
+  const c=CURRENT; if(!c) return; const L=LANG;
+  const ageNow=(Date.now()-c.seq[0].start)/YR_MS;
+  const lord=n=>houseLord(c,n);
+  const ml=c.maha.lord, mr=c.recs[ml];
+  const houseArea = (h)=> (L==='en'?HOUSES.en:HOUSES.hi)[h-1];
+
+  /* 1 — Present problem (from running daśā) */
+  const dusthana=[6,8,12].includes(mr.house);
+  const digNote = mr.dignity==='debilitated'
+     ? (L==='en'?` And ${PLANET_HI_NAME[ml]} is under pressure (debilitated) right now, so go gently here and lean on patience.`
+                : ` Aur ${PLANET_HI_NAME[ml]} abhi dabaav mein (neecha) hai, isliye yahan thoda sambhal ke chalo aur patience rakho.`)
+     : '';
+  const dusNote = dusthana
+     ? (L==='en'?` This area is a testing zone for you at the moment, so expect some friction before it clears.`
+                : ` Yeh area abhi test wala hai, to thodi rukawat ke baad cheezein khulengi.`)
+     : '';
+  const q1 = L==='en'
+    ? `You're running the <b>${PLANET_HI_NAME[ml]}</b> period, and its main pressure is <b>${PROBLEM[ml].en}</b>. It's showing up most around <b>${houseArea(mr.house)}</b> (its house).${dusNote}${digNote} Working <i>with</i> this energy — see the remedy below — settles it fastest.`
+    : `Abhi aapki <b>${PLANET_HI_NAME[ml]}</b> period chal rahi hai, aur iski main dikkat hai <b>${PROBLEM[ml].hi}</b>. Yeh sabse zyada <b>${houseArea(mr.house)}</b> ke around dikh rahi hai.${dusNote}${digNote} Is energy ke <i>saath</i> chalo (neeche upaay dekho) — sabse jaldi yahi settle karta hai.`;
+
+  /* 2 — Marriage timing */
+  const seventhLord=lord(7), secondLord=lord(2), eleventhLord=lord(11);
+  const in7=planetsInHouse(c,7);
+  const mset=new Set(['Venus','Jupiter',seventhLord,secondLord,eleventhLord,...in7]);
+  const wins=favorableWindows(c,mset,{count:2,minAge:19,allowMaha:true});
+  let q2,winsHtml='';
+  if(wins.length){
+    winsHtml='<div class="win">'+wins.map(w=>
+      `<span class="chip"><b>${fmtWin(w.start)} – ${fmtWin(w.end)}</b> · ${PLANET_HI_NAME[w.maha]}/${PLANET_HI_NAME[w.antar]}${w.strong?' ★':''}</span>`).join('')+'</div>';
+    q2 = L==='en'
+      ? `Marriage tends to come in the daśā of the partnership planets — Venus, Jupiter, your 7th lord <b>${PLANET_HI_NAME[seventhLord]}</b>${in7.length?`, and ${in7.map(p=>PLANET_HI_NAME[p]).join('/')} sitting in your 7th house`:''}. The most supportive upcoming windows are:`
+      : `Shaadi aam taur par partnership wale grahon ki daśā mein aati hai — Śukra, Guru, aapke 7th lord <b>${PLANET_HI_NAME[seventhLord]}</b>${in7.length?`, aur 7th house mein baithe ${in7.map(p=>PLANET_HI_NAME[p]).join('/')}`:''}. Sabse supportive aane wale windows:`;
+  } else {
+    q2 = L==='en'
+      ? `The clearest partnership-friendly daśā periods fall outside the next stretch shown here — the running ${PLANET_HI_NAME[ml]} phase isn't the prime trigger. Strengthening Venus (see remedies) keeps the door open in the meantime.`
+      : `Sabse saaf partnership-friendly daśā abhi dikhaye gaye stretch ke bahar hai — chal rahi ${PLANET_HI_NAME[ml]} phase main trigger nahi hai. Tab tak Śukra ko mazboot karo (upaay dekho), darwaaza khula rehta hai.`;
+  }
+  const q2note = L==='en'
+    ? ` <span style="color:var(--ink-faint)">★ = an especially strong window. These are openings, not exact dates — readiness and effort still matter.</span>`
+    : ` <span style="color:var(--ink-faint)">★ = khaas mazboot window. Ye openings hain, fixed taarikh nahi — taiyari aur koshish bhi maayne rakhti hai.</span>`;
+
+  /* 3 — Career */
+  const in10=planetsInHouse(c,10), tenthLord=lord(10);
+  const careerPlanet = in10[0] || tenthLord;
+  const tenthSign=(c.lagnaSign+9)%12;
+  const cset=new Set(['Sun','Saturn',tenthLord,...in10]);
+  const cwin=favorableWindows(c,cset,{count:1,minAge:18,allowMaha:true});
+  const cwinTxt = cwin.length
+    ? (L==='en'?` A strong push for career growth comes in <b>${fmtWin(cwin[0].start)} – ${fmtWin(cwin[0].end)}</b> (${PLANET_HI_NAME[cwin[0].maha]}/${PLANET_HI_NAME[cwin[0].antar]}).`
+               :` Career growth ka strong push <b>${fmtWin(cwin[0].start)} – ${fmtWin(cwin[0].end)}</b> mein aata hai (${PLANET_HI_NAME[cwin[0].maha]}/${PLANET_HI_NAME[cwin[0].antar]}).`)
+    : '';
+  const q3 = L==='en'
+    ? `Your 10th house of career is in <b>${SIGNS[tenthSign].n}</b>, shaped most by <b>${PLANET_HI_NAME[careerPlanet]}</b>${in10.length?' (sitting right in it)':' (its lord)'}. That points toward <b>${CAREER_FIELDS[careerPlanet].en}</b>. Lean into that lane rather than fighting it.${cwinTxt}`
+    : `Career ka 10th house <b>${SIGNS[tenthSign].n}</b> mein hai, aur ise sabse zyada <b>${PLANET_HI_NAME[careerPlanet]}</b> shape karta hai${in10.length?' (jo isi mein baitha hai)':' (iska lord)'}. Yeh ishara karta hai <b>${CAREER_FIELDS[careerPlanet].hi}</b> ki taraf. Is lane ke saath chalo, ulta mat lado.${cwinTxt}`;
+
+  /* 4 — Education */
+  const in5=planetsInHouse(c,5), fifthLord=lord(5);
+  const eduPlanet = in5[0] || fifthLord;
+  const meDig=c.recs.Mercury.dignity, juDig=c.recs.Jupiter.dignity;
+  const meWeak = meDig==='debilitated', juWeak = juDig==='debilitated';
+  const eset=new Set(['Mercury','Jupiter',fifthLord]);
+  const ewin=favorableWindows(c,eset,{count:1,minAge:5,allowMaha:true});
+  const ewinTxt = ewin.length
+    ? (L==='en'?` Study and exams go best during <b>${fmtWin(ewin[0].start)} – ${fmtWin(ewin[0].end)}</b> (${PLANET_HI_NAME[ewin[0].maha]}/${PLANET_HI_NAME[ewin[0].antar]}) — line up important courses or tests then.`
+               :` Padhai aur exam sabse achhe <b>${fmtWin(ewin[0].start)} – ${fmtWin(ewin[0].end)}</b> mein chalte hain (${PLANET_HI_NAME[ewin[0].maha]}/${PLANET_HI_NAME[ewin[0].antar]}) — important course/test usi time rakho.`)
+    : '';
+  const weakTxt = (meWeak||juWeak)
+    ? (L==='en'?` Your study planets (${meWeak?'Mercury':''}${meWeak&&juWeak?' & ':''}${juWeak?'Jupiter':''}) need support — short focused sessions beat long cramming, and the remedy below helps concentration.`
+               :` Aapke study grah (${meWeak?'Budh':''}${meWeak&&juWeak?' & ':''}${juWeak?'Guru':''}) ko support chahiye — chhote focused sessions, lambi ratta-maar se behtar; neeche wala upaay concentration mein madad karta hai.`)
+    : (L==='en'?` Your study planets are well-placed, so consistency matters more than extra hours.`
+               :` Aapke study grah achhe placed hain, isliye ghanton se zyada consistency maayne rakhti hai.`);
+  const q4 = L==='en'
+    ? `Your 5th house of intelligence is driven by <b>${PLANET_HI_NAME[eduPlanet]}</b>, which favours <b>${EDU_STREAM[eduPlanet].en}</b>.${weakTxt}${ewinTxt}`
+    : `Buddhi ka 5th house <b>${PLANET_HI_NAME[eduPlanet]}</b> chalata hai, jo <b>${EDU_STREAM[eduPlanet].hi}</b> ke liye accha hai.${weakTxt}${ewinTxt}`;
+
+  /* 5 — Manglik / Mangal dosha */
+  const mhouses=[1,2,4,7,8,12];
+  const marsHL=c.recs.Mars.house;
+  const marsSign=c.recs.Mars.sign;
+  const marsHM=((marsSign-c.recs.Moon.sign+12)%12)+1;
+  const fromLagna=mhouses.includes(marsHL), fromMoon=mhouses.includes(marsHM);
+  const isM=fromLagna||fromMoon;
+  const cancelled=[0,7,9].includes(marsSign); // Mars in own (Aries/Scorpio) or exalted (Capricorn)
+  let sev = (fromLagna&&fromMoon)?'strong':([7,8].includes(marsHL)||[7,8].includes(marsHM))?'moderate':'mild';
+  const refTxtEn=[fromLagna?`${ordinal(marsHL)} from Lagna`:'',fromMoon?`${ordinal(marsHM)} from Moon`:''].filter(Boolean).join(' and ');
+  let q5;
+  if(!isM){
+    q5 = L==='en'
+      ? `<b>No — not Manglik.</b> Mars sits in the ${ordinal(marsHL)} house, outside the dosha houses (1,2,4,7,8,12), so there's no Mangal dosha to worry about in matching.`
+      : `<b>Nahi — Manglik nahi.</b> Mangal ${ordinal(marsHL)} house mein hai, dosha wale gharon (1,2,4,7,8,12) se bahar — to matching mein Mangal dosha ki tension nahi.`;
+  } else if(cancelled){
+    q5 = L==='en'
+      ? `<b>Technically yes, but largely cancelled.</b> Mars is ${refTxtEn}, but it sits in its own/exalted sign (${SIGNS[marsSign].n}), which neutralises most of the dosha. Treat it as mild.`
+      : `<b>Technically haan, par kaafi cancel.</b> Mangal ${refTxtEn} hai, par apne/uchcha rashi (${SIGNS[marsSign].n}) mein baitha hai, jo dosha ko zyada-tar khatam kar deta hai. Ise mild maano.`;
+  } else {
+    q5 = L==='en'
+      ? `<b>Yes — Manglik (${sev}).</b> Mars is ${refTxtEn}. Traditional practice is to match with another Manglik (which cancels it), or to do the standard Maṅgal remedies — Tuesdays, Hanuman, red-lentil donation — before fixing a match.`
+      : `<b>Haan — Manglik (${sev}).</b> Mangal ${refTxtEn} hai. Parampara ke hisaab se doosre Manglik se match (jo isse cancel karta hai), ya match fix karne se pehle Mangal ke upaay — Mangalwar, Hanuman, masoor daal daan.`;
+  }
+
+  const T = L==='en'
+    ? ['What is the present problem?','When will I find my partner?','What about career?','What should I do in education?','Are you Manglik?']
+    : ['Abhi ki dikkat kya hai?','Partner / shaadi kab?','Career ka kya?','Padhai mein kya karein?','Manglik ho ya nahi?'];
+
+  document.getElementById('questions').innerHTML=`
+    <div class="q"><div class="ask"><span class="n">1</span>${T[0]}</div><div class="ans">${q1}</div></div>
+    <div class="q"><div class="ask"><span class="n">2</span>${T[1]}</div><div class="ans">${q2}${winsHtml}${wins.length?q2note:''}</div></div>
+    <div class="q"><div class="ask"><span class="n">3</span>${T[2]}</div><div class="ans">${q3}</div></div>
+    <div class="q"><div class="ask"><span class="n">4</span>${T[3]}</div><div class="ans">${q4}</div></div>
+    <div class="q"><div class="ask"><span class="n">5</span>${T[4]}</div><div class="ans">${q5}</div></div>
+  `;
+}
+
 function fmtDate(ms){const d=new Date(ms);return d.toLocaleDateString(undefined,{month:'short',year:'numeric'});}
+
+/* ============================================================
+   LIVE TRANSITS (gochar) + SADE SATI — computed for today
+   ============================================================ */
+function transitChart(dateMs){
+  const d=new Date(dateMs);
+  const JD=julianDay(d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate(),d.getUTCHours()+d.getUTCMinutes()/60);
+  const T=(JD-2451545.0)/36525, ay=lahiri(JD), sid=x=>norm360(x-ay);
+  const lon={Sun:sid(sunLong(T)),Moon:sid(moonLong(T)),Mars:sid(planetLong('Mars',T)),
+    Mercury:sid(planetLong('Mercury',T)),Jupiter:sid(planetLong('Jupiter',T)),
+    Venus:sid(planetLong('Venus',T)),Saturn:sid(planetLong('Saturn',T))};
+  lon.Rahu=sid(meanNode(T)); lon.Ketu=norm360(lon.Rahu+180);
+  const sign={}; for(const k in lon) sign[k]=Math.floor(lon[k]/30);
+  return {lon,sign};
+}
+function saturnSignOn(dateMs){
+  const d=new Date(dateMs);
+  const JD=julianDay(d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate(),12);
+  const T=(JD-2451545.0)/36525;
+  return Math.floor(norm360(planetLong('Saturn',T)-lahiri(JD))/30);
+}
+function sadeSati(c){
+  const moonSign=c.recs.Moon.sign, now=Date.now();
+  const inTriad=ms=>{const dd=((saturnSignOn(ms)-moonSign)+12)%12;return dd===11||dd===0||dd===1;};
+  const diff=((saturnSignOn(now)-moonSign)+12)%12;
+  let phase=null,small=null,start=null,end=null;
+  const inSS=(diff===11||diff===0||diff===1);
+  if(diff===11)phase='rising'; else if(diff===0)phase='peak'; else if(diff===1)phase='setting';
+  if(diff===3)small='kantaka'; if(diff===7)small='ashtama';
+  const MO=30*86400000, CAP=9*365*86400000;
+  if(inSS){
+    let a=now; while(inTriad(a-MO)&&(now-a)<CAP)a-=MO; start=a;
+    let b=now; while(inTriad(b+MO)&&(b-now)<CAP)b+=MO; end=b;
+  }
+  return {moonSign,diff,phase,small,inSS,start,end};
+}
+const SS_PHASE={
+ rising:{en:["Rising phase","Saturn is in the 12th from your Moon — the build-up: extra expenses, disturbed sleep, and a heavier mind. Tie up loose ends and avoid over-stretching."],
+         hi:["Shuruaati phase","Shani aapke Chandra se 12वें mein hai — shuruaat: extra kharch, neend mein khalal, aur bhaari mann. Cheezein samete rakho, over-stretch mat karo."]},
+ peak:{en:["Peak phase","Saturn is over your Moon — the heaviest 2½ years: mental pressure, health and patience are tested. Stay disciplined, lean on routine and faith.","peak"],
+       hi:["Peak phase","Shani aapke Chandra par hai — sabse bhaari 2½ saal: mansik dabaav, sehat aur patience ka test. Discipline rakho, routine aur shraddha ka sahara lo."]},
+ setting:{en:["Final phase","Saturn is in the 2nd from your Moon — the tail: focus shifts to money, family and speech, and the weight slowly lifts. Hold steady, the worst is behind.","setting"],
+          hi:["Aakhri phase","Shani aapke Chandra se 2re mein hai — poonch: dhyaan paisa, parivaar aur vaani par, aur bojh dheere-dheere halka hota hai. Tike raho, sabse mushkil nikal chuka."]}
+};
+function renderTransits(){
+  const c=CURRENT; if(!c) return; const L=LANG;
+  const tr=transitChart(Date.now());
+  const moonSign=c.recs.Moon.sign;
+  const ss=sadeSati(c);
+
+  // Sade Sati verdict
+  let ssHtml;
+  if(ss.inSS){
+    const ph=SS_PHASE[ss.phase][L];
+    const win = ss.start&&ss.end ? `<div class="win"><span class="chip"><b>${fmtDate(ss.start)} – ${fmtDate(ss.end)}</b> · ${L==='en'?'full Sade Sati':'poori Sade Sati'}</span></div>` : '';
+    ssHtml=`<div class="ss on"><div class="sslab">${L==='en'?'Sade Sati: ACTIVE':'Sade Sati: CHAL RAHI'} — ${ph[0]}</div><p>${ph[1]}</p>${win}</div>`;
+  } else {
+    let extra='';
+    if(ss.small==='kantaka') extra = L==='en'?' You are in Kaṇṭaka Śani (Saturn 4th from Moon) — a smaller 2½-year test of home and peace.':' Aap Kantaka Shani mein ho (Shani Chandra se 4the) — ghar aur shaanti ka chhota 2½ saal ka test.';
+    if(ss.small==='ashtama') extra = L==='en'?' You are in Aṣṭama Śani (Saturn 8th from Moon) — a smaller 2½-year test of health and change.':' Aap Ashtama Shani mein ho (Shani Chandra se 8the) — sehat aur badlav ka chhota 2½ saal ka test.';
+    ssHtml=`<div class="ss off"><div class="sslab">${L==='en'?'Sade Sati: not active':'Sade Sati: nahi chal rahi'}</div><p>${L==='en'?'Saturn is not transiting the 12th, 1st or 2nd from your Moon right now, so you are clear of Sade Sati.':'Shani abhi aapke Chandra se 12,1 ya 2re mein nahi hai, to aap Sade Sati se bahar ho.'}${extra}</p></div>`;
+  }
+
+  // Jupiter gochar (from Moon)
+  const juH=((tr.sign.Jupiter-moonSign)+12)%12+1;
+  const juGood=[2,5,7,9,11].includes(juH);
+  const juTxt = L==='en'
+    ? `Jupiter is transiting the <b>${ordinal(juH)} from your Moon</b> — ${juGood?'a supportive guru gochar; doors open with elders, learning and growth.':'a mixed guru gochar; growth needs patience this year.'}`
+    : `Guru aapke Chandra se <b>${juH}वें</b> mein gochar kar raha hai — ${juGood?'supportive guru gochar; bade-buzurg, seekhne aur growth se darwaaze khulte hain.':'mixed guru gochar; is saal growth ko patience chahiye.'}`;
+
+  // transit table (planet, current sign, house from Moon)
+  const rows=PLANET_ORDER.map(p=>{
+    const s=tr.sign[p], hm=((s-moonSign)+12)%12+1;
+    return `<tr><td class="p">${GRAHA[p].ab} <span class="dev">${GRAHA[p].dev}</span></td><td>${SIGNS[s].n} <span class="dev">${SIGNS[s].dev}</span></td><td>${hm}</td></tr>`;
+  }).join('');
+
+  document.getElementById('transits').innerHTML=`
+    ${ssHtml}
+    <p style="margin:14px 0 4px;font-size:14.5px">${juTxt}</p>
+    <table class="pl" style="margin-top:10px"><thead><tr><th>${L==='en'?'Graha now':'Graha abhi'}</th><th>${L==='en'?'Transit rāśi':'Gochar rāśi'}</th><th>${L==='en'?'From Moon':'Chandra se'}</th></tr></thead><tbody>${rows}</tbody></table>
+    <div class="kundli-cap" style="text-align:left;margin-top:8px">${L==='en'?'Transits read from the Moon (Chandra) · as of':'Gochar Chandra se · aaj ki taarikh'} ${new Date().toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'})}</div>
+  `;
+}
 
 function showResult(c,meta){
   CURRENT=c;
@@ -871,6 +1152,8 @@ function showResult(c,meta){
   if(c.nextMaha) document.getElementById('dNext').textContent=
     `Next: ${PLANET_HI_NAME[c.nextMaha.lord]} daśā begins ${fmtDate(c.nextMaha.start)}.`;
 
+  renderQuestions();
+  renderTransits();
   renderReading();
 
   const res=document.getElementById('result');
@@ -879,8 +1162,10 @@ function showResult(c,meta){
 }
 function drawCurrentKundli(mode){
   document.getElementById('kundli').innerHTML=drawKundli(CURRENT,mode);
-  document.getElementById('kundliCap').textContent =
-    (mode==='chandra'?'Chandra (Moon) chart · ':'Lagna chart (D1) · ')+'North-Indian · whole-sign houses';
+  const lead = mode==='chandra' ? 'Chandra (Moon) chart · '
+             : mode==='navamsa' ? 'Navāṁśa (D9) — marriage & strength · '
+             : 'Lagna chart (D1) · ';
+  document.getElementById('kundliCap').textContent = lead+'North-Indian · whole-sign houses';
 }
 
 /* ============================================================
@@ -1070,7 +1355,7 @@ document.getElementById('chartToggle').addEventListener('click',e=>{
 document.getElementById('langSeg').addEventListener('click',e=>{
   const b=e.target.closest('button'); if(!b)return;
   document.querySelectorAll('#langSeg button').forEach(x=>x.classList.remove('on'));
-  b.classList.add('on'); LANG=b.dataset.lang; renderReading();
+  b.classList.add('on'); LANG=b.dataset.lang; renderQuestions(); renderTransits(); renderReading();
 });
 document.getElementById('printBtn').addEventListener('click',()=>window.print());
 </script>
