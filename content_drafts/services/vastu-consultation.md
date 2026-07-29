@@ -47,4 +47,4 @@ Aligning your space with Vastu principles does not create magic, but it removes 
 
 **Ready to harmonize your environment?**
 
-[Book a Vastu Consultation at Shambhavaa](https://wa.me/919057918251?text=Hi%21%20I%20would%20like%20to%20book%20a%20Vastu%20Shastra%20Consultation.)
+[Book a Vastu Consultation with Bhavita](https://wa.me/917014406101?text=Hi%21%20I%20would%20like%20to%20book%20a%20Vastu%20Consultation%20with%20Bhavita.)
