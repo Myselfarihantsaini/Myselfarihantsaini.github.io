@@ -49,6 +49,10 @@
 @media (max-width: 700px) {
   .shambhavaa-page .sh-hero { padding: 28px 18px; }
   .shambhavaa-page .sh-hero-title { font-size: 32px; }
+  .shambhavaa-page .sh-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .shambhavaa-page .sh-stat { min-width: 0; padding: 8px 0; }
+  .shambhavaa-page .sh-stat-num { font-size: 26px; }
+  .shambhavaa-page .sh-stat-label { font-size: 12px; line-height: 1.4; }
   .sh-finder h2 { font-size: 30px; }
   .sh-finder-layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .shambhavaa-page .sh-finder-result { border-left: 0; border-top: 1px solid var(--gold-border); padding: 24px 0 0; }
