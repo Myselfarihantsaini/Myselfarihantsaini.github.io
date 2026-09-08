@@ -32,6 +32,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css?v=6.2">
     <link rel="stylesheet" href="css/enhance.css?v=1.1">
+    <link rel="stylesheet" href="css/consultation-finder.css?v=1">
     <!-- Google AdSense Auto Ads -->
 <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('consent', 'default', { ad_storage: 'denied', analytics_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });</script>
     <!-- Google tag (gtag.js) -->
@@ -438,20 +439,71 @@
   <!-- HERO -->
   <section class="sh-hero">
     <div class="sh-tag">Authentic Vedic Jyotish</div>
-    <h1 class="sh-hero-title">Read Your <span>Cosmic Blueprint</span></h1>
-    <p class="sh-hero-sub">Kundli reading, marriage astrology, career guidance, dasha-transit timing, and remedies — through complete chart analysis, not generic prediction.</p>
+    <h1 class="sh-hero-title">Vedic Astrology <span>Consultations</span></h1>
+    <p class="sh-hero-sub">Bring the question on your mind. Explore career, relationships, and life direction through your birth chart, or find Vastu guidance for your space.</p>
     <div class="sh-hero-btns">
-      <div class="sh-book-note">Choose your consultation path</div>
-      <a href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Vedic%20Astrology%20Consultation." class="sh-btn-green">Book Astrology</a>
-      <a href="https://wa.me/917014406101?text=Hi!%20I%20would%20like%20to%20Book%20a%20Vastu%20Consultation%20with%20Bhavita." class="sh-btn-outline">Book Vastu</a>
-      <a href="articles.html" class="sh-btn-outline">Read Articles</a>
-      <a href="#services" class="sh-btn-outline">Explore Services ↓</a>
+      <a href="#consultation-finder" class="sh-btn-green">Find Your Consultation</a>
+      <a href="tools/five-minute-kundli/" class="sh-btn-outline">Explore Your Kundli</a>
     </div>
+    <p class="sh-credential-link"><a href="#about">View Arihant's Kundli Mastery Course certificate</a></p>
     <div class="sh-stats">
       <div class="sh-stat"><div class="sh-stat-num">1,200+</div><div class="sh-stat-label">Clients Served</div></div>
       <div class="sh-stat"><div class="sh-stat-num">2+</div><div class="sh-stat-label">Years of Practice</div></div>
       <div class="sh-stat"><div class="sh-stat-num">4.9★</div><div class="sh-stat-label">Client Rating</div></div>
       <div class="sh-stat"><div class="sh-stat-num">Full</div><div class="sh-stat-label">Chart Method</div></div>
+    </div>
+  </section>
+
+  <div class="sh-divider"></div>
+
+  <section class="sh-section sh-finder" id="consultation-finder" aria-labelledby="finder-heading">
+    <div class="sh-finder-intro">
+      <p class="sh-sec-label">A place to begin</p>
+      <h2 id="finder-heading">Find Your Consultation</h2>
+      <p>A big life decision, one specific question, or a fresh look at your space. What brings you here today?</p>
+    </div>
+    <form class="sh-finder-layout" id="consultation-finder-form" hidden>
+      <div class="sh-finder-fields">
+        <label for="finder-concern">What would you like guidance on?</label>
+        <select id="finder-concern" name="concern">
+          <option value="chart">My birth chart and life direction</option>
+          <option value="career">Career, exams, or a job change</option>
+          <option value="marriage">Marriage and relationships</option>
+          <option value="question">One specific question</option>
+          <option value="birth">An uncertain birth time</option>
+          <option value="vastu">Vastu for my home or workspace</option>
+        </select>
+        <div id="finder-consultant-field">
+          <label for="finder-consultant">Your consultant</label>
+          <select id="finder-consultant" name="consultant">
+            <option value="arihant">Arihant Saini - Full Birth Chart Reading</option>
+            <option value="manasavi">Manasavi - Kundali Prediction</option>
+          </select>
+        </div>
+        <label for="finder-question">Your question <span>(optional)</span></label>
+        <textarea id="finder-question" name="question" rows="3" maxlength="600" placeholder="What would you like to discuss?"></textarea>
+        <p class="sh-finder-note">Your question stays in this page until you choose to open WhatsApp.</p>
+      </div>
+      <div class="sh-finder-result">
+        <div aria-live="polite" aria-atomic="true">
+          <p class="sh-finder-eyebrow">Suggested consultation</p>
+          <h3 id="finder-service">Full Birth Chart Reading</h3>
+          <p class="sh-finder-person" id="finder-person">With Arihant Saini</p>
+          <p id="finder-description">Explore life direction, strengths, and your dasha timeline through a complete birth chart reading.</p>
+          <div class="sh-finder-preparation">
+            <h4>What to have ready</h4>
+            <p id="finder-preparation">Your date, time, and place of birth, plus the areas of life you want to discuss.</p>
+          </div>
+        </div>
+        <a class="sh-btn-green" id="finder-book" href="https://wa.me/919057918251?text=Hi%20Arihant%2C%20I%20would%20like%20to%20enquire%20about%20a%20Full%20Birth%20Chart%20Reading." target="_blank" rel="noopener noreferrer">Enquire with Arihant on WhatsApp</a>
+        <p class="sh-finder-note">Ask about fees and availability before confirming a session.</p>
+        <a class="sh-finder-detail" id="finder-detail" href="vedic-kundli-reading.html">About this consultation</a>
+      </div>
+    </form>
+    <noscript><p class="sh-finder-fallback">Explore our <a href="#services">consultations</a> or <a href="contact.html">contact the team</a> to find the right service.</p></noscript>
+    <div class="sh-finder-first-step">
+      <div><h3>Just one question on your mind?</h3><p>Start with a Mini Question Reading or a One Question Audio Reply.</p></div>
+      <a href="https://wa.me/919057918251?text=Hi%20Arihant%2C%20I%20am%20interested%20in%20a%20Mini%20Question%20Reading%20or%20One%20Question%20Audio%20Reply.%20Please%20share%20the%20fees%20and%20availability." class="sh-btn-outline" target="_blank" rel="noopener noreferrer">Ask About a Short Reading</a>
     </div>
   </section>
 
@@ -639,7 +691,7 @@
   <!-- CTA BAND -->
   <div class="sh-cta-band">
     <div class="sh-cta-title">If the question is important, clarity should not be delayed.</div>
-    <div class="sh-cta-sub">Consultation slots are limited each week — book your session today.</div>
+    <div class="sh-cta-sub">Share what you would like to discuss and ask about the next available session.</div>
     <div class="sh-book-links">
       <a href="https://wa.me/919057918251?text=Hi!%20I%20would%20like%20to%20Book%20a%20Vedic%20Astrology%20Consultation." class="sh-btn-green">Book Astrology</a>
       <a href="https://wa.me/917014406101?text=Hi!%20I%20would%20like%20to%20Book%20a%20Vastu%20Consultation%20with%20Bhavita." class="sh-btn-outline">Book Vastu</a>
@@ -744,5 +796,6 @@
   }
 </script>
 <script defer src="js/main.js?v=6.2"></script>
+<script defer src="js/consultation-finder.js?v=1"></script>
 </body>
 </html>
