@@ -1394,12 +1394,13 @@ function selectLocation(loc, showStatus=true){
   document.getElementById('locationResults').classList.add('hidden');
   if(showStatus) setLocationStatus(`Selected ${loc.name} · ${Number(loc.lat).toFixed(4)}, ${Number(loc.lon).toFixed(4)} · UTC ${Number(loc.tz)>=0?'+':''}${Number(loc.tz)}`);
 }
+function escapeHTML(value){return String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
 function renderLocationResults(items){
   const box=document.getElementById('locationResults');
   if(!items.length){
     box.innerHTML='<button class="loc-result" type="button" data-manual="1">No exact match. Enter coordinates manually.<span>Open manual latitude, longitude and UTC offset fields</span></button>';
   }else{
-    box.innerHTML=items.map((loc,i)=>`<button class="loc-result" type="button" data-i="${i}">${loc.name}<span>${loc.lat.toFixed(4)}, ${loc.lon.toFixed(4)} · UTC ${loc.tz>=0?'+':''}${loc.tz}</span></button>`).join('');
+    box.innerHTML=items.map((loc,i)=>`<button class="loc-result" type="button" data-i="${i}">${escapeHTML(loc.name)}<span>${loc.lat.toFixed(4)}, ${loc.lon.toFixed(4)} · UTC ${loc.tz>=0?'+':''}${loc.tz}</span></button>`).join('');
   }
   box._items=items;
   box.classList.remove('hidden');

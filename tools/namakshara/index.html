@@ -706,6 +706,7 @@ let selectedPlace = null; /* {label, lat, lon, tzName?, fixedOffset?} */
 const placeInput=document.getElementById("place");
 const geoBox=document.getElementById("geoResults");
 const geoStatus=document.getElementById("geoStatus");
+function escapeHTML(value){return String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
 
 function norm(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z ]/g," ").replace(/\s+/g," ").trim();}
 function localFallback(q){
@@ -749,7 +750,7 @@ function mergeResults(local,live){
 function renderGeo(list){
   if(!list.length){geoBox.style.display="none";return;}
   geoBox.innerHTML=list.map((p,i)=>
-    `<button type="button" data-i="${i}">${p.label}<small>${Math.abs(p.lat).toFixed(2)}°${p.lat>=0?"N":"S"} ${Math.abs(p.lon).toFixed(2)}°${p.lon>=0?"E":"W"}${p.tzName?" · "+p.tzName:""}</small></button>`).join("");
+    `<button type="button" data-i="${i}">${escapeHTML(p.label)}<small>${Math.abs(p.lat).toFixed(2)}°${p.lat>=0?"N":"S"} ${Math.abs(p.lon).toFixed(2)}°${p.lon>=0?"E":"W"}${p.tzName?" · "+escapeHTML(p.tzName):""}</small></button>`).join("");
   geoBox.style.display="block";
   [...geoBox.querySelectorAll("button")].forEach(b=>b.addEventListener("click",()=>selectPlace(list[+b.dataset.i])));
 }
@@ -860,7 +861,7 @@ document.getElementById("go").addEventListener("click",()=>{
         <div class="kv">
           <div class="item"><div class="k">Sidereal Moon</div><div class="v">${degFmt(inRashi)} ${RASHIS[cast.rashi][0]}<small>${degFmt(cast.sid)} absolute · ayanamsa ${degFmt(cast.ayan)}</small></div></div>
           <div class="item"><div class="k">Janma rashi</div><div class="v">${RASHIS[cast.rashi][0]}<small>${RASHIS[cast.rashi][1]} Moon sign</small></div></div>
-          <div class="item"><div class="k">Gender</div><div class="v">${genderVal}<small>used for consultation context</small></div></div>
+          <div class="item"><div class="k">Gender</div><div class="v">${escapeHTML(genderVal)}<small>used for consultation context</small></div></div>
           <div class="item"><div class="k">Janma nakshatra</div><div class="v">${nk.n} · pada ${cast.pada}<small>Lord ${nk.lord} · Deity ${nk.deity}</small></div></div>
           <div class="item"><div class="k">Gana / Yoni</div><div class="v">${nk.gana}<small>${nk.yoni} yoni</small></div></div>
           <div class="item"><div class="k">Dasha at birth</div><div class="v">${DASHA[lordIdx][0]}<small>balance ≈ ${by}y ${bm}m</small></div></div>
@@ -868,7 +869,7 @@ document.getElementById("go").addEventListener("click",()=>{
         </div>
         ${!lagna?`<div class="note">Choose a birth place from the location finder (plus the time) to compute the lagna — the rising sign sharpens the name verdict.</div>`:""}
         ${tzAssumed?`<div class="note warn">No birth place selected, so IST (UTC+5:30) was assumed for the timezone. Pick a place for an exact conversion.</div>`:
-          `<div class="note">Timezone resolved for ${selectedPlace.label}: UTC${tz>=0?"+":""}${tz} at the birth moment${selectedPlace.tzName?" (from the "+selectedPlace.tzName+" zone history, DST-aware)":""}.</div>`}
+          `<div class="note">Timezone resolved for ${escapeHTML(selectedPlace.label)}: UTC${tz>=0?"+":""}${tz} at the birth moment${selectedPlace.tzName?" (from the "+escapeHTML(selectedPlace.tzName)+" zone history, DST-aware)":""}.</div>`}
         ${timeAssumed?`<div class="note warn">No birth time was given, so noon was assumed — the Moon moves ≈13° a day, so the nakshatra can differ. Add the time for a reliable result.</div>`:""}
         ${cast.boundary?`<div class="note warn">The Moon sits within ≈0.3° of a nakshatra boundary at this moment. Verify against a full ephemeris before relying on this nakshatra.</div>`:""}
       </div>`;
@@ -903,7 +904,7 @@ document.getElementById("go").addEventListener("click",()=>{
         <p style="color:var(--ivory-dim)">Auspicious opening syllables${janma.pada?` — your pada (${janma.pada}) is highlighted in tradition as the strongest`:""}:</p>
         <div class="syll-row">${own.map(s=>`<div class="syll ${hit&&hit.syl===s.syl?"hit":""}"><div class="s">${titleCase(s.syl)}</div><div class="p">Pada ${s.pada}${janma.pada===s.pada?" ★":""}</div></div>`).join("")}</div>
         ${hit
-          ?`<div class="note good"><strong>${rawName.split(/\s+/)[0]}</strong> opens with <strong>${titleCase(hit.syl)}</strong> — it honours ${nk.n}${janma.pada?(hit.pada===janma.pada?" in your own pada, the classical ideal.":" (pada "+hit.pada+", a sibling pada — still auspicious)."):"."}</div>`
+          ?`<div class="note good"><strong>${escapeHTML(rawName.split(/\s+/)[0])}</strong> opens with <strong>${titleCase(hit.syl)}</strong> — it honours ${nk.n}${janma.pada?(hit.pada===janma.pada?" in your own pada, the classical ideal.":" (pada "+hit.pada+", a sibling pada — still auspicious)."):"."}</div>`
           :`<div class="note warn">The name does not open with a ${nk.n} syllable. Tradition keeps it as the <em>vyavaharika</em> (worldly) name and assigns a nakshatra-aligned name for ritual use — or shifts the everyday spelling toward a syllable above.</div>`}
       </div>`;
   } else nb.innerHTML="";
@@ -978,24 +979,24 @@ document.getElementById("go").addEventListener("click",()=>{
   if(serious.length){
     vb.className="verdict-box warn";
     vb.innerHTML=`<h3>A correction is worth considering</h3>
-      <p>For <b>${titleCase(firstLow)}</b>, ${serious.length===1?"one point stands out":"a few points stand out"}:</p>
+      <p>For <b>${escapeHTML(titleCase(firstLow))}</b>, ${serious.length===1?"one point stands out":"a few points stand out"}:</p>
       <ul>${serious.concat(minor).map(p=>`<li>${p}</li>`).join("")}</ul>
-      ${best?`<p style="margin-top:10px">The smallest sound-${fellBack?"changing":"preserving"} spelling that improves this is <b>${best.display.split(/\s+/)[0]}</b>, below.${fellBack?" No spelling that keeps the exact pronunciation resolved it, so this one alters the sound slightly.":""}</p>`
+      ${best?`<p style="margin-top:10px">The smallest sound-${fellBack?"changing":"preserving"} spelling that improves this is <b>${escapeHTML(best.display.split(/\s+/)[0])}</b>, below.${fellBack?" No spelling that keeps the exact pronunciation resolved it, so this one alters the sound slightly.":""}</p>`
             :`<p style="margin-top:10px">None of the simple spelling changes explored improve on the original here — this is a case to take to a practising jyotishi rather than force a respelling.</p>`}`;
   } else if(minor.length){
     vb.className="verdict-box good";
     vb.innerHTML=`<h3>Largely harmonious — one optional refinement</h3>
-      <p><b>${titleCase(firstLow)}</b> has no fault in its numbers or star. The only note: ${minor[0]}.</p>
-      ${best&&realGain?`<p style="margin-top:10px">If you'd like to align the syllable too, <b>${best.display.split(/\s+/)[0]}</b> below does so while keeping the name recognisable.</p>`
+      <p><b>${escapeHTML(titleCase(firstLow))}</b> has no fault in its numbers or star. The only note: ${minor[0]}.</p>
+      ${best&&realGain?`<p style="margin-top:10px">If you'd like to align the syllable too, <b>${escapeHTML(best.display.split(/\s+/)[0])}</b> below does so while keeping the name recognisable.</p>`
                       :`<p style="margin-top:10px">No respelling improves on it, so the working name is best left as it is — or a separate nakshatra name kept only for ritual use.</p>`}`;
   } else if(best&&realGain){
     vb.className="verdict-box good";
     vb.innerHTML=`<h3>The name works; a lighter tuning is optional</h3>
-      <p><b>${titleCase(firstLow)}</b> has no classical fault. If you wish to strengthen it further, <b>${best.display.split(/\s+/)[0]}</b> scores a little higher — polish, not a remedy.</p>`;
+      <p><b>${escapeHTML(titleCase(firstLow))}</b> has no classical fault. If you wish to strengthen it further, <b>${escapeHTML(best.display.split(/\s+/)[0])}</b> scores a little higher — polish, not a remedy.</p>`;
   } else {
     vb.className="verdict-box good";
     vb.innerHTML=`<h3>The name is already harmonious</h3>
-      <p>By these measures <b>${titleCase(firstLow)}</b> sits well with the chart — no correction is needed. Tradition's counsel here is to leave a working name unchanged. The alternatives below are shown only for comparison.</p>`;
+      <p>By these measures <b>${escapeHTML(titleCase(firstLow))}</b> sits well with the chart — no correction is needed. Tradition's counsel here is to leave a working name unchanged. The alternatives below are shown only for comparison.</p>`;
   }
 
   /* ---- choose what to display: lead with the highlighted option ---- */
@@ -1026,7 +1027,7 @@ document.getElementById("go").addEventListener("click",()=>{
       `<span class="fchip ${f.k}">${f.t}<span class="d">${f.d>0?"+"+f.d:(f.d<0?f.d:"·")}</span></span>`).join("");
     return `<div class="cand ${isBest?"best":""} ${isOrig?"orig":""}">
       <div class="cand-head">
-        <div class="cand-name">${c.display.split(/\s+/)[0]}${rest?` <span style="font-family:'Karla';font-size:15px;color:var(--ivory-dim)">${rest}</span>`:""} ${badges.join(" ")}</div>
+        <div class="cand-name">${escapeHTML(c.display.split(/\s+/)[0])}${rest?` <span style="font-family:'Karla';font-size:15px;color:var(--ivory-dim)">${escapeHTML(rest)}</span>`:""} ${badges.join(" ")}</div>
         <div class="bar" title="relative score"><span style="width:${Math.max(6,Math.round(c.total/maxTotal*100))}%"></span></div>
       </div>
       <div class="cand-meta">Compound <b>${c.compound}</b> → <b>${c.single} ${PLANETS[c.single].en}</b> · ${change}</div>

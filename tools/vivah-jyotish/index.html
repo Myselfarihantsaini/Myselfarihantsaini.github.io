@@ -591,12 +591,13 @@ function fmtTz(t){ const s=t<0?"-":"+"; const a=Math.abs(t),hh=Math.floor(a),mm=
 function fmtLat(l){ return Math.abs(l).toFixed(2)+"\u00b0"+(l>=0?"N":"S"); }
 function fmtLon(l){ return Math.abs(l).toFixed(2)+"\u00b0"+(l>=0?"E":"W"); }
 function regOf(p){ return p[2]==="India" ? p[1]+", India" : p[1]+", "+p[2]; }
+function escapeHTML(value){return String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
 function selectPlace(p){
   selectedPlace=p; placeInput.value=p[0];
   document.getElementById("blat").value=p[3];
   document.getElementById("blon").value=p[4];
   document.getElementById("btz").value=p[5];
-  placeResolved.innerHTML="Using <b>"+p[0]+"</b> — "+regOf(p)+" · "+fmtLat(p[3])+", "+fmtLon(p[4])+" · "+fmtTz(p[5]);
+  placeResolved.innerHTML="Using <b>"+escapeHTML(p[0])+"</b> — "+escapeHTML(regOf(p))+" · "+fmtLat(p[3])+", "+fmtLon(p[4])+" · "+fmtTz(p[5]);
   closeList();
 }
 function closeList(){ placeList.classList.remove("open"); placeInput.setAttribute("aria-expanded","false"); activeIdx=-1; }
@@ -611,7 +612,7 @@ function renderList(items){
   if(!items.length){
     placeList.innerHTML='<li class="none">No match — open “Enter coordinates manually” below.</li>';
   } else {
-    placeList.innerHTML=items.map((p,i)=>'<li role="option" data-i="'+i+'">'+p[0]+'<span class="reg">'+regOf(p)+'</span></li>').join("");
+    placeList.innerHTML=items.map((p,i)=>'<li role="option" data-i="'+i+'">'+escapeHTML(p[0])+'<span class="reg">'+escapeHTML(regOf(p))+'</span></li>').join("");
   }
   placeList.classList.add("open"); placeInput.setAttribute("aria-expanded","true");
 }

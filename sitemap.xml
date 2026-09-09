@@ -127,18 +127,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://shambhavaa.com/cookie-policy.html</loc>
-    <lastmod>2026-05-22</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://shambhavaa.com/products.html</loc>
-    <lastmod>2026-05-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://shambhavaa.com/tools/janma-finder/</loc>
     <lastmod>2026-06-04</lastmod>
     <changefreq>monthly</changefreq>
