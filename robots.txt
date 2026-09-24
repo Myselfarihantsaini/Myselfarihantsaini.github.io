@@ -1,7 +1,13 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /worklanceo/admin
 User-agent: Mediapartners-Google
 Allow: /
+Disallow: /admin
+Disallow: /worklanceo/admin
 User-agent: Google-Display-Ads-Bot
 Allow: /
+Disallow: /admin
+Disallow: /worklanceo/admin
 Sitemap: https://shambhavaa.com/sitemap.xml
