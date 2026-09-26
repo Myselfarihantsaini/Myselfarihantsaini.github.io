@@ -11,3 +11,4 @@ Allow: /
 Disallow: /admin
 Disallow: /worklanceo/admin
 Sitemap: https://shambhavaa.com/sitemap.xml
+Sitemap: https://shambhavaa.com/worklanceo/sitemap.xml
